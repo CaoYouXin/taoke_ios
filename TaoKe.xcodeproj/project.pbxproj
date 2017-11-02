@@ -12,9 +12,13 @@
 		F92C68D11FAAE32C005CD910 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F92C68CF1FAAE32C005CD910 /* Main.storyboard */; };
 		F92C68D31FAAE32C005CD910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D21FAAE32C005CD910 /* Assets.xcassets */; };
 		F92C68D61FAAE32C005CD910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */; };
+		FC4399495122137E8C7EDA49 /* Pods_TaoKe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030F2ED6F7365B37BEB79011 /* Pods-TaoKe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.release.xcconfig"; sourceTree = "<group>"; };
+		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
+		AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaoKe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92C68C81FAAE32C005CD910 /* TaoKe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaoKe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F92C68CD1FAAE32C005CD910 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4399495122137E8C7EDA49 /* Pods_TaoKe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		215329D4FC5F1019838D25E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */,
+				030F2ED6F7365B37BEB79011 /* Pods-TaoKe.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2263801E9E15ECFB303B7C93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F92C68BF1FAAE32C005CD910 = {
 			isa = PBXGroup;
 			children = (
 				F92C68CA1FAAE32C005CD910 /* TaoKe */,
 				F92C68C91FAAE32C005CD910 /* Products */,
+				215329D4FC5F1019838D25E0 /* Pods */,
+				2263801E9E15ECFB303B7C93 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F92C68DA1FAAE32C005CD910 /* Build configuration list for PBXNativeTarget "TaoKe" */;
 			buildPhases = (
+				B50236B6D650058FA62AAA28 /* [CP] Check Pods Manifest.lock */,
 				F92C68C41FAAE32C005CD910 /* Sources */,
 				F92C68C51FAAE32C005CD910 /* Frameworks */,
 				F92C68C61FAAE32C005CD910 /* Resources */,
+				F878294256354365634B4BC1 /* [CP] Embed Pods Frameworks */,
+				A26AB86D5950720E5B1475D9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A26AB86D5950720E5B1475D9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B50236B6D650058FA62AAA28 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TaoKe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F878294256354365634B4BC1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F92C68C41FAAE32C005CD910 /* Sources */ = {
@@ -272,6 +355,7 @@
 		};
 		F92C68DB1FAAE32C005CD910 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +371,7 @@
 		};
 		F92C68DC1FAAE32C005CD910 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 030F2ED6F7365B37BEB79011 /* Pods-TaoKe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

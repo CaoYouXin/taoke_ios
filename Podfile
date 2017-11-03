@@ -8,8 +8,25 @@ target 'TaoKe' do
   # Pods for TaoKe
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'RestKit'
+  
   pod 'CleanroomLogger'
+  pod 'RestKit'
+  
   pod 'SDWebImage'
   pod 'FontAwesomeKit'
+  
+  pod 'RAMAnimatedTabBarController'
+  pod 'PullToRefresher'
+  pod 'GSKStretchyHeaderView'
+  pod 'ImageSlideshow'
+  
+  post_install do |installer|
+      installer.pods_project.targets.each do |target|
+          if target.name == 'RAMAnimatedTabBarController'
+              target.build_configurations.each do |config|
+                  config.build_settings['SWIFT_VERSION'] = '3.2'
+              end
+          end
+      end
+  end
 end

@@ -6,6 +6,10 @@ target 'TaoKe' do
   use_frameworks!
 
   # Pods for TaoKe
-  pod 'RxSwift',    '~> 4.0'
-  pod 'RxCocoa',    '~> 4.0'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RestKit'
+  pod 'CleanroomLogger'
+  pod 'SDWebImage'
+  pod 'FontAwesomeKit'
 end

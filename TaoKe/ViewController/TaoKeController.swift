@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TaoKeController.swift
 //  TaoKe
 //
 //  Created by jason tsang on 11/2/17.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import RAMAnimatedTabBarController
 
-class ViewController: UIViewController {
+class TaoKeController: RAMAnimatedTabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

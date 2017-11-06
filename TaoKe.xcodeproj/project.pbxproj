@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */; };
-		F92C68CE1FAAE32C005CD910 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92C68CD1FAAE32C005CD910 /* ViewController.swift */; };
+		F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92C68CD1FAAE32C005CD910 /* TaoKeController.swift */; };
 		F92C68D11FAAE32C005CD910 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F92C68CF1FAAE32C005CD910 /* Main.storyboard */; };
 		F92C68D31FAAE32C005CD910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D21FAAE32C005CD910 /* Assets.xcassets */; };
 		F92C68D61FAAE32C005CD910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */; };
+		F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */; };
+		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
 		FC4399495122137E8C7EDA49 /* Pods_TaoKe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,11 +23,13 @@
 		AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaoKe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92C68C81FAAE32C005CD910 /* TaoKe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaoKe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F92C68CD1FAAE32C005CD910 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F92C68CD1FAAE32C005CD910 /* TaoKeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeController.swift; sourceTree = "<group>"; };
 		F92C68D01FAAE32C005CD910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F92C68D21FAAE32C005CD910 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F92C68D51FAAE32C005CD910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F92C68D71FAAE32C005CD910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMScaleUpAnimation.swift; sourceTree = "<group>"; };
+		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		F9F3A7E01FAC0D6B00D73A50 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,13 +85,23 @@
 			isa = PBXGroup;
 			children = (
 				F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */,
-				F92C68CD1FAAE32C005CD910 /* ViewController.swift */,
+				F9EA8FCC1FAFDE1600EBB95C /* ViewController */,
 				F92C68CF1FAAE32C005CD910 /* Main.storyboard */,
 				F92C68D21FAAE32C005CD910 /* Assets.xcassets */,
 				F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */,
 				F92C68D71FAAE32C005CD910 /* Info.plist */,
+				F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */,
 			);
 			path = TaoKe;
+			sourceTree = "<group>";
+		};
+		F9EA8FCC1FAFDE1600EBB95C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F92C68CD1FAAE32C005CD910 /* TaoKeController.swift */,
+				F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,8 +259,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F92C68CE1FAAE32C005CD910 /* ViewController.swift in Sources */,
+				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
+				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,
+				F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

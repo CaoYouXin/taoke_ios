@@ -13,6 +13,7 @@
 		F92C68D31FAAE32C005CD910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D21FAAE32C005CD910 /* Assets.xcassets */; };
 		F92C68D61FAAE32C005CD910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */; };
 		F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */; };
+		F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6FAE61FB03C7500930751 /* DiscoverController.swift */; };
 		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
 		FC4399495122137E8C7EDA49 /* Pods_TaoKe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */; };
 /* End PBXBuildFile section */
@@ -29,6 +30,7 @@
 		F92C68D51FAAE32C005CD910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F92C68D71FAAE32C005CD910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMScaleUpAnimation.swift; sourceTree = "<group>"; };
+		F9D6FAE61FB03C7500930751 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		F9F3A7E01FAC0D6B00D73A50 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +102,7 @@
 			children = (
 				F92C68CD1FAAE32C005CD910 /* TaoKeController.swift */,
 				F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */,
+				F9D6FAE61FB03C7500930751 /* DiscoverController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,

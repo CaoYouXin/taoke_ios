@@ -27,13 +27,13 @@ class TaoKeController: RAMAnimatedTabBarController {
 
 extension UIViewController {
     func initNavigationBar() {
-        self.navigationController?.navigationBar.barStyle = .black
-        self.navigationController?.navigationBar.barTintColor = UIColor("#f5f5f5")
-        self.navigationController?.navigationBar.tintColor = UIColor("#424242")
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor("#424242")]
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.barTintColor = UIColor("#f5f5f5")
+        navigationController?.navigationBar.tintColor = UIColor("#424242")
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor("#424242")]
         
         let statusBar = UIView(frame: CGRect(x: 0, y: -view.bounds.size.height, width: view.bounds.size.width, height: view.bounds.size.height))
         statusBar.backgroundColor = UIColor("#ffa726")
-        self.navigationController?.navigationBar.addSubview(statusBar)
+        navigationController?.navigationBar.addSubview(statusBar)
     }
 }

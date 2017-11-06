@@ -194,7 +194,7 @@
         <!--发现-->
         <scene sceneID="pyA-AD-zzJ">
             <objects>
-                <viewController id="NTE-U3-fiX" sceneMemberID="viewController">
+                <viewController id="NTE-U3-fiX" customClass="DiscoverController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bDY-J1-gaO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

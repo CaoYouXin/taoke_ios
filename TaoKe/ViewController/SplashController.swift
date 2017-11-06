@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RxSwift
 
 class SplashController: UIViewController {
     @IBOutlet weak var splashImage: UIImageView!

@@ -11,8 +11,9 @@ target 'TaoKe' do
   
   pod 'CleanroomLogger'
   pod 'RestKit'
+  pod 'UIColor_Hex_Swift'
   
-  pod 'SDWebImage'
+  pod 'Kingfisher'
   pod 'FontAwesomeKit'
   
   pod 'RAMAnimatedTabBarController'

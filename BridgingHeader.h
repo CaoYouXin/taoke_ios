@@ -10,7 +10,6 @@
 #define BridgingHeader_h
 
 #import <RestKit/RestKit.h>
-#import <SDWebImage/UIImageView+WebCache.h>
 #import <FontAwesomeKit/FontAwesomeKit.h>
 
 #endif /* BridgingHeader_h */

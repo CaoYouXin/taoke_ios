@@ -132,11 +132,11 @@
             </objects>
             <point key="canvasLocation" x="2609" y="-776"/>
         </scene>
-        <!--Tao Ke Controller-->
+        <!--觅券儿-->
         <scene sceneID="M5e-Op-nkj">
             <objects>
                 <tabBarController id="Ydh-Z0-3O4" customClass="TaoKeController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="xca-Ki-Spk"/>
+                    <navigationItem key="navigationItem" title="觅券儿" id="xca-Ki-Spk"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qle-07-4hh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -13,6 +13,10 @@
 		F92C68D31FAAE32C005CD910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D21FAAE32C005CD910 /* Assets.xcassets */; };
 		F92C68D61FAAE32C005CD910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */; };
 		F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5881FB14B7500FDF3E4 /* SearchController.swift */; };
+		F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA58A1FB1519100FDF3E4 /* TaoKeService.swift */; };
+		F92DA58D1FB151A400FDF3E4 /* TaoKeTestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA58C1FB151A400FDF3E4 /* TaoKeTestService.swift */; };
+		F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5911FB1528A00FDF3E4 /* TaoKeProtocol.swift */; };
+		F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */; };
 		F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */; };
 		F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6FAE61FB03C7500930751 /* DiscoverController.swift */; };
 		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
@@ -31,6 +35,10 @@
 		F92C68D51FAAE32C005CD910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F92C68D71FAAE32C005CD910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F92DA5881FB14B7500FDF3E4 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		F92DA58A1FB1519100FDF3E4 /* TaoKeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeService.swift; sourceTree = "<group>"; };
+		F92DA58C1FB151A400FDF3E4 /* TaoKeTestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeTestService.swift; sourceTree = "<group>"; };
+		F92DA5911FB1528A00FDF3E4 /* TaoKeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeProtocol.swift; sourceTree = "<group>"; };
+		F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeData.swift; sourceTree = "<group>"; };
 		F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMScaleUpAnimation.swift; sourceTree = "<group>"; };
 		F9D6FAE61FB03C7500930751 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
@@ -88,18 +96,46 @@
 		F92C68CA1FAAE32C005CD910 /* TaoKe */ = {
 			isa = PBXGroup;
 			children = (
+				F92DA58E1FB151A900FDF3E4 /* api */,
+				F92DA58F1FB151EB00FDF3E4 /* ui */,
 				F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */,
-				F9EA8FCC1FAFDE1600EBB95C /* ViewController */,
+				F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */,
 				F92C68CF1FAAE32C005CD910 /* Main.storyboard */,
 				F92C68D21FAAE32C005CD910 /* Assets.xcassets */,
-				F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */,
 				F92C68D71FAAE32C005CD910 /* Info.plist */,
-				F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */,
 			);
 			path = TaoKe;
 			sourceTree = "<group>";
 		};
-		F9EA8FCC1FAFDE1600EBB95C /* ViewController */ = {
+		F92DA58E1FB151A900FDF3E4 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				F92DA58A1FB1519100FDF3E4 /* TaoKeService.swift */,
+				F92DA58C1FB151A400FDF3E4 /* TaoKeTestService.swift */,
+				F92DA5911FB1528A00FDF3E4 /* TaoKeProtocol.swift */,
+				F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		F92DA58F1FB151EB00FDF3E4 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				F92DA5901FB151FF00FDF3E4 /* animation */,
+				F9EA8FCC1FAFDE1600EBB95C /* controller */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		F92DA5901FB151FF00FDF3E4 /* animation */ = {
+			isa = PBXGroup;
+			children = (
+				F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */,
+			);
+			path = animation;
+			sourceTree = "<group>";
+		};
+		F9EA8FCC1FAFDE1600EBB95C /* controller */ = {
 			isa = PBXGroup;
 			children = (
 				F92C68CD1FAAE32C005CD910 /* TaoKeController.swift */,
@@ -107,7 +143,7 @@
 				F9D6FAE61FB03C7500930751 /* DiscoverController.swift */,
 				F92DA5881FB14B7500FDF3E4 /* SearchController.swift */,
 			);
-			path = ViewController;
+			path = controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +260,7 @@
 				"${BUILT_PRODUCTS_DIR}/CleanroomLogger/CleanroomLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesomeKit/FontAwesomeKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GSKStretchyHeaderView/GSKStretchyHeaderView.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/ISO8601DateFormatterValueTransformer/ISO8601DateFormatterValueTransformer.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
@@ -242,6 +279,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CleanroomLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GSKStretchyHeaderView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISO8601DateFormatterValueTransformer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
@@ -267,11 +305,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */,
 				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
+				F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
+				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,
+				F92DA58D1FB151A400FDF3E4 /* TaoKeTestService.swift in Sources */,
 				F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

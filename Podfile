@@ -11,6 +11,7 @@ target 'TaoKe' do
   
   pod 'CleanroomLogger'
   pod 'RestKit'
+  pod 'HandyJSON'
   pod 'UIColor_Hex_Swift'
   
   pod 'Kingfisher'
@@ -24,6 +25,11 @@ target 'TaoKe' do
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|
+          if target.name == 'HandyJSON'
+              target.build_configurations.each do |config|
+                  config.build_settings['SWIFT_VERSION'] = '3.2'
+              end
+          end
           if target.name == 'RAMAnimatedTabBarController'
               target.build_configurations.each do |config|
                   config.build_settings['SWIFT_VERSION'] = '3.2'

@@ -18,6 +18,7 @@
 		F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5911FB1528A00FDF3E4 /* TaoKeProtocol.swift */; };
 		F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */; };
 		F92DA5961FB169D600FDF3E4 /* TaoKeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5951FB169D600FDF3E4 /* TaoKeApi.swift */; };
+		F92DA5981FB1780800FDF3E4 /* RxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5971FB1780800FDF3E4 /* RxHelper.swift */; };
 		F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */; };
 		F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6FAE61FB03C7500930751 /* DiscoverController.swift */; };
 		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
@@ -41,6 +42,7 @@
 		F92DA5911FB1528A00FDF3E4 /* TaoKeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeProtocol.swift; sourceTree = "<group>"; };
 		F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeData.swift; sourceTree = "<group>"; };
 		F92DA5951FB169D600FDF3E4 /* TaoKeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeApi.swift; sourceTree = "<group>"; };
+		F92DA5971FB1780800FDF3E4 /* RxHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelper.swift; sourceTree = "<group>"; };
 		F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMScaleUpAnimation.swift; sourceTree = "<group>"; };
 		F9D6FAE61FB03C7500930751 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				F92DA5911FB1528A00FDF3E4 /* TaoKeProtocol.swift */,
 				F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */,
 				F92DA5951FB169D600FDF3E4 /* TaoKeApi.swift */,
+				F92DA5971FB1780800FDF3E4 /* RxHelper.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */,
 				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
 				F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */,
+				F92DA5981FB1780800FDF3E4 /* RxHelper.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,

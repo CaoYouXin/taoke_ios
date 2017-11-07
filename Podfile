@@ -22,6 +22,7 @@ target 'TaoKe' do
   pod 'GSKStretchyHeaderView'
   pod 'ImageSlideshow'
   pod 'ImageSlideshow/Kingfisher'
+  pod 'TabLayoutView'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

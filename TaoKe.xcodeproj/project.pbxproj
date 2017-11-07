@@ -19,6 +19,7 @@
 		F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */; };
 		F92DA5961FB169D600FDF3E4 /* TaoKeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5951FB169D600FDF3E4 /* TaoKeApi.swift */; };
 		F92DA5981FB1780800FDF3E4 /* RxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5971FB1780800FDF3E4 /* RxHelper.swift */; };
+		F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B203A1FB1A54200AC57E4 /* CouponTab.swift */; };
 		F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */; };
 		F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6FAE61FB03C7500930751 /* DiscoverController.swift */; };
 		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
@@ -43,6 +44,7 @@
 		F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeData.swift; sourceTree = "<group>"; };
 		F92DA5951FB169D600FDF3E4 /* TaoKeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeApi.swift; sourceTree = "<group>"; };
 		F92DA5971FB1780800FDF3E4 /* RxHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelper.swift; sourceTree = "<group>"; };
+		F95B203A1FB1A54200AC57E4 /* CouponTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTab.swift; sourceTree = "<group>"; };
 		F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMScaleUpAnimation.swift; sourceTree = "<group>"; };
 		F9D6FAE61FB03C7500930751 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				F92DA58E1FB151A900FDF3E4 /* api */,
+				F95B203C1FB1A58E00AC57E4 /* model */,
 				F92DA58F1FB151EB00FDF3E4 /* ui */,
 				F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */,
 				F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */,
@@ -139,6 +142,14 @@
 				F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */,
 			);
 			path = animation;
+			sourceTree = "<group>";
+		};
+		F95B203C1FB1A58E00AC57E4 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F95B203A1FB1A54200AC57E4 /* CouponTab.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		F9EA8FCC1FAFDE1600EBB95C /* controller */ = {
@@ -277,6 +288,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SOCKit/SOCKit.framework",
+				"${BUILT_PRODUCTS_DIR}/TabLayoutView/TabLayoutView.framework",
 				"${BUILT_PRODUCTS_DIR}/TransitionKit/TransitionKit.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 			);
@@ -296,6 +308,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SOCKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TabLayoutView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 			);
@@ -315,6 +328,7 @@
 				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
 				F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */,
 				F92DA5981FB1780800FDF3E4 /* RxHelper.swift in Sources */,
+				F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,

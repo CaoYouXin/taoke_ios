@@ -42,7 +42,7 @@ class DiscoverController: UIViewController {
             ImageSource(image: UIImage(named: "splash")!),
             ImageSource(image: UIImage(named: "splash")!),
             ImageSource(image: UIImage(named: "splash")!)
-//            KingfisherSource(urlString: "http://7xi8d6.com1.z0.glb.clouddn.com/20171025112955_lmesMu_katyteiko_25_10_2017_11_29_43_270.jpeg")!
+            //            KingfisherSource(urlString: "http://7xi8d6.com1.z0.glb.clouddn.com/20171025112955_lmesMu_katyteiko_25_10_2017_11_29_43_270.jpeg")!
             ])
     }
     
@@ -56,7 +56,7 @@ class DiscoverController: UIViewController {
             }
             self.couponTab.items = items
         }, onError: { error in
-
+            
         }, onCompleted: {
             
         })

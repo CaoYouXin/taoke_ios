@@ -12,7 +12,7 @@ import UIColor_Hex_Swift
 import FontAwesomeKit
 
 class TaoKeController: RAMAnimatedTabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,7 +21,7 @@ class TaoKeController: RAMAnimatedTabBarController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.searchIcon(withSize: 15).image(with: CGSize.init(width: 15, height: 15)), style: .plain, target: self, action: #selector(search))
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

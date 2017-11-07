@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CleanroomLogger
 import ImageSlideshow
 import TabLayoutView
 
@@ -49,16 +50,15 @@ class DiscoverController: UIViewController {
     private func initCouponTab() {
         couponTab.indicatorColor = UIColor("#ef6c00")
         couponTab.fontSelectedColor = UIColor("#ef6c00")
-        TaoKeApi.getCouponTab().rxSchedulerHelper().subscribe(onNext: { tabs in
+        let _ = TaoKeApi.getCouponTab().rxSchedulerHelper().subscribe(onNext: { tabs in
             var items: [String] = []
             for tab in tabs {
                 items.append(tab.title == nil ? "" : tab.title!)
             }
             self.couponTab.items = items
         }, onError: { error in
-            
+            Log.error?.message(error.localizedDescription)
         }, onCompleted: {
-            
         })
     }
 }

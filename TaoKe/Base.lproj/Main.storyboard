@@ -147,11 +147,27 @@
                         <segue destination="iLp-2B-dgL" kind="relationship" relationship="viewControllers" id="9LP-lD-1Fz"/>
                         <segue destination="4dH-ze-0ss" kind="relationship" relationship="viewControllers" id="r81-sh-js5"/>
                         <segue destination="duZ-7k-Vge" kind="relationship" relationship="viewControllers" id="yHx-nm-Y49"/>
+                        <segue destination="BgH-UX-dMr" kind="show" identifier="segue_taoke_to_search" id="u13-Ed-jnv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjB-L0-jRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1641" y="39"/>
+        </scene>
+        <!--Search Controller-->
+        <scene sceneID="hLD-Pb-cxQ">
+            <objects>
+                <viewController id="BgH-UX-dMr" customClass="SearchController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3dl-DN-F8I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="D8O-KD-Rc6"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZSo-L6-ZX7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1641" y="901"/>
         </scene>
         <!--我的-->
         <scene sceneID="P66-9A-SMB">

@@ -17,8 +17,6 @@ class DiscoverController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.initNavigationBar()
-        
         self.initSlider()
     }
     
@@ -28,11 +26,17 @@ class DiscoverController: UIViewController {
     }
     
     private func initSlider() {
-        slideshow = ImageSlideshow(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width * 9 / 16))
+        var y = UIApplication.shared.statusBarFrame.size.height
+        if let navigationBarHeight = navigationController?.navigationBar.frame.height {
+            y += navigationBarHeight
+        }
+        slideshow = ImageSlideshow(frame: CGRect(x: 0, y: y, width: view.frame.size.width, height: view.frame.size.width * 9 / 25))
         slideshow?.slideshowInterval = 3
         slideshow?.contentScaleMode = .scaleAspectFill
         slideshow?.draggingEnabled = false
+
         view.addSubview(slideshow!)
+        
         updateSlider()
     }
     

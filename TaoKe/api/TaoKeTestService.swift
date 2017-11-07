@@ -9,12 +9,31 @@
 import RxSwift
 
 class TaoKeTestService: TaoKeProtocol {
-    func tao(api: String) -> Observable<TaoKeData?> {
-        return Observable.empty()
+    private static var instance: TaoKeProtocol?
+    
+    private init() {}
+    
+    public static func getInstance() -> TaoKeProtocol {
+        if instance == nil {
+            instance = TaoKeTestService()
+        }
+        return instance!
     }
     
-    func tao(api: String, access_taken: String, data: String, signature: String) -> Observable<TaoKeData?> {
-        return Observable.empty()
+    public func tao(api: String) -> Observable<TaoKeData?> {
+        let taoKeData = TaoKeData()
+        taoKeData.header = [:]
+        taoKeData.body = [:]
+        
+        taoKeData.header!["ResultCode"] = "0000" as AnyObject
+        return Observable.just(taoKeData)
+    }
+    
+    public func tao(api: String, access_taken: String, data: String, signature: String) -> Observable<TaoKeData?> {
+        let taoKeData = TaoKeData()
+        taoKeData.header = [:]
+        taoKeData.body = [:]
+        return Observable.just(taoKeData)
     }
 }
 

@@ -6,8 +6,6 @@
 //  Copyright © 2017 jason tsang. All rights reserved.
 //
 
-import UIKit
-
 class SplashController: UIViewController {
     @IBOutlet weak var splashImage: UIImageView!
     

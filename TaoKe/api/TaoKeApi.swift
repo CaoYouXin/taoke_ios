@@ -15,6 +15,25 @@ class TaoKeApi {
             .handleResult()
     }
     
+    public static func getBrandList() -> Observable<[BrandItem]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_BRAND_LIST)
+            .handleResult()
+            .map({ (taoKeData) -> [BrandItem] in
+                var items: [BrandItem] = []
+                if let recs = taoKeData?.body?["recs"] as? [[String: AnyObject]] {
+                    for rec in recs {
+                        let item = BrandItem()
+                        item.type = rec["type"] as? Int
+                        item.title = rec["title"] as? String
+                        item.thumb = rec["thumb"] as? String
+                        items.append(item)
+                    }
+                }
+                return items
+            })
+    }
+    
     public static func getCouponTab() -> Observable<[CouponTab]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_COUPON_TAB)

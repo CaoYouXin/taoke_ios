@@ -8,6 +8,8 @@ target 'TaoKe' do
   # Pods for TaoKe
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxViewModel'
+  pod 'RxDataSources'
   
   pod 'CleanroomLogger'
   pod 'RestKit'
@@ -18,7 +20,7 @@ target 'TaoKe' do
   pod 'FontAwesomeKit'
   
   pod 'RAMAnimatedTabBarController'
-  pod 'PullToRefresher'
+  pod 'PullToRefresher', :git => 'https://github.com/Yalantis/PullToRefresh.git'
   pod 'GSKStretchyHeaderView'
   pod 'ImageSlideshow'
   pod 'ImageSlideshow/Kingfisher'

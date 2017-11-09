@@ -9,7 +9,7 @@ import CleanroomLogger
 import RxSwift
 import RxCocoa
 import RxViewModel
-import PullToRefresh
+import MJRefresh
 
 class DiscoverController: UIViewController {
   
@@ -34,19 +34,19 @@ class DiscoverController: UIViewController {
     }
     
     private func initScrollView() {
-        scrollView.addPullToRefresh(PullToRefresh()) { [weak self] in
+        scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self?.scrollView.endRefreshing(at: .top)
+                self.scrollView.mj_header.endRefreshing()
             }
-        }
+        })
         
-        scrollView.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
+        scrollView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self?.scrollView.endRefreshing(at: .bottom)
+                self.scrollView.mj_footer.endRefreshing()
             }
-        }
+        })
     }
     
     private func initHeaderView() {

@@ -11,6 +11,7 @@
 
 #import <RestKit/RestKit.h>
 #import <FontAwesomeKit/FontAwesomeKit.h>
+#import <MJRefresh/MJRefresh.h>
 @import GSKStretchyHeaderView;
 
 #endif /* BridgingHeader_h */

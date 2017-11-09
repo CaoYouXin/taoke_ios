@@ -20,7 +20,7 @@ target 'TaoKe' do
   pod 'FontAwesomeKit'
   
   pod 'RAMAnimatedTabBarController'
-  pod 'PullToRefresher', :git => 'https://github.com/Yalantis/PullToRefresh.git'
+  pod 'MJRefresh'
   pod 'GSKStretchyHeaderView'
   pod 'ImageSlideshow'
   pod 'ImageSlideshow/Kingfisher'

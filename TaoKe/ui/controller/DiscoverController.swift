@@ -28,25 +28,9 @@ class DiscoverController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        initScrollView()
         initHeaderView()
         initCouponList()
-    }
-    
-    private func initScrollView() {
-        scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.scrollView.mj_header.endRefreshing()
-            }
-        })
-        
-        scrollView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-            let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.scrollView.mj_footer.endRefreshing()
-            }
-        })
+        initMJRefresh()
     }
     
     private func initHeaderView() {
@@ -95,6 +79,22 @@ class DiscoverController: UIViewController {
             .disposed(by: disposeBag)
         
         couponViewModel.active = true
+    }
+    
+    private func initMJRefresh() {
+        scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                self.scrollView.mj_header.endRefreshing()
+            }
+        })
+        
+        couponList.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                self.couponList.mj_footer.endRefreshing()
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {

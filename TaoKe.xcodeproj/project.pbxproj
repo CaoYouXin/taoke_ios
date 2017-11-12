@@ -517,10 +517,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B8JXVMT2QE;
+				DEVELOPMENT_TEAM = WW3Q239636;
 				INFOPLIST_FILE = TaoKe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.gnastnosaj.TaoKe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.caoyouxin.taoke.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
@@ -535,10 +535,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B8JXVMT2QE;
+				DEVELOPMENT_TEAM = WW3Q239636;
 				INFOPLIST_FILE = TaoKe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.gnastnosaj.TaoKe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.caoyouxin.taoke.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;

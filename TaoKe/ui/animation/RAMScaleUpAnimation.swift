@@ -6,7 +6,6 @@
 //  Copyright © 2017 jason tsang. All rights reserved.
 //
 
-import UIKit
 import RAMAnimatedTabBarController
 
 /// The RAMBounceAnimation class provides bounce animation.

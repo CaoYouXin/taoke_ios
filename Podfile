@@ -8,6 +8,8 @@ target 'TaoKe' do
   # Pods for TaoKe
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxViewModel'
+  pod 'RxDataSources'
   
   pod 'CleanroomLogger'
   pod 'RestKit'
@@ -18,10 +20,12 @@ target 'TaoKe' do
   pod 'FontAwesomeKit'
   
   pod 'RAMAnimatedTabBarController'
-  pod 'PullToRefresher'
+  pod 'MJRefresh'
   pod 'GSKStretchyHeaderView'
+  pod 'MEVFloatingButton'
   pod 'ImageSlideshow'
   pod 'ImageSlideshow/Kingfisher'
+  pod 'TabLayoutView'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

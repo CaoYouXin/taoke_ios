@@ -51,4 +51,30 @@ class TaoKeApi {
                 return tabs
             })
     }
+    
+    public static func getCouponList() -> Observable<[CouponItem]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_COUPON_LIST)
+            .handleResult()
+            .map({ (taoKeData) -> [CouponItem] in
+                var items: [CouponItem] = []
+                if let recs = taoKeData?.body?["recs"] as? [[String: AnyObject]] {
+                    for rec in recs {
+                        let item = CouponItem()
+                        item.id = rec["id"] as? Int
+                        item.thumb = rec["thumb"] as? String
+                        item.title = rec["title"] as? String
+                        item.priceBefore = rec["priceBefore"] as? String
+                        item.sales = rec["sales"] as? Int
+                        item.priceAfter = rec["priceAfter"] as? String
+                        item.value = rec["value"] as? String
+                        item.total = rec["total"] as? Int
+                        item.left = rec["left"] as? Int
+                        item.earn = rec["earn"] as? String
+                        items.append(item)
+                    }
+                }
+                return items
+            })
+    }
 }

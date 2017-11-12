@@ -22,6 +22,7 @@ target 'TaoKe' do
   pod 'RAMAnimatedTabBarController'
   pod 'MJRefresh'
   pod 'GSKStretchyHeaderView'
+  pod 'MEVFloatingButton'
   pod 'ImageSlideshow'
   pod 'ImageSlideshow/Kingfisher'
   pod 'TabLayoutView'

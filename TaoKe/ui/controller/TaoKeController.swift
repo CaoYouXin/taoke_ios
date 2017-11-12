@@ -38,6 +38,10 @@ extension UIViewController {
         navigationController?.navigationBar.tintColor = UIColor("#424242")
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor("#424242")]
         
+        navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
+        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2)
+        navigationController?.navigationBar.layer.shadowOpacity = 0.2;
+        
         let statusBar = UIView(frame: CGRect(x: 0, y: -UIApplication.shared.statusBarFrame.size.height, width: view.bounds.size.width, height: UIApplication.shared.statusBarFrame.size.height))
         statusBar.backgroundColor = UIColor("#ffa726")
         navigationController?.navigationBar.addSubview(statusBar)

@@ -219,11 +219,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5P3-Ck-sKC">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" id="XF2-1e-ucr"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Eu0-N4-mA9">
                                             <size key="itemSize" width="0.0" height="0.0"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -234,11 +230,12 @@
                                     </collectionView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="5P3-Ck-sKC" secondAttribute="bottom" constant="20" symbolic="YES" id="4Ab-AX-jWD"/>
-                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="centerX" secondItem="pVf-QZ-kgz" secondAttribute="centerX" id="dsY-rC-MK4"/>
-                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="top" secondItem="pVf-QZ-kgz" secondAttribute="top" id="lBK-7s-2GC"/>
-                                    <constraint firstAttribute="trailing" secondItem="5P3-Ck-sKC" secondAttribute="trailing" id="omf-5J-7Cd"/>
-                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="leading" secondItem="pVf-QZ-kgz" secondAttribute="leading" id="zP3-yo-E1f"/>
+                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="top" secondItem="pVf-QZ-kgz" secondAttribute="top" id="37H-SI-mo1"/>
+                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="centerX" secondItem="pVf-QZ-kgz" secondAttribute="centerX" id="648-c9-gPF"/>
+                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="leading" secondItem="pVf-QZ-kgz" secondAttribute="leading" id="EtD-hg-OfV"/>
+                                    <constraint firstAttribute="bottom" secondItem="5P3-Ck-sKC" secondAttribute="bottom" id="I4W-gP-vnK"/>
+                                    <constraint firstAttribute="trailing" secondItem="5P3-Ck-sKC" secondAttribute="trailing" id="dVR-od-Mws"/>
+                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="centerY" secondItem="pVf-QZ-kgz" secondAttribute="centerY" id="dkc-1u-12e"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

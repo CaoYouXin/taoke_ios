@@ -83,6 +83,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
                     let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                     constraint.constant = height
+                    self.minimumContentHeight = self.couponTab.frame.size.height
                     self.maximumContentHeight = self.contentHeight! + height
                 }
                 
@@ -99,6 +100,11 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func initCouponTab() {
         couponTab.indicatorColor = UIColor("#ef6c00")
         couponTab.fontSelectedColor = UIColor("#ef6c00")
+        
+        couponTab.layer.shadowColor = UIColor.black.cgColor
+        couponTab.layer.shadowOffset = CGSize(width: 0, height: 4)
+        couponTab.layer.shadowOpacity = 0.2;
+        
         updateCouponTab()
     }
     

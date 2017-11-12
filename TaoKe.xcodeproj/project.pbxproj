@@ -30,6 +30,7 @@
 		F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */; };
 		F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6FAE61FB03C7500930751 /* DiscoverController.swift */; };
 		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
+		F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */; };
 		FC4399495122137E8C7EDA49 /* Pods_TaoKe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		F9D6FAE61FB03C7500930751 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		F9F3A7E01FAC0D6B00D73A50 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				F95B203A1FB1A54200AC57E4 /* CouponTab.swift */,
 				F90EA80B1FB3DDCC00184D04 /* BrandItem.swift */,
+				F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				"${BUILT_PRODUCTS_DIR}/ISO8601DateFormatterValueTransformer/ISO8601DateFormatterValueTransformer.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageSlideshow/ImageSlideshow.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MEVFloatingButton/MEVFloatingButton.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/RKValueTransformers/RKValueTransformers.framework",
@@ -337,6 +341,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISO8601DateFormatterValueTransformer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageSlideshow.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MEVFloatingButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKValueTransformers.framework",
@@ -376,6 +381,7 @@
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
 				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,
+				F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */,
 				F92DA58D1FB151A400FDF3E4 /* TaoKeTestService.swift in Sources */,
 				F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */,
 				F92DA5961FB169D600FDF3E4 /* TaoKeApi.swift in Sources */,

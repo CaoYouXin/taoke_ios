@@ -57,8 +57,6 @@ class DiscoverController: UIViewController {
             couponList.addSubview(headerView)
             
             headerView.couponTab.delegate = self
-            
-            couponList.contentOffset = CGPoint(x: 0, y: 0)
         }
     }
     

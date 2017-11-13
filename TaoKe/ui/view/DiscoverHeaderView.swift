@@ -88,6 +88,10 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                     self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
                     
                     self.maximumContentHeight += height
+                    
+                    //fix the content offset bug, any better way?
+                    let discoverController = self.superview as? DiscoverController
+                    discoverController?.couponList.contentOffset = CGPoint(x: 0, y: 0)
                 }
                 
                 self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)

@@ -7,15 +7,17 @@
 //
 import CleanroomLogger
 import RxSwift
-import RxCocoa
-import RxViewModel
+import RxSegue
 import MJRefresh
 import MEVFloatingButton
+import TabLayoutView
 import FontAwesomeKit
 
 class DiscoverController: UIViewController {
-  
+    
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    let floatingButton: MEVFloatingButton = MEVFloatingButton()
     
     @IBOutlet weak var couponList: UICollectionView!
     @IBOutlet weak var couponListFlowLayout: UICollectionViewFlowLayout!
@@ -24,15 +26,17 @@ class DiscoverController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    let couponViewModel = RxViewModel()
+    let couponDataSource = CouponDataSource()
+    var couponListHelper: MVCHelper<CouponItem>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        
+        initScrollView()
+        initFloatingButton()
         initHeaderView()
         initCouponList()
-        initScrollView()
     }
     
     private func initHeaderView() {
@@ -40,9 +44,21 @@ class DiscoverController: UIViewController {
         discoverHeaderView = nibViews?.first as? DiscoverHeaderView
         
         if let headerView = discoverHeaderView {
-            headerView.frame = CGRect(x: headerView.frame.origin.x, y: headerView.frame.origin.y, width: view.frame.size.width, height: headerView.frame.size.height)
+            //fix the headerview bug, any better way?
+            var adjust = CGFloat(0)
+            let height = self.view.frame.size.height
+            if height == 568 {
+                adjust -= 16
+            }else if height == 736 {
+                adjust += 16
+            }
+            headerView.maximumContentHeight += adjust
             
             couponList.addSubview(headerView)
+            
+            headerView.couponTab.delegate = self
+            
+            couponList.contentOffset = CGPoint(x: 0, y: 0)
         }
     }
     
@@ -51,20 +67,15 @@ class DiscoverController: UIViewController {
         
         couponListFlowLayout.itemSize = CGSize(width: view.frame.size.width, height: 112)
         
-        let couponDataSource = TaoKeApi.getCouponList()
-            .catchError({ (error) -> Observable<[CouponItem]> in
-                Log.error?.message(error.localizedDescription)
-                return Observable.empty()
-            })
-        
         let couponCellFactory: (UICollectionView, Int, CouponItem) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CouponCell
-
+            
             //cell.thumb.image = #imageLiteral(resourceName: "splash")
             cell.thumb.kf.setImage(with: URL(string: element.thumb!))
             cell.couponTitle.text = element.title!
             cell.couponPriceBefore.text = "现价 ¥ \(element.priceBefore!)        月销量 \(element.sales!) 件"
+            
             let couponPriceAfter = "券后价 ¥ \(element.priceAfter!)"
             let couponPriceAfterMutableAttributed = NSMutableAttributedString(string: couponPriceAfter)
             let location = couponPriceAfter.index(of: "¥")?.encodedOffset
@@ -73,22 +84,57 @@ class DiscoverController: UIViewController {
             couponPriceAfterMutableAttributed.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.black, range: range)
             cell.couponPriceAfter.attributedText = couponPriceAfterMutableAttributed
             
+            let progress = Float(element.left!) / Float(element.total!)
+            if cell.couponProgress.progress != progress {
+                cell.couponProgress.progress = 0
+                cell.couponProgress.layoutIfNeeded()
+            }
+            cell.couponProgress.progress = progress
+            UIView.animate(withDuration: 1, animations: { () -> Void in
+                cell.couponProgress.layoutIfNeeded()
+            })
+            
             cell.couponValue.text = "券 | \(element.value!)元        余\(element.left!)张"
             cell.couponEarn.text = "赚 ¥ \(element.earn!)"
             return cell
         }
         
-        couponViewModel
-            .forwardSignalWhileActive(couponDataSource)
-            .rxSchedulerHelper()
-            .bind(to: couponList.rx.items)(couponCellFactory)
+        couponListHelper = MVCHelper(couponList)
+        couponListHelper?.set(dataSource: couponDataSource)
+        couponListHelper?.set(cellFactory: couponCellFactory)
+        couponListHelper?.refresh()
+        
+        let segue: AnyObserver<CouponItem> = NavigationSegue(
+            fromViewController: self.navigationController!,
+            toViewControllerFactory:
+            { (sender, context) -> DetailController in
+                let detailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+                detailController.couponItem = context
+                return detailController
+        }).asObserver()
+        
+        couponList.rx.itemSelected
+            .map{ indexPath -> CouponItem in
+                return try self.couponList.rx.model(at: indexPath)
+            }
+            .bind(to: segue)
             .disposed(by: disposeBag)
         
-        couponViewModel.active = true
+        couponList.rx.didScroll.subscribe(onNext: {
+            let isExpanded = self.discoverHeaderView?.frame.size.height != self.discoverHeaderView?.minimumContentHeight
+            if isExpanded {
+                self.floatingButton.isHidden = true
+            }else {
+                self.floatingButton.isHidden = false
+            }
+        }, onError: { (error) in
+            Log.error?.message(error.localizedDescription)
+        })
     }
     
     private func initScrollView() {
         scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.couponListHelper?.refresh()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.scrollView.mj_header.endRefreshing()
@@ -96,16 +142,19 @@ class DiscoverController: UIViewController {
         })
         
         scrollView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.couponListHelper?.loadMore()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.scrollView.mj_footer.isHidden = true
                 self.scrollView.mj_footer.isHidden = false
             }
         })
-
-        scrollView.mj_footer.isAutomaticallyHidden = false
         
-        let floatingButton = MEVFloatingButton()
+        scrollView.mj_footer.isAutomaticallyHidden = false
+    }
+    
+    private func initFloatingButton() {
+        floatingButton.isHidden = true
         floatingButton.image = FAKMaterialIcons.formatValignTopIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))
         floatingButton.imageColor = UIColor("#424242")
         floatingButton.backgroundColor = UIColor.white
@@ -116,10 +165,26 @@ class DiscoverController: UIViewController {
         floatingButton.layer.shadowOffset = CGSize(width: 0, height: 2)
         floatingButton.layer.shadowOpacity = 0.2;
         scrollView.setFloatingButton(floatingButton)
+        
+        scrollView.floatingButtonDelegate = self
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension DiscoverController: MEVFloatingButtonDelegate {
+    func floatingButton(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        couponList.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+    }
+}
+
+extension DiscoverController: TabLayoutViewDelegate {
+    func tabLayoutView(_ tabLayoutView: TabLayoutView, didSelectTabAt index: Int) {
+        couponList.setContentOffset(CGPoint(x: 0, y: discoverHeaderView!.maximumContentHeight), animated: true)
+        couponDataSource.set(index)
+        couponListHelper?.refresh()
     }
 }

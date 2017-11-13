@@ -25,13 +25,14 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     let brandViewModel = RxViewModel()
     
-    var contentHeight: CGFloat?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentHeight = couponTab.frame.origin.y + couponTab.frame.size.height + 15
-        maximumContentHeight = contentHeight!
+        self.maximumContentHeight = self.couponTab.frame.origin.y + self.couponTab.frame.size.height
+        
+        self.minimumContentHeight = self.couponTab.frame.size.height
+        
+        self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
         
         initSlider()
         initBrandList()
@@ -83,8 +84,10 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
                     let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                     constraint.constant = height
-                    self.minimumContentHeight = self.couponTab.frame.size.height
-                    self.maximumContentHeight = self.contentHeight! + height
+                    
+                    self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
+                    
+                    self.maximumContentHeight += height
                 }
                 
                 self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
@@ -117,7 +120,6 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             self.couponTab.items = items
         }, onError: { error in
             Log.error?.message(error.localizedDescription)
-        }, onCompleted: {
         })
     }
 }

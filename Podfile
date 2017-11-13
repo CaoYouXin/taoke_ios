@@ -6,10 +6,11 @@ target 'TaoKe' do
   use_frameworks!
 
   # Pods for TaoKe
-  pod 'RxSwift'
-  pod 'RxCocoa'
+  pod 'RxSwift',    '~> 4.0'
+  pod 'RxCocoa',    '~> 4.0'
   pod 'RxViewModel'
   pod 'RxDataSources'
+  pod 'RxSegue', :git => 'https://github.com/gnastnosaj/RxSegue.git'
   
   pod 'CleanroomLogger'
   pod 'RestKit'

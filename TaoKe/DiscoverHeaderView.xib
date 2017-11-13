@@ -213,9 +213,10 @@
                     <color key="textColor" red="0.90196078430000004" green="0.31764705879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0x-6g-GB6" customClass="TabLayoutView" customModule="TabLayoutView">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0x-6g-GB6" customClass="TabLayoutView" customModule="TabLayoutView">
                     <rect key="frame" x="0.0" y="323" width="375" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="VB3-OY-ZO8"/>
                     </constraints>
@@ -251,7 +252,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="minimumContentHeight">
-                    <real key="value" value="40"/>
+                    <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="maximumContentHeight">
                     <real key="value" value="0.0"/>

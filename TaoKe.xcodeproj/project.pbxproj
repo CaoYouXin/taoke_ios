@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8BE1FB93DF4000BC49F /* DetailController.swift */; };
+		F907D8C11FB97498000BC49F /* MVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C01FB97498000BC49F /* MVCHelper.swift */; };
+		F907D8C41FB97513000BC49F /* RxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C31FB97513000BC49F /* RxDataSource.swift */; };
+		F907D8C61FB981DF000BC49F /* CouponDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C51FB981DF000BC49F /* CouponDataSource.swift */; };
 		F90EA80C1FB3DDCC00184D04 /* BrandItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90EA80B1FB3DDCC00184D04 /* BrandItem.swift */; };
 		F90EA80E1FB3E56500184D04 /* DiscoverHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F90EA80D1FB3E56500184D04 /* DiscoverHeaderView.xib */; };
 		F90EA8101FB3E57600184D04 /* DiscoverHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90EA80F1FB3E57600184D04 /* DiscoverHeaderView.swift */; };
@@ -38,6 +42,10 @@
 		030F2ED6F7365B37BEB79011 /* Pods-TaoKe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.release.xcconfig"; sourceTree = "<group>"; };
 		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
 		AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaoKe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F907D8BE1FB93DF4000BC49F /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		F907D8C01FB97498000BC49F /* MVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVCHelper.swift; sourceTree = "<group>"; };
+		F907D8C31FB97513000BC49F /* RxDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxDataSource.swift; sourceTree = "<group>"; };
+		F907D8C51FB981DF000BC49F /* CouponDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponDataSource.swift; sourceTree = "<group>"; };
 		F90EA80B1FB3DDCC00184D04 /* BrandItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandItem.swift; sourceTree = "<group>"; };
 		F90EA80D1FB3E56500184D04 /* DiscoverHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverHeaderView.xib; sourceTree = "<group>"; };
 		F90EA80F1FB3E57600184D04 /* DiscoverHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverHeaderView.swift; sourceTree = "<group>"; };
@@ -96,6 +104,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F907D8C21FB974A0000BC49F /* mvc */ = {
+			isa = PBXGroup;
+			children = (
+				F907D8C01FB97498000BC49F /* MVCHelper.swift */,
+				F907D8C31FB97513000BC49F /* RxDataSource.swift */,
+			);
+			path = mvc;
+			sourceTree = "<group>";
+		};
+		F907D8C71FB981E2000BC49F /* datasource */ = {
+			isa = PBXGroup;
+			children = (
+				F907D8C51FB981DF000BC49F /* CouponDataSource.swift */,
+			);
+			path = datasource;
+			sourceTree = "<group>";
+		};
 		F90EA8111FB3E57A00184D04 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				F92DA58E1FB151A900FDF3E4 /* api */,
+				F907D8C21FB974A0000BC49F /* mvc */,
 				F95B203C1FB1A58E00AC57E4 /* model */,
+				F907D8C71FB981E2000BC49F /* datasource */,
 				F92DA58F1FB151EB00FDF3E4 /* ui */,
 				F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */,
 				F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */,
@@ -191,6 +218,7 @@
 				F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */,
 				F9D6FAE61FB03C7500930751 /* DiscoverController.swift */,
 				F92DA5881FB14B7500FDF3E4 /* SearchController.swift */,
+				F907D8BE1FB93DF4000BC49F /* DetailController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -324,6 +352,7 @@
 				"${BUILT_PRODUCTS_DIR}/RestKit/RestKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSegue/RxSegue.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxViewModel/RxViewModel.framework",
 				"${BUILT_PRODUCTS_DIR}/SOCKit/SOCKit.framework",
@@ -348,6 +377,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RestKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSegue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxViewModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SOCKit.framework",
@@ -367,9 +397,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F907D8C11FB97498000BC49F /* MVCHelper.swift in Sources */,
 				F90EA80C1FB3DDCC00184D04 /* BrandItem.swift in Sources */,
 				F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */,
 				F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */,
+				F907D8C61FB981DF000BC49F /* CouponDataSource.swift in Sources */,
 				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
 				F99662111FB41083002CF243 /* CouponCell.swift in Sources */,
 				F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */,
@@ -379,7 +411,9 @@
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
+				F907D8C41FB97513000BC49F /* RxDataSource.swift in Sources */,
 				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
+				F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,
 				F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */,
 				F92DA58D1FB151A400FDF3E4 /* TaoKeTestService.swift in Sources */,

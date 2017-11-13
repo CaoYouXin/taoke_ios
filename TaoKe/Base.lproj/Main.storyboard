@@ -147,7 +147,6 @@
                         <segue destination="iLp-2B-dgL" kind="relationship" relationship="viewControllers" id="9LP-lD-1Fz"/>
                         <segue destination="4dH-ze-0ss" kind="relationship" relationship="viewControllers" id="r81-sh-js5"/>
                         <segue destination="duZ-7k-Vge" kind="relationship" relationship="viewControllers" id="yHx-nm-Y49"/>
-                        <segue destination="BgH-UX-dMr" kind="show" identifier="segue_taoke_to_search" id="u13-Ed-jnv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjB-L0-jRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -157,7 +156,7 @@
         <!--Search Controller-->
         <scene sceneID="hLD-Pb-cxQ">
             <objects>
-                <viewController id="BgH-UX-dMr" customClass="SearchController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchController" id="BgH-UX-dMr" customClass="SearchController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3dl-DN-F8I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSo-L6-ZX7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="880"/>
+            <point key="canvasLocation" x="1641" y="746"/>
         </scene>
         <!--我的-->
         <scene sceneID="P66-9A-SMB">
@@ -220,6 +219,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5P3-Ck-sKC">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Eu0-N4-mA9">
                                             <size key="itemSize" width="0.0" height="0.0"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -280,6 +280,21 @@
                 </customObject>
             </objects>
             <point key="canvasLocation" x="2608.8000000000002" y="-1446.0269865067467"/>
+        </scene>
+        <!--Detail Controller-->
+        <scene sceneID="lgb-Dq-BS9">
+            <objects>
+                <viewController storyboardIdentifier="DetailController" id="vy0-sq-AoX" customClass="DetailController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="998-de-YAD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Zj4-yJ-DY0"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sAX-Gp-B6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3312" y="-1445"/>
         </scene>
     </scenes>
     <resources>

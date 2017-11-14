@@ -25,6 +25,21 @@ class TaoKeTestService: TaoKeProtocol {
         taoKeData.header = [:]
         taoKeData.body = [:]
         
+        if api.hasPrefix(TaoKeService.API_COUPON_DETAIL) {
+            taoKeData.header!["ResultCode"] = "0000" as AnyObject
+            taoKeData.body!["id"] = 0 as AnyObject
+            taoKeData.body!["thumb"] = "http://7xi8d6.com1.z0.glb.clouddn.com/20171025112955_lmesMu_katyteiko_25_10_2017_11_29_43_270.jpeg" as AnyObject
+            taoKeData.body!["title"] = "冬季毛绒沙发垫加厚保暖简约法兰绒坐垫布艺防滑沙发套沙发罩全盖" as AnyObject
+            taoKeData.body!["priceAfter"] = "99.00" as AnyObject
+            taoKeData.body!["priceBefore"] = "399.00" as AnyObject
+            taoKeData.body!["sales"] = 3580 as AnyObject
+            taoKeData.body!["coupon"] = "300.0" as AnyObject
+            taoKeData.body!["couponRequirement"] = "398.0" as AnyObject
+            taoKeData.body!["commissionPercent"] = "5.50%" as AnyObject
+            taoKeData.body!["commission"] = "5.45" as AnyObject
+            return Observable.just(taoKeData)
+        }
+        
         switch api {
         case TaoKeService.API_BRAND_LIST:
             taoKeData.header!["ResultCode"] = "0000" as AnyObject

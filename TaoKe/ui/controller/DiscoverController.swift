@@ -78,8 +78,8 @@ class DiscoverController: UIViewController {
             let couponPriceAfterMutableAttributed = NSMutableAttributedString(string: couponPriceAfter)
             let location = couponPriceAfter.index(of: "¥")?.encodedOffset
             let range = NSRange(location: location!, length: couponPriceAfter.utf16.count - location!)
-            couponPriceAfterMutableAttributed.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 16), range: range)
-            couponPriceAfterMutableAttributed.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.black, range: range)
+            couponPriceAfterMutableAttributed.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 16), range: range)
+            couponPriceAfterMutableAttributed.addAttribute(.foregroundColor, value: UIColor.black, range: range)
             cell.couponPriceAfter.attributedText = couponPriceAfterMutableAttributed
             
             let progress = Float(element.left!) / Float(element.total!)

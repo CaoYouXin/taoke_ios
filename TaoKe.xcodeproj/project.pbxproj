@@ -29,6 +29,7 @@
 		F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93802DC1FB3F1D300803475 /* BrandCell.swift */; };
 		F93802DF1FB3F1ED00803475 /* BrandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93802DE1FB3F1ED00803475 /* BrandCell.xib */; };
 		F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B203A1FB1A54200AC57E4 /* CouponTab.swift */; };
+		F9758B641FBAD561009C0BEE /* CouponItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */; };
 		F98D19F51FBA970500B0F9D0 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F41FBA970500B0F9D0 /* Detail.storyboard */; };
 		F98D19F71FBA975700B0F9D0 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F61FBA975700B0F9D0 /* Search.storyboard */; };
 		F99662111FB41083002CF243 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99662101FB41083002CF243 /* CouponCell.swift */; };
@@ -68,6 +69,7 @@
 		F93802DC1FB3F1D300803475 /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		F93802DE1FB3F1ED00803475 /* BrandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandCell.xib; sourceTree = "<group>"; };
 		F95B203A1FB1A54200AC57E4 /* CouponTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTab.swift; sourceTree = "<group>"; };
+		F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponItemDetail.swift; sourceTree = "<group>"; };
 		F98D19F41FBA970500B0F9D0 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		F98D19F61FBA975700B0F9D0 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		F99662101FB41083002CF243 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				F95B203A1FB1A54200AC57E4 /* CouponTab.swift */,
 				F90EA80B1FB3DDCC00184D04 /* BrandItem.swift */,
 				F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */,
+				F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -236,8 +239,8 @@
 		F9EA8FCC1FAFDE1600EBB95C /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				F92C68CD1FAAE32C005CD910 /* TaoKeController.swift */,
 				F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */,
+				F92C68CD1FAAE32C005CD910 /* TaoKeController.swift */,
 				F9D6FAE61FB03C7500930751 /* DiscoverController.swift */,
 				F92DA5881FB14B7500FDF3E4 /* SearchController.swift */,
 				F907D8BE1FB93DF4000BC49F /* DetailController.swift */,
@@ -434,6 +437,7 @@
 				F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
+				F9758B641FBAD561009C0BEE /* CouponItemDetail.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
 				F907D8C41FB97513000BC49F /* RxDataSource.swift in Sources */,
 				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
@@ -581,10 +585,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B8JXVMT2QE;
+				DEVELOPMENT_TEAM = WW3Q239636;
 				INFOPLIST_FILE = TaoKe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.gnastnosaj.TaoKe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.caoyouxin.taoke.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;
@@ -599,10 +603,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B8JXVMT2QE;
+				DEVELOPMENT_TEAM = WW3Q239636;
 				INFOPLIST_FILE = TaoKe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.gnastnosaj.TaoKe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.caoyouxin.taoke.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = BridgingHeader.h;

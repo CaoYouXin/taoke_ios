@@ -77,4 +77,23 @@ class TaoKeApi {
                 return items
             })
     }
+    
+    public static func getCouponDetail(_ couponItem: CouponItem) -> Observable<CouponItemDetail> {
+        return TaoKeService.getInstance()
+            .tao(api: "\(TaoKeService.API_COUPON_DETAIL)/\(couponItem.id!)")
+            .handleResult()
+            .map({ (taoKeData) -> CouponItemDetail in
+                let couponItemDetail = CouponItemDetail()
+                couponItemDetail.thumb = taoKeData?.body?["thumb"] as? String
+                couponItemDetail.title = taoKeData?.body?["title"] as? String
+                couponItemDetail.priceBefore = taoKeData?.body?["priceBefore"] as? String
+                couponItemDetail.priceAfter = taoKeData?.body?["priceAfter"] as? String
+                couponItemDetail.sales = taoKeData?.body?["sales"] as? Int
+                couponItemDetail.coupon = taoKeData?.body?["coupon"] as? String
+                couponItemDetail.couponRequirement = taoKeData?.body?["couponRequirement"] as? String
+                couponItemDetail.commissionPercent = taoKeData?.body?["commissionPercent"] as? String
+                couponItemDetail.commission = taoKeData?.body?["commission"] as? String
+                return couponItemDetail
+            })
+    }
 }

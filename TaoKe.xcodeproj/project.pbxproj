@@ -29,6 +29,8 @@
 		F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93802DC1FB3F1D300803475 /* BrandCell.swift */; };
 		F93802DF1FB3F1ED00803475 /* BrandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93802DE1FB3F1ED00803475 /* BrandCell.xib */; };
 		F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B203A1FB1A54200AC57E4 /* CouponTab.swift */; };
+		F98D19F51FBA970500B0F9D0 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F41FBA970500B0F9D0 /* Detail.storyboard */; };
+		F98D19F71FBA975700B0F9D0 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F61FBA975700B0F9D0 /* Search.storyboard */; };
 		F99662111FB41083002CF243 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99662101FB41083002CF243 /* CouponCell.swift */; };
 		F99662131FB410AD002CF243 /* CouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99662121FB410AD002CF243 /* CouponCell.xib */; };
 		F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */; };
@@ -66,6 +68,8 @@
 		F93802DC1FB3F1D300803475 /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		F93802DE1FB3F1ED00803475 /* BrandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandCell.xib; sourceTree = "<group>"; };
 		F95B203A1FB1A54200AC57E4 /* CouponTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTab.swift; sourceTree = "<group>"; };
+		F98D19F41FBA970500B0F9D0 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		F98D19F61FBA975700B0F9D0 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		F99662101FB41083002CF243 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		F99662121FB410AD002CF243 /* CouponCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponCell.xib; sourceTree = "<group>"; };
 		F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAMScaleUpAnimation.swift; sourceTree = "<group>"; };
@@ -159,11 +163,6 @@
 				F907D8C71FB981E2000BC49F /* datasource */,
 				F92DA58F1FB151EB00FDF3E4 /* ui */,
 				F92C68CB1FAAE32C005CD910 /* AppDelegate.swift */,
-				F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */,
-				F92C68CF1FAAE32C005CD910 /* Main.storyboard */,
-				F90EA80D1FB3E56500184D04 /* DiscoverHeaderView.xib */,
-				F93802DE1FB3F1ED00803475 /* BrandCell.xib */,
-				F99662121FB410AD002CF243 /* CouponCell.xib */,
 				F92C68D21FAAE32C005CD910 /* Assets.xcassets */,
 				F92C68D71FAAE32C005CD910 /* Info.plist */,
 			);
@@ -189,6 +188,8 @@
 				F92DA5901FB151FF00FDF3E4 /* animation */,
 				F9EA8FCC1FAFDE1600EBB95C /* controller */,
 				F90EA8111FB3E57A00184D04 /* view */,
+				F98D19F21FBA961000B0F9D0 /* sb */,
+				F98D19F31FBA962A00B0F9D0 /* nb */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -209,6 +210,27 @@
 				F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		F98D19F21FBA961000B0F9D0 /* sb */ = {
+			isa = PBXGroup;
+			children = (
+				F92C68D41FAAE32C005CD910 /* LaunchScreen.storyboard */,
+				F92C68CF1FAAE32C005CD910 /* Main.storyboard */,
+				F98D19F61FBA975700B0F9D0 /* Search.storyboard */,
+				F98D19F41FBA970500B0F9D0 /* Detail.storyboard */,
+			);
+			path = sb;
+			sourceTree = "<group>";
+		};
+		F98D19F31FBA962A00B0F9D0 /* nb */ = {
+			isa = PBXGroup;
+			children = (
+				F90EA80D1FB3E56500184D04 /* DiscoverHeaderView.xib */,
+				F93802DE1FB3F1ED00803475 /* BrandCell.xib */,
+				F99662121FB410AD002CF243 /* CouponCell.xib */,
+			);
+			path = nb;
 			sourceTree = "<group>";
 		};
 		F9EA8FCC1FAFDE1600EBB95C /* controller */ = {
@@ -287,9 +309,11 @@
 			files = (
 				F92C68D61FAAE32C005CD910 /* LaunchScreen.storyboard in Resources */,
 				F92C68D31FAAE32C005CD910 /* Assets.xcassets in Resources */,
+				F98D19F51FBA970500B0F9D0 /* Detail.storyboard in Resources */,
 				F90EA80E1FB3E56500184D04 /* DiscoverHeaderView.xib in Resources */,
 				F99662131FB410AD002CF243 /* CouponCell.xib in Resources */,
 				F92C68D11FAAE32C005CD910 /* Main.storyboard in Resources */,
+				F98D19F71FBA975700B0F9D0 /* Search.storyboard in Resources */,
 				F93802DF1FB3F1ED00803475 /* BrandCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

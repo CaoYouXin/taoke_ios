@@ -106,7 +106,7 @@ class DiscoverController: UIViewController {
             fromViewController: self.navigationController!,
             toViewControllerFactory:
             { (sender, context) -> DetailController in
-                let detailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+                let detailController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
                 detailController.couponItem = context
                 return detailController
         }).asObserver()

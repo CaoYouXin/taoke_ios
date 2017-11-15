@@ -17,17 +17,17 @@ class DiscoverController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    let floatingButton: MEVFloatingButton = MEVFloatingButton()
+    private let floatingButton: MEVFloatingButton = MEVFloatingButton()
     
     @IBOutlet weak var couponList: UICollectionView!
     @IBOutlet weak var couponListFlowLayout: UICollectionViewFlowLayout!
     
-    var discoverHeaderView: DiscoverHeaderView?
+    private var discoverHeaderView: DiscoverHeaderView?
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
-    let couponDataSource = CouponDataSource()
-    var couponListHelper: MVCHelper<CouponItem>?
+    private let couponDataSource = CouponDataSource()
+    private var couponListHelper: MVCHelper<CouponItem>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +55,22 @@ class DiscoverController: UIViewController {
             headerView.maximumContentHeight += adjust
             
             couponList.addSubview(headerView)
+            
+            let segue: AnyObserver<BrandItem> = NavigationSegue(
+                fromViewController: self.navigationController!,
+                toViewControllerFactory:
+                { (sender, context) -> ProductListController in
+                    let productListController = UIStoryboard(name: "ProductList", bundle: nil).instantiateViewController(withIdentifier: "ProductListController") as! ProductListController
+                    productListController.brandItem = context
+                    return productListController
+            }).asObserver()
+            
+            headerView.brandList.rx.itemSelected
+                .map{ indexPath -> BrandItem in
+                    return try headerView.brandList.rx.model(at: indexPath)
+                }
+                .bind(to: segue)
+                .disposed(by: disposeBag)
             
             headerView.couponTab.delegate = self
         }
@@ -127,7 +143,7 @@ class DiscoverController: UIViewController {
             }
         }, onError: { (error) in
             Log.error?.message(error.localizedDescription)
-        })
+        }).disposed(by: disposeBag)
     }
     
     private func initScrollView() {

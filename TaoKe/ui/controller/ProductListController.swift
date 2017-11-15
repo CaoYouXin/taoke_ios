@@ -132,7 +132,6 @@ class ProductListController: UIViewController {
                         let itemWidth = (self.view.frame.size.width - 10) / 2
                         let height = itemWidth / radio
                         constraint.constant = height
-                        collectionView.layoutIfNeeded()
                     }
                 }
             })

@@ -38,6 +38,41 @@ class TaoKeTestService: TaoKeProtocol {
             taoKeData.body!["commissionPercent"] = "5.50%" as AnyObject
             taoKeData.body!["commission"] = "5.45" as AnyObject
             return Observable.just(taoKeData)
+        } else if api.hasPrefix(TaoKeService.API_PRODUCT_LIST) {
+            taoKeData.header!["ResultCode"] = "0000" as AnyObject
+            let productThumbs = ["https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg",
+                               "https://ws1.sinaimg.cn/large/610dc034ly1fitcjyruajj20u011h412.jpg", "http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg", "https://ws1.sinaimg.cn/large/610dc034ly1fk05lf9f4cj20u011h423.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjppsiclufj20u011igo5.jpg", "https://ws1.sinaimg.cn/large/610dc034ly1fjfae1hjslj20u00tyq4x.jpg"]
+            var products: [[String:AnyObject]] = []
+            for i in 0..<productThumbs.count {
+                var product: [String:AnyObject] = [:]
+                product["id"] = i as AnyObject
+                product["title"] = "冬季毛绒沙发垫加厚保暖简约法兰绒坐垫布艺防滑沙发套沙发罩全盖" as AnyObject
+                product["thumb"] = productThumbs[i] as AnyObject
+                if i % 2 == 0 {
+                    product["isNew"] = true as AnyObject
+                } else {
+                    product["isNew"] = false as AnyObject
+                }
+                product["price"] = "328" as AnyObject
+                product["sales"] = 711 as AnyObject
+                products.append(product)
+            }
+            taoKeData.body!["recs"] = products as AnyObject
+            return Observable.just(taoKeData)
         }
         
         switch api {

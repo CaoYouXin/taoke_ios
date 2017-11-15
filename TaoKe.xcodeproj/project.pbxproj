@@ -28,6 +28,7 @@
 		F92DA5981FB1780800FDF3E4 /* RxHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92DA5971FB1780800FDF3E4 /* RxHelper.swift */; };
 		F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93802DC1FB3F1D300803475 /* BrandCell.swift */; };
 		F93802DF1FB3F1ED00803475 /* BrandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93802DE1FB3F1ED00803475 /* BrandCell.xib */; };
+		F949F8E01FBC324800E8382A /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F949F8DF1FBC324800E8382A /* ProductCell.xib */; };
 		F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B203A1FB1A54200AC57E4 /* CouponTab.swift */; };
 		F9758B641FBAD561009C0BEE /* CouponItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */; };
 		F98D19F51FBA970500B0F9D0 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F41FBA970500B0F9D0 /* Detail.storyboard */; };
@@ -38,6 +39,9 @@
 		F9B65BDE1FBBD7A900413211 /* ProductList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9B65BDD1FBBD7A900413211 /* ProductList.storyboard */; };
 		F9B65BE01FBBD7CA00413211 /* ProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B65BDF1FBBD7CA00413211 /* ProductListController.swift */; };
 		F9B65BE21FBBDCBB00413211 /* BrandDateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B65BE11FBBDCBB00413211 /* BrandDateSource.swift */; };
+		F9B7E01B1FBC0DFC00E4CCE2 /* ProductDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E01A1FBC0DFC00E4CCE2 /* ProductDataSource.swift */; };
+		F9B7E01D1FBC197600E4CCE2 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E01C1FBC197600E4CCE2 /* ProductCell.swift */; };
+		F9B7E01F1FBC1B3400E4CCE2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E01E1FBC1B3400E4CCE2 /* Product.swift */; };
 		F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6FAE61FB03C7500930751 /* DiscoverController.swift */; };
 		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
 		F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */; };
@@ -71,6 +75,7 @@
 		F92DA5971FB1780800FDF3E4 /* RxHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxHelper.swift; sourceTree = "<group>"; };
 		F93802DC1FB3F1D300803475 /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		F93802DE1FB3F1ED00803475 /* BrandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandCell.xib; sourceTree = "<group>"; };
+		F949F8DF1FBC324800E8382A /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		F95B203A1FB1A54200AC57E4 /* CouponTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTab.swift; sourceTree = "<group>"; };
 		F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponItemDetail.swift; sourceTree = "<group>"; };
 		F98D19F41FBA970500B0F9D0 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
@@ -81,6 +86,9 @@
 		F9B65BDD1FBBD7A900413211 /* ProductList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductList.storyboard; sourceTree = "<group>"; };
 		F9B65BDF1FBBD7CA00413211 /* ProductListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListController.swift; sourceTree = "<group>"; };
 		F9B65BE11FBBDCBB00413211 /* BrandDateSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandDateSource.swift; sourceTree = "<group>"; };
+		F9B7E01A1FBC0DFC00E4CCE2 /* ProductDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDataSource.swift; sourceTree = "<group>"; };
+		F9B7E01C1FBC197600E4CCE2 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		F9B7E01E1FBC1B3400E4CCE2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F9D6FAE61FB03C7500930751 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		F9F3A7E01FAC0D6B00D73A50 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -128,8 +136,9 @@
 		F907D8C71FB981E2000BC49F /* datasource */ = {
 			isa = PBXGroup;
 			children = (
-				F907D8C51FB981DF000BC49F /* CouponDataSource.swift */,
 				F9B65BE11FBBDCBB00413211 /* BrandDateSource.swift */,
+				F9B7E01A1FBC0DFC00E4CCE2 /* ProductDataSource.swift */,
+				F907D8C51FB981DF000BC49F /* CouponDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -140,6 +149,7 @@
 				F90EA80F1FB3E57600184D04 /* DiscoverHeaderView.swift */,
 				F93802DC1FB3F1D300803475 /* BrandCell.swift */,
 				F99662101FB41083002CF243 /* CouponCell.swift */,
+				F9B7E01C1FBC197600E4CCE2 /* ProductCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -216,6 +226,7 @@
 			children = (
 				F95B203A1FB1A54200AC57E4 /* CouponTab.swift */,
 				F90EA80B1FB3DDCC00184D04 /* BrandItem.swift */,
+				F9B7E01E1FBC1B3400E4CCE2 /* Product.swift */,
 				F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */,
 				F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */,
 			);
@@ -240,6 +251,7 @@
 				F90EA80D1FB3E56500184D04 /* DiscoverHeaderView.xib */,
 				F93802DE1FB3F1ED00803475 /* BrandCell.xib */,
 				F99662121FB410AD002CF243 /* CouponCell.xib */,
+				F949F8DF1FBC324800E8382A /* ProductCell.xib */,
 			);
 			path = nb;
 			sourceTree = "<group>";
@@ -326,6 +338,7 @@
 				F90EA80E1FB3E56500184D04 /* DiscoverHeaderView.xib in Resources */,
 				F99662131FB410AD002CF243 /* CouponCell.xib in Resources */,
 				F92C68D11FAAE32C005CD910 /* Main.storyboard in Resources */,
+				F949F8E01FBC324800E8382A /* ProductCell.xib in Resources */,
 				F98D19F71FBA975700B0F9D0 /* Search.storyboard in Resources */,
 				F93802DF1FB3F1ED00803475 /* BrandCell.xib in Resources */,
 			);
@@ -440,14 +453,17 @@
 				F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */,
 				F9B65BE21FBBDCBB00413211 /* BrandDateSource.swift in Sources */,
 				F907D8C61FB981DF000BC49F /* CouponDataSource.swift in Sources */,
+				F9B7E01B1FBC0DFC00E4CCE2 /* ProductDataSource.swift in Sources */,
 				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
 				F99662111FB41083002CF243 /* CouponCell.swift in Sources */,
 				F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */,
 				F92DA5981FB1780800FDF3E4 /* RxHelper.swift in Sources */,
 				F90EA8101FB3E57600184D04 /* DiscoverHeaderView.swift in Sources */,
 				F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */,
+				F9B7E01F1FBC1B3400E4CCE2 /* Product.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
+				F9B7E01D1FBC197600E4CCE2 /* ProductCell.swift in Sources */,
 				F9758B641FBAD561009C0BEE /* CouponItemDetail.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
 				F9B65BE01FBBD7CA00413211 /* ProductListController.swift in Sources */,

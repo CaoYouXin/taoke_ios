@@ -118,8 +118,7 @@ class ProductListController: UIViewController {
     private func initProductList() {
         productList.register(UINib(nibName: "ProductCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        let itemWidth = (view.frame.size.width - 10) / 2
-        productListFlowLayout.estimatedItemSize = CGSize(width: itemWidth, height: itemWidth)
+        productListFlowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
         
         let productDataSource = ProductDataSource(brandItem!)
         
@@ -130,6 +129,7 @@ class ProductListController: UIViewController {
                 if let tmp = image {
                     let radio = tmp.size.width / tmp.size.height
                     if let constraint = (cell.thumb.constraints.filter{$0.firstAttribute == .height}.first) {
+                        let itemWidth = (self.view.frame.size.width - 10) / 2
                         let height = itemWidth / radio
                         constraint.constant = height
                         collectionView.layoutIfNeeded()

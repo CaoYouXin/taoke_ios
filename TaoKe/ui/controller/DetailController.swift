@@ -8,6 +8,8 @@
 
 import CleanroomLogger
 import FontAwesomeKit
+import RxSwift
+import RxSegue
 
 class DetailController: UIViewController {
     var couponItem: CouponItem?
@@ -33,6 +35,10 @@ class DetailController: UIViewController {
     @IBOutlet weak var detailCommissionIcon: UIImageView!
 
     @IBOutlet weak var detailCommission: UILabel!
+    
+    @IBOutlet weak var detailShare: UILabel!
+    
+    @IBOutlet weak var detailApp: UILabel!
     
     override func viewDidLoad() {
 
@@ -96,11 +102,26 @@ class DetailController: UIViewController {
             Log.error?.message(error.localizedDescription)
         })
         
+        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        detailShare.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        detailApp.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc private func tap(_ sender: UITapGestureRecognizer) {
+        switch sender.view! {
+        case detailShare:
+            let shareController = UIStoryboard(name: "Share", bundle: nil).instantiateViewController(withIdentifier: "ShareController") as! ShareController
+            shareController.couponItem = couponItem
+            self.navigationController?.pushViewController(shareController, animated: true)
+        default:
+            break
+        }
     }
     
     @objc private func back() {

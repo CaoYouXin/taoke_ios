@@ -295,7 +295,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即分享" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cx-vN-7Va">
-                                                <rect key="frame" x="0.0" y="14" width="187" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="48.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -309,15 +309,19 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="淘宝打开" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P8-AB-UPp">
-                                                <rect key="frame" x="188" y="14" width="187" height="20.5"/>
+                                                <rect key="frame" x="188" y="0.0" width="187" height="48.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="6cx-vN-7Va" firstAttribute="top" secondItem="JpK-Tb-1GG" secondAttribute="top" id="5bA-2d-uzb"/>
                                             <constraint firstAttribute="height" constant="48" id="Eyq-sf-oLs"/>
+                                            <constraint firstAttribute="bottom" secondItem="6cx-vN-7Va" secondAttribute="bottom" id="eQ3-3N-AUE"/>
+                                            <constraint firstItem="9P8-AB-UPp" firstAttribute="top" secondItem="JpK-Tb-1GG" secondAttribute="top" id="fci-ar-WG0"/>
                                             <constraint firstItem="9P8-AB-UPp" firstAttribute="width" secondItem="6cx-vN-7Va" secondAttribute="width" id="x0L-D7-1zN"/>
+                                            <constraint firstAttribute="bottom" secondItem="9P8-AB-UPp" secondAttribute="bottom" id="xrV-Eq-PKD"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -344,6 +348,7 @@
                         <viewLayoutGuide key="safeArea" id="sGG-hN-MtZ"/>
                     </view>
                     <connections>
+                        <outlet property="detailApp" destination="9P8-AB-UPp" id="3k2-mC-8RL"/>
                         <outlet property="detailCommission" destination="VHK-Lo-wgk" id="4od-QJ-Geu"/>
                         <outlet property="detailCommissionIcon" destination="1q9-kC-O6t" id="lFd-Xe-IZK"/>
                         <outlet property="detailCoupon" destination="Cjd-ol-Iov" id="5Gq-gT-FvS"/>
@@ -352,6 +357,7 @@
                         <outlet property="detailPriceAfterIcon" destination="3cz-n7-3wF" id="UxR-FE-0gb"/>
                         <outlet property="detailPriceBefore" destination="HxI-RL-tvE" id="Ouj-Hj-465"/>
                         <outlet property="detailSales" destination="UM0-LQ-pwa" id="lBN-7f-Ayq"/>
+                        <outlet property="detailShare" destination="6cx-vN-7Va" id="N5a-Af-EAk"/>
                         <outlet property="detailThumb" destination="XR9-VV-SqM" id="EM1-zm-tM3"/>
                         <outlet property="detailTitle" destination="Lkb-zl-KJw" id="fUX-xE-iLD"/>
                         <outlet property="detailViewIcon" destination="mOP-MG-M9g" id="9PS-OR-ERu"/>

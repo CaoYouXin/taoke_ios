@@ -118,4 +118,13 @@ class TaoKeApi {
                 return couponItemDetail
             })
     }
+    
+    public static func getCouponShareImageList(_ couponItem: CouponItem) -> Observable<[String]?> {
+        return TaoKeService.getInstance()
+            .tao(api: "\(TaoKeService.API_COUPON_SHARE_IMAGE_LIST)/\(couponItem.id!)")
+            .handleResult()
+            .map({ (taoKeData) -> [String]? in
+                return taoKeData?.body?["images"] as? [String]
+            })
+    }
 }

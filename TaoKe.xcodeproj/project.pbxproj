@@ -33,6 +33,9 @@
 		F95361FF1FBD5677008A5819 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95361FE1FBD5677008A5819 /* ShareController.swift */; };
 		F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B203A1FB1A54200AC57E4 /* CouponTab.swift */; };
 		F9758B641FBAD561009C0BEE /* CouponItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */; };
+		F98D01191FBD73C7003A3F4F /* ShareImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D01181FBD73C7003A3F4F /* ShareImageCell.swift */; };
+		F98D011B1FBD7472003A3F4F /* ShareImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D011A1FBD7472003A3F4F /* ShareImageDataSource.swift */; };
+		F98D011D1FBD74A1003A3F4F /* ShareImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98D011C1FBD74A1003A3F4F /* ShareImage.swift */; };
 		F98D19F51FBA970500B0F9D0 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F41FBA970500B0F9D0 /* Detail.storyboard */; };
 		F98D19F71FBA975700B0F9D0 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F61FBA975700B0F9D0 /* Search.storyboard */; };
 		F99662111FB41083002CF243 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99662101FB41083002CF243 /* CouponCell.swift */; };
@@ -83,6 +86,9 @@
 		F95361FE1FBD5677008A5819 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; };
 		F95B203A1FB1A54200AC57E4 /* CouponTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTab.swift; sourceTree = "<group>"; };
 		F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponItemDetail.swift; sourceTree = "<group>"; };
+		F98D01181FBD73C7003A3F4F /* ShareImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageCell.swift; sourceTree = "<group>"; };
+		F98D011A1FBD7472003A3F4F /* ShareImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageDataSource.swift; sourceTree = "<group>"; };
+		F98D011C1FBD74A1003A3F4F /* ShareImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImage.swift; sourceTree = "<group>"; };
 		F98D19F41FBA970500B0F9D0 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		F98D19F61FBA975700B0F9D0 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		F99662101FB41083002CF243 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
@@ -145,6 +151,7 @@
 				F9B65BE11FBBDCBB00413211 /* BrandDateSource.swift */,
 				F9B7E01A1FBC0DFC00E4CCE2 /* ProductDataSource.swift */,
 				F907D8C51FB981DF000BC49F /* CouponDataSource.swift */,
+				F98D011A1FBD7472003A3F4F /* ShareImageDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -156,6 +163,7 @@
 				F93802DC1FB3F1D300803475 /* BrandCell.swift */,
 				F99662101FB41083002CF243 /* CouponCell.swift */,
 				F9B7E01C1FBC197600E4CCE2 /* ProductCell.swift */,
+				F98D01181FBD73C7003A3F4F /* ShareImageCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -244,6 +252,7 @@
 				F9B7E01E1FBC1B3400E4CCE2 /* Product.swift */,
 				F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */,
 				F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */,
+				F98D011C1FBD74A1003A3F4F /* ShareImage.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -491,8 +500,11 @@
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
 				F9B65BE01FBBD7CA00413211 /* ProductListController.swift in Sources */,
 				F907D8C41FB97513000BC49F /* RxDataSource.swift in Sources */,
+				F98D011B1FBD7472003A3F4F /* ShareImageDataSource.swift in Sources */,
+				F98D011D1FBD74A1003A3F4F /* ShareImage.swift in Sources */,
 				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
 				F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */,
+				F98D01191FBD73C7003A3F4F /* ShareImageCell.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,
 				F95361FC1FBD4AD2008A5819 /* Events.swift in Sources */,
 				F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */,

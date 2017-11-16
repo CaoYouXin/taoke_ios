@@ -14,9 +14,9 @@ class ProductDataSource: RxDataSource<Product> {
     public static let SORT_PRICE_DOWN = 3
     public static let SORT_COMMISSION = 4
     
-    var brandItem: BrandItem
+    private var brandItem: BrandItem
     
-    var sort: Int = 0
+    private var sort: Int = 0
     
     init(_ brandItem: BrandItem) {
         self.brandItem = brandItem

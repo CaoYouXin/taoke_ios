@@ -144,7 +144,7 @@ class ProductListController: UIViewController {
         
         let productCellFactory: (UICollectionView, Int, Product) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
-            let cell = self.productList.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProductCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProductCell
             cell.thumb.kf.setImage(with: URL(string: element.thumb!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
                 if let tmp = image {
                     self.sizeCache[element.thumb!] = tmp.size

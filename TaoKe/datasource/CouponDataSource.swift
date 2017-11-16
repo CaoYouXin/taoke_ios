@@ -8,7 +8,7 @@
 import RxSwift
 
 class CouponDataSource: RxDataSource<CouponItem> {
-    var type: Int = 0
+    private var type: Int = 0
     
     func set(_ type: Int) {
         self.type = type

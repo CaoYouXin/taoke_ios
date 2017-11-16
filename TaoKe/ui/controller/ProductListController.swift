@@ -7,7 +7,10 @@
 //
 
 import CleanroomLogger
+import RxSwift
+import RxBus
 import FontAwesomeKit
+import ELWaterFallLayout
 
 class ProductListController: UIViewController {
     
@@ -27,11 +30,13 @@ class ProductListController: UIViewController {
     
     @IBOutlet weak var productList: UICollectionView!
     
-    @IBOutlet weak var productListFlowLayout: UICollectionViewFlowLayout!
-    
     var brandItem: BrandItem?
     
-    var sort: Int = 0
+    private var sort: Int = 0
+    
+    private var sizeCache: [String: CGSize] = [:]
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         
@@ -118,8 +123,23 @@ class ProductListController: UIViewController {
     private func initProductList() {
         productList.register(UINib(nibName: "ProductCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        productListFlowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+        let productListLayout = ELWaterFlowLayout()
+        productList.collectionViewLayout = productListLayout
         
+        productListLayout.delegate = self
+        productListLayout.lineCount = 2
+        productListLayout.vItemSpace = 10//垂直间距10
+        productListLayout.hItemSpace = 10//水平间距10
+        productListLayout.edge = UIEdgeInsets.zero
+        
+        //refresh layout
+        RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
+            .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+            .rxSchedulerHelper()
+            .subscribe { event in
+                productListLayout.lineCount = 2
+            }.disposed(by: disposeBag)
+
         let productDataSource = ProductDataSource(brandItem!)
         
         let productCellFactory: (UICollectionView, Int, Product) -> UICollectionViewCell = { (collectionView, row, element) in
@@ -127,14 +147,15 @@ class ProductListController: UIViewController {
             let cell = self.productList.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ProductCell
             cell.thumb.kf.setImage(with: URL(string: element.thumb!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
                 if let tmp = image {
-                    let radio = tmp.size.width / tmp.size.height
-                    if let constraint = (cell.thumb.constraints.filter{$0.firstAttribute == .height}.first) {
-                        let itemWidth = (self.view.frame.size.width - 10) / 2
-                        let height = itemWidth / radio
-                        constraint.constant = height
-                    }
+                    self.sizeCache[element.thumb!] = tmp.size
                 }
+                //refresh layout
+                RxBus.shared.post(event: Events.WaterFallLayout())
             })
+            
+            if let constraint = (cell.isNewWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
+                constraint.constant = element.isNew! ? 20 : 0
+            }
             cell.title.text = element.title
             cell.price.text = "¥ \(element.price!)"
             cell.sales.text = "月销\(element.sales!)笔"
@@ -144,12 +165,49 @@ class ProductListController: UIViewController {
         let productListHelper = MVCHelper<Product>(productList)
         
         productListHelper.set(dataSource: productDataSource)
-        productListHelper.set(cellFactory: productCellFactory)
+        productListHelper.set(cellFactory: productCellFactory, dataHook: {
+            products in
+            
+            return products
+        })
         
         productListHelper.refresh()
     }
     
     @objc private func back() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension ProductListController: ELWaterFlowLayoutDelegate  {
+    func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
+        let cell = productList.cellForItem(at: IndexPath(row: index, section: 0)) as? ProductCell
+        
+        var itemHeight: CGFloat = 80
+        
+        var imageSize: CGSize?
+        
+        do{
+            let model = try productList.rx.model(at: IndexPath(row: index, section: 0)) as Product
+            
+            if model.isNew! {
+                itemHeight += 20
+            }
+            
+            imageSize = sizeCache[model.thumb!]
+        }catch {
+        }
+        
+        if let size = imageSize {
+            let radio = size.width / size.height
+            itemHeight += (view.frame.size.width - 10) / 2 / radio
+        }else if let image = cell?.thumb.image {
+            let radio = image.size.width / image.size.height
+            itemHeight += (view.frame.size.width - 10) / 2 / radio
+        } else {
+            itemHeight += (view.frame.size.width - 10) / 2
+        }
+        
+        return itemHeight
     }
 }

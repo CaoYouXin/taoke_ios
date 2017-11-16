@@ -29,6 +29,7 @@
 		F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93802DC1FB3F1D300803475 /* BrandCell.swift */; };
 		F93802DF1FB3F1ED00803475 /* BrandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93802DE1FB3F1ED00803475 /* BrandCell.xib */; };
 		F949F8E01FBC324800E8382A /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F949F8DF1FBC324800E8382A /* ProductCell.xib */; };
+		F95361FC1FBD4AD2008A5819 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95361FB1FBD4AD2008A5819 /* Events.swift */; };
 		F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95B203A1FB1A54200AC57E4 /* CouponTab.swift */; };
 		F9758B641FBAD561009C0BEE /* CouponItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */; };
 		F98D19F51FBA970500B0F9D0 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F98D19F41FBA970500B0F9D0 /* Detail.storyboard */; };
@@ -76,6 +77,7 @@
 		F93802DC1FB3F1D300803475 /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		F93802DE1FB3F1ED00803475 /* BrandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BrandCell.xib; sourceTree = "<group>"; };
 		F949F8DF1FBC324800E8382A /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		F95361FB1FBD4AD2008A5819 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		F95B203A1FB1A54200AC57E4 /* CouponTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponTab.swift; sourceTree = "<group>"; };
 		F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponItemDetail.swift; sourceTree = "<group>"; };
 		F98D19F41FBA970500B0F9D0 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		F92C68CA1FAAE32C005CD910 /* TaoKe */ = {
 			isa = PBXGroup;
 			children = (
+				F95361FD1FBD4AD6008A5819 /* rxbus */,
 				F92DA58E1FB151A900FDF3E4 /* api */,
 				F907D8C21FB974A0000BC49F /* mvc */,
 				F95B203C1FB1A58E00AC57E4 /* model */,
@@ -219,6 +222,14 @@
 				F9A44AA91FB00AF200EC2EDD /* RAMScaleUpAnimation.swift */,
 			);
 			path = animation;
+			sourceTree = "<group>";
+		};
+		F95361FD1FBD4AD6008A5819 /* rxbus */ = {
+			isa = PBXGroup;
+			children = (
+				F95361FB1FBD4AD2008A5819 /* Events.swift */,
+			);
+			path = rxbus;
 			sourceTree = "<group>";
 		};
 		F95B203C1FB1A58E00AC57E4 /* model */ = {
@@ -389,6 +400,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CleanroomLogger/CleanroomLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/ELWaterFallLayout/ELWaterFallLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesomeKit/FontAwesomeKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GSKStretchyHeaderView/GSKStretchyHeaderView.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
@@ -400,6 +412,7 @@
 				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/RKValueTransformers/RKValueTransformers.framework",
 				"${BUILT_PRODUCTS_DIR}/RestKit/RestKit.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBus/RxBus.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSegue/RxSegue.framework",
@@ -414,6 +427,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CleanroomLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ELWaterFallLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesomeKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GSKStretchyHeaderView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
@@ -425,6 +439,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKValueTransformers.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RestKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBus.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSegue.framework",
@@ -471,6 +486,7 @@
 				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
 				F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,
+				F95361FC1FBD4AD2008A5819 /* Events.swift in Sources */,
 				F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */,
 				F92DA58D1FB151A400FDF3E4 /* TaoKeTestService.swift in Sources */,
 				F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */,

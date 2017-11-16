@@ -11,6 +11,7 @@ target 'TaoKe' do
   pod 'RxViewModel'
   pod 'RxDataSources'
   pod 'RxSegue', :git => 'https://github.com/gnastnosaj/RxSegue.git'
+  pod 'RxBus'
   
   pod 'CleanroomLogger'
   pod 'RestKit'
@@ -27,6 +28,7 @@ target 'TaoKe' do
   pod 'ImageSlideshow'
   pod 'ImageSlideshow/Kingfisher'
   pod 'TabLayoutView'
+  pod 'ELWaterFallLayout'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

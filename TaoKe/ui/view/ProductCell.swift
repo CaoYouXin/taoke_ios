@@ -14,16 +14,11 @@ class ProductCell: UICollectionViewCell {
     
     @IBOutlet weak var title: UILabel!
     
+    @IBOutlet weak var isNewWrapper: UIView!
+    
     @IBOutlet weak var isNew: UILabel!
     
     @IBOutlet weak var price: UILabel!
     
     @IBOutlet weak var sales: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        let screenWidth = UIScreen.main.bounds.size.width
-        widthConstraint.constant = (screenWidth - 10) / 2
-    }
 }

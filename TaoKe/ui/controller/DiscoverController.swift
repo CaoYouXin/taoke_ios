@@ -7,6 +7,7 @@
 //
 import CleanroomLogger
 import RxSwift
+import RxBus
 import RxSegue
 import MJRefresh
 import MEVFloatingButton
@@ -35,11 +36,20 @@ class DiscoverController: UIViewController {
         
         initScrollView()
         initFloatingButton()
-        initHeaderView()
         initCouponList()
+        initHeaderView()
     }
     
     private func initHeaderView() {
+        //fix the headerview bug, any better way?
+        RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
+            .rxSchedulerHelper()
+            .subscribe { event in
+                if self.couponList.numberOfItems(inSection: 0) > 0 {
+                    self.couponList.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                }
+            }.disposed(by: disposeBag)
+        
         let nibViews = Bundle.main.loadNibNamed("DiscoverHeaderView", owner: self, options: nil)
         discoverHeaderView = nibViews?.first as? DiscoverHeaderView
         
@@ -114,8 +124,8 @@ class DiscoverController: UIViewController {
         }
         
         couponListHelper = MVCHelper(couponList)
-        couponListHelper?.set(dataSource: couponDataSource)
         couponListHelper?.set(cellFactory: couponCellFactory)
+        couponListHelper?.set(dataSource: couponDataSource)
         couponListHelper?.refresh()
         
         let segue: AnyObserver<CouponItem> = NavigationSegue(

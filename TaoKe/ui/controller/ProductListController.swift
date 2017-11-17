@@ -11,6 +11,7 @@ import RxSwift
 import RxBus
 import FontAwesomeKit
 import ELWaterFallLayout
+import MJRefresh
 
 class ProductListController: UIViewController {
     
@@ -37,6 +38,8 @@ class ProductListController: UIViewController {
     private var sizeCache: [String: CGSize] = [:]
     
     private let disposeBag = DisposeBag()
+    
+    private var productListHelper: MVCHelper<Product>?
     
     override func viewDidLoad() {
         
@@ -139,8 +142,6 @@ class ProductListController: UIViewController {
             .subscribe { event in
                 productListLayout.lineCount = 2
             }.disposed(by: disposeBag)
-
-        let productDataSource = ProductDataSource(brandItem!)
         
         let productCellFactory: (UICollectionView, Int, Product) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
@@ -162,16 +163,33 @@ class ProductListController: UIViewController {
             return cell
         }
         
-        let productListHelper = MVCHelper<Product>(productList)
+        let productDataSource = ProductDataSource(brandItem!)
         
-        productListHelper.set(dataSource: productDataSource)
-        productListHelper.set(cellFactory: productCellFactory, dataHook: {
-            products in
-            
-            return products
+        productListHelper = MVCHelper<Product>(productList)
+        
+        productListHelper?.set(cellFactory: productCellFactory)
+        productListHelper?.set(dataSource: productDataSource)
+        
+        productListHelper?.refresh()
+        
+        productList.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.productListHelper?.refresh()
+            let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                self.productList.mj_header.endRefreshing()
+            }
         })
         
-        productListHelper.refresh()
+        productList.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.productListHelper?.loadMore()
+            let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime) {
+                self.productList.mj_footer.isHidden = true
+                self.productList.mj_footer.isHidden = false
+            }
+        })
+        
+        productList.mj_footer.isAutomaticallyHidden = false
     }
     
     @objc private func back() {
@@ -196,6 +214,7 @@ extension ProductListController: ELWaterFlowLayoutDelegate  {
             
             imageSize = sizeCache[model.thumb!]
         }catch {
+            Log.error?.message(error.localizedDescription)
         }
         
         if let size = imageSize {

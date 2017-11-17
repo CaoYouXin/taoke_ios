@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import FontAwesomeKit
 import Kingfisher
+import Toast_Swift
 
 class ShareController: UIViewController {
     
@@ -149,16 +150,35 @@ class ShareController: UIViewController {
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
         case saveIcon, saveText:
+            var observables: [Observable<UIImage?>] = []
             if let shareImages = self.shareImages {
-                for shareImage in shareImages {
+                for i in 0..<shareImages.count {
+                    let shareImage = shareImages[i]
                     if shareImage.selected! {
-                        KingfisherManager.shared.downloader.downloadImage(with: URL(string: shareImage.thumb!)!, retrieveImageTask: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, url, data) in
-                            if let data = image {
-                                UIImageWriteToSavedPhotosAlbum(data, nil, nil, nil)
-                            }
-                        })
+                        observables.append(Observable.create({ (observer) -> Disposable in
+                            KingfisherManager.shared.downloader.downloadImage(with: URL(string: shareImage.thumb!)!, retrieveImageTask: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, url, data) in
+                                if let data = image {
+                                    UIImageWriteToSavedPhotosAlbum(data, nil, nil, nil)
+                                    observer.onNext(image)
+                                    observer.onCompleted()
+                                } else {
+                                    observer.onError(error!)
+                                }
+                            })
+                            return Disposables.create()
+                        }))
                     }
                 }
+            }
+            if observables.count != 0 {
+                self.view.makeToastActivity(.center)
+                Observable.zip(observables)
+                    .rxSchedulerHelper()
+                    .subscribe(onNext: { _ in
+                        self.view.hideToastActivity()
+                    }, onError: { (error) in
+                        Log.error?.message(error.localizedDescription)
+                    }).disposed(by: disposeBag)
             }
         case copyIcon, copyText:
             let linkHint = "{分享渠道后自动生成链接与口令}"

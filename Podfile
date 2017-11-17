@@ -29,6 +29,7 @@ target 'TaoKe' do
   pod 'ImageSlideshow/Kingfisher'
   pod 'TabLayoutView'
   pod 'ELWaterFallLayout'
+  pod 'Toast-Swift', '~> 2.0.0'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|
@@ -38,6 +39,11 @@ target 'TaoKe' do
               end
           end
           if target.name == 'RAMAnimatedTabBarController'
+              target.build_configurations.each do |config|
+                  config.build_settings['SWIFT_VERSION'] = '3.2'
+              end
+          end
+          if target.name == 'Toast-Swift'
               target.build_configurations.each do |config|
                   config.build_settings['SWIFT_VERSION'] = '3.2'
               end

@@ -174,38 +174,41 @@ class ShareController: UIViewController {
     }
     
     @objc private func share() {
-        let linkHint = "{分享渠道后自动生成链接与口令}"
-        let link = "\n\(couponItem!.thumb!)\n--------------------\n复制这条信息，\(couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
-        if var text = shareText.text {
-            if let _ = text.range(of: linkHint) {
-                text = text.replacingOccurrences(of: linkHint, with: link)
-            } else {
-                text += link
+        var actvityItems:[Any] = []
+        
+        let share = {
+            if var text = self.shareText.text {
+                let linkHint = "{分享渠道后自动生成链接与口令}"
+                let link = "\n\(self.couponItem!.thumb!)\n--------------------\n复制这条信息，\(self.couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
+                if let _ = text.range(of: linkHint) {
+                    text = text.replacingOccurrences(of: linkHint, with: link)
+                } else {
+                    text += link
+                }
+                actvityItems.append(text)
             }
-            var actvityItems:[Any] = []
-            actvityItems.append(text)
-            let share = {
-                let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
-                self.present(activityViewController, animated: true)
-            }
-            if let fetch = fetchShareImages(false) {
-                self.view.makeToastActivity(.center)
-                fetch.subscribe(onNext: { images in
-                    self.view.hideToastActivity()
-                    for image in images {
-                        if image != nil {
-                            actvityItems.append(image)
-                        }
+            
+            let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
+            self.present(activityViewController, animated: true)
+        }
+        
+        if let fetch = fetchShareImages(false) {
+            self.view.makeToastActivity(.center)
+            fetch.subscribe(onNext: { images in
+                self.view.hideToastActivity()
+                for image in images {
+                    if image != nil {
+                        actvityItems.append(image!)
                     }
-                    share()
-                }, onError: { (error) in
-                    self.view.hideToastActivity()
-                    share()
-                    Log.error?.message(error.localizedDescription)
-                }).disposed(by: disposeBag)
-            } else {
+                }
                 share()
-            }
+            }, onError: { (error) in
+                self.view.hideToastActivity()
+                share()
+                Log.error?.message(error.localizedDescription)
+            }).disposed(by: disposeBag)
+        } else {
+            share()
         }
     }
     
@@ -222,9 +225,9 @@ class ShareController: UIViewController {
                     }).disposed(by: disposeBag)
             }
         case copyIcon, copyText:
-            let linkHint = "{分享渠道后自动生成链接与口令}"
-            let link = "\n\(couponItem!.thumb!)\n--------------------\n复制这条信息，\(couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
             if var text = shareText.text {
+                let linkHint = "{分享渠道后自动生成链接与口令}"
+                let link = "\n\(couponItem!.thumb!)\n--------------------\n复制这条信息，\(couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
                 if let _ = text.range(of: linkHint) {
                     text = text.replacingOccurrences(of: linkHint, with: link)
                 } else {

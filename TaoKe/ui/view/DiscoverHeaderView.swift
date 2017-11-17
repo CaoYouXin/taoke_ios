@@ -37,7 +37,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func initSlider() {
         slideshow.slideshowInterval = 3
         slideshow.contentScaleMode = .scaleAspectFill
-        slideshow.draggingEnabled = false
+        //slideshow.draggingEnabled = false
         
         updateSlider()
     }

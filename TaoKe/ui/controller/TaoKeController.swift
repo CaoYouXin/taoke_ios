@@ -18,7 +18,7 @@ class TaoKeController: RAMAnimatedTabBarController {
         
         self.initNavigationBar()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.searchIcon(withSize: 15).image(with: CGSize.init(width: 15, height: 15)), style: .plain, target: self, action: #selector(search))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.searchIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(search))
     }
     
     override func didReceiveMemoryWarning() {

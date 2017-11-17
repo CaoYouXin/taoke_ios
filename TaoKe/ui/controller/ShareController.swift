@@ -31,6 +31,15 @@ class ShareController: UIViewController {
     
     @IBOutlet weak var copyText: UILabel!
     
+    @IBOutlet weak var wechatWrapper: UIView!
+    @IBOutlet weak var wechatIcon: UIImageView!
+    
+    @IBOutlet weak var weiboWrapper: UIView!
+    @IBOutlet weak var weiboIcon: UIImageView!
+    
+    @IBOutlet weak var qqWrapper: UIView!
+    @IBOutlet weak var qqIcon: UIImageView!
+    
     private let disposeBag = DisposeBag()
     
     private var shareImages: [ShareImage]?
@@ -41,11 +50,11 @@ class ShareController: UIViewController {
         
         self.initNavigationBar()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize.init(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         
         navigationItem.title = "创建分享"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "分享", style: UIBarButtonItemStyle.plain, target: self, action: #selector(share))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "分享", style: UIBarButtonItemStyle.plain, target: self, action: #selector(share))
         
         let text = "已选 1 张"
         let selectCountMutableAttributedString = NSMutableAttributedString(string: text)
@@ -56,7 +65,7 @@ class ShareController: UIViewController {
         
         let cloudDownloadIcon = FAKMaterialIcons.cloudDownloadIcon(withSize: 22)
         cloudDownloadIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#ef6c00"))
-        saveIcon.image = cloudDownloadIcon!.image(with: CGSize.init(width: 22, height: 22))
+        saveIcon.image = cloudDownloadIcon?.image(with: CGSize(width: 22, height: 22))
         
         shareText.layer.borderWidth = 1
         shareText.layer.borderColor = UIColor("#bdbdbd").cgColor
@@ -64,7 +73,19 @@ class ShareController: UIViewController {
         
         let iosCopyIcon = FAKIonIcons.iosCopyIcon(withSize: 22)
         iosCopyIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#ef6c00"))
-        copyIcon.image = iosCopyIcon!.image(with: CGSize.init(width: 22, height: 22))
+        copyIcon.image = iosCopyIcon?.image(with: CGSize(width: 22, height: 22))
+        
+        let wechatIcon = FAKFontAwesome.wechatIcon(withSize: 35)
+        wechatIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#04cd0d"))
+        self.wechatIcon.image = wechatIcon?.image(with: CGSize(width: 40, height: 40))
+        
+        let weiboIcon = FAKFontAwesome.weiboIcon(withSize: 35)
+        weiboIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#d14220"))
+        self.weiboIcon.image = weiboIcon?.image(with: CGSize(width: 40, height: 40))
+        
+        let qqIcon = FAKFontAwesome.qqIcon(withSize: 35)
+        qqIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#39afed"))
+        self.qqIcon.image = qqIcon?.image(with: CGSize(width: 40, height: 40))
         
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         saveIcon.addGestureRecognizer(tapGestureRecognizer)
@@ -74,7 +95,12 @@ class ShareController: UIViewController {
         copyIcon.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         copyText.addGestureRecognizer(tapGestureRecognizer)
-        
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        wechatWrapper.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        weiboWrapper.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        qqWrapper.addGestureRecognizer(tapGestureRecognizer)
         initShareImageList()
     }
     
@@ -88,7 +114,7 @@ class ShareController: UIViewController {
             
             let checkCircleIcon = FAKFontAwesome.checkCircleIcon(withSize: 24)
             checkCircleIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor(element.selected! ? "#e65100" : "#00000080"))
-            cell.select.image = checkCircleIcon!.image(with: CGSize(width: 24, height: 24))
+            cell.select.image = checkCircleIcon?.image(with: CGSize(width: 24, height: 24))
             return cell
         }
         
@@ -120,7 +146,7 @@ class ShareController: UIViewController {
             }catch {
                 Log.error?.message(error.localizedDescription)
             }
-            cell.select.image = checkCircleIcon!.image(with: CGSize(width: 24, height: 24))
+            cell.select.image = checkCircleIcon?.image(with: CGSize(width: 24, height: 24))
             
             var selectCount = 0
             for shareImage in self.shareImages! {
@@ -169,6 +195,21 @@ class ShareController: UIViewController {
         }
     }
     
+    private func generateShareText() -> String? {
+        if var text = self.shareText.text {
+            let linkHint = "{分享渠道后自动生成链接与口令}"
+            let link = "\n\(self.couponItem!.thumb!)\n--------------------\n复制这条信息，\(self.couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
+            if let _ = text.range(of: linkHint) {
+                text = text.replacingOccurrences(of: linkHint, with: link)
+            } else {
+                text += link
+            }
+            return text
+        }else {
+            return nil
+        }
+    }
+    
     @objc private func back() {
         navigationController?.popViewController(animated: true)
     }
@@ -177,15 +218,8 @@ class ShareController: UIViewController {
         var actvityItems:[Any] = []
         
         let share = {
-            if var text = self.shareText.text {
-                let linkHint = "{分享渠道后自动生成链接与口令}"
-                let link = "\n\(self.couponItem!.thumb!)\n--------------------\n复制这条信息，\(self.couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
-                if let _ = text.range(of: linkHint) {
-                    text = text.replacingOccurrences(of: linkHint, with: link)
-                } else {
-                    text += link
-                }
-                actvityItems.append(text)
+            if let shareText = self.generateShareText() {
+                actvityItems.append(shareText)
             }
             
             let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
@@ -225,16 +259,50 @@ class ShareController: UIViewController {
                     }).disposed(by: disposeBag)
             }
         case copyIcon, copyText:
-            if var text = shareText.text {
-                let linkHint = "{分享渠道后自动生成链接与口令}"
-                let link = "\n\(couponItem!.thumb!)\n--------------------\n复制这条信息，\(couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
-                if let _ = text.range(of: linkHint) {
-                    text = text.replacingOccurrences(of: linkHint, with: link)
-                } else {
-                    text += link
-                }
+            if let shareText = generateShareText() {
                 let pasteboard = UIPasteboard.general
-                pasteboard.string = text
+                pasteboard.string = shareText
+            }
+        case wechatWrapper, weiboWrapper, qqWrapper:
+            let share = {
+                if let shareText = self.generateShareText() {
+                    let pasteboard = UIPasteboard.general
+                    pasteboard.string = shareText
+                }
+                let alert = UIAlertController(title: "", message: "『照片已保存相册，文案已复制到粘贴板』", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "分享", style: .default, handler: { (action) in
+                    var url: URL?
+                    switch sender.view! {
+                    case self.wechatWrapper:
+                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
+                    case self.weiboWrapper:
+                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
+                    case self.qqWrapper:
+                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
+                    default:
+                        break
+                    }
+                    if url != nil {
+                        if UIApplication.shared.canOpenURL(url!) {
+                            UIApplication.shared.open(url!, options: [:])
+                        }
+                    }
+                }))
+                self.present(alert, animated: true)
+            }
+
+            if let fetch = fetchShareImages(true) {
+                self.view.makeToastActivity(.center)
+                fetch.subscribe(onNext: { _ in
+                    self.view.hideToastActivity()
+                    share()
+                }, onError: { (error) in
+                    self.view.hideToastActivity()
+                    share()
+                    Log.error?.message(error.localizedDescription)
+                }).disposed(by: disposeBag)
+            } else {
+                share()
             }
         default:
             break

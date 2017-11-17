@@ -48,7 +48,7 @@ class ProductListController: UIViewController {
         
         self.initNavigationBar()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize.init(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         navigationItem.title = brandItem!.title!
         
         initSortBar()
@@ -70,11 +70,11 @@ class ProductListController: UIViewController {
         
         let chevronUpIcon = FAKFontAwesome.chevronUpIcon(withSize: 8)
         chevronUpIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
-        sortPriceUp.image = chevronUpIcon?.image(with: CGSize.init(width: 8, height: 8))
+        sortPriceUp.image = chevronUpIcon?.image(with: CGSize(width: 8, height: 8))
         
         let chevronDownIcon = FAKFontAwesome.chevronDownIcon(withSize: 8)
         chevronDownIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
-        sortPriceDown.image = chevronDownIcon?.image(with: CGSize.init(width: 8, height: 8))
+        sortPriceDown.image = chevronDownIcon?.image(with: CGSize(width: 8, height: 8))
     }
     
     @objc private func updateSortBar(_ sender: UITapGestureRecognizer) {
@@ -87,11 +87,11 @@ class ProductListController: UIViewController {
         
         let chevronUpIcon = FAKFontAwesome.chevronUpIcon(withSize: 8)
         chevronUpIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey400)
-        sortPriceUp.image = chevronUpIcon?.image(with: CGSize.init(width: 8, height: 8))
+        sortPriceUp.image = chevronUpIcon?.image(with: CGSize(width: 8, height: 8))
         
         let chevronDownIcon = FAKFontAwesome.chevronDownIcon(withSize: 8)
         chevronDownIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey400)
-        sortPriceDown.image = chevronDownIcon?.image(with: CGSize.init(width: 8, height: 8))
+        sortPriceDown.image = chevronDownIcon?.image(with: CGSize(width: 8, height: 8))
         
         switch sender.view! {
         case sortMultiple:
@@ -112,12 +112,12 @@ class ProductListController: UIViewController {
                 sort = ProductDataSource.SORT_PRICE_DOWN
                 let chevronDownIcon = FAKFontAwesome.chevronDownIcon(withSize: 8)
                 chevronDownIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey900)
-                sortPriceDown.image = chevronDownIcon?.image(with: CGSize.init(width: 8, height: 8))
+                sortPriceDown.image = chevronDownIcon?.image(with: CGSize(width: 8, height: 8))
             } else {
                 sort = ProductDataSource.SORT_PRICE_UP
                 let chevronUpIcon = FAKFontAwesome.chevronUpIcon(withSize: 8)
                 chevronUpIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey900)
-                sortPriceUp.image = chevronUpIcon?.image(with: CGSize.init(width: 8, height: 8))
+                sortPriceUp.image = chevronUpIcon?.image(with: CGSize(width: 8, height: 8))
             }
             break
         }

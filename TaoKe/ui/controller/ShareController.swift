@@ -160,10 +160,10 @@ class ShareController: UIViewController {
                                 if let data = image {
                                     UIImageWriteToSavedPhotosAlbum(data, nil, nil, nil)
                                     observer.onNext(image)
-                                    observer.onCompleted()
                                 } else {
-                                    observer.onError(error!)
+                                    observer.onNext(nil)
                                 }
+                                observer.onCompleted()
                             })
                             return Disposables.create()
                         }))
@@ -177,6 +177,7 @@ class ShareController: UIViewController {
                     .subscribe(onNext: { _ in
                         self.view.hideToastActivity()
                     }, onError: { (error) in
+                        self.view.hideToastActivity()
                         Log.error?.message(error.localizedDescription)
                     }).disposed(by: disposeBag)
             }

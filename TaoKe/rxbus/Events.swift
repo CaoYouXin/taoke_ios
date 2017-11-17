@@ -8,6 +8,8 @@
 import RxBus
 
 struct Events {
+    struct ViewDidLoad: BusEvent {
+    }
     struct WaterFallLayout: BusEvent {
     }
 }

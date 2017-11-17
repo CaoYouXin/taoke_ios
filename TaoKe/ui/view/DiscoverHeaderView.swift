@@ -8,6 +8,7 @@
 
 import CleanroomLogger
 import RxSwift
+import RxBus
 import ImageSlideshow
 import TabLayoutView
 
@@ -54,8 +55,6 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func initBrandList() {
         brandList.register(UINib(nibName: "BrandCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        let brandDataSource = BrandDataSource()
-        
         let brandCellFactory: (UICollectionView, Int, BrandItem) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BrandCell
@@ -66,6 +65,8 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             cell.thumb.kf.setImage(with: URL(string: element.thumb!))
             return cell
         }
+        
+        let brandDataSource = BrandDataSource()
         
         let brandDataHook = { (brandItems: [BrandItem]) -> [BrandItem] in
             if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
@@ -79,16 +80,16 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
                 
                 //fix the content offset bug, any better way?
-                let discoverController = self.superview as? DiscoverController
-                discoverController?.couponList.contentOffset = CGPoint(x: 0, y: 0)
+                RxBus.shared.post(event: Events.ViewDidLoad())
             }
             return brandItems
         }
         
         let brandListHelper = MVCHelper<BrandItem>(brandList)
         
+        brandListHelper.set(cellFactory: brandCellFactory)
         brandListHelper.set(dataSource: brandDataSource)
-        brandListHelper.set(cellFactory: brandCellFactory, dataHook: brandDataHook)
+        brandListHelper.set(dataHook: brandDataHook)
         
         brandListHelper.refresh()
     }

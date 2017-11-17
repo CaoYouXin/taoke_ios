@@ -7,6 +7,7 @@
 //
 import CleanroomLogger
 import RxSwift
+import RxBus
 import RxSegue
 import MJRefresh
 import MEVFloatingButton
@@ -53,6 +54,13 @@ class DiscoverController: UIViewController {
                 adjust += 16
             }
             headerView.maximumContentHeight += adjust
+            
+            //fix the headerview bug, any better way?
+            RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
+                .rxSchedulerHelper()
+                .subscribe { event in
+                    self.couponList.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                }.disposed(by: disposeBag)
             
             couponList.addSubview(headerView)
             
@@ -114,8 +122,8 @@ class DiscoverController: UIViewController {
         }
         
         couponListHelper = MVCHelper(couponList)
-        couponListHelper?.set(dataSource: couponDataSource)
         couponListHelper?.set(cellFactory: couponCellFactory)
+        couponListHelper?.set(dataSource: couponDataSource)
         couponListHelper?.refresh()
         
         let segue: AnyObserver<CouponItem> = NavigationSegue(

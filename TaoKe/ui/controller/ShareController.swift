@@ -10,6 +10,7 @@ import CleanroomLogger
 import RxSwift
 import RxCocoa
 import FontAwesomeKit
+import Kingfisher
 
 class ShareController: UIViewController {
     
@@ -77,8 +78,6 @@ class ShareController: UIViewController {
     }
     
     private func initShareImageList() {
-        let shareImageListDataSource = ShareImageDataSource(couponItem!)
-        
         let shareImageListCellFactory: (UICollectionView, Int, ShareImage) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ShareImageCell
@@ -92,27 +91,33 @@ class ShareController: UIViewController {
             return cell
         }
         
-        let shareImageListHelper = MVCHelper<ShareImage>(shareImageList)
+        let shareImageListDataSource = ShareImageDataSource(couponItem!)
         
-        shareImageListHelper.set(dataSource: shareImageListDataSource)
-        shareImageListHelper.set(cellFactory: shareImageListCellFactory, dataHook: {
+        let shareImageListDataHook: ([ShareImage]) -> [ShareImage] = {
             shareImages in
             shareImages[0].selected = true
             self.shareImages = shareImages
             return shareImages
-        })
+        }
+        
+        let shareImageListHelper = MVCHelper<ShareImage>(shareImageList)
+        
+        shareImageListHelper.set(cellFactory: shareImageListCellFactory)
+        shareImageListHelper.set(dataSource: shareImageListDataSource)
+        shareImageListHelper.set(dataHook: shareImageListDataHook)
+        
         shareImageListHelper.refresh()
- 
+        
         shareImageList.rx.itemSelected.subscribe(onNext: { indexPath in
             let cell = self.shareImageList.cellForItem(at: indexPath) as! ShareImageCell
-
+            
             let checkCircleIcon = FAKFontAwesome.checkCircleIcon(withSize: 24)
             do{
                 let model = try self.shareImageList.rx.model(at: indexPath) as ShareImage
                 model.selected = !model.selected!
                 checkCircleIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor(model.selected! ? "#e65100" : "#00000080"))
-            }catch{
-                
+            }catch {
+                Log.error?.message(error.localizedDescription)
             }
             cell.select.image = checkCircleIcon!.image(with: CGSize(width: 24, height: 24))
             
@@ -141,7 +146,34 @@ class ShareController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func tap() {
-        navigationController?.popViewController(animated: true)
+    @objc private func tap(_ sender: UITapGestureRecognizer) {
+        switch sender.view! {
+        case saveIcon, saveText:
+            if let shareImages = self.shareImages {
+                for shareImage in shareImages {
+                    if shareImage.selected! {
+                        KingfisherManager.shared.downloader.downloadImage(with: URL(string: shareImage.thumb!)!, retrieveImageTask: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, url, data) in
+                            if let data = image {
+                                UIImageWriteToSavedPhotosAlbum(data, nil, nil, nil)
+                            }
+                        })
+                    }
+                }
+            }
+        case copyIcon, copyText:
+            let linkHint = "{分享渠道后自动生成链接与口令}"
+            let link = "\n\(couponItem!.thumb!)\n--------------------\n复制这条信息，\(couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
+            if var text = shareText.text {
+                if let _ = text.range(of: linkHint) {
+                    text = text.replacingOccurrences(of: linkHint, with: link)
+                } else {
+                    text += link
+                }
+                let pasteboard = UIPasteboard.general
+                pasteboard.string = text
+            }
+        default:
+            break
+        }
     }
 }

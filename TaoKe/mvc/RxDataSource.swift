@@ -7,15 +7,7 @@
 //
 import RxSwift
 
-protocol RxDataSourceProtocol {
-    associatedtype Element
-    func refresh() -> Observable<[Self.Element]>
-    func loadMore() -> Observable<[Self.Element]>
-    func loadCache() -> Observable<[Self.Element]>
-    func hasMore() -> Bool
-}
-
-class RxDataSource<T>: RxDataSourceProtocol {
+class RxDataSource<T> {
     func refresh() -> Observable<[T]> {
         return Observable.empty()
     }

@@ -12,8 +12,11 @@ import RxSwift
 class TaoKeService: TaoKeProtocol {
     public static let API_VERIFICATION = "verification"
     public static let API_BRAND_LIST = "brandList"
+    public static let API_PRODUCT_LIST = "productList"
     public static let API_COUPON_TAB = "couponTab"
     public static let API_COUPON_LIST = "couponList"
+    public static let API_COUPON_DETAIL = "couponDetail"
+    public static let API_COUPON_SHARE_IMAGE_LIST = "couponShareImageList"
     
     public static let HOST = "https://127.0.0.1:8081"
     

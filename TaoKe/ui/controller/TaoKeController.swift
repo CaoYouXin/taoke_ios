@@ -27,7 +27,7 @@ class TaoKeController: RAMAnimatedTabBarController {
     }
     
     @objc private func search() {
-        let searchController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchController") as! SearchController
+        let searchController = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchController") as! SearchController
         self.navigationController?.pushViewController(searchController, animated: true)
     }
 }

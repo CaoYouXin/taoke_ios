@@ -153,21 +153,6 @@
             </objects>
             <point key="canvasLocation" x="1641" y="39"/>
         </scene>
-        <!--Search Controller-->
-        <scene sceneID="hLD-Pb-cxQ">
-            <objects>
-                <viewController storyboardIdentifier="SearchController" id="BgH-UX-dMr" customClass="SearchController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3dl-DN-F8I">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="D8O-KD-Rc6"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZSo-L6-ZX7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1641" y="746"/>
-        </scene>
         <!--我的-->
         <scene sceneID="P66-9A-SMB">
             <objects>
@@ -280,21 +265,6 @@
                 </customObject>
             </objects>
             <point key="canvasLocation" x="2608.8000000000002" y="-1446.0269865067467"/>
-        </scene>
-        <!--Detail Controller-->
-        <scene sceneID="lgb-Dq-BS9">
-            <objects>
-                <viewController storyboardIdentifier="DetailController" id="vy0-sq-AoX" customClass="DetailController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="998-de-YAD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="Zj4-yJ-DY0"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sAX-Gp-B6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3312" y="-1445"/>
         </scene>
     </scenes>
     <resources>

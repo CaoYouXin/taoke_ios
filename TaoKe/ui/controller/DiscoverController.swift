@@ -17,17 +17,17 @@ class DiscoverController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    let floatingButton: MEVFloatingButton = MEVFloatingButton()
+    private let floatingButton: MEVFloatingButton = MEVFloatingButton()
     
     @IBOutlet weak var couponList: UICollectionView!
     @IBOutlet weak var couponListFlowLayout: UICollectionViewFlowLayout!
     
-    var discoverHeaderView: DiscoverHeaderView?
+    private var discoverHeaderView: DiscoverHeaderView?
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
-    let couponDataSource = CouponDataSource()
-    var couponListHelper: MVCHelper<CouponItem>?
+    private let couponDataSource = CouponDataSource()
+    private var couponListHelper: MVCHelper<CouponItem>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +56,22 @@ class DiscoverController: UIViewController {
             
             couponList.addSubview(headerView)
             
+            let segue: AnyObserver<BrandItem> = NavigationSegue(
+                fromViewController: self.navigationController!,
+                toViewControllerFactory:
+                { (sender, context) -> ProductListController in
+                    let productListController = UIStoryboard(name: "ProductList", bundle: nil).instantiateViewController(withIdentifier: "ProductListController") as! ProductListController
+                    productListController.brandItem = context
+                    return productListController
+            }).asObserver()
+            
+            headerView.brandList.rx.itemSelected
+                .map{ indexPath -> BrandItem in
+                    return try headerView.brandList.rx.model(at: indexPath)
+                }
+                .bind(to: segue)
+                .disposed(by: disposeBag)
+            
             headerView.couponTab.delegate = self
         }
     }
@@ -78,8 +94,8 @@ class DiscoverController: UIViewController {
             let couponPriceAfterMutableAttributed = NSMutableAttributedString(string: couponPriceAfter)
             let location = couponPriceAfter.index(of: "¥")?.encodedOffset
             let range = NSRange(location: location!, length: couponPriceAfter.utf16.count - location!)
-            couponPriceAfterMutableAttributed.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 16), range: range)
-            couponPriceAfterMutableAttributed.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.black, range: range)
+            couponPriceAfterMutableAttributed.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 16), range: range)
+            couponPriceAfterMutableAttributed.addAttribute(.foregroundColor, value: UIColor.black, range: range)
             cell.couponPriceAfter.attributedText = couponPriceAfterMutableAttributed
             
             let progress = Float(element.left!) / Float(element.total!)
@@ -106,7 +122,7 @@ class DiscoverController: UIViewController {
             fromViewController: self.navigationController!,
             toViewControllerFactory:
             { (sender, context) -> DetailController in
-                let detailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+                let detailController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
                 detailController.couponItem = context
                 return detailController
         }).asObserver()
@@ -127,7 +143,7 @@ class DiscoverController: UIViewController {
             }
         }, onError: { (error) in
             Log.error?.message(error.localizedDescription)
-        })
+        }).disposed(by: disposeBag)
     }
     
     private func initScrollView() {

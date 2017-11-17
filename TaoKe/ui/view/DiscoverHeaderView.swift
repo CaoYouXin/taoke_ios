@@ -8,8 +8,6 @@
 
 import CleanroomLogger
 import RxSwift
-import RxCocoa
-import RxViewModel
 import ImageSlideshow
 import TabLayoutView
 
@@ -20,10 +18,6 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     @IBOutlet weak var brandListFlowLayout: UICollectionViewFlowLayout!
     
     @IBOutlet weak var couponTab: TabLayoutView!
-    
-    let disposeBag = DisposeBag()
-    
-    let brandViewModel = RxViewModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,11 +54,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func initBrandList() {
         brandList.register(UINib(nibName: "BrandCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        let brandDataSource = TaoKeApi.getBrandList()
-            .catchError({ (error) -> Observable<[BrandItem]> in
-                Log.error?.message(error.localizedDescription)
-                return Observable.empty()
-            })
+        let brandDataSource = BrandDataSource()
         
         let brandCellFactory: (UICollectionView, Int, BrandItem) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
@@ -77,31 +67,30 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             return cell
         }
         
-        brandViewModel
-            .forwardSignalWhileActive(brandDataSource)
-            .rxSchedulerHelper()
-            .map({ (brandItems) -> [BrandItem] in
-                if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
-                    let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
-                    constraint.constant = height
-                    
-                    self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
-                    
-                    self.maximumContentHeight += height
-                    
-                    //fix the content offset bug, any better way?
-                    let discoverController = self.superview as? DiscoverController
-                    discoverController?.couponList.contentOffset = CGPoint(x: 0, y: 0)
-                }
+        let brandDataHook = { (brandItems: [BrandItem]) -> [BrandItem] in
+            if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
+                let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
+                constraint.constant = height
+                
+                self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
+                
+                self.maximumContentHeight += height
                 
                 self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
                 
-                return brandItems
-            })
-            .bind(to: brandList.rx.items)(brandCellFactory)
-            .disposed(by: disposeBag)
+                //fix the content offset bug, any better way?
+                let discoverController = self.superview as? DiscoverController
+                discoverController?.couponList.contentOffset = CGPoint(x: 0, y: 0)
+            }
+            return brandItems
+        }
         
-        brandViewModel.active = true
+        let brandListHelper = MVCHelper<BrandItem>(brandList)
+        
+        brandListHelper.set(dataSource: brandDataSource)
+        brandListHelper.set(cellFactory: brandCellFactory, dataHook: brandDataHook)
+        
+        brandListHelper.refresh()
     }
     
     private func initCouponTab() {

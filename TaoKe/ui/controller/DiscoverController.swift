@@ -36,8 +36,8 @@ class DiscoverController: UIViewController {
         
         initScrollView()
         initFloatingButton()
-        initHeaderView()
         initCouponList()
+        initHeaderView()
     }
     
     private func initHeaderView() {

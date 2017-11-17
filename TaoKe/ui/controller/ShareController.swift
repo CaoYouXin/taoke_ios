@@ -139,42 +139,82 @@ class ShareController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
+    private func fetchShareImages(_ save: Bool) -> Observable<[UIImage?]>? {
+        var observables: [Observable<UIImage?>] = []
+        if let shareImages = self.shareImages {
+            for i in 0..<shareImages.count {
+                let shareImage = shareImages[i]
+                if shareImage.selected! {
+                    observables.append(Observable.create({ (observer) -> Disposable in
+                        KingfisherManager.shared.downloader.downloadImage(with: URL(string: shareImage.thumb!)!, retrieveImageTask: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, url, data) in
+                            if let data = image {
+                                if save {
+                                    UIImageWriteToSavedPhotosAlbum(data, nil, nil, nil)
+                                }
+                                observer.onNext(image)
+                            } else {
+                                observer.onNext(nil)
+                            }
+                            observer.onCompleted()
+                        })
+                        return Disposables.create()
+                    }))
+                }
+            }
+        }
+        if observables.count == 0 {
+            return nil
+        }else {
+            return Observable.zip(observables).rxSchedulerHelper()
+        }
+    }
+    
     @objc private func back() {
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func share() {
-        navigationController?.popViewController(animated: true)
+        let linkHint = "{分享渠道后自动生成链接与口令}"
+        let link = "\n\(couponItem!.thumb!)\n--------------------\n复制这条信息，\(couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
+        if var text = shareText.text {
+            if let _ = text.range(of: linkHint) {
+                text = text.replacingOccurrences(of: linkHint, with: link)
+            } else {
+                text += link
+            }
+            var actvityItems:[Any] = []
+            actvityItems.append(text)
+            let share = {
+                let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
+                self.present(activityViewController, animated: true)
+            }
+            if let fetch = fetchShareImages(false) {
+                self.view.makeToastActivity(.center)
+                fetch.subscribe(onNext: { images in
+                    self.view.hideToastActivity()
+                    for image in images {
+                        if image != nil {
+                            actvityItems.append(image)
+                        }
+                    }
+                    share()
+                }, onError: { (error) in
+                    self.view.hideToastActivity()
+                    share()
+                    Log.error?.message(error.localizedDescription)
+                }).disposed(by: disposeBag)
+            } else {
+                share()
+            }
+        }
     }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
         case saveIcon, saveText:
-            var observables: [Observable<UIImage?>] = []
-            if let shareImages = self.shareImages {
-                for i in 0..<shareImages.count {
-                    let shareImage = shareImages[i]
-                    if shareImage.selected! {
-                        observables.append(Observable.create({ (observer) -> Disposable in
-                            KingfisherManager.shared.downloader.downloadImage(with: URL(string: shareImage.thumb!)!, retrieveImageTask: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, url, data) in
-                                if let data = image {
-                                    UIImageWriteToSavedPhotosAlbum(data, nil, nil, nil)
-                                    observer.onNext(image)
-                                } else {
-                                    observer.onNext(nil)
-                                }
-                                observer.onCompleted()
-                            })
-                            return Disposables.create()
-                        }))
-                    }
-                }
-            }
-            if observables.count != 0 {
+            if let fetch = fetchShareImages(true) {
                 self.view.makeToastActivity(.center)
-                Observable.zip(observables)
-                    .rxSchedulerHelper()
-                    .subscribe(onNext: { _ in
+                fetch.subscribe(onNext: { _ in
                         self.view.hideToastActivity()
                     }, onError: { (error) in
                         self.view.hideToastActivity()

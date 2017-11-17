@@ -41,6 +41,15 @@ class DiscoverController: UIViewController {
     }
     
     private func initHeaderView() {
+        //fix the headerview bug, any better way?
+        RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
+            .rxSchedulerHelper()
+            .subscribe { event in
+                if self.couponList.numberOfItems(inSection: 0) > 0 {
+                    self.couponList.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                }
+            }.disposed(by: disposeBag)
+        
         let nibViews = Bundle.main.loadNibNamed("DiscoverHeaderView", owner: self, options: nil)
         discoverHeaderView = nibViews?.first as? DiscoverHeaderView
         
@@ -54,13 +63,6 @@ class DiscoverController: UIViewController {
                 adjust += 16
             }
             headerView.maximumContentHeight += adjust
-            
-            //fix the headerview bug, any better way?
-            RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
-                .rxSchedulerHelper()
-                .subscribe { event in
-                    self.couponList.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-                }.disposed(by: disposeBag)
             
             couponList.addSubview(headerView)
             

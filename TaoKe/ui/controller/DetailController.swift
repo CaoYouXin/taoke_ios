@@ -47,7 +47,7 @@ class DetailController: UIViewController {
         
         self.initNavigationBar()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize.init(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         navigationItem.title = "宝贝推广信息"
         
         TaoKeApi.getCouponDetail(couponItem!).rxSchedulerHelper().subscribe(onNext: { (couponItemDetail) in
@@ -56,7 +56,7 @@ class DetailController: UIViewController {
             
             let newspaperOIcon = FAKFontAwesome.newspaperOIcon(withSize: 20)
             newspaperOIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#424242"))
-            self.detailViewIcon.image = newspaperOIcon?.image(with: CGSize.init(width: 20, height: 20))
+            self.detailViewIcon.image = newspaperOIcon?.image(with: CGSize(width: 20, height: 20))
             
             self.detailPriceAfterIcon.layer.cornerRadius = 2;
             self.detailPriceAfterIcon.layer.masksToBounds = true;
@@ -76,7 +76,7 @@ class DetailController: UIViewController {
             
             let ticketStarIcon = FAKMaterialIcons.ticketStarIcon(withSize: 16)
             ticketStarIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#757575"))
-            self.detailCouponIcon.image = ticketStarIcon?.image(with: CGSize.init(width: 16, height: 16))
+            self.detailCouponIcon.image = ticketStarIcon?.image(with: CGSize(width: 16, height: 16))
             
             text = "优惠券 \(couponItemDetail.coupon!)元（满\(couponItemDetail.couponRequirement!)使用）"
             attributedText = NSMutableAttributedString(string: text)
@@ -90,7 +90,7 @@ class DetailController: UIViewController {
             
             let moneyIcon = FAKFontAwesome.moneyIcon(withSize: 16)
             moneyIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#757575"))
-            self.detailCommissionIcon.image = moneyIcon?.image(with: CGSize.init(width: 16, height: 16))
+            self.detailCommissionIcon.image = moneyIcon?.image(with: CGSize(width: 16, height: 16))
             
             text = "通用佣金 \(couponItemDetail.commissionPercent!)（预计 ¥\(couponItemDetail.commission!)）"
             attributedText = NSMutableAttributedString(string: text)

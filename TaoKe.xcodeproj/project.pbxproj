@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B396FD61FC0765A00B1CBA0 /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B396FD41FC0765A00B1CBA0 /* AccountController.swift */; };
 		F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8BE1FB93DF4000BC49F /* DetailController.swift */; };
 		F907D8C11FB97498000BC49F /* MVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C01FB97498000BC49F /* MVCHelper.swift */; };
 		F907D8C41FB97513000BC49F /* RxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C31FB97513000BC49F /* RxDataSource.swift */; };
@@ -56,6 +57,7 @@
 
 /* Begin PBXFileReference section */
 		030F2ED6F7365B37BEB79011 /* Pods-TaoKe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.release.xcconfig"; sourceTree = "<group>"; };
+		2B396FD41FC0765A00B1CBA0 /* AccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountController.swift; sourceTree = "<group>"; };
 		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
 		AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaoKe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F907D8BE1FB93DF4000BC49F /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				F9B65BDF1FBBD7CA00413211 /* ProductListController.swift */,
 				F907D8BE1FB93DF4000BC49F /* DetailController.swift */,
 				F95361FE1FBD5677008A5819 /* ShareController.swift */,
+				2B396FD41FC0765A00B1CBA0 /* AccountController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				F9B65BE21FBBDCBB00413211 /* BrandDateSource.swift in Sources */,
 				F907D8C61FB981DF000BC49F /* CouponDataSource.swift in Sources */,
 				F9B7E01B1FBC0DFC00E4CCE2 /* ProductDataSource.swift in Sources */,
+				2B396FD61FC0765A00B1CBA0 /* AccountController.swift in Sources */,
 				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
 				F99662111FB41083002CF243 /* CouponCell.swift in Sources */,
 				F92DA5941FB152F900FDF3E4 /* TaoKeData.swift in Sources */,

@@ -140,7 +140,7 @@ class ProductListController: UIViewController {
             .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .rxSchedulerHelper()
             .subscribe { event in
-                productListLayout.lineCount = 2
+//                productListLayout.lineCount = 2
             }.disposed(by: disposeBag)
         
         let productCellFactory: (UICollectionView, Int, Product) -> UICollectionViewCell = { (collectionView, row, element) in

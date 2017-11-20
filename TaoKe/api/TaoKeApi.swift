@@ -9,6 +9,13 @@
 import RxSwift
 
 class TaoKeApi {
+    
+    public static func getNewerGuideList() -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_NOVICE_LIST)
+            .handleResult()
+    }
+    
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_VERIFICATION)
@@ -102,7 +109,7 @@ class TaoKeApi {
     
     public static func getCouponDetail(_ couponItem: CouponItem) -> Observable<CouponItemDetail> {
         return TaoKeService.getInstance()
-            .tao(api: "\(TaoKeService.API_COUPON_DETAIL)/\(couponItem.id!)")
+            .tao(api: "")
             .handleResult()
             .map({ (taoKeData) -> CouponItemDetail in
                 let couponItemDetail = CouponItemDetail()
@@ -121,7 +128,7 @@ class TaoKeApi {
     
     public static func getCouponShareImageList(_ couponItem: CouponItem) -> Observable<[String]?> {
         return TaoKeService.getInstance()
-            .tao(api: "\(TaoKeService.API_COUPON_SHARE_IMAGE_LIST)/\(couponItem.id!)")
+            .tao(api: "")
             .handleResult()
             .map({ (taoKeData) -> [String]? in
                 return taoKeData?.body?["images"] as? [String]

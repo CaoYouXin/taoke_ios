@@ -11,6 +11,8 @@ import FontAwesomeKit
 
 class NewerGuideController: UIViewController, UIScrollViewDelegate {
 
+    @IBOutlet weak var newerGuideList: UICollectionView!
+    @IBOutlet weak var newerGuideListFlowLayout: UICollectionViewFlowLayout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,7 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         navigationItem.title = "新手引导"
+        
         
     }
     

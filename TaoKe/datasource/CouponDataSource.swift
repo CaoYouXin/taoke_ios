@@ -19,10 +19,6 @@ class CouponDataSource: RxDataSource<CouponItem> {
     }
     
     override func loadMore() -> Observable<[CouponItem]> {
-        return TaoKeApi.getCouponList().map({ (items) -> [CouponItem] in
-            var newItems: [CouponItem] = []
-            newItems.append(items[0])
-            return newItems
-        })
+        return Observable.just([])
     }
 }

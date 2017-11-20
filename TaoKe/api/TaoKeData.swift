@@ -8,9 +8,9 @@
 
 import HandyJSON
 
-class TaoKeData: NSObject, HandyJSON{
-    public var header: Dictionary<String, AnyObject>?
-    public var body: Dictionary<String, AnyObject>?
+class TaoKeData: NSObject, HandyJSON {
+    public var code: Int?
+    public var body: Dictionary<String, Any>?
     
     override required init() {}
 }

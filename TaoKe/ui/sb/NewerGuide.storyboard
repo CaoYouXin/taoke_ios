@@ -46,6 +46,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GPI-Iy-4kp"/>
                     </view>
+                    <connections>
+                        <outlet property="newerGuideList" destination="XAz-6I-6xh" id="3uj-77-kda"/>
+                        <outlet property="newerGuideListFlowLayout" destination="z3w-ne-UrY" id="TW0-ow-JRU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRk-iW-u9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

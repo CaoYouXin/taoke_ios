@@ -97,7 +97,8 @@ class AccountController: UIViewController {
             
             break
         case aboutBtn:
-            
+            let aboutController = UIStoryboard(name: "About", bundle: nil).instantiateViewController(withIdentifier: "AboutController") as! AboutController
+            self.navigationController?.pushViewController(aboutController, animated: true)
             break
         case exitBtn:
             

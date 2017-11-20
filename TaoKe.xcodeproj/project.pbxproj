@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B2F69F91FC27048004D9B28 /* NewerGuide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F69F81FC27048004D9B28 /* NewerGuide.storyboard */; };
 		2B2F69FB1FC270A5004D9B28 /* NewerGuideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F69FA1FC270A5004D9B28 /* NewerGuideController.swift */; };
+		2B2F69FD1FC28667004D9B28 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F69FC1FC28667004D9B28 /* About.storyboard */; };
+		2B2F69FF1FC28696004D9B28 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F69FE1FC28696004D9B28 /* AboutController.swift */; };
 		2B396FD61FC0765A00B1CBA0 /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B396FD41FC0765A00B1CBA0 /* AccountController.swift */; };
 		F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8BE1FB93DF4000BC49F /* DetailController.swift */; };
 		F907D8C11FB97498000BC49F /* MVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C01FB97498000BC49F /* MVCHelper.swift */; };
@@ -61,6 +63,8 @@
 		030F2ED6F7365B37BEB79011 /* Pods-TaoKe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.release.xcconfig"; sourceTree = "<group>"; };
 		2B2F69F81FC27048004D9B28 /* NewerGuide.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewerGuide.storyboard; sourceTree = "<group>"; };
 		2B2F69FA1FC270A5004D9B28 /* NewerGuideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewerGuideController.swift; sourceTree = "<group>"; };
+		2B2F69FC1FC28667004D9B28 /* About.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		2B2F69FE1FC28696004D9B28 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		2B396FD41FC0765A00B1CBA0 /* AccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountController.swift; sourceTree = "<group>"; };
 		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
 		AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaoKe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,6 +277,7 @@
 				F98D19F41FBA970500B0F9D0 /* Detail.storyboard */,
 				F99D08DE1FBD5C2700A6CA6E /* Share.storyboard */,
 				2B2F69F81FC27048004D9B28 /* NewerGuide.storyboard */,
+				2B2F69FC1FC28667004D9B28 /* About.storyboard */,
 			);
 			path = sb;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				F95361FE1FBD5677008A5819 /* ShareController.swift */,
 				2B396FD41FC0765A00B1CBA0 /* AccountController.swift */,
 				2B2F69FA1FC270A5004D9B28 /* NewerGuideController.swift */,
+				2B2F69FE1FC28696004D9B28 /* AboutController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -371,6 +377,7 @@
 				F92C68D31FAAE32C005CD910 /* Assets.xcassets in Resources */,
 				F98D19F51FBA970500B0F9D0 /* Detail.storyboard in Resources */,
 				F90EA80E1FB3E56500184D04 /* DiscoverHeaderView.xib in Resources */,
+				2B2F69FD1FC28667004D9B28 /* About.storyboard in Resources */,
 				F99662131FB410AD002CF243 /* CouponCell.xib in Resources */,
 				F92C68D11FAAE32C005CD910 /* Main.storyboard in Resources */,
 				F949F8E01FBC324800E8382A /* ProductCell.xib in Resources */,
@@ -525,6 +532,7 @@
 				F92DA58D1FB151A400FDF3E4 /* TaoKeTestService.swift in Sources */,
 				F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */,
 				F92DA5961FB169D600FDF3E4 /* TaoKeApi.swift in Sources */,
+				2B2F69FF1FC28696004D9B28 /* AboutController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,12 +17,21 @@ class AccountController: UIViewController {
     @IBOutlet weak var rightArrow4: UIImageView!
     @IBOutlet weak var rightArrow5: UIImageView!
     @IBOutlet weak var rightArrow6: UIImageView!
+    
     @IBOutlet weak var newerGuideImage: UIImageView!
     @IBOutlet weak var shareToImage: UIImageView!
     @IBOutlet weak var enrollImage: UIImageView!
     @IBOutlet weak var teamImage: UIImageView!
     @IBOutlet weak var helpReportImage: UIImageView!
     @IBOutlet weak var aboutImage: UIImageView!
+    
+    @IBOutlet weak var newGuideBtn: UIButton!
+    @IBOutlet weak var shareToBtn: UIButton!
+    @IBOutlet weak var enrollBtn: UIButton!
+    @IBOutlet weak var teamBtn: UIButton!
+    @IBOutlet weak var helpReportBtn: UIButton!
+    @IBOutlet weak var aboutBtn: UIButton!
+    @IBOutlet weak var exitBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,15 +76,37 @@ class AccountController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func buttonClicked(_ sender: UIButton) {
+        switch sender {
+        case newGuideBtn:
+            let alert = UIAlertController(title: "", message: "点击新手引导", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
+            break
+        case shareToBtn:
+            let alert = UIAlertController(title: "", message: "点击分享给好友", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
+            break
+        case enrollBtn:
+            
+            break
+        case teamBtn:
+            
+            break
+        case helpReportBtn:
+            
+            break
+        case aboutBtn:
+            
+            break
+        case exitBtn:
+            
+            break
+        default: break
+        }
     }
-    */
-
+    
 }

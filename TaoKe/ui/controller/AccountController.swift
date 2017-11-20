@@ -35,8 +35,7 @@ class AccountController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
         let rightArrowIcon = FAKFontAwesome.chevronRightIcon(withSize: 16)
         rightArrowIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#757575"))
         self.rightArrow1.image = rightArrowIcon?.image(with: CGSize(width: 16, height: 16))
@@ -79,10 +78,8 @@ class AccountController: UIViewController {
     @IBAction func buttonClicked(_ sender: UIButton) {
         switch sender {
         case newGuideBtn:
-            let alert = UIAlertController(title: "", message: "点击新手引导", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true)
+            let newerGuideController = UIStoryboard(name: "NewerGuide", bundle: nil).instantiateViewController(withIdentifier: "NewerGuideController") as! NewerGuideController
+            self.navigationController?.pushViewController(newerGuideController, animated: true)
             break
         case shareToBtn:
             let alert = UIAlertController(title: "", message: "点击分享给好友", preferredStyle: .alert)

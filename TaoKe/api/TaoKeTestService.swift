@@ -81,6 +81,21 @@ class TaoKeTestService: TaoKeProtocol {
         }
         
         switch api {
+        case TaoKeService.API_VERIFICATION:
+            taoKeData.header!["ResultCode"] = "0000" as AnyObject
+            return Observable.just(taoKeData)
+        case TaoKeService.API_SIGN_IN:
+            taoKeData.header!["ResultCode"] = "0000" as AnyObject
+            taoKeData.body!["access_token"] = "0000" as AnyObject
+            return Observable.just(taoKeData)
+        case TaoKeService.API_SIGN_UP:
+            taoKeData.header!["ResultCode"] = "0000" as AnyObject
+            taoKeData.body!["access_token"] = "0000" as AnyObject
+            return Observable.just(taoKeData)
+        case TaoKeService.API_RESET_PASSWORD:
+            taoKeData.header!["ResultCode"] = "0000" as AnyObject
+            taoKeData.body!["access_token"] = "0000" as AnyObject
+            return Observable.just(taoKeData)
         case TaoKeService.API_BRAND_LIST:
             taoKeData.header!["ResultCode"] = "0000" as AnyObject
             let brandTitles = ["今日上新", "聚划算", "品牌券"]

@@ -11,6 +11,9 @@ import RxSwift
 
 class TaoKeService: TaoKeProtocol {
     public static let API_VERIFICATION = "verification"
+    public static let API_SIGN_IN = "signIn"
+    public static let API_SIGN_UP = "signUp"
+    public static let API_RESET_PASSWORD = "resetPassword"
     public static let API_BRAND_LIST = "brandList"
     public static let API_PRODUCT_LIST = "productList"
     public static let API_COUPON_TAB = "couponTab"

@@ -30,6 +30,7 @@ target 'TaoKe' do
   pod 'TabLayoutView'
   pod 'ELWaterFallLayout'
   pod 'Toast-Swift', '~> 2.0.0'
+  pod 'EAIntroView'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

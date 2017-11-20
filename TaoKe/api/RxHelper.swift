@@ -33,6 +33,8 @@ extension ObservableType {
 }
 
 class ApiError: Error {
+    var message: String?
+    
     init() {
         
     }

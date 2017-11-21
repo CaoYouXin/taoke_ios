@@ -48,14 +48,17 @@ class TaoKeApi {
     }
 
     public static func signIn(phone: String, password: String) -> Observable<TaoKeData?> {
-        return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_SIGN_IN)
-            .handleResult()
-            .map({ (taoKeData) -> TaoKeData? in
-                token = taoKeData?.body?["access_token"] as? String
-                cacheToken()
-                return taoKeData
-            })
+//        return TaoKeService.getInstance()
+//            .tao(api: TaoKeService.API_SIGN_IN)
+//            .handleResult()
+//            .map({ (taoKeData) -> TaoKeData? in
+//                token = taoKeData?.body?["access_token"] as? String
+//                cacheToken()
+//                return taoKeData
+//            })
+        token = "tester"
+        cacheToken()
+        return Observable.just(nil)
     }
 
     public static func resetPassword(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
@@ -186,4 +189,5 @@ class TaoKeApi {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_NOVICE_LIST)
             .handleResult()
+    }
 }

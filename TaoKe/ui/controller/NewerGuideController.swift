@@ -24,14 +24,21 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
         
         scrollview.translatesAutoresizingMaskIntoConstraints = false
         newerGuideList.translatesAutoresizingMaskIntoConstraints = false
+        newerGuideList.spacing = 0
         
         for _ in 1 ..< 20 {
-            let imageView = UIImageView(image: #imageLiteral(resourceName: "splash"))
+            let imageView = UIImageView()
+            imageView.kf.setImage(with: URL(string: "http://sjbz.fd.zol-img.com.cn/t_s800x1280c/g5/M00/07/04/ChMkJ1jlsOKIUYUYAAQhvA87IyIAAbZHwKhfVgABCHU427.jpg"), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                if let img = image {
+                    let ratio = img.size.height / img.size.width
+                    let height = self.view.frame.width * ratio
+                    self.newerGuideList.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: height))
+                    if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height}.first) {
+                        constraint.constant += height + self.newerGuideList.spacing
+                    }
+                }
+            })
             newerGuideList.addArrangedSubview(imageView)
-            newerGuideList.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 100))
-            if let constraint = (newerGuideList.constraints.filter{$0.firstAttribute == .height}.first) {
-                constraint.constant += (100 + newerGuideList.spacing)
-            }
         }
     }
     

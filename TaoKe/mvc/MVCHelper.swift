@@ -5,6 +5,7 @@
 //  Created by jason tsang on 11/13/17.
 //  Copyright © 2017 jason tsang. All rights reserved.
 //
+import CleanroomLogger
 import RxSwift
 import RxCocoa
 import RxViewModel
@@ -56,15 +57,15 @@ class MVCHelper<T> {
                 refresh -> Observable<[T]> in
                 switch self.mode {
                 case 0:
-                    return self.dataSource!.loadCache()
+                    return self.dataSource!.loadCacheProxy()
                 case 1:
-                    return self.dataSource!.refresh().map({ (data) -> [T] in
+                    return self.dataSource!.refreshProxy().map({ (data) -> [T] in
                         self.data = []
                         self.data.append(contentsOf: data)
                         return self.data
                     })
                 case 2:
-                    return self.dataSource!.loadMore().map({ (data) -> [T] in
+                    return self.dataSource!.loadMoreProxy().map({ (data) -> [T] in
                         self.data.append(contentsOf: data)
                         return self.data
                     })
@@ -77,16 +78,22 @@ class MVCHelper<T> {
             signal = signal.catchError({ (error) -> Observable<[T]> in
                 return handler(error)
             })
+        } else {
+            signal = signal.catchError({ (error) -> Observable<[T]> in
+                Log.error?.message(error.localizedDescription)
+                return Observable.empty()
+            })
         }
         
-        signal.flatMap({ (origin) -> Observable<[T]> in
+        signal = signal.flatMap({ (origin) -> Observable<[T]> in
                 var data = origin
                 if let hook = self.dataHook {
                     data = hook(origin)
                 }
                 return Observable.just(data)
             })
-            .bind(to: collectionView.rx.items)(cellFactory!)
+        
+        signal.bind(to: collectionView.rx.items)(cellFactory!)
             .disposed(by: disposeBag)
     }
     

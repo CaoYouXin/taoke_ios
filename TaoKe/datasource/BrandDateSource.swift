@@ -9,9 +9,7 @@
 import RxSwift
 
 class BrandDataSource: RxDataSource<BrandItem> {
-    
     override func refresh() -> Observable<[BrandItem]> {
         return TaoKeApi.getBrandList()
     }
-    
 }

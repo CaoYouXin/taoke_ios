@@ -163,7 +163,7 @@ class ProductListController: UIViewController {
             return cell
         }
         
-        let productDataSource = ProductDataSource(brandItem!)
+        let productDataSource = ProductDataSource(viewController: self, brandItem: brandItem)
         
         productListHelper = MVCHelper<Product>(productList)
         

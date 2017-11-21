@@ -27,13 +27,17 @@ class DiscoverController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
-    private let couponDataSource = CouponDataSource()
+    private var couponDataSource: CouponDataSource?
     private var couponListHelper: MVCHelper<CouponItem>?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        couponDataSource = CouponDataSource(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         initScrollView()
         initFloatingButton()
         initCouponList()
@@ -208,7 +212,7 @@ extension DiscoverController: MEVFloatingButtonDelegate {
 extension DiscoverController: TabLayoutViewDelegate {
     func tabLayoutView(_ tabLayoutView: TabLayoutView, didSelectTabAt index: Int) {
         couponList.setContentOffset(CGPoint(x: 0, y: discoverHeaderView!.maximumContentHeight), animated: true)
-        couponDataSource.set(index)
+        couponDataSource?.set(index)
         couponListHelper?.refresh()
     }
 }

@@ -5,18 +5,54 @@
 //  Created by jason tsang on 11/6/17.
 //  Copyright © 2017 jason tsang. All rights reserved.
 //
+import CleanroomLogger
+import RxSwift
 
 class SplashController: UIViewController {
     @IBOutlet weak var splashImage: UIImageView!
     
+    @IBOutlet weak var appName: UIImageView!
+    
+    @IBOutlet weak var signUp: UIButton!
+    
+    @IBOutlet weak var signIn: UIButton!
+    
+    private let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib.        
+        signUp.layer.borderWidth = 1
+        signUp.layer.borderColor = UIColor("#FFB74D").cgColor
+        signUp.layer.cornerRadius = 6
+        signIn.layer.borderWidth = 1
+        signIn.layer.borderColor = UIColor("#FFB74D").cgColor
+        signIn.layer.cornerRadius = 6
         
-        UIView.animate(withDuration: 3, animations: { () -> Void in
+        UIView.animate(withDuration: 1.5, animations: { () -> Void in
             self.splashImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }) { (finished) -> Void in
-            self.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
+            self.appName.alpha = 1
+        })
+        
+        if TaoKeApi.restoreToken() {
+            Observable<Int>.timer(RxTimeInterval(3), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: {
+                    _ in
+                    if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
+                        self.navigationController?.navigationController?.performSegue(withIdentifier: "segue_to_taoke", sender: nil)
+                    } else {
+                        self.navigationController?.navigationController?.performSegue(withIdentifier: "segue_to_intro", sender: nil)
+                    }
+                }, onError: {
+                    error in
+                    Log.error?.message(error.localizedDescription)
+                }).disposed(by: disposeBag)
+        } else {
+            UIView.animate(withDuration: 1.5, animations: { () -> Void in
+                self.signUp.alpha = 1
+                self.signIn.alpha = 1
+            })
         }
     }
     

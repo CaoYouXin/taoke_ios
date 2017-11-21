@@ -7,21 +7,22 @@
 //
 
 import RxSwift
+import Toast_Swift
 
 extension ObservableType {
     public func rxSchedulerHelper() -> Observable<Self.E> {
         return self.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
     }
-    
+
     public func handleResult() -> Observable<Self.E> {
         return self.map { data -> Self.E in
             if data is TaoKeData {
                 let taoKeData = data as? TaoKeData
-                let resultCode = taoKeData?.code
-                if  resultCode == nil || resultCode != 2000 {
-                    if let message = taoKeData?.body?["msg"] as? String {
-                        throw ApiError(message: message)
+                let resultCode = taoKeData?.header?["ResultCode"] as? String
+                if  resultCode == nil || resultCode!.compare("0000").rawValue != 0 {
+                    if let message = taoKeData?.header?["Message"] as? String {
+                        throw ApiError(message)
                     } else {
                         throw ApiError()
                     }
@@ -32,12 +33,25 @@ extension ObservableType {
     }
 }
 
-class ApiError: Error {
-    init() {
-        
+class ApiErrorHook: Hook {
+    func hook<T>(viewController: UIViewController?, observable: Observable<T>) -> Observable<T> {
+        return observable.observeOn(MainScheduler.instance).map({ (data) -> T in
+            if let controller = viewController {
+                controller.view.makeToast("This is a api error hook", duration: 3.0, position: .center)
+            }
+            return data
+        }).subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
     }
-    
-    init(message: String) {
-        
+}
+
+class ApiError: Error {
+    var message: String?
+
+    init() {
+
+    }
+
+    init(_ message: String?) {
+        self.message = message
     }
 }

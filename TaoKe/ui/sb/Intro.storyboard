@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Intro Controller-->
+        <scene sceneID="Au2-jg-9qs">
+            <objects>
+                <viewController storyboardIdentifier="IntroController" id="UCA-Ub-emo" customClass="IntroController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2j2-KQ-CiY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwB-iP-m2a" customClass="EAIntroView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uwB-iP-m2a" firstAttribute="top" secondItem="2j2-KQ-CiY" secondAttribute="top" id="Mht-Sl-RMj"/>
+                            <constraint firstAttribute="bottom" secondItem="uwB-iP-m2a" secondAttribute="bottom" id="W30-a7-NjO"/>
+                            <constraint firstAttribute="trailing" secondItem="uwB-iP-m2a" secondAttribute="trailing" id="duv-Ic-o5v"/>
+                            <constraint firstItem="uwB-iP-m2a" firstAttribute="leading" secondItem="2j2-KQ-CiY" secondAttribute="leading" id="hQn-ft-85E"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="introView" destination="uwB-iP-m2a" id="lne-77-gEi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLI-BX-zmc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-170" y="122"/>
+        </scene>
+    </scenes>
+</document>

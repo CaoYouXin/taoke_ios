@@ -49,7 +49,6 @@
                     </view>
                     <connections>
                         <outlet property="newerGuideList" destination="5sB-1s-RUb" id="Fdg-gb-32V"/>
-                        <outlet property="scrollview" destination="rjh-ln-gL3" id="OG1-6g-xef"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRk-iW-u9l" userLabel="First Responder" sceneMemberID="firstResponder"/>

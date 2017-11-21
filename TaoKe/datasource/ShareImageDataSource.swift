@@ -8,14 +8,19 @@
 import RxSwift
 
 class ShareImageDataSource: RxDataSource<ShareImage> {
-    private var couponItem: CouponItem
+    private var couponItem: CouponItem?
     
-    init(_ couponItem: CouponItem) {
+    init(viewController: UIViewController, couponItem: CouponItem?) {
+        self.couponItem = couponItem
+        super.init(viewController)
+    }
+    
+    func set(_ couponItem: CouponItem?) {
         self.couponItem = couponItem
     }
     
     override func refresh() -> Observable<[ShareImage]> {
-        return TaoKeApi.getCouponShareImageList(couponItem)
+        return TaoKeApi.getCouponShareImageList(couponItem!)
             .map({
                 images in
                 var shareImages: [ShareImage] = []

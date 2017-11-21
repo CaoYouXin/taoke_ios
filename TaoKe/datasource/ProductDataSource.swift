@@ -14,11 +14,16 @@ class ProductDataSource: RxDataSource<Product> {
     public static let SORT_PRICE_DOWN = 3
     public static let SORT_COMMISSION = 4
     
-    private var brandItem: BrandItem
+    private var brandItem: BrandItem?
     
     private var sort: Int = 0
     
-    init(_ brandItem: BrandItem) {
+    init(viewController: UIViewController, brandItem: BrandItem?) {
+        self.brandItem = brandItem
+        super.init(viewController)
+    }
+    
+    func set(_ brandItem: BrandItem?) {
         self.brandItem = brandItem
     }
     
@@ -27,6 +32,6 @@ class ProductDataSource: RxDataSource<Product> {
     }
     
     override func refresh() -> Observable<[Product]> {
-        return TaoKeApi.getProductList(brandItem)
+        return TaoKeApi.getProductList(brandItem!)
     }
 }

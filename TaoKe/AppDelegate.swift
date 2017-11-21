@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Log.enable()
         Log.info?.message("The application has finished launching.")
+        RxDataHook.add(ApiErrorHook())
         return true
     }
     

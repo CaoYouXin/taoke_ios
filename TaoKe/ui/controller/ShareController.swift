@@ -118,7 +118,7 @@ class ShareController: UIViewController {
             return cell
         }
         
-        let shareImageListDataSource = ShareImageDataSource(couponItem!)
+        let shareImageListDataSource = ShareImageDataSource(viewController: self, couponItem: couponItem)
         
         let shareImageListDataHook: ([ShareImage]) -> [ShareImage] = {
             shareImages in

@@ -15,6 +15,7 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var newerGuideList: UIStackView!
     
     private var images: [UIImageView] = [];
+    private var constraints: [NSLayoutConstraint] = [];
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,9 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
                     let ratio = img.size.height / img.size.width
                     let height = self.view.frame.width * ratio
                     
-                    self.newerGuideList.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: height))
+                    let constraint = NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: height)
+                    self.newerGuideList.addConstraint(constraint)
+                    self.constraints.append(constraint)
                     
                     if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height}.first) {
                         constraint.constant += height + self.newerGuideList.spacing
@@ -48,6 +51,7 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.newerGuideList.removeConstraints(self.constraints)
         for image in self.images {
             self.newerGuideList.removeArrangedSubview(image)
         }

@@ -38,7 +38,7 @@ class DiscoverController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        initScrollView()
+        initMJRefresh()
         initFloatingButton()
         initCouponList()
         initHeaderView()
@@ -160,7 +160,7 @@ class DiscoverController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
-    private func initScrollView() {
+    private func initMJRefresh() {
         scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.couponListHelper?.refresh()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -169,16 +169,17 @@ class DiscoverController: UIViewController {
             }
         })
         
-        scrollView.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+        couponList.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.couponListHelper?.loadMore()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.scrollView.mj_footer.isHidden = true
-                self.scrollView.mj_footer.isHidden = false
+                self.couponList.mj_footer.endRefreshing()
+                //self.couponList.mj_footer.isHidden = true
+                //self.couponList.mj_footer.isHidden = false
             }
         })
         
-        scrollView.mj_footer.isAutomaticallyHidden = false
+        //couponList.mj_footer.isAutomaticallyHidden = false
     }
     
     private func initFloatingButton() {
@@ -211,7 +212,7 @@ extension DiscoverController: MEVFloatingButtonDelegate {
 
 extension DiscoverController: TabLayoutViewDelegate {
     func tabLayoutView(_ tabLayoutView: TabLayoutView, didSelectTabAt index: Int) {
-        couponList.setContentOffset(CGPoint(x: 0, y: discoverHeaderView!.maximumContentHeight), animated: true)
+        couponList.setContentOffset(CGPoint(x: 0, y: -discoverHeaderView!.minimumContentHeight), animated: true)
         couponDataSource?.set(index)
         couponListHelper?.refresh()
     }

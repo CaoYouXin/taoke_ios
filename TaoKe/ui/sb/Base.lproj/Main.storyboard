@@ -113,6 +113,7 @@
                             <constraint firstAttribute="trailing" secondItem="NFx-46-PVK" secondAttribute="trailing" id="uCf-Tw-uAB"/>
                             <constraint firstItem="S6g-os-Gor" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="uix-Xx-MGY"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="X5D-bn-VzR"/>
                     </view>
                     <navigationItem key="navigationItem" id="LBA-5o-Y0J"/>
                     <connections>
@@ -364,8 +365,8 @@
                                     <constraint firstItem="5P3-Ck-sKC" firstAttribute="centerX" secondItem="pVf-QZ-kgz" secondAttribute="centerX" id="648-c9-gPF"/>
                                     <constraint firstItem="5P3-Ck-sKC" firstAttribute="leading" secondItem="pVf-QZ-kgz" secondAttribute="leading" id="EtD-hg-OfV"/>
                                     <constraint firstAttribute="bottom" secondItem="5P3-Ck-sKC" secondAttribute="bottom" id="I4W-gP-vnK"/>
+                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="height" secondItem="pVf-QZ-kgz" secondAttribute="height" id="SID-NF-2j2"/>
                                     <constraint firstAttribute="trailing" secondItem="5P3-Ck-sKC" secondAttribute="trailing" id="dVR-od-Mws"/>
-                                    <constraint firstItem="5P3-Ck-sKC" firstAttribute="centerY" secondItem="pVf-QZ-kgz" secondAttribute="centerY" id="dkc-1u-12e"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

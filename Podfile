@@ -31,6 +31,7 @@ target 'TaoKe' do
   pod 'ELWaterFallLayout'
   pod 'Toast-Swift', '~> 2.0.0'
   pod 'EAIntroView'
+  pod 'QRCode'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

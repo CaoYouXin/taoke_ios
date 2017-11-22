@@ -12,6 +12,7 @@ import RxCocoa
 import FontAwesomeKit
 import Kingfisher
 import Toast_Swift
+import QRCode
 
 class ShareController: UIViewController {
     
@@ -40,6 +41,13 @@ class ShareController: UIViewController {
     @IBOutlet weak var qqWrapper: UIView!
     @IBOutlet weak var qqIcon: UIImageView!
     
+    @IBOutlet weak var descWrapper: UIView!
+    @IBOutlet weak var descTitle: UILabel!
+    @IBOutlet weak var descPriceBefore: UILabel!
+    @IBOutlet weak var descCoupon: UILabel!
+    @IBOutlet weak var descPriceAfter: UILabel!
+    @IBOutlet weak var descQRCode: UIImageView!
+    
     private let disposeBag = DisposeBag()
     
     private var shareImages: [ShareImage]?
@@ -54,7 +62,7 @@ class ShareController: UIViewController {
         
         navigationItem.title = "创建分享"
         
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "分享", style: UIBarButtonItemStyle.plain, target: self, action: #selector(share))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "分享", style: UIBarButtonItemStyle.plain, target: self, action: #selector(share))
         
         let text = "已选 1 张"
         let selectCountMutableAttributedString = NSMutableAttributedString(string: text)
@@ -102,6 +110,8 @@ class ShareController: UIViewController {
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         qqWrapper.addGestureRecognizer(tapGestureRecognizer)
         initShareImageList()
+        
+        initDesc()
     }
     
     private func initShareImageList() {
@@ -165,6 +175,45 @@ class ShareController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
+    private func initDesc() {
+        descTitle.text = couponItem!.title!
+        
+        var text = "现价  ¥ \(couponItem!.priceBefore!)"
+        var location = text.index(of: "¥")!.encodedOffset + 2
+        var range = NSRange(location: location, length: text.utf16.count - location)
+        var attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle, value: NSUnderlineStyle.patternSolid.rawValue | NSUnderlineStyle.styleSingle.rawValue, range: range)
+        descPriceBefore.attributedText = attributedText
+        
+        let orange800 = UIColor("#ef6c00")
+        text = " 券  \(couponItem!.value!)元 "
+        range = NSRange(location: 0, length: 3)
+        attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(NSAttributedStringKey.backgroundColor, value: orange800, range: range)
+        range = NSRange(location: 1, length: 1)
+        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.white, range: range)
+        range = NSRange(location: 4, length: text.utf16.count - 5)
+        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: orange800, range: range)
+        descCoupon.attributedText = attributedText
+        descCoupon.layer.borderWidth = 1
+        descCoupon.layer.borderColor = orange800.cgColor
+        descCoupon.layer.cornerRadius = 2
+        
+        text = "券后价 ¥ \(couponItem!.priceAfter!)"
+        attributedText = NSMutableAttributedString(string: text)
+        location = text.index(of: "¥")!.encodedOffset
+        range = NSRange(location: location, length: text.utf16.count - location)
+        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: orange800, range: range)
+        location = text.index(of: "¥")!.encodedOffset + 1
+        range = NSRange(location: location, length: text.utf16.count - location)
+        attributedText.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 18), range: range)
+        descPriceAfter.attributedText = attributedText
+        
+        var qrCode = QRCode(couponItem!.thumb!)
+        qrCode?.size = CGSize(width: descQRCode.frame.size.width - 6, height: descQRCode.frame.size.height - 6)
+        descQRCode.image = qrCode?.image
+    }
+    
     private func fetchShareImages(_ save: Bool) -> Observable<[UIImage?]>? {
         var observables: [Observable<UIImage?>] = []
         if let shareImages = self.shareImages {
@@ -192,6 +241,47 @@ class ShareController: UIViewController {
             return nil
         }else {
             return Observable.zip(observables).rxSchedulerHelper()
+        }
+    }
+    
+    private func generateShareImage(_ save: Bool) -> Observable<UIImage?>? {
+        if let fetch = fetchShareImages(save) {
+            return fetch.map({ (shareImages) -> UIImage? in
+                var renderer = UIGraphicsImageRenderer(size: self.descWrapper.frame.size)
+                var shareImage = renderer.image(actions: { (context) in
+                    self.descWrapper.layer.render(in: context.cgContext)
+                })
+                
+                let width = self.view.frame.size.width
+                var height = shareImage.size.height
+                for shareImage in shareImages {
+                    if let image = shareImage {
+                        let radio = image.size.width / image.size.height
+                        height += width / radio
+                    }
+                }
+                let size = CGSize(width: width, height: height)
+                var y = CGFloat(0)
+                
+                renderer = UIGraphicsImageRenderer(size: size)
+                shareImage = renderer.image(actions: { (context) in
+                    for shareImage in shareImages {
+                        if let image = shareImage {
+                            let radio = image.size.width / image.size.height
+                            image.draw(in: CGRect(x: 0, y: y, width: width, height: width / radio))
+                            y += width / radio
+                        }
+                    }
+                    shareImage.draw(at: CGPoint(x: 0, y: y))
+                })
+                
+                if save {
+                    UIImageWriteToSavedPhotosAlbum(shareImage, nil, nil, nil)
+                }
+                return shareImage
+            })
+        } else {
+            return nil
         }
     }
     
@@ -226,14 +316,12 @@ class ShareController: UIViewController {
             self.present(activityViewController, animated: true)
         }
         
-        if let fetch = fetchShareImages(false) {
+        if let generateShareImage = generateShareImage(false) {
             self.view.makeToastActivity(.center)
-            fetch.subscribe(onNext: { images in
+            generateShareImage.subscribe(onNext: { shareImage in
                 self.view.hideToastActivity()
-                for image in images {
-                    if image != nil {
-                        actvityItems.append(image!)
-                    }
+                if let image = shareImage {
+                    actvityItems.append(image)
                 }
                 share()
             }, onError: { (error) in
@@ -291,9 +379,9 @@ class ShareController: UIViewController {
                 self.present(alert, animated: true)
             }
 
-            if let fetch = fetchShareImages(true) {
+            if let generateShareImage = generateShareImage(true) {
                 self.view.makeToastActivity(.center)
-                fetch.subscribe(onNext: { _ in
+                generateShareImage.subscribe(onNext: { _ in
                     self.view.hideToastActivity()
                     share()
                 }, onError: { (error) in

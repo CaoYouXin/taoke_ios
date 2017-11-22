@@ -10,49 +10,69 @@ import RestKit
 import RxSwift
 
 class TaoKeService: TaoKeProtocol {
-    public static let API_VERIFICATION = "verification"
-    public static let API_SIGN_IN = "signIn"
-    public static let API_SIGN_UP = "signUp"
-    public static let API_RESET_PASSWORD = "resetPassword"
-    public static let API_BRAND_LIST = "brandList"
-    public static let API_PRODUCT_LIST = "productList"
-    public static let API_COUPON_TAB = "couponTab"
-    public static let API_COUPON_LIST = "couponList"
-    public static let API_COUPON_DETAIL = "couponDetail"
-    public static let API_COUPON_SHARE_IMAGE_LIST = "couponShareImageList"
-    
-    public static let HOST = "https://127.0.0.1:8081"
-    
+
+    public static let API_VERIFICATION = "tbk/phone/verify"
+    public static let API_SIGN_IN = "tbk/user/login"
+    public static let API_SIGN_UP = "tbk/user/register"
+    public static let API_RESET_PASSWORD = "tbk/user/reset/pwd"
+
+    public static let API_BANNER_LIST = "home/banner/list"
+    public static let API_COUPON_TAB = "home/cate/list"
+    public static let API_BRAND_LIST = "home/group/list"
+
+    public static let API_HINT_LIST = "tbk/hints/{keyword}"
+    public static let API_SEARCH_LIST = "tbk/search/{keyword}"
+
+    public static let API_MESSAGE_LIST = "msg/list/{pageNo}"
+    public static let API_REPORT = "msg/feedback"
+
+    public static let API_FRIENDS_LIST = "tbk/team/list"
+    public static let API_COUPON_LIST = "tbk/coupon/{cid}/{pNo}"
+    public static let API_PRODUCT_LIST = "tbk/fav/{favId}/list/{pageNo}"
+    public static let API_ORDER_LIST = "tbk/order/list/{type}/{pageNo}"
+    public static let API_GET_SHARE_LINK = "tbk/url/trans"
+
+    public static let API_HELP_LIST = "app/help/list"
+    public static let API_NOVICE_LIST = "app/guide/list"
+    public static let API_SHARE_APP_LIST = "app/share/img/url/list"
+
+    public static let API_SEND_WITHDRAW = "tbk/withdraw/{amount}"
+    public static let API_USER_AMOUNT = "tbk/candraw"
+    public static let API_THIS_MOUNT_ESTIMATE = "tbk/estimate/this"
+    public static let API_LAST_MOUNT_ESTIMATE = "tbk/estimate/that"
+
+    public static let API_ENROLL = "tbk/user/apply/4/agent"
+
+    public static let HOST = "http://192.168.1.102:8080/api/"
+
     private static var instance: TaoKeProtocol?
-    
+
     private var manager: RKObjectManager?
-    
+
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
-        requestDataMapping?.addAttributeMappings(from: ["access_taken", "data", "signature"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
-        
+
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)
-        taoKeDataMapping?.addAttributeMappings(from: ["header", "body"])
-        
+        taoKeDataMapping?.addAttributeMappings(from: ["code", "body"])
         let responseDescriptor = RKResponseDescriptor(mapping: taoKeDataMapping, method: .any, pathPattern: nil, keyPath: nil, statusCodes: nil)
-        
+
         manager = RKObjectManager(baseURL: URL(string: TaoKeService.HOST))
         manager?.addRequestDescriptor(requestDescriptor)
         manager?.addResponseDescriptor(responseDescriptor)
     }
-    
+
     public static func getInstance() -> TaoKeProtocol {
         if instance == nil {
-            //instance = TaoKeService()
-            instance = TaoKeTestService.getInstance()
+            instance = TaoKeService()
+//            instance = TaoKeTestService.getInstance()
         }
         return instance!
     }
-    
+
     public func tao(api: String) -> Observable<TaoKeData?> {
         return Observable.create { (observer) -> Disposable in
-            self.manager?.getObjectsAtPath(("/api/\(api)").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), parameters: nil, success: { (operation, result) in
+            self.manager?.getObjectsAtPath(api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), parameters: nil, success: { (operation, result) in
                 observer.onNext(result?.firstObject as? TaoKeData)
                 observer.onCompleted()
             }, failure: { (operation, error) in
@@ -61,10 +81,24 @@ class TaoKeService: TaoKeProtocol {
             return Disposables.create()
         }
     }
-    
-    public func tao(api: String, access_taken: String, data: String, signature: String) -> Observable<TaoKeData?> {
+
+    public func tao(api: String, auth: String) -> Observable<TaoKeData?> {
+        self.manager?.httpClient.setDefaultHeader("auth", value: auth)
+        return Observable.create { (observer) -> Disposable in
+            self.manager?.getObjectsAtPath(api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), parameters: nil, success: { (operation, result) in
+                observer.onNext(result?.firstObject as? TaoKeData)
+                observer.onCompleted()
+            }, failure: { (operation, error) in
+                observer.onError(error!)
+            })
+            return Disposables.create()
+        }
+    }
+
+    public func tao(api: String, auth: String, data: Dictionary<String, Any>) -> Observable<TaoKeData?> {
+        self.manager?.httpClient.setDefaultHeader("auth", value: auth)
         return Observable.create({ (observer) -> Disposable in
-            self.manager?.post(NSMutableDictionary(dictionary: ["access_taken": access_taken, "data": data, "signature": signature], copyItems: true), path: "/api/\(api)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), parameters: nil, success: { (operation, result) in
+            self.manager?.post(data, path: api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), parameters: nil, success: { (operation, result) in
                 observer.onNext(result?.firstObject as? TaoKeData)
                 observer.onCompleted()
             }, failure: { (operation, error) in

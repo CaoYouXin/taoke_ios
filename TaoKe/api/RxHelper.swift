@@ -14,14 +14,14 @@ extension ObservableType {
         return self.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
     }
-    
+
     public func handleResult() -> Observable<Self.E> {
         return self.map { data -> Self.E in
             if data is TaoKeData {
                 let taoKeData = data as? TaoKeData
-                let resultCode = taoKeData?.header?["ResultCode"] as? String
-                if  resultCode == nil || resultCode!.compare("0000").rawValue != 0 {
-                    if let message = taoKeData?.header?["Message"] as? String {
+                let resultCode = taoKeData?.code
+                if  resultCode == nil || resultCode != 2000 {
+                    if let message = taoKeData?.body?["msg"] as? String {
                         throw ApiError(message)
                     } else {
                         throw ApiError()
@@ -46,11 +46,11 @@ class ApiErrorHook: Hook {
 
 class ApiError: Error {
     var message: String?
-    
+
     init() {
-        
+
     }
-    
+
     init(_ message: String?) {
         self.message = message
     }

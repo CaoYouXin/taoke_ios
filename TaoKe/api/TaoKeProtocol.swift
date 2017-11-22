@@ -9,9 +9,13 @@
 import RxSwift
 
 protocol TaoKeProtocol {
+    
     func tao(api: String) -> Observable<TaoKeData?>
     
-    func tao(api: String, access_taken: String, data: String, signature: String) -> Observable<TaoKeData?>
+    func tao(api: String, auth: String) -> Observable<TaoKeData?>
+    
+    func tao(api: String, auth: String, data: Dictionary<String, Any>) -> Observable<TaoKeData?>
     
     static func getInstance() -> TaoKeProtocol
+    
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Newer Guide Controller-->
+        <scene sceneID="Q9l-Vv-Hhn">
+            <objects>
+                <viewController storyboardIdentifier="NewerGuideController" id="oOP-I5-wb6" customClass="NewerGuideController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZCu-s5-Ll6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjh-ln-gL3">
+                                <rect key="frame" x="0.0" y="10" width="375" height="647"/>
+                                <subviews>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5sB-1s-RUb">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="4GG-Zt-JoO"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5sB-1s-RUb" firstAttribute="leading" secondItem="rjh-ln-gL3" secondAttribute="leading" id="Cil-Og-2G3"/>
+                                    <constraint firstItem="5sB-1s-RUb" firstAttribute="centerX" secondItem="rjh-ln-gL3" secondAttribute="centerX" id="Nh6-5a-XNt"/>
+                                    <constraint firstItem="5sB-1s-RUb" firstAttribute="top" secondItem="rjh-ln-gL3" secondAttribute="top" id="Tmi-ta-yUo"/>
+                                    <constraint firstAttribute="trailing" secondItem="5sB-1s-RUb" secondAttribute="trailing" id="leM-Sa-5dF"/>
+                                    <constraint firstAttribute="bottom" secondItem="5sB-1s-RUb" secondAttribute="bottom" id="vRO-pe-QzQ"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rjh-ln-gL3" firstAttribute="width" secondItem="GPI-Iy-4kp" secondAttribute="width" id="0BN-ST-sQG"/>
+                            <constraint firstItem="rjh-ln-gL3" firstAttribute="height" secondItem="GPI-Iy-4kp" secondAttribute="height" id="G33-jb-XsN"/>
+                            <constraint firstItem="rjh-ln-gL3" firstAttribute="centerX" secondItem="ZCu-s5-Ll6" secondAttribute="centerX" id="azE-Ot-tRJ"/>
+                            <constraint firstItem="rjh-ln-gL3" firstAttribute="centerY" secondItem="ZCu-s5-Ll6" secondAttribute="centerY" id="eId-Yu-9xR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GPI-Iy-4kp"/>
+                    </view>
+                    <connections>
+                        <outlet property="newerGuideList" destination="5sB-1s-RUb" id="Fdg-gb-32V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jRk-iW-u9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="128.80000000000001" y="-57.121439280359823"/>
+        </scene>
+    </scenes>
+</document>

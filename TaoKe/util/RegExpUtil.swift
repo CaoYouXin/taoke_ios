@@ -12,7 +12,7 @@ class RegExpUtil {
             return false
         }
         
-        let mobile = "^(13[0-9]|15[0-9]|18[0-9]|17[0-9]|147)\\d{8}$"
+        let mobile = "^1\\d{10}$"
         let regexMobile = NSPredicate(format: "SELF MATCHES %@", mobile)
         
         return regexMobile.evaluate(with: phoneNo)

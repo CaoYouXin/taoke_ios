@@ -10,12 +10,7 @@ import UIKit
 import FontAwesomeKit
 
 class NewerGuideController: UIViewController, UIScrollViewDelegate {
-    @IBOutlet weak var scrollview: UIScrollView!
-    
     @IBOutlet weak var newerGuideList: UIStackView!
-    
-    private var images: [UIImageView] = [];
-    private var constraints: [NSLayoutConstraint] = [];
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,39 +19,27 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         navigationItem.title = "新手引导"
-        
-        scrollview.translatesAutoresizingMaskIntoConstraints = false
-        newerGuideList.translatesAutoresizingMaskIntoConstraints = false
         newerGuideList.spacing = 0
         
         for _ in 1 ..< 20 {
             let imageView = UIImageView()
-            imageView.kf.setImage(with: URL(string: "http://sjbz.fd.zol-img.com.cn/t_s800x1280c/g5/M00/07/04/ChMkJ1jlsOKIUYUYAAQhvA87IyIAAbZHwKhfVgABCHU427.jpg"), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-                if let img = image {
-                    let ratio = img.size.height / img.size.width
-                    let height = self.view.frame.width * ratio
-                    
-                    let constraint = NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: height)
-                    self.newerGuideList.addConstraint(constraint)
-                    self.constraints.append(constraint)
-                    
-                    if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height}.first) {
-                        constraint.constant += height + self.newerGuideList.spacing
-                    }
-                }
-            })
-            images.append(imageView)
             newerGuideList.addArrangedSubview(imageView)
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.newerGuideList.removeConstraints(self.constraints)
-        for image in self.images {
-            self.newerGuideList.removeArrangedSubview(image)
-        }
-        if let constraint = (newerGuideList.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = 0
+            newerGuideList.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0))
+            
+            imageView.kf.setImage(with: URL(string: "http://sjbz.fd.zol-img.com.cn/t_s800x1280c/g5/M00/07/04/ChMkJ1jlsOKIUYUYAAQhvA87IyIAAbZHwKhfVgABCHU427.jpg"), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                    if let img = image {
+                        let ratio = img.size.height / img.size.width
+                        let height = self.view.frame.width * ratio
+                        
+                        if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height && $0.firstItem!.isEqual(imageView)}.first) {
+                            constraint.constant = height
+                        }
+                        
+                        if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height && $0.firstItem!.isEqual(self.newerGuideList)}.first) {
+                            constraint.constant += (height + self.newerGuideList.spacing)
+                        }
+                    }
+                })
         }
     }
     

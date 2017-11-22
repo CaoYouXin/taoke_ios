@@ -49,9 +49,7 @@ class DiscoverController: UIViewController {
         RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
-                if self.couponList.numberOfItems(inSection: 0) > 0 {
-                    self.couponList.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-                }
+                self.couponList.setContentOffset(CGPoint(x: 0, y: -self.discoverHeaderView!.maximumContentHeight), animated: false)
             }.disposed(by: disposeBag)
         
         let nibViews = Bundle.main.loadNibNamed("DiscoverHeaderView", owner: self, options: nil)
@@ -206,7 +204,7 @@ class DiscoverController: UIViewController {
 
 extension DiscoverController: MEVFloatingButtonDelegate {
     func floatingButton(_ scrollView: UIScrollView!, didTap button: UIButton!) {
-        couponList.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        couponList.setContentOffset(CGPoint(x: 0, y: -discoverHeaderView!.maximumContentHeight), animated: true)
     }
 }
 

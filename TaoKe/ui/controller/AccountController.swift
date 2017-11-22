@@ -101,11 +101,6 @@ class AccountController: UIViewController {
             alert.addAction(UIAlertAction(title: "注销", style: .default, handler: { (action) in
                 TaoKeApi.clearToken()
                 UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
-//                let splash = self.storyboard?.instantiateViewController(withIdentifier: "SplashController") as! SplashController
-//                let appDel:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//                appDel.window?.rootViewController = splash
-//                self.navigationController?.navigationController?.popToRootViewController(animated: true)
-//                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                 self.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
             }))
             alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in

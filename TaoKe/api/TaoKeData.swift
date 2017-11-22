@@ -9,7 +9,7 @@
 import HandyJSON
 
 class TaoKeData: NSObject, HandyJSON {
-    public var code: Int?
+    public var code: AnyObject?
     public var body: AnyObject?
     
     func getList() -> [Dictionary<String, AnyObject>]? {

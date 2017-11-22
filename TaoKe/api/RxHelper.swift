@@ -19,7 +19,7 @@ extension ObservableType {
         return self.map { data -> Self.E in
             if data is TaoKeData {
                 let taoKeData = data as? TaoKeData
-                let resultCode = taoKeData?.code
+                let resultCode = taoKeData?.code as? Int
                 if  resultCode == nil || resultCode != 2000 {
                     if let message = taoKeData?.body?["msg"] as? String {
                         throw ApiError(message)

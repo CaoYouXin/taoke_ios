@@ -6,11 +6,15 @@
 //  Copyright © 2017年 jason tsang. All rights reserved.
 //
 
+import CleanroomLogger
 import UIKit
+import RxSwift
 import FontAwesomeKit
 
 class NewerGuideController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var newerGuideList: UIStackView!
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,26 +25,35 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
         navigationItem.title = "新手引导"
         newerGuideList.spacing = 0
         
-        for _ in 1 ..< 20 {
-            let imageView = UIImageView()
-            newerGuideList.addArrangedSubview(imageView)
-            newerGuideList.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0))
-            
-            imageView.kf.setImage(with: URL(string: "http://sjbz.fd.zol-img.com.cn/t_s800x1280c/g5/M00/07/04/ChMkJ1jlsOKIUYUYAAQhvA87IyIAAbZHwKhfVgABCHU427.jpg"), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-                    if let img = image {
-                        let ratio = img.size.height / img.size.width
-                        let height = self.view.frame.width * ratio
-                        
-                        if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height && $0.firstItem!.isEqual(imageView)}.first) {
-                            constraint.constant = height
+        TaoKeApi.getNewerGuideList().rxSchedulerHelper().subscribe({ event in
+            switch event {
+            case .next(let urls):
+                for url in urls! {
+                    let imageView = UIImageView()
+                    self.newerGuideList.addArrangedSubview(imageView)
+                    self.newerGuideList.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0))
+                    
+                    imageView.kf.setImage(with: URL(string: url), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                        if let img = image {
+                            let ratio = img.size.height / img.size.width
+                            let height = self.view.frame.width * ratio
+                            
+                            if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height && $0.firstItem!.isEqual(imageView)}.first) {
+                                constraint.constant = height
+                            }
+                            
+                            if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height && $0.firstItem!.isEqual(self.newerGuideList)}.first) {
+                                constraint.constant += (height + self.newerGuideList.spacing)
+                            }
                         }
-                        
-                        if let constraint = (self.newerGuideList.constraints.filter{$0.firstAttribute == .height && $0.firstItem!.isEqual(self.newerGuideList)}.first) {
-                            constraint.constant += (height + self.newerGuideList.spacing)
-                        }
-                    }
-                })
-        }
+                    })
+                }
+            case .error(let error):
+                Log.error?.message(error.localizedDescription)
+            case .completed:
+                break;
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func didReceiveMemoryWarning() {

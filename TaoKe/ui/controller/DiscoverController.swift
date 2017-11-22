@@ -128,7 +128,7 @@ class DiscoverController: UIViewController {
         couponListHelper = MVCHelper(couponList)
         couponListHelper?.set(cellFactory: couponCellFactory)
         couponListHelper?.set(dataSource: couponDataSource)
-        couponListHelper?.refresh()
+//        couponListHelper?.refresh()
         
         let segue: AnyObserver<CouponItem> = NavigationSegue(
             fromViewController: self.navigationController!,
@@ -212,6 +212,6 @@ extension DiscoverController: TabLayoutViewDelegate {
     func tabLayoutView(_ tabLayoutView: TabLayoutView, didSelectTabAt index: Int) {
         couponList.setContentOffset(CGPoint(x: 0, y: -discoverHeaderView!.minimumContentHeight), animated: true)
         couponDataSource?.set(index)
-        couponListHelper?.refresh()
+//        couponListHelper?.refresh()
     }
 }

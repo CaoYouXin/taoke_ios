@@ -185,9 +185,17 @@ class TaoKeApi {
             })
     }
 
-    public static func getNewerGuideList() -> Observable<TaoKeData?> {
+    public static func getNewerGuideList() -> Observable<[String]?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_NOVICE_LIST)
             .handleResult()
+            .map({(taokeData) -> [String]? in
+                var ret: [String] = []
+                let recs = taokeData?.getList()!
+                for rec in recs! {
+                    ret.append((rec["imgUrl"] as? String)!)
+                }
+                return ret
+            })
     }
 }

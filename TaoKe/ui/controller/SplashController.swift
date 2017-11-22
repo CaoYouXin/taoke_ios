@@ -19,6 +19,10 @@ class SplashController: UIViewController {
     
     private let disposeBag = DisposeBag()
     
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.        

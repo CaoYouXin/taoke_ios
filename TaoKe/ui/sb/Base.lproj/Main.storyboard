@@ -162,6 +162,7 @@
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Cze-mm-IlI"/>
+                        <segue destination="1t0-ML-JoR" kind="showDetail" id="I0u-fa-lHM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPR-JY-mhg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -272,6 +273,7 @@
                     </navigationBar>
                     <connections>
                         <segue destination="Ydh-Z0-3O4" kind="relationship" relationship="rootViewController" id="QBS-bR-QmU"/>
+                        <segue destination="Pc5-2b-eGg" kind="showDetail" identifier="logout" id="IYj-EG-kuS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3I4-XX-X1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -688,4 +690,8 @@
         <image name="splash" width="1080" height="1349"/>
         <image name="splash_app_name" width="192" height="192"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="I0u-fa-lHM"/>
+        <segue reference="IYj-EG-kuS"/>
+    </inferredMetricsTieBreakers>
 </document>

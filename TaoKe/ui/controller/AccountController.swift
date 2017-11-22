@@ -82,10 +82,6 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(newerGuideController, animated: true)
             break
         case shareToBtn:
-            let alert = UIAlertController(title: "", message: "点击分享给好友", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true)
             break
         case enrollBtn:
             
@@ -101,7 +97,20 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(aboutController, animated: true)
             break
         case exitBtn:
-            
+            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "注销", style: .default, handler: { (action) in
+                TaoKeApi.clearToken()
+                UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
+//                let splash = self.storyboard?.instantiateViewController(withIdentifier: "SplashController") as! SplashController
+//                let appDel:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//                appDel.window?.rootViewController = splash
+//                self.navigationController?.navigationController?.popToRootViewController(animated: true)
+//                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                self.navigationController?.performSegue(withIdentifier: "logout", sender: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
             break
         default: break
         }

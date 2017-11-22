@@ -12,6 +12,7 @@ class TaoKeApi {
     public static let DEFAULT_ACCESS_TOKEN = "token"
 
     private static var token: String?
+    private static var CDN = "http://192.168.0.115:8070/"
 
     public static func cacheToken() {
         UserDefaults.standard.setValue(token, forKey: TaoKeApi.DEFAULT_ACCESS_TOKEN)
@@ -193,7 +194,7 @@ class TaoKeApi {
                 var ret: [String] = []
                 let recs = taokeData?.getList()!
                 for rec in recs! {
-                    ret.append((rec["imgUrl"] as? String)!)
+                    ret.append(CDN + (rec["imgUrl"] as? String)!)
                 }
                 return ret
             })

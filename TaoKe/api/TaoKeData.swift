@@ -8,9 +8,21 @@
 
 import HandyJSON
 
-class TaoKeData: NSObject, HandyJSON{
-    public var header: Dictionary<String, AnyObject>?
-    public var body: Dictionary<String, AnyObject>?
+class TaoKeData: NSObject, HandyJSON {
+    public var code: AnyObject?
+    public var body: AnyObject?
+    
+    func getList() -> [Dictionary<String, AnyObject>]? {
+        return self.body as? [Dictionary<String, AnyObject>]
+    }
+    
+    func getMap() -> Dictionary<String, AnyObject>? {
+        return self.body as? Dictionary<String, AnyObject>
+    }
+    
+    func getStringList() -> [String]? {
+        return self.body as? [String]
+    }
     
     override required init() {}
 }

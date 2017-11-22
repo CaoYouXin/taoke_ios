@@ -10,13 +10,13 @@ import RxSwift
 
 class TaoKeApi {
     public static let DEFAULT_ACCESS_TOKEN = "token"
-    
+
     private static var token: String?
-    
+
     public static func cacheToken() {
         UserDefaults.standard.setValue(token, forKey: TaoKeApi.DEFAULT_ACCESS_TOKEN)
     }
-    
+
     public static func restoreToken() -> Bool {
         if let token = UserDefaults.standard.string(forKey: TaoKeApi.DEFAULT_ACCESS_TOKEN) {
             TaoKeApi.token = token
@@ -25,17 +25,17 @@ class TaoKeApi {
             return false
         }
     }
-    
+
     public static func clearToken() {
         UserDefaults.standard.removeObject(forKey: TaoKeApi.DEFAULT_ACCESS_TOKEN)
     }
-    
+
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_VERIFICATION)
             .handleResult()
     }
-    
+
     public static func signUp(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_SIGN_UP)
@@ -46,18 +46,21 @@ class TaoKeApi {
                 return taoKeData
             })
     }
-    
+
     public static func signIn(phone: String, password: String) -> Observable<TaoKeData?> {
-        return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_SIGN_IN)
-            .handleResult()
-            .map({ (taoKeData) -> TaoKeData? in
-                token = taoKeData?.body?["access_token"] as? String
-                cacheToken()
-                return taoKeData
-            })
+//        return TaoKeService.getInstance()
+//            .tao(api: TaoKeService.API_SIGN_IN)
+//            .handleResult()
+//            .map({ (taoKeData) -> TaoKeData? in
+//                token = taoKeData?.body?["access_token"] as? String
+//                cacheToken()
+//                return taoKeData
+//            })
+        token = "tester"
+        cacheToken()
+        return Observable.just(nil)
     }
-    
+
     public static func resetPassword(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_RESET_PASSWORD)
@@ -68,7 +71,7 @@ class TaoKeApi {
                 return taoKeData
             })
     }
-    
+
     public static func getBrandList() -> Observable<[BrandItem]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_BRAND_LIST)
@@ -87,7 +90,7 @@ class TaoKeApi {
                 return items
             })
     }
-    
+
     public static func getProductList(_ brandItem: BrandItem) -> Observable<[Product]> {
         return TaoKeService.getInstance()
             .tao(api: "\(TaoKeService.API_PRODUCT_LIST)/\(brandItem.type!)")
@@ -109,7 +112,7 @@ class TaoKeApi {
                 return items
             })
     }
-    
+
     public static func getCouponTab() -> Observable<[CouponTab]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_COUPON_TAB)
@@ -127,7 +130,7 @@ class TaoKeApi {
                 return tabs
             })
     }
-    
+
     public static func getCouponList() -> Observable<[CouponItem]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_COUPON_LIST)
@@ -153,10 +156,10 @@ class TaoKeApi {
                 return items
             })
     }
-    
+
     public static func getCouponDetail(_ couponItem: CouponItem) -> Observable<CouponItemDetail> {
         return TaoKeService.getInstance()
-            .tao(api: "\(TaoKeService.API_COUPON_DETAIL)/\(couponItem.id!)")
+            .tao(api: "")
             .handleResult()
             .map({ (taoKeData) -> CouponItemDetail in
                 let couponItemDetail = CouponItemDetail()
@@ -172,13 +175,27 @@ class TaoKeApi {
                 return couponItemDetail
             })
     }
-    
+
     public static func getCouponShareImageList(_ couponItem: CouponItem) -> Observable<[String]?> {
         return TaoKeService.getInstance()
-            .tao(api: "\(TaoKeService.API_COUPON_SHARE_IMAGE_LIST)/\(couponItem.id!)")
+            .tao(api: "")
             .handleResult()
             .map({ (taoKeData) -> [String]? in
                 return taoKeData?.body?["images"] as? [String]
+            })
+    }
+
+    public static func getNewerGuideList() -> Observable<[String]?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_NOVICE_LIST)
+            .handleResult()
+            .map({(taokeData) -> [String]? in
+                var ret: [String] = []
+                let recs = taokeData?.getList()!
+                for rec in recs! {
+                    ret.append((rec["imgUrl"] as? String)!)
+                }
+                return ret
             })
     }
 }

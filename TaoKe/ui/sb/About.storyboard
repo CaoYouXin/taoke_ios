@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--About Controller-->
+        <scene sceneID="D2U-ZN-Own">
+            <objects>
+                <viewController storyboardIdentifier="AboutController" id="45d-Lk-MuJ" customClass="AboutController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JRd-Bg-6Q9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="nw1-zn-ULM">
+                                <rect key="frame" x="127" y="50" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="Iyh-E5-40b"/>
+                                    <constraint firstAttribute="width" constant="120" id="Ury-i0-8Kt"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RzW-H0-xxG">
+                                <rect key="frame" x="166" y="203" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nw1-zn-ULM" firstAttribute="top" secondItem="e5J-8G-bbe" secondAttribute="top" constant="30" id="5vp-S5-MbN"/>
+                            <constraint firstItem="nw1-zn-ULM" firstAttribute="centerX" secondItem="e5J-8G-bbe" secondAttribute="centerX" id="7xE-dz-Abr"/>
+                            <constraint firstItem="RzW-H0-xxG" firstAttribute="top" secondItem="nw1-zn-ULM" secondAttribute="bottom" constant="33" id="hSH-st-ZX0"/>
+                            <constraint firstItem="RzW-H0-xxG" firstAttribute="centerX" secondItem="e5J-8G-bbe" secondAttribute="centerX" id="r6h-CE-cQg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e5J-8G-bbe"/>
+                    </view>
+                    <connections>
+                        <outlet property="aboutText" destination="RzW-H0-xxG" id="69d-4x-8eF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9D5-bP-ScX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50.399999999999999" y="-36.431784107946029"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splash" width="1080" height="1349"/>
+    </resources>
+</document>

@@ -91,7 +91,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         brandListHelper.set(dataSource: brandDataSource)
         brandListHelper.set(dataHook: brandDataHook)
         
-        brandListHelper.refresh()
+//        brandListHelper.refresh()
     }
     
     private func initCouponTab() {
@@ -102,7 +102,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         couponTab.layer.shadowOffset = CGSize(width: 0, height: 4)
         couponTab.layer.shadowOpacity = 0.2;
         
-        updateCouponTab()
+//        updateCouponTab()
     }
     
     private func updateCouponTab() {

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,14 +30,24 @@
                             <constraint firstAttribute="trailing" secondItem="uwB-iP-m2a" secondAttribute="trailing" id="duv-Ic-o5v"/>
                             <constraint firstItem="uwB-iP-m2a" firstAttribute="leading" secondItem="2j2-KQ-CiY" secondAttribute="leading" id="hQn-ft-85E"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="aKY-xY-Tb4"/>
                     </view>
                     <connections>
                         <outlet property="introView" destination="uwB-iP-m2a" id="lne-77-gEi"/>
+                        <segue destination="cAN-7h-wgf" kind="showDetail" identifier="segue_intro_to_taoke" id="mZO-0e-Ll9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qLI-BX-zmc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-170" y="122"/>
+        </scene>
+        <!--TaoKeNavigationController-->
+        <scene sceneID="S7w-9A-sJZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="TaoKeNavigationController" id="cAN-7h-wgf" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EJa-DS-8ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="421" y="121"/>
         </scene>
     </scenes>
 </document>

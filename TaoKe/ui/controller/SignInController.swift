@@ -91,11 +91,11 @@ class SignInController: UIViewController {
                     print("hide toast")
                     if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
                         print("before to taoke")
-                        self.navigationController?.navigationController?.performSegue(withIdentifier: "segue_to_taoke", sender: nil)
+                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
                         print("after to taoke")
                     } else {
                         print("before to intro")
-                        self.navigationController?.navigationController?.performSegue(withIdentifier: "segue_to_intro", sender: nil)
+                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
                         print("after to intro")
                     }
                 }, onError: { (error) in

@@ -106,7 +106,7 @@ class AccountController: UIViewController {
 //                appDel.window?.rootViewController = splash
 //                self.navigationController?.navigationController?.popToRootViewController(animated: true)
 //                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                self.navigationController?.performSegue(withIdentifier: "logout", sender: nil)
+                self.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
             }))
             alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
             }))

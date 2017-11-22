@@ -132,9 +132,9 @@ class ResetPasswordController: UIViewController {
                 .subscribe(onNext: { _ in
                     self.view.hideToastActivity()
                     if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                        self.navigationController?.navigationController?.performSegue(withIdentifier: "segue_to_taoke", sender: nil)
+                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
                     } else {
-                        self.navigationController?.navigationController?.performSegue(withIdentifier: "segue_to_intro", sender: nil)
+                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
                     }
                 }, onError: { (error) in
                     self.view.hideToastActivity()

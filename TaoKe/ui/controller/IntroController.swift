@@ -48,6 +48,6 @@ class IntroController: UIViewController {
 extension IntroController: EAIntroDelegate {
     func introDidFinish(_ introView: EAIntroView!, wasSkipped: Bool) {
         UserDefaults.standard.setValue(true, forKey: IntroController.INTRO_READ)
-        self.navigationController?.performSegue(withIdentifier: "segue_to_taoke", sender: nil)
+        self.performSegue(withIdentifier: "segue_intro_to_taoke", sender: nil)
     }
 }

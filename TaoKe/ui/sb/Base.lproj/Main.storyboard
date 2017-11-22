@@ -144,13 +144,11 @@
                     </navigationBar>
                     <connections>
                         <segue destination="Pc5-2b-eGg" kind="relationship" relationship="rootViewController" id="XYP-Td-EIi"/>
-                        <segue destination="i8O-TE-rx8" kind="showDetail" identifier="segue_to_intro" action="showViewController:sender:" id="yhk-fN-Qac"/>
-                        <segue destination="1t0-ML-JoR" kind="showDetail" identifier="segue_to_taoke" id="NaB-3p-zUq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-sz-4Bd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-519" y="-550"/>
+            <point key="canvasLocation" x="-505" y="-445"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LZv-Ax-Z4c">
@@ -162,12 +160,13 @@
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Cze-mm-IlI"/>
-                        <segue destination="1t0-ML-JoR" kind="showDetail" id="I0u-fa-lHM"/>
+                        <segue destination="1t0-ML-JoR" kind="showDetail" identifier="segue_splash_to_taoke" id="I0u-fa-lHM"/>
+                        <segue destination="i8O-TE-rx8" kind="showDetail" identifier="segue_splash_to_intro" id="4sl-qT-Vb2"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPR-JY-mhg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671" y="-1033"/>
+            <point key="canvasLocation" x="670" y="-1030"/>
         </scene>
         <!--SignUpController-->
         <scene sceneID="Wqy-aJ-kGX">
@@ -185,7 +184,7 @@
                 <viewControllerPlaceholder storyboardName="Intro" referencedIdentifier="IntroController" id="i8O-TE-rx8" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9AA-Qg-3Pu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="669" y="-550"/>
+            <point key="canvasLocation" x="238" y="-445"/>
         </scene>
         <!--消息-->
         <scene sceneID="3Bh-UK-QwG">
@@ -266,19 +265,19 @@
         <!--Navigation Controller-->
         <scene sceneID="HT5-Js-aIn">
             <objects>
-                <navigationController id="1t0-ML-JoR" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TaoKeNavigationController" id="1t0-ML-JoR" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hOO-3x-gZg">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
                         <segue destination="Ydh-Z0-3O4" kind="relationship" relationship="rootViewController" id="QBS-bR-QmU"/>
-                        <segue destination="Pc5-2b-eGg" kind="showDetail" identifier="logout" id="IYj-EG-kuS"/>
+                        <segue destination="Pc5-2b-eGg" kind="showDetail" identifier="segue_taoke_to_splash" id="IYj-EG-kuS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3I4-XX-X1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="671" y="38"/>
+            <point key="canvasLocation" x="670" y="38"/>
         </scene>
         <!--觅券儿-->
         <scene sceneID="M5e-Op-nkj">
@@ -691,7 +690,6 @@
         <image name="splash_app_name" width="192" height="192"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="I0u-fa-lHM"/>
-        <segue reference="IYj-EG-kuS"/>
+        <segue reference="XYP-Td-EIi"/>
     </inferredMetricsTieBreakers>
 </document>

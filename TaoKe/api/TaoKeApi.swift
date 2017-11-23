@@ -9,27 +9,8 @@
 import RxSwift
 
 class TaoKeApi {
-    public static let DEFAULT_ACCESS_TOKEN = "token"
 
-    private static var token: String?
     private static var CDN = "http://192.168.0.115:8070/"
-
-    public static func cacheToken() {
-        UserDefaults.standard.setValue(token, forKey: TaoKeApi.DEFAULT_ACCESS_TOKEN)
-    }
-
-    public static func restoreToken() -> Bool {
-        if let token = UserDefaults.standard.string(forKey: TaoKeApi.DEFAULT_ACCESS_TOKEN) {
-            TaoKeApi.token = token
-            return true
-        } else {
-            return false
-        }
-    }
-
-    public static func clearToken() {
-        UserDefaults.standard.removeObject(forKey: TaoKeApi.DEFAULT_ACCESS_TOKEN)
-    }
 
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
@@ -42,24 +23,19 @@ class TaoKeApi {
             .tao(api: TaoKeService.API_SIGN_UP)
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
-                token = taoKeData?.body?["access_token"] as? String
-                cacheToken()
+                UserData?.set(from: taoKeData).cache()
                 return taoKeData
             })
     }
 
     public static func signIn(phone: String, password: String) -> Observable<TaoKeData?> {
-//        return TaoKeService.getInstance()
-//            .tao(api: TaoKeService.API_SIGN_IN)
-//            .handleResult()
-//            .map({ (taoKeData) -> TaoKeData? in
-//                token = taoKeData?.body?["access_token"] as? String
-//                cacheToken()
-//                return taoKeData
-//            })
-        token = "tester"
-        cacheToken()
-        return Observable.just(nil)
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_SIGN_IN)
+            .handleResult()
+            .map({ (taoKeData) -> TaoKeData? in
+                UserData!.set(from: taoKeData).cache()
+                return taoKeData
+            })
     }
 
     public static func resetPassword(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
@@ -67,8 +43,7 @@ class TaoKeApi {
             .tao(api: TaoKeService.API_RESET_PASSWORD)
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
-                token = taoKeData?.body?["access_token"] as? String
-                cacheToken()
+                UserData!.set(from: taoKeData).cache()
                 return taoKeData
             })
     }

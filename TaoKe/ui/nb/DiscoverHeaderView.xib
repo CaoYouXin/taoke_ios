@@ -41,8 +41,8 @@
                     <color key="textColor" red="0.93725490199999995" green="0.42352941179999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VDq-1i-Bt0">
-                    <rect key="frame" x="0.0" y="185" width="375" height="33"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VDq-1i-Bt0">
+                    <rect key="frame" x="0.0" y="187" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" id="Snq-0e-zuL"/>
@@ -55,15 +55,15 @@
                     </collectionViewFlowLayout>
                     <cells/>
                 </collectionView>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KT1-LL-SeC">
-                    <rect key="frame" x="0.0" y="218" width="375" height="12"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KT1-LL-SeC">
+                    <rect key="frame" x="0.0" y="187" width="375" height="12"/>
                     <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="12" id="JFt-K6-asz"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="好券直播" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjK-dp-baZ">
-                    <rect key="frame" x="0.0" y="230" width="375" height="36"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好券直播" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjK-dp-baZ">
+                    <rect key="frame" x="0.0" y="199" width="375" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="gTY-q6-fnF"/>
                     </constraints>
@@ -71,8 +71,8 @@
                     <color key="textColor" red="0.90196078430000004" green="0.31764705879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V0x-6g-GB6" customClass="TabLayoutView" customModule="TabLayoutView">
-                    <rect key="frame" x="0.0" y="261" width="375" height="40"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0x-6g-GB6" customClass="TabLayoutView" customModule="TabLayoutView">
+                    <rect key="frame" x="0.0" y="235" width="375" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
                     <constraints>
@@ -95,6 +95,7 @@
                 <constraint firstItem="ARb-kw-nV8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="V7I-SD-2pB"/>
                 <constraint firstItem="rjK-dp-baZ" firstAttribute="top" secondItem="KT1-LL-SeC" secondAttribute="bottom" id="Z06-K6-PJj"/>
                 <constraint firstItem="VDq-1i-Bt0" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="avc-qK-jZ2"/>
+                <constraint firstItem="VDq-1i-Bt0" firstAttribute="top" secondItem="ARb-kw-nV8" secondAttribute="bottom" id="hf4-6V-7Gc"/>
                 <constraint firstItem="rjK-dp-baZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="iQb-z2-4g8"/>
                 <constraint firstItem="KT1-LL-SeC" firstAttribute="top" secondItem="VDq-1i-Bt0" secondAttribute="bottom" id="o81-YU-tL0"/>
                 <constraint firstItem="KT1-LL-SeC" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="pUw-cN-wTV"/>

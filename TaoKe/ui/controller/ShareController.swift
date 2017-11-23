@@ -77,7 +77,7 @@ class ShareController: UIViewController {
         
         shareText.layer.borderWidth = 1
         shareText.layer.borderColor = UIColor("#bdbdbd").cgColor
-        shareText.text = "\(couponItem!.title!)\n  【包邮】\n  【在售价】\(couponItem!.priceBefore!)元\n  【券后价】\(couponItem!.priceAfter!)元\n  【下单链接】{分享渠道后自动生成链接与口令}"
+        shareText.text = "\(couponItem!.title!)\n  【包邮】\n  【在售价】\(couponItem!.zkFinalPrice!)元\n  【券后价】\(couponItem!.couponPrice!)元\n  【下单链接】{分享渠道后自动生成链接与口令}"
         
         let iosCopyIcon = FAKIonIcons.iosCopyIcon(withSize: 22)
         iosCopyIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#ef6c00"))
@@ -178,7 +178,7 @@ class ShareController: UIViewController {
     private func initDesc() {
         descTitle.text = couponItem!.title!
         
-        var text = "现价  ¥ \(couponItem!.priceBefore!)"
+        var text = "现价  ¥ \(couponItem!.zkFinalPrice!)"
         var location = text.index(of: "¥")!.encodedOffset + 2
         var range = NSRange(location: location, length: text.utf16.count - location)
         var attributedText = NSMutableAttributedString(string: text)
@@ -186,7 +186,7 @@ class ShareController: UIViewController {
         descPriceBefore.attributedText = attributedText
         
         let orange800 = UIColor("#ef6c00")
-        text = " 券  \(couponItem!.value!)元 "
+        text = " 券  \(couponItem!.couponInfo!)"
         range = NSRange(location: 0, length: 3)
         attributedText = NSMutableAttributedString(string: text)
         attributedText.addAttribute(NSAttributedStringKey.backgroundColor, value: orange800, range: range)
@@ -199,7 +199,7 @@ class ShareController: UIViewController {
         descCoupon.layer.borderColor = orange800.cgColor
         descCoupon.layer.cornerRadius = 2
         
-        text = "券后价 ¥ \(couponItem!.priceAfter!)"
+        text = "券后价 ¥ \(couponItem!.couponPrice!)"
         attributedText = NSMutableAttributedString(string: text)
         location = text.index(of: "¥")!.encodedOffset
         range = NSRange(location: location, length: text.utf16.count - location)
@@ -209,7 +209,7 @@ class ShareController: UIViewController {
         attributedText.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 18), range: range)
         descPriceAfter.attributedText = attributedText
         
-        var qrCode = QRCode(couponItem!.thumb!)
+        var qrCode = QRCode(couponItem!.couponClickUrl!)
         qrCode?.size = CGSize(width: descQRCode.frame.size.width - 6, height: descQRCode.frame.size.height - 6)
         descQRCode.image = qrCode?.image
     }
@@ -288,7 +288,7 @@ class ShareController: UIViewController {
     private func generateShareText() -> String? {
         if var text = self.shareText.text {
             let linkHint = "{分享渠道后自动生成链接与口令}"
-            let link = "\n\(self.couponItem!.thumb!)\n--------------------\n复制这条信息，\(self.couponItem!.thumb!.hashValue)，打开【手机淘宝】即可查看"
+            let link = "\n\(self.couponItem!.itemUrl!)\n--------------------\n复制这条信息，\(self.couponItem!.itemUrl!.hashValue)，打开【手机淘宝】即可查看"
             if let _ = text.range(of: linkHint) {
                 text = text.replacingOccurrences(of: linkHint, with: link)
             } else {

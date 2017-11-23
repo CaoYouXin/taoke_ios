@@ -93,7 +93,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         brandListHelper.set(dataSource: brandDataSource)
         brandListHelper.set(dataHook: brandDataHook)
         
-//        brandListHelper.refresh()
+        brandListHelper.refresh()
     }
     
     private func initCouponTab() {

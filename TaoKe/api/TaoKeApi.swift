@@ -101,32 +101,52 @@ class TaoKeApi {
                     tab.name = rec["name"] as? String
                     tabs.append(tab)
                 }
+                CouponTab.cache = tabs
                 return tabs
             })
     }
 
-    public static func getCouponList() -> Observable<[CouponItem]> {
+    public static func getCouponList(cid: String) -> Observable<[CouponItem]> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_COUPON_LIST)
+            .tao(api: TaoKeService.API_COUPON_LIST.replacingOccurrences(of: "{cid}", with: cid).replacingOccurrences(of: "{pageNo}", with: "1"), auth: (UserData.get()?.token)!)
             .handleResult()
             .map({ (taoKeData) -> [CouponItem] in
                 var items: [CouponItem] = []
-                if let recs = taoKeData?.body?["recs"] as? [[String: AnyObject]] {
-                    for rec in recs {
+                    for rec in (taoKeData?.getList())! {
                         let item = CouponItem()
-                        item.id = rec["id"] as? Int
-                        item.thumb = rec["thumb"] as? String
+                        item.category = rec["category"] as? Int64
+                        item.couponRemainCount = rec["couponRemainCount"] as? Int64
+                        item.couponTotalCount = rec["couponTotalCount"] as? Int64
+                        item.userType = rec["userType"] as? Int64
+                        item.numIid = rec["numIid"] as? Int64
+                        item.sellerId = rec["sellerId"] as? Int64
+                        item.volume = rec["volume"] as? Int64
+                        item.smallImages = rec["smallImages"] as? [String]
+                        item.commissionRate = rec["commissionRate"] as? String
+                        item.couponClickUrl = rec["couponClickUrl"] as? String
+                        item.couponEndTime = rec["couponEndTime"] as? String
+                        item.couponInfo = rec["couponInfo"] as? String
+                        item.couponStartTime = rec["couponStartTime"] as? String
+                        item.zkFinalPrice = rec["zkFinalPrice"] as? String
+                        item.itemUrl = rec["itemUrl"] as? String
+                        item.nick = rec["nick"] as? String
+                        item.pictUrl = rec["pictUrl"] as? String
                         item.title = rec["title"] as? String
-                        item.priceBefore = rec["priceBefore"] as? String
-                        item.sales = rec["sales"] as? Int
-                        item.priceAfter = rec["priceAfter"] as? String
-                        item.value = rec["value"] as? String
-                        item.total = rec["total"] as? Int
-                        item.left = rec["left"] as? Int
-                        item.earn = rec["earn"] as? String
+                        item.shopTitle = rec["shopTitle"] as? String
+                        item.itemDescription = rec["itemDescription"] as? String
+
+                        var start = item.couponInfo?.index(of: "减")
+                        start = item.couponInfo?.index(after: start!)
+                        var coupon = item.couponInfo?[start!...]
+                        start = coupon?.index(of: "元")
+                        coupon = coupon?[..<start!]
+                        let couponPrice = Float64(item.zkFinalPrice!)! - Float64(coupon!)!
+                        item.couponPrice = String(format: "%.2f", arguments: [couponPrice])
+                        let earnPrice = couponPrice * Float64(item.commissionRate!)! / 100
+                        item.earnPrice = String(format: "%.2f", arguments: [earnPrice])
+                        
                         items.append(item)
                     }
-                }
                 return items
             })
     }

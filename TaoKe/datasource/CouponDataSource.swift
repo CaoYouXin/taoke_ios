@@ -8,14 +8,14 @@
 import RxSwift
 
 class CouponDataSource: RxDataSource<CouponItem> {
-    private var type: Int = 0
+    private var cid: String?
     
-    func set(_ type: Int) {
-        self.type = type
+    func set(cid: String) {
+        self.cid = cid
     }
     
     override func refresh() -> Observable<[CouponItem]> {
-        return TaoKeApi.getCouponList()
+        return TaoKeApi.getCouponList(cid: self.cid!)
     }
     
     override func loadMore() -> Observable<[CouponItem]> {

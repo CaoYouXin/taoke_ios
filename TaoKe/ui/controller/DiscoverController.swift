@@ -98,11 +98,11 @@ class DiscoverController: UIViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CouponCell
             
             //cell.thumb.image = #imageLiteral(resourceName: "splash")
-            cell.thumb.kf.setImage(with: URL(string: element.thumb!))
+            cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
             cell.couponTitle.text = element.title!
-            cell.couponPriceBefore.text = "现价 ¥ \(element.priceBefore!)        月销量 \(element.sales!) 件"
+            cell.couponPriceBefore.text = "现价 ¥ \(element.zkFinalPrice!)        月销量 \(element.volume!) 件"
             
-            let couponPriceAfter = "券后价 ¥ \(element.priceAfter!)"
+            let couponPriceAfter = "券后价 ¥ \(element.couponPrice!)"
             let couponPriceAfterMutableAttributed = NSMutableAttributedString(string: couponPriceAfter)
             let location = couponPriceAfter.index(of: "¥")?.encodedOffset
             let range = NSRange(location: location!, length: couponPriceAfter.utf16.count - location!)
@@ -110,7 +110,7 @@ class DiscoverController: UIViewController {
             couponPriceAfterMutableAttributed.addAttribute(.foregroundColor, value: UIColor.black, range: range)
             cell.couponPriceAfter.attributedText = couponPriceAfterMutableAttributed
             
-            let progress = Float(element.left!) / Float(element.total!)
+            let progress = Float(element.couponRemainCount!) / Float(element.couponTotalCount!)
             if cell.couponProgress.progress != progress {
                 cell.couponProgress.progress = 0
                 cell.couponProgress.layoutIfNeeded()
@@ -120,8 +120,8 @@ class DiscoverController: UIViewController {
                 cell.couponProgress.layoutIfNeeded()
             })
             
-            cell.couponValue.text = "券 | \(element.value!)元        余\(element.left!)张"
-            cell.couponEarn.text = "赚 ¥ \(element.earn!)"
+            cell.couponValue.text = "券 | \(element.couponInfo!)"
+            cell.couponEarn.text = "赚 ¥ \(element.earnPrice!)"
             return cell
         }
         
@@ -211,7 +211,7 @@ extension DiscoverController: MEVFloatingButtonDelegate {
 extension DiscoverController: TabLayoutViewDelegate {
     func tabLayoutView(_ tabLayoutView: TabLayoutView, didSelectTabAt index: Int) {
         couponList.setContentOffset(CGPoint(x: 0, y: -discoverHeaderView!.minimumContentHeight), animated: true)
-        couponDataSource?.set(index)
-//        couponListHelper?.refresh()
+        couponDataSource?.set(cid: (CouponTab.cache?[index].cid)!)
+        couponListHelper?.refresh()
     }
 }

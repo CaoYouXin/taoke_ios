@@ -9,6 +9,7 @@
 #ifndef BridgingHeader_h
 #define BridgingHeader_h
 
+#import <CommonCrypto/CommonDigest.h>
 #import <RestKit/RestKit.h>
 #import <FontAwesomeKit/FontAwesomeKit.h>
 #import <MJRefresh/MJRefresh.h>

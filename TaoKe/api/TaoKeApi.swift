@@ -23,17 +23,17 @@ class TaoKeApi {
             .tao(api: TaoKeService.API_SIGN_UP)
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
-                UserData?.set(from: taoKeData).cache()
+                UserData.setBy(from: taoKeData)?.cache()
                 return taoKeData
             })
     }
 
     public static func signIn(phone: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_SIGN_IN)
+            .tao(api: TaoKeService.API_SIGN_IN, auth: "nil", data: ["phone": phone, "pwd": password.md5()])
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
-                UserData!.set(from: taoKeData).cache()
+                UserData.setBy(from: taoKeData)?.cache()
                 return taoKeData
             })
     }
@@ -43,25 +43,24 @@ class TaoKeApi {
             .tao(api: TaoKeService.API_RESET_PASSWORD)
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
-                UserData!.set(from: taoKeData).cache()
+                UserData.setBy(from: taoKeData)?.cache()
                 return taoKeData
             })
     }
 
-    public static func getBrandList() -> Observable<[BrandItem]> {
+    public static func getBrandList() -> Observable<[HomeBtn]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_BRAND_LIST)
             .handleResult()
-            .map({ (taoKeData) -> [BrandItem] in
-                var items: [BrandItem] = []
-                if let recs = taoKeData?.body?["recs"] as? [[String: AnyObject]] {
-                    for rec in recs {
-                        let item = BrandItem()
-                        item.type = rec["type"] as? Int
-                        item.title = rec["title"] as? String
-                        item.thumb = rec["thumb"] as? String
-                        items.append(item)
-                    }
+            .map({ (taoKeData) -> [HomeBtn] in
+                var items: [HomeBtn] = []
+                for rec in (taoKeData?.getList())! {
+                    let item = HomeBtn();
+                    item.name = rec["name"] as? String
+                    item.ext = rec["ext"] as? String
+                    item.imgUrl = CDN + (rec["imgUrl"] as? String)!
+                    item.openType = rec["openType"] as? Int
+                    items.append(item)
                 }
                 return items
             })
@@ -95,13 +94,11 @@ class TaoKeApi {
             .handleResult()
             .map({ (taoKeData) -> [CouponTab] in
                 var tabs: [CouponTab] = []
-                if let recs = taoKeData?.body?["recs"] as? [[String: AnyObject]] {
-                    for rec in recs {
-                        let tab = CouponTab()
-                        tab.type = rec["type"] as? Int
-                        tab.title = rec["title"] as? String
-                        tabs.append(tab)
-                    }
+                for rec in (taoKeData?.getList())! {
+                    let tab = CouponTab()
+                    tab.cid = rec["cid"] as? String
+                    tab.name = rec["name"] as? String
+                    tabs.append(tab)
                 }
                 return tabs
             })
@@ -174,4 +171,23 @@ class TaoKeApi {
                 return ret
             })
     }
+    
+    public static func getBannerList() -> Observable<[HomeBtn]?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_BANNER_LIST)
+            .handleResult()
+            .map({ (taoKeData) -> [HomeBtn]? in
+                var items: [HomeBtn] = []
+                for rec in (taoKeData?.getList())! {
+                    let item = HomeBtn();
+                    item.name = rec["name"] as? String
+                    item.ext = rec["ext"] as? String
+                    item.imgUrl = CDN + (rec["imgUrl"] as? String)!
+                    item.openType = rec["openType"] as? Int
+                    items.append(item)
+                }
+                return items
+            })
+    }
+    
 }

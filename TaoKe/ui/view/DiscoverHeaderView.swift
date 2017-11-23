@@ -43,32 +43,34 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     }
     
     private func updateSlider() {
-        slideshow.setImageInputs([
-            ImageSource(image: UIImage(named: "splash")!),
-            ImageSource(image: UIImage(named: "splash")!),
-            ImageSource(image: UIImage(named: "splash")!),
-            ImageSource(image: UIImage(named: "splash")!)
-            //            KingfisherSource(urlString: "http://7xi8d6.com1.z0.glb.clouddn.com/20171025112955_lmesMu_katyteiko_25_10_2017_11_29_43_270.jpeg")!
-            ])
+        let _ = TaoKeApi.getBannerList().rxSchedulerHelper().subscribe(onNext: { btns in
+            var imageSources: [KingfisherSource] = [];
+            for btn in btns! {
+                imageSources.append(KingfisherSource(urlString: btn.imgUrl!)!)
+            }
+            self.slideshow.setImageInputs(imageSources)
+        }, onError: { error in
+            Log.error?.message(error.localizedDescription)
+        })
     }
     
     private func initBrandList() {
         brandList.register(UINib(nibName: "BrandCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        let brandCellFactory: (UICollectionView, Int, BrandItem) -> UICollectionViewCell = { (collectionView, row, element) in
+        let brandCellFactory: (UICollectionView, Int, HomeBtn) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BrandCell
             
             cell.thumb.layer.borderWidth = 1
             cell.thumb.layer.borderColor = UIColor.white.cgColor
             //cell.thumb.image = #imageLiteral(resourceName: "splash")
-            cell.thumb.kf.setImage(with: URL(string: element.thumb!))
+            cell.thumb.kf.setImage(with: URL(string: element.imgUrl!))
             return cell
         }
         
         let brandDataSource = BrandDataSource()
         
-        let brandDataHook = { (brandItems: [BrandItem]) -> [BrandItem] in
+        let brandDataHook = { (brandItems: [HomeBtn]) -> [HomeBtn] in
             if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
                 let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                 constraint.constant = height
@@ -85,7 +87,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             return brandItems
         }
         
-        let brandListHelper = MVCHelper<BrandItem>(brandList)
+        let brandListHelper = MVCHelper<HomeBtn>(brandList)
         
         brandListHelper.set(cellFactory: brandCellFactory)
         brandListHelper.set(dataSource: brandDataSource)
@@ -102,14 +104,14 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         couponTab.layer.shadowOffset = CGSize(width: 0, height: 4)
         couponTab.layer.shadowOpacity = 0.2;
         
-//        updateCouponTab()
+        updateCouponTab()
     }
     
     private func updateCouponTab() {
         let _ = TaoKeApi.getCouponTab().rxSchedulerHelper().subscribe(onNext: { tabs in
             var items: [String] = []
             for tab in tabs {
-                items.append(tab.title == nil ? "" : tab.title!)
+                items.append(tab.name == nil ? "" : tab.name!)
             }
             self.couponTab.items = items
         }, onError: { error in

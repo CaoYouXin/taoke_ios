@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RestKit
 import CleanroomLogger
 
 @UIApplicationMain
@@ -16,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        RKlcl_configure_by_name("RestKit/Network", RKlcl_vTrace.rawValue);
+        RKlcl_configure_by_name("RestKit/ObjectMapping", RKlcl_vTrace.rawValue);
         Log.enable()
         Log.info?.message("The application has finished launching.")
         RxDataHook.add(ApiErrorHook())

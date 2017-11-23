@@ -3,8 +3,6 @@
 // Copyright (c) 2017 jason tsang. All rights reserved.
 //
 
-import Foundation
-
 class UserData {
 
     private static let DEFAULT_TOKEN = "token"
@@ -28,7 +26,7 @@ class UserData {
         return instance
     }
 
-    public static func set(from: TaoKeData?) -> UserData? {
+    public static func setBy(from: TaoKeData?) -> UserData? {
         instance = UserData()
         instance!.token = from?.body![DEFAULT_TOKEN] as? String
         instance!.candidate = from?.body![DEFAULT_CANDIDATE] as? Bool

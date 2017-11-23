@@ -7,6 +7,6 @@
 //
 
 class CouponTab {
-    public var type: Int?
-    public var title: String?
+    public var cid: String?
+    public var name: String?
 }

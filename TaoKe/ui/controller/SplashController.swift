@@ -38,7 +38,7 @@ class SplashController: UIViewController {
             self.appName.alpha = 1
         })
         
-        if TaoKeApi.restoreToken() {
+        if UserData.restore() {
             Observable<Int>.timer(RxTimeInterval(3), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: {

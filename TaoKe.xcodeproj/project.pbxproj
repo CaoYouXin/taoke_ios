@@ -13,6 +13,8 @@
 		2B2F69FD1FC28667004D9B28 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F69FC1FC28667004D9B28 /* About.storyboard */; };
 		2B2F69FF1FC28696004D9B28 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F69FE1FC28696004D9B28 /* AboutController.swift */; };
 		2B396FD61FC0765A00B1CBA0 /* AccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B396FD41FC0765A00B1CBA0 /* AccountController.swift */; };
+		2B45D8861FC69FBF00D1CBFE /* StringMd5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45D8851FC69FBF00D1CBFE /* StringMd5.swift */; };
+		2B6943271FC6B28300DE197D /* HomeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6943261FC6B28300DE197D /* HomeBtn.swift */; };
 		F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8BE1FB93DF4000BC49F /* DetailController.swift */; };
 		F907D8C11FB97498000BC49F /* MVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C01FB97498000BC49F /* MVCHelper.swift */; };
 		F907D8C41FB97513000BC49F /* RxDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8C31FB97513000BC49F /* RxDataSource.swift */; };
@@ -75,6 +77,8 @@
 		2B2F69FC1FC28667004D9B28 /* About.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		2B2F69FE1FC28696004D9B28 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		2B396FD41FC0765A00B1CBA0 /* AccountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountController.swift; sourceTree = "<group>"; };
+		2B45D8851FC69FBF00D1CBFE /* StringMd5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringMd5.swift; sourceTree = "<group>"; };
+		2B6943261FC6B28300DE197D /* HomeBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBtn.swift; sourceTree = "<group>"; };
 		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
 		AA06AA39800470287AC8E9FE /* Pods_TaoKe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaoKe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F907D8BE1FB93DF4000BC49F /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 				F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */,
 				F98D011C1FBD74A1003A3F4F /* ShareImage.swift */,
 				1812A2E5BCDD3886EC4857E9 /* UserData.swift */,
+				2B6943261FC6B28300DE197D /* HomeBtn.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				F97842051FC2AE06001954D3 /* RegExpUtil.swift */,
+				2B45D8851FC69FBF00D1CBFE /* StringMd5.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -558,6 +564,7 @@
 				F9B7E01F1FBC1B3400E4CCE2 /* Product.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
+				2B6943271FC6B28300DE197D /* HomeBtn.swift in Sources */,
 				F9B7E01D1FBC197600E4CCE2 /* ProductCell.swift in Sources */,
 				F9758B641FBAD561009C0BEE /* CouponItemDetail.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
@@ -568,6 +575,7 @@
 				F98D011B1FBD7472003A3F4F /* ShareImageDataSource.swift in Sources */,
 				F98D011D1FBD74A1003A3F4F /* ShareImage.swift in Sources */,
 				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
+				2B45D8861FC69FBF00D1CBFE /* StringMd5.swift in Sources */,
 				F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */,
 				F98D01191FBD73C7003A3F4F /* ShareImageCell.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,

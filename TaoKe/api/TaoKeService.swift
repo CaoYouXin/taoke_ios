@@ -51,6 +51,7 @@ class TaoKeService: TaoKeProtocol {
 
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
+        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "balabala"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
 
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)
@@ -60,6 +61,7 @@ class TaoKeService: TaoKeProtocol {
         manager = RKObjectManager(baseURL: URL(string: TaoKeService.HOST))
         manager?.addRequestDescriptor(requestDescriptor)
         manager?.addResponseDescriptor(responseDescriptor)
+        manager?.requestSerializationMIMEType = RKMIMETypeJSON
     }
 
     public static func getInstance() -> TaoKeProtocol {
@@ -95,7 +97,7 @@ class TaoKeService: TaoKeProtocol {
         }
     }
 
-    public func tao(api: String, auth: String, data: Dictionary<String, Any>) -> Observable<TaoKeData?> {
+    public func tao(api: String, auth: String, data: NSMutableDictionary) -> Observable<TaoKeData?> {
         self.manager?.httpClient.setDefaultHeader("auth", value: auth)
         return Observable.create({ (observer) -> Disposable in
             self.manager?.post(data, path: api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), parameters: nil, success: { (operation, result) in

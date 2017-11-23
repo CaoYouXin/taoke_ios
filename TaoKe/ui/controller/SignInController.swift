@@ -88,15 +88,10 @@ class SignInController: UIViewController {
                 .rxSchedulerHelper()
                 .subscribe(onNext: { _ in
                     self.view.hideToastActivity()
-                    print("hide toast")
                     if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                        print("before to taoke")
                         self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
-                        print("after to taoke")
                     } else {
-                        print("before to intro")
                         self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
-                        print("after to intro")
                     }
                 }, onError: { (error) in
                     self.view.hideToastActivity()

@@ -216,7 +216,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="glk-fd-du4">
-                                                <rect key="frame" x="10" y="10" width="355" height="520.5"/>
+                                                <rect key="frame" x="10" y="10" width="355" height="658.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpl-e9-Cte">
                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
@@ -373,8 +373,25 @@
                                                             <constraint firstItem="gmW-wt-iUB" firstAttribute="centerY" secondItem="WIq-fB-ZSq" secondAttribute="centerY" id="yW7-It-dhj"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s74-o2-p3V">
+                                                        <rect key="frame" x="0.0" y="380.5" width="355" height="128"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="觅券儿仅提供技术支持，请您自行确保分享内容真实合法（如不使用内部优惠券、好评返现等虚假描述）。 如果遇到无法分享的情况，请减少选择的图片数量重试！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ds-fL-zKh">
+                                                                <rect key="frame" x="0.0" y="0.0" width="355" height="90"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="4ds-fL-zKh" firstAttribute="leading" secondItem="s74-o2-p3V" secondAttribute="leading" id="2eQ-GQ-3Ig"/>
+                                                            <constraint firstAttribute="height" constant="128" id="5nF-xc-zAH"/>
+                                                            <constraint firstItem="4ds-fL-zKh" firstAttribute="top" secondItem="s74-o2-p3V" secondAttribute="top" id="7vo-kk-tXI"/>
+                                                            <constraint firstAttribute="trailing" secondItem="4ds-fL-zKh" secondAttribute="trailing" id="tQ7-hn-53p"/>
+                                                        </constraints>
+                                                    </view>
                                                     <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C8z-AD-dTn">
-                                                        <rect key="frame" x="0.0" y="380.5" width="355" height="30"/>
+                                                        <rect key="frame" x="0.0" y="518.5" width="355" height="30"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTJ-41-vkZ">
                                                                 <rect key="frame" x="0.0" y="14.5" width="127.5" height="1"/>
@@ -406,7 +423,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCE-F6-ne9">
-                                                        <rect key="frame" x="0.0" y="420.5" width="355" height="100"/>
+                                                        <rect key="frame" x="0.0" y="558.5" width="355" height="100"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="VYr-sx-FlH">
                                                                 <rect key="frame" x="50" y="0.0" width="255" height="100"/>

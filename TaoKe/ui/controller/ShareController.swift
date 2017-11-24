@@ -77,7 +77,11 @@ class ShareController: UIViewController {
         
         shareText.layer.borderWidth = 1
         shareText.layer.borderColor = UIColor("#bdbdbd").cgColor
-        shareText.text = "\(couponItem!.title!)\n  【包邮】\n  【在售价】\(couponItem!.zkFinalPrice!)元\n  【券后价】\(couponItem!.couponPrice!)元\n  【下单链接】{分享渠道后自动生成链接与口令}"
+        if couponItem!.couponPrice == nil {
+            shareText.text = "\(couponItem!.title!)\n  【包邮】\n  【在售价】\(couponItem!.zkFinalPrice!)元\n  【下单链接】{分享渠道后自动生成链接与口令}"
+        } else {
+            shareText.text = "\(couponItem!.title!)\n  【包邮】\n  【在售价】\(couponItem!.zkFinalPrice!)元\n  【券后价】\(couponItem!.couponPrice!)元\n  【下单链接】{分享渠道后自动生成链接与口令}"
+        }
         
         let iosCopyIcon = FAKIonIcons.iosCopyIcon(withSize: 22)
         iosCopyIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#ef6c00"))
@@ -178,36 +182,40 @@ class ShareController: UIViewController {
     private func initDesc() {
         descTitle.text = couponItem!.title!
         
-        var text = "现价  ¥ \(couponItem!.zkFinalPrice!)"
-        var location = text.index(of: "¥")!.encodedOffset + 2
-        var range = NSRange(location: location, length: text.utf16.count - location)
-        var attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle, value: NSUnderlineStyle.patternSolid.rawValue | NSUnderlineStyle.styleSingle.rawValue, range: range)
-        descPriceBefore.attributedText = attributedText
-        
-        let orange800 = UIColor("#ef6c00")
-        text = " 券  \(couponItem!.couponInfo!)"
-        range = NSRange(location: 0, length: 3)
-        attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(NSAttributedStringKey.backgroundColor, value: orange800, range: range)
-        range = NSRange(location: 1, length: 1)
-        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.white, range: range)
-        range = NSRange(location: 4, length: text.utf16.count - 5)
-        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: orange800, range: range)
-        descCoupon.attributedText = attributedText
-        descCoupon.layer.borderWidth = 1
-        descCoupon.layer.borderColor = orange800.cgColor
-        descCoupon.layer.cornerRadius = 2
-        
-        text = "券后价 ¥ \(couponItem!.couponPrice!)"
-        attributedText = NSMutableAttributedString(string: text)
-        location = text.index(of: "¥")!.encodedOffset
-        range = NSRange(location: location, length: text.utf16.count - location)
-        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: orange800, range: range)
-        location = text.index(of: "¥")!.encodedOffset + 1
-        range = NSRange(location: location, length: text.utf16.count - location)
-        attributedText.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 18), range: range)
-        descPriceAfter.attributedText = attributedText
+        if couponItem?.couponInfo == nil {
+            
+        } else {
+            var text = "现价  ¥ \(couponItem!.zkFinalPrice!)"
+            var location = text.index(of: "¥")!.encodedOffset + 2
+            var range = NSRange(location: location, length: text.utf16.count - location)
+            var attributedText = NSMutableAttributedString(string: text)
+            attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle, value: NSUnderlineStyle.patternSolid.rawValue | NSUnderlineStyle.styleSingle.rawValue, range: range)
+            descPriceBefore.attributedText = attributedText
+            
+            let orange800 = UIColor("#ef6c00")
+            text = " 券  \(couponItem!.couponInfo!)"
+            range = NSRange(location: 0, length: 3)
+            attributedText = NSMutableAttributedString(string: text)
+            attributedText.addAttribute(NSAttributedStringKey.backgroundColor, value: orange800, range: range)
+            range = NSRange(location: 1, length: 1)
+            attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.white, range: range)
+            range = NSRange(location: 4, length: text.utf16.count - 5)
+            attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: orange800, range: range)
+            descCoupon.attributedText = attributedText
+            descCoupon.layer.borderWidth = 1
+            descCoupon.layer.borderColor = orange800.cgColor
+            descCoupon.layer.cornerRadius = 2
+            
+            text = "券后价 ¥ \(couponItem!.couponPrice!)"
+            attributedText = NSMutableAttributedString(string: text)
+            location = text.index(of: "¥")!.encodedOffset
+            range = NSRange(location: location, length: text.utf16.count - location)
+            attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: orange800, range: range)
+            location = text.index(of: "¥")!.encodedOffset + 1
+            range = NSRange(location: location, length: text.utf16.count - location)
+            attributedText.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 18), range: range)
+            descPriceAfter.attributedText = attributedText
+        }
         
         var qrCode = QRCode(couponItem!.couponClickUrl!)
         qrCode?.size = CGSize(width: descQRCode.frame.size.width - 6, height: descQRCode.frame.size.height - 6)

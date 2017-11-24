@@ -22,6 +22,10 @@ extension ObservableType {
                 print("data: \(taoKeData?.toJSONString() ?? "taoke parse error")")
                 let resultCode = taoKeData?.code
                 if  resultCode == nil || resultCode != 2000 {
+                    if resultCode == 4010 {
+                        throw ApiUnAuth()
+                    }
+                    
                     if let message = taoKeData?.body?["msg"] as? String {
                         throw ApiError(message)
                     } else {
@@ -36,13 +40,19 @@ extension ObservableType {
 
 class ApiErrorHook: Hook {
     func hook<T>(viewController: UIViewController?, observable: Observable<T>) -> Observable<T> {
-        return observable.observeOn(MainScheduler.instance).map({ (data) -> T in
-            if let controller = viewController {
-                controller.view.makeToast("This is a api error hook", duration: 3.0, position: .center)
+        return observable.observeOn(MainScheduler.instance).catchError({(error) -> Observable<T> in
+            if error is ApiUnAuth {
+                UserData.clear()
+                UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
+                viewController?.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
             }
-            return data
+            return Observable.empty()
         }).subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
     }
+}
+
+class ApiUnAuth: Error {
+    init () {}
 }
 
 class ApiError: Error {

@@ -56,6 +56,8 @@ class DiscoverController: UIViewController {
         discoverHeaderView = nibViews?.first as? DiscoverHeaderView
         
         if let headerView = discoverHeaderView {
+            headerView.setController(ctrl: self)
+            
             //fix the headerview bug, any better way?
             var adjust = CGFloat(0)
             let height = self.view.frame.size.height
@@ -199,6 +201,11 @@ class DiscoverController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    public func refreshCouponList(cid: String) {
+        couponDataSource?.set(cid: cid)
+        couponListHelper?.refresh()
     }
 }
 

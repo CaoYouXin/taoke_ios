@@ -20,6 +20,12 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     @IBOutlet weak var couponTab: TabLayoutView!
     
+    private var controller: DiscoverController?
+    
+    public func setController(ctrl: DiscoverController) {
+        self.controller = ctrl
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -114,6 +120,12 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 items.append(tab.name == nil ? "" : tab.name!)
             }
             self.couponTab.items = items
+            
+            if tabs.count == 0 {
+                return
+            }
+            
+            self.controller?.refreshCouponList(cid: tabs[0].cid!)
         }, onError: { error in
             Log.error?.message(error.localizedDescription)
         })

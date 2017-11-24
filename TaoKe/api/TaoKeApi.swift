@@ -89,6 +89,7 @@ class TaoKeApi {
                     item.title = rec["title"] as? String
                     item.shopTitle = rec["shopTitle"] as? String
                     item.itemDescription = rec["itemDescription"] as? String
+                    item.tkLink = rec["clickUrl"] as? String
                     
                     item.couponInfo = rec["couponInfo"] as? String
                     if item.couponInfo != nil {
@@ -182,31 +183,15 @@ class TaoKeApi {
             })
     }
 
-    public static func getCouponDetail(_ couponItem: CouponItem) -> Observable<CouponItemDetail> {
+    public static func getShareView(_ link: String, _ title: String) -> Observable<ShareView?> {
         return TaoKeService.getInstance()
-            .tao(api: "")
+            .tao(api: TaoKeService.API_GET_SHARE_LINK, auth: (UserData.get()?.token)!, data: ["title": title, "url": link])
             .handleResult()
-            .map({ (taoKeData) -> CouponItemDetail in
-                let couponItemDetail = CouponItemDetail()
-                couponItemDetail.thumb = taoKeData?.body?["thumb"] as? String
-                couponItemDetail.title = taoKeData?.body?["title"] as? String
-                couponItemDetail.priceBefore = taoKeData?.body?["priceBefore"] as? String
-                couponItemDetail.priceAfter = taoKeData?.body?["priceAfter"] as? String
-                couponItemDetail.sales = taoKeData?.body?["sales"] as? Int
-                couponItemDetail.coupon = taoKeData?.body?["coupon"] as? String
-                couponItemDetail.couponRequirement = taoKeData?.body?["couponRequirement"] as? String
-                couponItemDetail.commissionPercent = taoKeData?.body?["commissionPercent"] as? String
-                couponItemDetail.commission = taoKeData?.body?["commission"] as? String
-                return couponItemDetail
-            })
-    }
-
-    public static func getCouponShareImageList(_ couponItem: CouponItem) -> Observable<[String]?> {
-        return TaoKeService.getInstance()
-            .tao(api: "")
-            .handleResult()
-            .map({ (taoKeData) -> [String]? in
-                return taoKeData?.body?["images"] as? [String]
+            .map({ (taoKeData) -> ShareView? in
+                let shareView = ShareView()
+                shareView.shortUrl = taoKeData?.body!["shortUrl"] as? String
+                shareView.tPwd = taoKeData?.body!["tPwd"] as? String
+                return shareView
             })
     }
 

@@ -49,7 +49,7 @@ class ShareController: UIViewController {
     @IBOutlet weak var descQRCode: UIImageView!
     
     private let disposeBag = DisposeBag()
-    
+    private var shareView: ShareView?
     private var shareImages: [ShareImage]?
     
     override func viewDidLoad() {
@@ -182,9 +182,20 @@ class ShareController: UIViewController {
     private func initDesc() {
         descTitle.text = couponItem!.title!
         
+        let orange800 = UIColor("#ef6c00")
         if couponItem?.couponInfo == nil {
             
+            var text = "现价  ¥ \(couponItem!.zkFinalPrice!)"
+            let attributedText = NSMutableAttributedString(string: text)
+            var location = text.index(of: "¥")!.encodedOffset
+            var range = NSRange(location: location, length: text.utf16.count - location)
+            attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: orange800, range: range)
+            location = text.index(of: "¥")!.encodedOffset + 1
+            range = NSRange(location: location, length: text.utf16.count - location)
+            attributedText.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 18), range: range)
+            descPriceAfter.attributedText = attributedText
         } else {
+            
             var text = "现价  ¥ \(couponItem!.zkFinalPrice!)"
             var location = text.index(of: "¥")!.encodedOffset + 2
             var range = NSRange(location: location, length: text.utf16.count - location)
@@ -192,7 +203,6 @@ class ShareController: UIViewController {
             attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle, value: NSUnderlineStyle.patternSolid.rawValue | NSUnderlineStyle.styleSingle.rawValue, range: range)
             descPriceBefore.attributedText = attributedText
             
-            let orange800 = UIColor("#ef6c00")
             text = " 券  \(couponItem!.couponInfo!)"
             range = NSRange(location: 0, length: 3)
             attributedText = NSMutableAttributedString(string: text)
@@ -217,9 +227,6 @@ class ShareController: UIViewController {
             descPriceAfter.attributedText = attributedText
         }
         
-        var qrCode = QRCode(couponItem!.couponClickUrl!)
-        qrCode?.size = CGSize(width: descQRCode.frame.size.width - 6, height: descQRCode.frame.size.height - 6)
-        descQRCode.image = qrCode?.image
     }
     
     private func fetchShareImages(_ save: Bool) -> Observable<[UIImage?]>? {
@@ -293,18 +300,43 @@ class ShareController: UIViewController {
         }
     }
     
-    private func generateShareText() -> String? {
-        if var text = self.shareText.text {
-            let linkHint = "{分享渠道后自动生成链接与口令}"
-            let link = "\n\(self.couponItem!.itemUrl!)\n--------------------\n复制这条信息，\(self.couponItem!.itemUrl!.hashValue)，打开【手机淘宝】即可查看"
-            if let _ = text.range(of: linkHint) {
-                text = text.replacingOccurrences(of: linkHint, with: link)
+    private func generateShareText() -> Observable<String?> {
+        
+        let genLink = { (_ shareView: ShareView) -> String? in
+            if var text = self.shareText.text {
+                let linkHint = "{分享渠道后自动生成链接与口令}"
+                let link = "\n\(shareView.shortUrl!)\n--------------------\n复制这条信息，\(shareView.tPwd!)，打开【手机淘宝】即可查看"
+                if let _ = text.range(of: linkHint) {
+                    text = text.replacingOccurrences(of: linkHint, with: link)
+                } else {
+                    text += link
+                }
+                
+                let pasteboard = UIPasteboard.general
+                pasteboard.string = text
+                
+                return text
             } else {
-                text += link
+                return nil
             }
-            return text
-        }else {
-            return nil
+        }
+        
+        if shareView != nil {
+            return Observable.just(genLink(shareView!))
+        } else {
+            self.view.makeToastActivity(.center)
+            return TaoKeApi.getShareView(self.couponItem!.couponClickUrl ?? self.couponItem!.tkLink!, self.couponItem!.title!)
+                    .rxSchedulerHelper().map({ (data) -> String? in
+                        self.view.hideToastActivity()
+                        
+                        var qrCode = QRCode((data?.shortUrl)!)
+                        qrCode?.size = CGSize(width: self.descQRCode.frame.size.width - 6, height: self.descQRCode.frame.size.height - 6)
+                        self.descQRCode.image = qrCode?.image
+                        
+                        self.shareView = data
+                        
+                        return genLink(data!)
+                    })
         }
     }
     
@@ -313,33 +345,26 @@ class ShareController: UIViewController {
     }
     
     @objc private func share() {
-        var actvityItems:[Any] = []
-        
-        let share = {
-//            if let shareText = self.generateShareText() {
-//                actvityItems.append(shareText)
-//            }
-            
-            let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
-            self.present(activityViewController, animated: true)
-        }
-        
-        if let generateShareImage = generateShareImage(false) {
-            self.view.makeToastActivity(.center)
-            generateShareImage.subscribe(onNext: { shareImage in
-                self.view.hideToastActivity()
-                if let image = shareImage {
-                    actvityItems.append(image)
-                }
-                share()
-            }, onError: { (error) in
-                self.view.hideToastActivity()
-                share()
-                Log.error?.message(error.localizedDescription)
-            }).disposed(by: disposeBag)
-        } else {
-            share()
-        }
+        let _ = self.generateShareText().subscribe(onNext: { (data) in
+            if let generateShareImage = self.generateShareImage(false) {
+                self.view.makeToastActivity(.center)
+                generateShareImage.subscribe(onNext: { shareImage in
+                    self.view.hideToastActivity()
+                    
+                    var actvityItems:[Any] = []
+                    if let image = shareImage {
+                        actvityItems.append(image)
+                    }
+                    
+                    let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
+                    self.present(activityViewController, animated: true)
+                    
+                }, onError: { (error) in
+                    self.view.hideToastActivity()
+                    Log.error?.message(error.localizedDescription)
+                }).disposed(by: self.disposeBag)
+            }
+        })
     }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
@@ -348,58 +373,55 @@ class ShareController: UIViewController {
             if let fetch = fetchShareImages(true) {
                 self.view.makeToastActivity(.center)
                 fetch.subscribe(onNext: { _ in
-                        self.view.hideToastActivity()
-                    }, onError: { (error) in
-                        self.view.hideToastActivity()
-                        Log.error?.message(error.localizedDescription)
-                    }).disposed(by: disposeBag)
-            }
-        case copyIcon, copyText:
-            if let shareText = generateShareText() {
-                let pasteboard = UIPasteboard.general
-                pasteboard.string = shareText
-            }
-        case wechatWrapper, weiboWrapper, qqWrapper:
-            let share = {
-                if let shareText = self.generateShareText() {
-                    let pasteboard = UIPasteboard.general
-                    pasteboard.string = shareText
-                }
-                let alert = UIAlertController(title: "", message: "『照片已保存相册，文案已复制到粘贴板』", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "分享", style: .default, handler: { (action) in
-                    var url: URL?
-                    switch sender.view! {
-                    case self.wechatWrapper:
-                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
-                    case self.weiboWrapper:
-                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
-                    case self.qqWrapper:
-                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
-                    default:
-                        break
-                    }
-                    if url != nil {
-                        if UIApplication.shared.canOpenURL(url!) {
-                            UIApplication.shared.open(url!, options: [:])
-                        }
-                    }
-                }))
-                self.present(alert, animated: true)
-            }
-
-            if let generateShareImage = generateShareImage(true) {
-                self.view.makeToastActivity(.center)
-                generateShareImage.subscribe(onNext: { _ in
                     self.view.hideToastActivity()
-                    share()
                 }, onError: { (error) in
                     self.view.hideToastActivity()
-                    share()
                     Log.error?.message(error.localizedDescription)
                 }).disposed(by: disposeBag)
-            } else {
-                share()
             }
+        case copyIcon, copyText:
+            let _ = generateShareText().subscribe(onNext: { (data) in })
+            //        case wechatWrapper, weiboWrapper, qqWrapper:
+            //            let share = {
+            //                if let shareText = self.generateShareText() {
+            //                    let pasteboard = UIPasteboard.general
+            //                    pasteboard.string = shareText
+            //                }
+            //                let alert = UIAlertController(title: "", message: "『照片已保存相册，文案已复制到粘贴板』", preferredStyle: .alert)
+            //                alert.addAction(UIAlertAction(title: "分享", style: .default, handler: { (action) in
+            //                    var url: URL?
+            //                    switch sender.view! {
+            //                    case self.wechatWrapper:
+            //                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
+            //                    case self.weiboWrapper:
+            //                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
+            //                    case self.qqWrapper:
+            //                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
+            //                    default:
+            //                        break
+            //                    }
+            //                    if url != nil {
+            //                        if UIApplication.shared.canOpenURL(url!) {
+            //                            UIApplication.shared.open(url!, options: [:])
+            //                        }
+            //                    }
+            //                }))
+            //                self.present(alert, animated: true)
+            //            }
+            //
+            //            if let generateShareImage = generateShareImage(true) {
+            //                self.view.makeToastActivity(.center)
+            //                generateShareImage.subscribe(onNext: { _ in
+            //                    self.view.hideToastActivity()
+            //                    share()
+            //                }, onError: { (error) in
+            //                    self.view.hideToastActivity()
+            //                    share()
+            //                    Log.error?.message(error.localizedDescription)
+            //                }).disposed(by: disposeBag)
+            //            } else {
+            //                share()
+        //            }
         default:
             break
         }

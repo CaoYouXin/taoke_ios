@@ -89,13 +89,17 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                 constraint.constant = height
                 
-                //fix the content offset bug, any better way?
+                // fix refresh discover white blank bug
                 let newMaximumContentHeight = self.maxContentHeight + height
                 if (self.maximumContentHeight != newMaximumContentHeight) {
                     self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
                     self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
                     self.maximumContentHeight = newMaximumContentHeight
+                    
+                    //fix the content offset bug, any better way?
                     RxBus.shared.post(event: Events.ViewDidLoad())
+                    //fix the tab layout click bug
+                    self.couponTab.selectedSegmentIndex = 0
                 }
             }
             return brandItems

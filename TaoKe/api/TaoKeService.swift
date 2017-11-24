@@ -52,7 +52,7 @@ class TaoKeService: TaoKeProtocol {
 
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
-        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "balabala"])
+        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "title", "url"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
 
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)

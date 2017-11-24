@@ -20,6 +20,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     @IBOutlet weak var couponTab: TabLayoutView!
     
+    private var brandListHelper: MVCHelper<HomeBtn>?
     private var controller: DiscoverController?
     
     public func setController(ctrl: DiscoverController) {
@@ -38,6 +39,12 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         initSlider()
         initBrandList()
         initCouponTab()
+    }
+    
+    public func refreshHeader() {
+        updateSlider()
+        updateBrandList()
+        updateCouponTab()
     }
     
     private func initSlider() {
@@ -93,13 +100,17 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             return brandItems
         }
         
-        let brandListHelper = MVCHelper<HomeBtn>(brandList)
+        brandListHelper = MVCHelper<HomeBtn>(brandList)
         
-        brandListHelper.set(cellFactory: brandCellFactory)
-        brandListHelper.set(dataSource: brandDataSource)
-        brandListHelper.set(dataHook: brandDataHook)
+        brandListHelper?.set(cellFactory: brandCellFactory)
+        brandListHelper?.set(dataSource: brandDataSource)
+        brandListHelper?.set(dataHook: brandDataHook)
         
-        brandListHelper.refresh()
+        updateBrandList()
+    }
+    
+    private func updateBrandList() {
+        brandListHelper?.refresh()
     }
     
     private func initCouponTab() {

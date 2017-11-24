@@ -12,6 +12,7 @@ class UserData {
     private static let DEFAULT_USER_ID = "id";
     private static let DEFAULT_USER_SHARE_CODE = "code";
     private static let DEFAULT_CANDIDATE = "candidate";
+    private static let DEFAULT_DIRECT_USER = "directUser";
 
     public var token: String?
     public var name: String?
@@ -19,6 +20,7 @@ class UserData {
     public var userId: Int64?
     public var candidate: Bool?
     public var shareCode: String?
+    public var directUser: Bool?
 
     private static var instance: UserData?
 
@@ -30,7 +32,8 @@ class UserData {
         instance = UserData()
         instance!.token = from?.body![DEFAULT_TOKEN] as? String
         instance!.candidate = from?.body![DEFAULT_CANDIDATE] as? Bool
-        let user = from?.body![DEFAULT_USER] as? AnyObject
+        instance!.directUser = from?.body![DEFAULT_DIRECT_USER] as? Bool
+        let user = from?.body![DEFAULT_USER] as? [String: AnyObject]
         instance!.userId = user![DEFAULT_USER_ID] as? Int64
         instance!.name = user![DEFAULT_USER_NAME] as? String
         instance!.pid = user![DEFAULT_USER_PID] as? String
@@ -43,6 +46,7 @@ class UserData {
             instance = UserData()
             instance!.token = token
             instance!.candidate = UserDefaults.standard.bool(forKey: UserData.DEFAULT_CANDIDATE)
+            instance!.directUser = UserDefaults.standard.bool(forKey: UserData.DEFAULT_DIRECT_USER)
             instance!.userId = UserDefaults.standard.object(forKey: UserData.DEFAULT_USER_ID) as? Int64
             instance!.name = UserDefaults.standard.string(forKey: UserData.DEFAULT_USER_NAME)
             instance!.pid = UserDefaults.standard.string(forKey: UserData.DEFAULT_USER_PID)
@@ -60,15 +64,21 @@ class UserData {
         UserDefaults.standard.removeObject(forKey: UserData.DEFAULT_USER_NAME)
         UserDefaults.standard.removeObject(forKey: UserData.DEFAULT_USER_PID)
         UserDefaults.standard.removeObject(forKey: UserData.DEFAULT_USER_SHARE_CODE)
+        UserDefaults.standard.removeObject(forKey: UserData.DEFAULT_DIRECT_USER)
     }
 
     public func cache() {
         UserDefaults.standard.setValue(self.token, forKey: UserData.DEFAULT_TOKEN)
         UserDefaults.standard.setValue(self.candidate, forKey: UserData.DEFAULT_CANDIDATE)
+        UserDefaults.standard.setValue(self.directUser, forKey: UserData.DEFAULT_DIRECT_USER)
         UserDefaults.standard.setValue(self.userId, forKey: UserData.DEFAULT_USER_ID)
         UserDefaults.standard.setValue(self.name, forKey: UserData.DEFAULT_USER_NAME)
         UserDefaults.standard.setValue(self.pid, forKey: UserData.DEFAULT_USER_PID)
         UserDefaults.standard.setValue(self.shareCode, forKey: UserData.DEFAULT_USER_SHARE_CODE)
     }
 
+    public func isBuyer() -> Bool {
+        return self.shareCode == nil || self.shareCode?.count == 0
+    }
+    
 }

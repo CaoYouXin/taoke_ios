@@ -70,17 +70,17 @@ class DiscoverController: UIViewController {
             
             couponList.addSubview(headerView)
             
-            let segue: AnyObserver<BrandItem> = NavigationSegue(
+            let segue: AnyObserver<HomeBtn> = NavigationSegue(
                 fromViewController: self.navigationController!,
                 toViewControllerFactory:
                 { (sender, context) -> ProductListController in
                     let productListController = UIStoryboard(name: "ProductList", bundle: nil).instantiateViewController(withIdentifier: "ProductListController") as! ProductListController
-                    productListController.brandItem = context
+                    productListController.homeBtn = context
                     return productListController
             }).asObserver()
             
             headerView.brandList.rx.itemSelected
-                .map{ indexPath -> BrandItem in
+                .map{ indexPath -> HomeBtn in
                     return try headerView.brandList.rx.model(at: indexPath)
                 }
                 .bind(to: segue)
@@ -130,7 +130,6 @@ class DiscoverController: UIViewController {
         couponListHelper = MVCHelper(couponList)
         couponListHelper?.set(cellFactory: couponCellFactory)
         couponListHelper?.set(dataSource: couponDataSource)
-//        couponListHelper?.refresh()
         
         let segue: AnyObserver<CouponItem> = NavigationSegue(
             fromViewController: self.navigationController!,
@@ -162,7 +161,7 @@ class DiscoverController: UIViewController {
     
     private func initMJRefresh() {
         scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
-            self.couponListHelper?.refresh()
+            self.discoverHeaderView?.refreshHeader()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.scrollView.mj_header.endRefreshing()

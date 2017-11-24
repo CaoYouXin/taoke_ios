@@ -62,7 +62,6 @@
 		F9B65BE21FBBDCBB00413211 /* BrandDateSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B65BE11FBBDCBB00413211 /* BrandDateSource.swift */; };
 		F9B7E01B1FBC0DFC00E4CCE2 /* ProductDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E01A1FBC0DFC00E4CCE2 /* ProductDataSource.swift */; };
 		F9B7E01D1FBC197600E4CCE2 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E01C1FBC197600E4CCE2 /* ProductCell.swift */; };
-		F9B7E01F1FBC1B3400E4CCE2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B7E01E1FBC1B3400E4CCE2 /* Product.swift */; };
 		F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6FAE61FB03C7500930751 /* DiscoverController.swift */; };
 		F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */; };
 		F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */; };
@@ -130,7 +129,6 @@
 		F9B65BE11FBBDCBB00413211 /* BrandDateSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandDateSource.swift; sourceTree = "<group>"; };
 		F9B7E01A1FBC0DFC00E4CCE2 /* ProductDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDataSource.swift; sourceTree = "<group>"; };
 		F9B7E01C1FBC197600E4CCE2 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
-		F9B7E01E1FBC1B3400E4CCE2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F9D6FAE61FB03C7500930751 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		F9EA8FCD1FAFDE7F00EBB95C /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		F9F3A7E01FAC0D6B00D73A50 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 			children = (
 				F95B203A1FB1A54200AC57E4 /* CouponTab.swift */,
 				F90EA80B1FB3DDCC00184D04 /* BrandItem.swift */,
-				F9B7E01E1FBC1B3400E4CCE2 /* Product.swift */,
 				F9F6439D1FB69ECC00EC14F3 /* CouponItem.swift */,
 				F9758B631FBAD561009C0BEE /* CouponItemDetail.swift */,
 				F98D011C1FBD74A1003A3F4F /* ShareImage.swift */,
@@ -561,7 +558,6 @@
 				F97842061FC2AE06001954D3 /* RegExpUtil.swift in Sources */,
 				F90EA8101FB3E57600184D04 /* DiscoverHeaderView.swift in Sources */,
 				F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */,
-				F9B7E01F1FBC1B3400E4CCE2 /* Product.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
 				2B6943271FC6B28300DE197D /* HomeBtn.swift in Sources */,

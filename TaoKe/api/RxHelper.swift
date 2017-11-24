@@ -42,9 +42,13 @@ class ApiErrorHook: Hook {
     func hook<T>(viewController: UIViewController?, observable: Observable<T>) -> Observable<T> {
         return observable.observeOn(MainScheduler.instance).catchError({(error) -> Observable<T> in
             if error is ApiUnAuth {
-                UserData.clear()
-                UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
-                viewController?.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
+                let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "好的", style: .default, handler: { (action) in
+                    UserData.clear()
+                    UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
+                    viewController?.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
+                }))
+                viewController?.present(alert, animated: true)
             }
             return Observable.empty()
         }).subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))

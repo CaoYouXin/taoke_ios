@@ -20,6 +20,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     @IBOutlet weak var couponTab: TabLayoutView!
     
+    private var maxContentHeight: CGFloat?
     private var brandListHelper: MVCHelper<HomeBtn>?
     private var controller: DiscoverController?
     
@@ -31,7 +32,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         super.awakeFromNib()
         
         self.maximumContentHeight = self.couponTab.frame.origin.y + self.couponTab.frame.size.height
-        
+        self.maxContentHeight = self.maximumContentHeight
         self.minimumContentHeight = self.couponTab.frame.size.height
         
         self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
@@ -88,14 +89,14 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                 constraint.constant = height
                 
-                self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
-                
-                self.maximumContentHeight += height
-                
-                self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
-                
                 //fix the content offset bug, any better way?
-                RxBus.shared.post(event: Events.ViewDidLoad())
+                let newMaximumContentHeight = self.maxContentHeight! + height
+                if (self.maximumContentHeight != newMaximumContentHeight) {
+                    self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
+                    self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
+                    self.maximumContentHeight = newMaximumContentHeight
+                    RxBus.shared.post(event: Events.ViewDidLoad())
+                }
             }
             return brandItems
         }

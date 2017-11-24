@@ -91,6 +91,10 @@ class DiscoverController: UIViewController {
     }
     
     private func initCouponList() {
+        if #available(iOS 11.0, *) {
+            self.couponList.contentInsetAdjustmentBehavior = .never
+        }
+        
         couponList.register(UINib(nibName: "CouponCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
         couponListFlowLayout.itemSize = CGSize(width: view.frame.size.width, height: 112)

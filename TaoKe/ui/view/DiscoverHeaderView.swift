@@ -20,7 +20,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     @IBOutlet weak var couponTab: TabLayoutView!
     
-    private var maxContentHeight: CGFloat?
+    var maxContentHeight = CGFloat(0)
     private var brandListHelper: MVCHelper<HomeBtn>?
     private var controller: DiscoverController?
     
@@ -32,7 +32,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         super.awakeFromNib()
         
         self.maximumContentHeight = self.couponTab.frame.origin.y + self.couponTab.frame.size.height
-        self.maxContentHeight = self.maximumContentHeight
+        self.maxContentHeight += self.maximumContentHeight
         self.minimumContentHeight = self.couponTab.frame.size.height
         
         self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
@@ -90,7 +90,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 constraint.constant = height
                 
                 //fix the content offset bug, any better way?
-                let newMaximumContentHeight = self.maxContentHeight! + height
+                let newMaximumContentHeight = self.maxContentHeight + height
                 if (self.maximumContentHeight != newMaximumContentHeight) {
                     self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
                     self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)

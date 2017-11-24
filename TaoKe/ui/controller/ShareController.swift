@@ -308,9 +308,9 @@ class ShareController: UIViewController {
         var actvityItems:[Any] = []
         
         let share = {
-            if let shareText = self.generateShareText() {
-                actvityItems.append(shareText)
-            }
+//            if let shareText = self.generateShareText() {
+//                actvityItems.append(shareText)
+//            }
             
             let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
             self.present(activityViewController, animated: true)

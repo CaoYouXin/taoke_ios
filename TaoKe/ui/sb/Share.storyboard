@@ -213,7 +213,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaB-ea-Te0">
-                                        <rect key="frame" x="0.0" y="-260" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="glk-fd-du4">
                                                 <rect key="frame" x="10" y="10" width="355" height="520.5"/>
@@ -373,7 +373,7 @@
                                                             <constraint firstItem="gmW-wt-iUB" firstAttribute="centerY" secondItem="WIq-fB-ZSq" secondAttribute="centerY" id="yW7-It-dhj"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C8z-AD-dTn">
+                                                    <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C8z-AD-dTn">
                                                         <rect key="frame" x="0.0" y="380.5" width="355" height="30"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTJ-41-vkZ">
@@ -405,7 +405,7 @@
                                                             <constraint firstItem="K1o-jW-zTf" firstAttribute="width" secondItem="XTJ-41-vkZ" secondAttribute="width" id="rYJ-K9-C7e"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCE-F6-ne9">
+                                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCE-F6-ne9">
                                                         <rect key="frame" x="0.0" y="420.5" width="355" height="100"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="VYr-sx-FlH">

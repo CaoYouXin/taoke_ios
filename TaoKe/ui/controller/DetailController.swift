@@ -8,13 +8,14 @@
 
 import CleanroomLogger
 import FontAwesomeKit
+import ImageSlideshow
 import RxSwift
 import RxSegue
 
 class DetailController: UIViewController {
     var couponItem: CouponItem?
     
-    @IBOutlet weak var detailThumb: UIImageView!
+    @IBOutlet weak var picSliders: ImageSlideshow!
     @IBOutlet weak var detailTitle: UILabel!
     @IBOutlet weak var detailViewIcon: UIImageView!
     @IBOutlet weak var couponPriceWrapper: UIView!
@@ -54,7 +55,14 @@ class DetailController: UIViewController {
     }
     
     private func initView() {
-        self.detailThumb.kf.setImage(with: URL(string: (couponItem?.pictUrl)!))
+        self.picSliders.slideshowInterval = 3
+        self.picSliders.contentScaleMode = .scaleAspectFill
+        var imageSources: [KingfisherSource] = [KingfisherSource(urlString: (couponItem?.pictUrl)!)!];
+        for url in (couponItem?.smallImages)! {
+            imageSources.append(KingfisherSource(urlString: url)!)
+        }
+        self.picSliders.setImageInputs(imageSources)
+        
         self.detailTitle.text = couponItem?.title
         
         let newspaperOIcon = FAKFontAwesome.newspaperOIcon(withSize: 20)

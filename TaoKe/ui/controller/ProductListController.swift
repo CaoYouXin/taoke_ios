@@ -9,6 +9,7 @@
 import CleanroomLogger
 import RxSwift
 import RxBus
+import RxSegue
 import FontAwesomeKit
 import ELWaterFallLayout
 import MJRefresh
@@ -195,6 +196,22 @@ class ProductListController: UIViewController {
         productListHelper?.set(dataSource: productDataSource)
         
         productListHelper?.refresh()
+        
+        let segue: AnyObserver<CouponItem> = NavigationSegue(
+            fromViewController: self.navigationController!,
+            toViewControllerFactory:
+            { (sender, context) -> DetailController in
+                let detailController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+                detailController.couponItem = context
+                return detailController
+        }).asObserver()
+        
+        productList.rx.itemSelected
+            .map{ indexPath -> CouponItem in
+                return try self.productList.rx.model(at: indexPath)
+            }
+            .bind(to: segue)
+            .disposed(by: disposeBag)
         
         productList.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.productListHelper?.refresh()

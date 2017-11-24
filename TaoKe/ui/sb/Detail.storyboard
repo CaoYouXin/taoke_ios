@@ -25,12 +25,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JjG-3c-0DQ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="573"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XR9-VV-SqM">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5E-MU-W1t" customClass="ImageSlideshow" customModule="ImageSlideshow">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="XR9-VV-SqM" secondAttribute="height" multiplier="3:2" id="sf5-bj-oah"/>
+                                                    <constraint firstAttribute="width" secondItem="v5E-MU-W1t" secondAttribute="height" multiplier="3:2" id="qpA-yF-3BI"/>
                                                 </constraints>
-                                            </imageView>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zQ-VR-9Kw">
                                                 <rect key="frame" x="0.0" y="250" width="375" height="60"/>
                                                 <subviews>
@@ -282,7 +283,7 @@
                                             <constraint firstAttribute="trailing" secondItem="m0A-wS-4on" secondAttribute="trailing" id="ZSN-27-SAY"/>
                                             <constraint firstItem="NyK-rZ-cZI" firstAttribute="top" secondItem="BrX-bO-mwZ" secondAttribute="bottom" id="ejg-Wm-ply"/>
                                             <constraint firstItem="SM9-c1-lty" firstAttribute="leading" secondItem="JjG-3c-0DQ" secondAttribute="leading" id="fRl-cm-dJt"/>
-                                            <constraint firstItem="0zQ-VR-9Kw" firstAttribute="top" secondItem="XR9-VV-SqM" secondAttribute="bottom" id="kkg-pD-UvE"/>
+                                            <constraint firstItem="0zQ-VR-9Kw" firstAttribute="top" secondItem="v5E-MU-W1t" secondAttribute="bottom" id="kf0-qf-ygd"/>
                                             <constraint firstItem="8jQ-6h-Fnb" firstAttribute="leading" secondItem="JjG-3c-0DQ" secondAttribute="leading" id="kkz-tr-dPS"/>
                                             <constraint firstItem="m0A-wS-4on" firstAttribute="leading" secondItem="JjG-3c-0DQ" secondAttribute="leading" id="lrH-Mw-ie7"/>
                                             <constraint firstItem="NyK-rZ-cZI" firstAttribute="leading" secondItem="JjG-3c-0DQ" secondAttribute="leading" id="lrY-0O-FWa"/>
@@ -373,11 +374,11 @@
                         <outlet property="detailPriceBefore" destination="HxI-RL-tvE" id="Ouj-Hj-465"/>
                         <outlet property="detailSales" destination="UM0-LQ-pwa" id="lBN-7f-Ayq"/>
                         <outlet property="detailShare" destination="6cx-vN-7Va" id="N5a-Af-EAk"/>
-                        <outlet property="detailThumb" destination="XR9-VV-SqM" id="EM1-zm-tM3"/>
                         <outlet property="detailTitle" destination="Lkb-zl-KJw" id="fUX-xE-iLD"/>
                         <outlet property="detailViewIcon" destination="mOP-MG-M9g" id="9PS-OR-ERu"/>
                         <outlet property="earnWrapper" destination="duA-Ck-IU1" id="mO4-Rx-rev"/>
                         <outlet property="noCouponWrapper" destination="ask-GC-ntX" id="RjM-wu-QCC"/>
+                        <outlet property="picSliders" destination="v5E-MU-W1t" id="1p1-Dc-9n4"/>
                         <outlet property="saleVolume" destination="IDj-b1-1fC" id="GYx-YO-hxH"/>
                     </connections>
                 </viewController>

@@ -346,20 +346,35 @@
                                     <constraint firstAttribute="bottom" secondItem="JpK-Tb-1GG" secondAttribute="bottom" id="ZXq-X5-tx3"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即分享" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1z-LX-QCg">
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="CZf-1C-RkJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="N1z-LX-QCg" firstAttribute="leading" secondItem="sGG-hN-MtZ" secondAttribute="leading" id="9W7-t0-Fz7"/>
                             <constraint firstItem="bnI-FW-Zmj" firstAttribute="leading" secondItem="sGG-hN-MtZ" secondAttribute="leading" id="AOq-Pr-Bfy"/>
+                            <constraint firstItem="sGG-hN-MtZ" firstAttribute="trailing" secondItem="N1z-LX-QCg" secondAttribute="trailing" id="Adl-0O-lcm"/>
                             <constraint firstItem="ecu-tM-zbs" firstAttribute="top" secondItem="sGG-hN-MtZ" secondAttribute="top" id="QBk-k1-bMv"/>
                             <constraint firstItem="sGG-hN-MtZ" firstAttribute="bottom" secondItem="ecu-tM-zbs" secondAttribute="bottom" id="b8G-Lz-Hnp"/>
                             <constraint firstItem="sGG-hN-MtZ" firstAttribute="trailing" secondItem="ecu-tM-zbs" secondAttribute="trailing" id="iap-CK-bNM"/>
                             <constraint firstItem="ecu-tM-zbs" firstAttribute="leading" secondItem="sGG-hN-MtZ" secondAttribute="leading" id="nW5-K7-nTh"/>
                             <constraint firstItem="sGG-hN-MtZ" firstAttribute="bottom" secondItem="bnI-FW-Zmj" secondAttribute="bottom" id="t0Q-gg-pt3"/>
+                            <constraint firstItem="sGG-hN-MtZ" firstAttribute="bottom" secondItem="N1z-LX-QCg" secondAttribute="bottom" id="wKh-Lx-6JC"/>
                             <constraint firstItem="sGG-hN-MtZ" firstAttribute="trailing" secondItem="bnI-FW-Zmj" secondAttribute="trailing" id="zwj-Qw-are"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sGG-hN-MtZ"/>
                     </view>
                     <connections>
+                        <outlet property="agentShare" destination="N1z-LX-QCg" id="QMe-lT-vc9"/>
+                        <outlet property="buyerWrapper" destination="bnI-FW-Zmj" id="vER-NY-rrd"/>
                         <outlet property="couponInfoWrapper" destination="c6I-kM-Bjk" id="jVl-iR-cO3"/>
                         <outlet property="couponPriceBefore" destination="8dv-EP-uy0" id="69k-Tl-PBY"/>
                         <outlet property="couponPriceWrapper" destination="WBu-63-LV9" id="Qmd-u8-laK"/>

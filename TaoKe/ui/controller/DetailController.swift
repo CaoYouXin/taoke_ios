@@ -33,8 +33,10 @@ class DetailController: UIViewController {
     @IBOutlet weak var earnWrapper: UIView!
     @IBOutlet weak var detailCommissionIcon: UIImageView!
     @IBOutlet weak var detailCommission: UILabel!
+    @IBOutlet weak var buyerWrapper: UIView!
     @IBOutlet weak var detailShare: UILabel!
     @IBOutlet weak var detailApp: UILabel!
+    @IBOutlet weak var agentShare: UILabel!
     
     override func viewDidLoad() {
 
@@ -50,6 +52,8 @@ class DetailController: UIViewController {
         detailShare.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         detailApp.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        agentShare.addGestureRecognizer(tapGestureRecognizer)
         
         initView()
     }
@@ -122,6 +126,14 @@ class DetailController: UIViewController {
             self.detailCommission.text = "分享预计赚 ¥ \(couponItem?.earnPrice! ?? "")"
         }
         
+        if let constraint = (self.agentShare.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 48
+        }
+        
+        if let constraint = (self.buyerWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = (UserData.get()?.isBuyer())! ? 48 : 0
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -131,7 +143,7 @@ class DetailController: UIViewController {
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
-        case detailShare:
+        case detailShare, agentShare:
             let shareController = UIStoryboard(name: "Share", bundle: nil).instantiateViewController(withIdentifier: "ShareController") as! ShareController
             shareController.couponItem = couponItem
             self.navigationController?.pushViewController(shareController, animated: true)

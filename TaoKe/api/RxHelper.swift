@@ -36,6 +36,15 @@ extension ObservableType {
             return data
         }
     }
+    
+    public func handlerError(_ callback: @escaping () -> Void) -> Observable<Self.E> {
+        return self.catchError({(error) -> Observable<Self.E> in
+            if error is ApiError {
+                callback()
+            }
+            return Observable.empty()
+        })
+    }
 }
 
 class ApiErrorHook: Hook {

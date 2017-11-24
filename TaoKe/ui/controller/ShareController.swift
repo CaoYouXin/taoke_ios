@@ -326,17 +326,19 @@ class ShareController: UIViewController {
         } else {
             self.view.makeToastActivity(.center)
             return TaoKeApi.getShareView(self.couponItem!.couponClickUrl ?? self.couponItem!.tkLink!, self.couponItem!.title!)
-                    .rxSchedulerHelper().map({ (data) -> String? in
-                        self.view.hideToastActivity()
-                        
-                        var qrCode = QRCode((data?.shortUrl)!)
-                        qrCode?.size = CGSize(width: self.descQRCode.frame.size.width - 6, height: self.descQRCode.frame.size.height - 6)
-                        self.descQRCode.image = qrCode?.image
-                        
-                        self.shareView = data
-                        
-                        return genLink(data!)
-                    })
+                .rxSchedulerHelper().map({ (data) -> String? in
+                    self.view.hideToastActivity()
+                    
+                    var qrCode = QRCode((data?.shortUrl)!)
+                    qrCode?.size = CGSize(width: self.descQRCode.frame.size.width - 6, height: self.descQRCode.frame.size.height - 6)
+                    self.descQRCode.image = qrCode?.image
+                    
+                    self.shareView = data
+                    
+                    return genLink(data!)
+                }).handlerError {
+                    self.view.hideToastActivity()
+            }
         }
     }
     
@@ -380,7 +382,12 @@ class ShareController: UIViewController {
                 }).disposed(by: disposeBag)
             }
         case copyIcon, copyText:
-            let _ = generateShareText().subscribe(onNext: { (data) in })
+            let _ = generateShareText().subscribe(onNext: { (shareText) in
+                let alert = UIAlertController(title: "分享文案已经复制到剪切板", message: shareText, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
+                }))
+                self.present(alert, animated: true)
+            })
             //        case wechatWrapper, weiboWrapper, qqWrapper:
             //            let share = {
             //                if let shareText = self.generateShareText() {

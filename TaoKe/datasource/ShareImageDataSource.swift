@@ -20,19 +20,18 @@ class ShareImageDataSource: RxDataSource<ShareImage> {
     }
     
     override func refresh() -> Observable<[ShareImage]> {
-        return TaoKeApi.getCouponShareImageList(couponItem!)
-            .map({
-                images in
-                var shareImages: [ShareImage] = []
-                if(images != nil) {
-                    for image in images! {
-                        let shareImage = ShareImage()
-                        shareImage.thumb = image
-                        shareImage.selected = false
-                        shareImages.append(shareImage)
-                    }
-                }
-                return shareImages
-            })
+        let shareImage = ShareImage()
+        shareImage.thumb = couponItem?.pictUrl
+        shareImage.selected = true
+        var shareImages: [ShareImage] = [shareImage]
+        
+        for image in (couponItem?.smallImages)! {
+            let shareImage = ShareImage()
+            shareImage.thumb = image
+            shareImage.selected = false
+            shareImages.append(shareImage)
+        }
+        
+        return Observable.just(shareImages)
     }
 }

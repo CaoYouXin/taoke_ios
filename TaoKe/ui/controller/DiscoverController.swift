@@ -61,11 +61,12 @@ class DiscoverController: UIViewController {
             //fix the headerview bug, any better way?
             var adjust = CGFloat(0)
             let height = self.view.frame.size.height
-            if height == 568 {
-                adjust -= 16
-            }else if height == 736 {
-                adjust += 16
-            }
+//            if height == 568 {
+//                adjust -= 32
+//            }else if height == 736 {
+//                adjust += 32
+//            }
+            print("adjust = \(adjust)")
             headerView.maximumContentHeight += adjust
             
             couponList.addSubview(headerView)

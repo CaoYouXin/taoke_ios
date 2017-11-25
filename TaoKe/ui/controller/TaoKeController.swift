@@ -6,6 +6,8 @@
 //  Copyright © 2017 jason tsang. All rights reserved.
 //
 
+import RxBus
+import CleanroomLogger
 import RAMAnimatedTabBarController
 import UIColor_Hex_Swift
 import FontAwesomeKit
@@ -19,6 +21,8 @@ class TaoKeController: RAMAnimatedTabBarController {
         self.initNavigationBar()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.searchIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(search))
+        
+        viewControllers?.forEach { $0.view }
     }
     
     override func didReceiveMemoryWarning() {
@@ -26,6 +30,14 @@ class TaoKeController: RAMAnimatedTabBarController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func tapHandler(_ gesture: UIGestureRecognizer) {
+        super.tapHandler(gesture)
+        if selectedIndex == 2 {
+            //test dismiss
+            RxBus.shared.post(event: Events.Message())
+        }
+    }
+
     @objc private func search() {
         let searchController = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchController") as! SearchController
         self.navigationController?.pushViewController(searchController, animated: true)

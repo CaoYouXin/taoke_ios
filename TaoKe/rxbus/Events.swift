@@ -12,4 +12,7 @@ struct Events {
     }
     struct WaterFallLayout: BusEvent {
     }
+    struct Message: BusEvent {
+        var count: Int = 0
+    }
 }

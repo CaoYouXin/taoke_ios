@@ -10,6 +10,7 @@ import CleanroomLogger
 import UIKit
 import FontAwesomeKit
 import RxSwift
+import ELWaterFallLayout
 
 class ShareAppController: UIViewController {
 
@@ -36,22 +37,30 @@ class ShareAppController: UIViewController {
     }
     
     private func initShareTemplates() {
+        let shareTemplateLayout = ELWaterFlowLayout()
+        shareTemplateList.collectionViewLayout = shareTemplateLayout
+        
+        shareTemplateLayout.delegate = self
+        shareTemplateLayout.lineCount = 1
+        shareTemplateLayout.vItemSpace = 10//垂直间距10
+        shareTemplateLayout.hItemSpace = 10//水平间距10
+        shareTemplateLayout.edge = UIEdgeInsets.zero
+        shareTemplateLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
+        
         let shareImageListCellFactory: (UICollectionView, Int, ShareImage) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ShareTemplateCell
             cell.template.layer.borderWidth = 1
             cell.template.layer.borderColor = UIColor("#bdbdbd").cgColor
-            cell.contentView.addConstraint(NSLayoutConstraint(item: cell.template, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0))
+            cell.template.addConstraint(NSLayoutConstraint(item: cell.template, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0))
             cell.template.kf.setImage(with: URL(string: element.thumb!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
                 if let tmp = image {
                     let ratio = tmp.size.width / tmp.size.height
-                    let width = cell.contentView.frame.height * ratio
+                    let width = cell.template.frame.height * ratio
                     
-                    if let constraint = (cell.contentView.constraints.filter{$0.firstAttribute == NSLayoutAttribute.width}.first) {
+                    if let constraint = (cell.template.constraints.filter{$0.firstAttribute == NSLayoutAttribute.width}.first) {
                         constraint.constant = width
                     }
-                    
-                    cell.contentView.sizeToFit()
                 }
             })
             
@@ -111,4 +120,14 @@ class ShareAppController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
+}
+
+extension ShareAppController: ELWaterFlowLayoutDelegate  {
+    func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
+        let cell = self.shareTemplateList.cellForItem(at: IndexPath(row: index, section: 0)) as? ShareTemplateCell
+        
+        
+        
+        return CGFloat(0)
+    }
 }

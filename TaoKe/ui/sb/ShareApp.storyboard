@@ -192,7 +192,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="255" height="357"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1bN-5f-aoR">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1bN-5f-aoR">
                                                                             <rect key="frame" x="0.0" y="0.0" width="255" height="357"/>
                                                                         </imageView>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F34-7I-kpl">
@@ -205,7 +205,6 @@
                                                                     </subviews>
                                                                 </view>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="1bN-5f-aoR" secondAttribute="trailing" id="7Zc-II-O1s"/>
                                                                     <constraint firstItem="F34-7I-kpl" firstAttribute="leading" secondItem="nYB-0h-H49" secondAttribute="leading" constant="10" id="E5U-Xc-fSl"/>
                                                                     <constraint firstItem="F34-7I-kpl" firstAttribute="top" secondItem="nYB-0h-H49" secondAttribute="top" constant="10" id="EKc-F7-0fT"/>
                                                                     <constraint firstItem="1bN-5f-aoR" firstAttribute="leading" secondItem="nYB-0h-H49" secondAttribute="leading" id="d0C-FA-hQo"/>

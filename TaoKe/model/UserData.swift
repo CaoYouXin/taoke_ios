@@ -81,4 +81,16 @@ class UserData {
         return self.shareCode == nil || self.shareCode?.count == 0
     }
     
+    public func getShareType() -> Int {
+        if (isBuyer()) {
+            return 2;
+        }
+        
+        if (self.directUser!) {
+            return 1;
+        }
+        
+        return 2;
+    }
+    
 }

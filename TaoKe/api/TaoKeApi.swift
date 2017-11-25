@@ -227,4 +227,18 @@ class TaoKeApi {
             })
     }
     
+    public static func getShareTemplates(_ type: Int) -> Observable<[String]?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_SHARE_APP_LIST.replacingOccurrences(of: "{type}", with: "\(type)"))
+            .handleResult()
+            .map({(taokeData) -> [String]? in
+                var ret: [String] = []
+                let recs = taokeData?.getList()!
+                for rec in recs! {
+                    ret.append(CDN + (rec["imgUrl"] as? String)!)
+                }
+                return ret
+            })
+    }
+    
 }

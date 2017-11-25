@@ -34,7 +34,7 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_HELP_LIST = "app/help/list"
     public static let API_NOVICE_LIST = "app/guide/list"
-    public static let API_SHARE_APP_LIST = "app/share/img/url/list"
+    public static let API_SHARE_APP_LIST = "app/share/img/url/list/{type}"
 
     public static let API_SEND_WITHDRAW = "tbk/withdraw/{amount}"
     public static let API_USER_AMOUNT = "tbk/candraw"

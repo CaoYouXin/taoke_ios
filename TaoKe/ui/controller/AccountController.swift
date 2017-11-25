@@ -122,10 +122,8 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(newerGuideController, animated: true)
             break
         case shareToBtn:
-            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true)
+            let shareAppController = UIStoryboard(name: "ShareApp", bundle: nil).instantiateViewController(withIdentifier: "ShareAppController") as! ShareAppController
+            self.navigationController?.pushViewController(shareAppController, animated: true)
             break
         case enrollBtn:
             let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)

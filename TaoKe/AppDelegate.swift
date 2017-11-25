@@ -9,6 +9,7 @@
 import UIKit
 import RestKit
 import CleanroomLogger
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.enable()
         Log.info?.message("The application has finished launching.")
         RxDataHook.add(ApiErrorHook())
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if error != nil {
+                Log.error?.message(error!.localizedDescription)
+            }
+        }
         return true
     }
     

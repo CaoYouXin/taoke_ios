@@ -382,17 +382,26 @@
                                                     <action selector="buttonClicked:" destination="duZ-7k-Vge" eventType="touchUpInside" id="tFn-OK-Xla"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UiL-qd-h54">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UiL-qd-h54">
                                                 <rect key="frame" x="16" y="276" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="iiw-dS-viM"/>
+                                                    <constraint firstAttribute="width" constant="30" id="kB2-Rv-CdP"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESZ-4b-fco">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESZ-4b-fco">
                                                 <rect key="frame" x="16" y="327" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="W8V-gW-ufw"/>
+                                                    <constraint firstAttribute="width" constant="30" id="z7n-hS-Q5f"/>
+                                                </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dy7-kP-SGn">
-                                                <rect key="frame" x="330" y="276" width="30" height="30"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5jm-JO-Rdc">
-                                                <rect key="frame" x="330" y="327" width="30" height="30"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5jm-JO-Rdc">
+                                                <rect key="frame" x="329" y="327" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="WCv-WF-yEt"/>
+                                                    <constraint firstAttribute="height" constant="30" id="rn5-GK-zG0"/>
+                                                </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XjD-Jz-lEd">
                                                 <rect key="frame" x="0.0" y="387" width="375" height="50"/>
@@ -481,6 +490,13 @@
                                                     <constraint firstAttribute="height" constant="120" id="svG-MD-t86"/>
                                                 </constraints>
                                             </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dy7-kP-SGn">
+                                                <rect key="frame" x="329" y="276" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="0mP-zW-ZJw"/>
+                                                    <constraint firstAttribute="height" constant="30" id="ecJ-60-8HT"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -572,6 +588,7 @@
                     <connections>
                         <outlet property="aboutBtn" destination="Apt-kL-M1b" id="86z-Tg-kuL"/>
                         <outlet property="aboutImage" destination="FQn-Uf-IZs" id="lMP-Lo-eOc"/>
+                        <outlet property="accountName" destination="7xD-5T-0M0" id="jg2-wa-KXB"/>
                         <outlet property="enrollBtn" destination="Zi5-am-ug1" id="FcS-wZ-rwy"/>
                         <outlet property="enrollImage" destination="UiL-qd-h54" id="Jo8-fp-UbJ"/>
                         <outlet property="exitBtn" destination="Dcx-wG-nfn" id="CpC-pw-VaV"/>
@@ -589,6 +606,7 @@
                         <outlet property="shareToImage" destination="iFz-CH-AuW" id="TII-X1-N0c"/>
                         <outlet property="teamBtn" destination="fV2-57-p5Z" id="Tn7-Eb-9D2"/>
                         <outlet property="teamImage" destination="ESZ-4b-fco" id="TUj-nY-324"/>
+                        <outlet property="viewWrapper" destination="pWp-tL-7bK" id="i0t-Ut-YGh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tJx-7p-Wi4" userLabel="First Responder" sceneMemberID="firstResponder"/>

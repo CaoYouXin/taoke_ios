@@ -104,6 +104,10 @@ class DiscoverController: UIViewController {
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CouponCell
             
+            if let constraint = (cell.couponEarn.constraints.filter({$0.firstAttribute == .height}).first) {
+                constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 15
+            }
+            
             //cell.thumb.image = #imageLiteral(resourceName: "splash")
             cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
             cell.couponTitle.text = element.title!

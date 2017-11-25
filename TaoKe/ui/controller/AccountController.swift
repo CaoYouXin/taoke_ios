@@ -33,6 +33,9 @@ class AccountController: UIViewController {
     @IBOutlet weak var aboutBtn: UIButton!
     @IBOutlet weak var exitBtn: UIButton!
     
+    @IBOutlet weak var accountName: UILabel!
+    @IBOutlet weak var viewWrapper: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,6 +71,43 @@ class AccountController: UIViewController {
         let aboutIcon = FAKFontAwesome.infoCircleIcon(withSize: 20)
         aboutIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#00BFFF"))
         self.aboutImage.image = aboutIcon?.image(with: CGSize(width: 20, height: 20))
+        
+        self.accountName.text = UserData.get()?.name
+        
+        if let constraint = (self.viewWrapper.constraints.filter({$0.firstAttribute == .top && ($0.firstItem?.isEqual(self.enrollBtn))!}).first) {
+            constraint.constant = (UserData.get()?.candidate)! || !(UserData.get()?.isBuyer())! ? 20 : 0
+        }
+        if let constraint = (self.enrollBtn.constraints.filter({$0.firstAttribute == .height}).first) {
+            constraint.constant = (UserData.get()?.candidate)! ? 50 : 0
+        }
+        if let constraint = (self.teamBtn.constraints.filter({$0.firstAttribute == .height}).first) {
+            constraint.constant = !(UserData.get()?.isBuyer())! ? 50 : 0
+        }
+
+        if let constraint = (self.enrollImage.constraints.filter({$0.firstAttribute == .height}).first) {
+            constraint.constant = (UserData.get()?.candidate)! ? 30 : 0
+        }
+        if let constraint = (self.teamImage.constraints.filter({$0.firstAttribute == .height}).first) {
+            constraint.constant = !(UserData.get()?.isBuyer())! ? 30 : 0
+        }
+        if let constraint = (self.rightArrow3.constraints.filter({$0.firstAttribute == .height}).first) {
+            constraint.constant = (UserData.get()?.candidate)! ? 30 : 0
+        }
+        if let constraint = (self.rightArrow4.constraints.filter({$0.firstAttribute == .height}).first) {
+            constraint.constant = !(UserData.get()?.isBuyer())! ? 30 : 0
+        }
+        
+        if !(UserData.get()?.candidate)! {
+            self.enrollBtn.isHidden = true
+            self.enrollImage.isHidden = true
+            self.rightArrow3.isHidden = true
+        }
+        
+        if (UserData.get()?.isBuyer())! {
+            self.teamBtn.isHidden = true
+            self.teamImage.isHidden = true
+            self.rightArrow4.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,15 +122,28 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(newerGuideController, animated: true)
             break
         case shareToBtn:
+            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
             break
         case enrollBtn:
-            
+            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
             break
         case teamBtn:
-            
+            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
             break
         case helpReportBtn:
-            
+            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
             break
         case aboutBtn:
             let aboutController = UIStoryboard(name: "About", bundle: nil).instantiateViewController(withIdentifier: "AboutController") as! AboutController

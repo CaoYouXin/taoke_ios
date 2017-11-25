@@ -116,6 +116,7 @@ class ShareController: UIViewController {
         initShareImageList()
         
         initDesc()
+        shareView = nil
     }
     
     private func initShareImageList() {

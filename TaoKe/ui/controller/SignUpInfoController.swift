@@ -25,6 +25,8 @@ class SignUpInfoController: UIViewController {
     
     @IBOutlet weak var nickName: UITextField!
     
+    @IBOutlet weak var invitationCode: UITextField!
+    
     @IBOutlet weak var signUp: UILabel!
     
     var phoneNo: String?
@@ -115,29 +117,46 @@ class SignUpInfoController: UIViewController {
             eyeIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: password.isSecureTextEntry ? UIColor("#bdbdbd") : UIColor.black)
             passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
         case signUp:
-            view.makeToastActivity(.center)
-            TaoKeApi.signUp(phone: phoneNo!, verificationCode: verificationCode.text!, password: password.text!)
-                .rxSchedulerHelper()
-                .subscribe(onNext: { _ in
-                    self.view.hideToastActivity()
-                    if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
-                    } else {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
-                    }
-                }, onError: { (error) in
-                    self.view.hideToastActivity()
-                    Log.error?.message(error.localizedDescription)
-                    if let error = error as? ApiError {
-                        if let message = error.message {
-                            self.view.makeToast(message)
-                            return
-                        }
-                    }
-                    self.view.makeToast("注册失败，网络连接异常...")
-                }).disposed(by: disposeBag)
+            if invitationCode.text == nil || invitationCode.text?.count == 0 {
+                let alert = UIAlertController(title: "", message: "输入邀请码，可以实时准确的获得优惠信息", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "去填邀请码", style: .cancel, handler: { (action) in
+                }))
+                alert.addAction(UIAlertAction(title: "直接注册", style: .default, handler: { (action) in
+                    
+                    self.register()
+                }))
+                self.present(alert, animated: true)
+                return
+            }
+            
+            register()
         default:
             break
         }
     }
+    
+    private func register() {
+        view.makeToastActivity(.center)
+        TaoKeApi.signUp(phone: phoneNo!, verificationCode: verificationCode.text!, password: password.text!, nick: nickName.text!, invication: invitationCode.text!)
+            .rxSchedulerHelper()
+            .subscribe(onNext: { _ in
+                self.view.hideToastActivity()
+                if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
+                } else {
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
+                }
+            }, onError: { (error) in
+                self.view.hideToastActivity()
+                Log.error?.message(error.localizedDescription)
+                if let error = error as? ApiError {
+                    if let message = error.message {
+                        self.view.makeToast(message)
+                        return
+                    }
+                }
+                self.view.makeToast("注册失败，网络连接异常...")
+            }).disposed(by: disposeBag)
+    }
+    
 }

@@ -10,7 +10,7 @@ import RxSwift
 
 class TaoKeApi {
 
-    private static var CDN = "http://192.168.0.115:8070/"
+    private static var CDN = "http://192.168.1.115:8070/"
 //    private static var CDN = "http://server.tkmqr.com:8070/"
 
     public static func verification(phone: String) -> Observable<TaoKeData?> {
@@ -19,9 +19,9 @@ class TaoKeApi {
             .handleResult()
     }
 
-    public static func signUp(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
+    public static func signUp(phone: String, verificationCode: String, password: String, nick: String, invication: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_SIGN_UP)
+            .tao(api: TaoKeService.API_SIGN_UP, auth: "", data: ["code": verificationCode, "invitation": invication, "user": ["phone": phone, "name": nick, "pwd": password.md5()]])
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
                 UserData.setBy(from: taoKeData)?.cache()
@@ -41,7 +41,7 @@ class TaoKeApi {
 
     public static func resetPassword(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_RESET_PASSWORD)
+            .tao(api: TaoKeService.API_RESET_PASSWORD, auth: "", data: ["phone": phone, "smsCode": verificationCode, "pwd": password.md5()])
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
                 UserData.setBy(from: taoKeData)?.cache()

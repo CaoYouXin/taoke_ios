@@ -33,9 +33,8 @@ class SplashController: UIViewController {
         signIn.layer.borderColor = UIColor("#FFB74D").cgColor
         signIn.layer.cornerRadius = 6
         
-        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 1.5, animations: { () -> Void in
             self.splashImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-            self.appName.alpha = 1
         })
         
         if UserData.restore() {

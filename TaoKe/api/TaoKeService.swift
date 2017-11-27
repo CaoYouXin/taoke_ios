@@ -43,7 +43,7 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_ENROLL = "tbk/user/apply/4/agent"
 
-    public static let HOST = "http://192.168.0.115:8080/api/"
+    public static let HOST = "http://192.168.1.115:8080/api/"
 //    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     private static var instance: TaoKeProtocol?
@@ -52,7 +52,7 @@ class TaoKeService: TaoKeProtocol {
 
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
-        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "title", "url"])
+        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "title", "url", "smsCode", "code", "invitation", "user"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
 
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)

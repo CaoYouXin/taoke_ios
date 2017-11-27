@@ -657,7 +657,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="A4l-1d-lGw">
-                                <rect key="frame" x="0.0" y="180" width="375" height="307"/>
+                                <rect key="frame" x="0.0" y="159.5" width="375" height="348"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSW-xz-qQn">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="24"/>
@@ -831,8 +831,56 @@
                                             <constraint firstItem="ajr-9M-UXH" firstAttribute="top" secondItem="yOF-L9-ICq" secondAttribute="top" id="lZQ-Pc-u0Q"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eku-Jy-3bW">
+                                        <rect key="frame" x="0.0" y="207" width="375" height="12"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="DYu-Ry-QZe"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vvr-h0-WA3">
+                                        <rect key="frame" x="0.0" y="219" width="375" height="28"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ywq-NV-4rX">
+                                                <rect key="frame" x="74.5" y="0.0" width="225" height="28"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邀请码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3DT-WH-ew8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="28"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="ywq-NV-4rX" secondAttribute="bottom" id="3lm-KY-yHe"/>
+                                            <constraint firstItem="ywq-NV-4rX" firstAttribute="top" secondItem="Vvr-h0-WA3" secondAttribute="top" id="BR1-zD-KqP"/>
+                                            <constraint firstAttribute="height" constant="28" id="DYP-fR-u3S"/>
+                                            <constraint firstItem="ywq-NV-4rX" firstAttribute="width" secondItem="Vvr-h0-WA3" secondAttribute="width" multiplier="0.6" id="afJ-e6-jtI"/>
+                                            <constraint firstItem="ywq-NV-4rX" firstAttribute="centerX" secondItem="Vvr-h0-WA3" secondAttribute="centerX" id="mTB-Cx-cCJ"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIU-aL-qI6">
+                                        <rect key="frame" x="0.0" y="247" width="375" height="1"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Kz-2v-Zb4">
+                                                <rect key="frame" x="74.5" y="0.0" width="225" height="1"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="3Kz-2v-Zb4" firstAttribute="centerX" secondItem="zIU-aL-qI6" secondAttribute="centerX" id="7sZ-O7-HfB"/>
+                                            <constraint firstAttribute="bottom" secondItem="3Kz-2v-Zb4" secondAttribute="bottom" id="CmN-wF-OUu"/>
+                                            <constraint firstItem="3Kz-2v-Zb4" firstAttribute="width" secondItem="zIU-aL-qI6" secondAttribute="width" multiplier="0.6" id="PJj-Pf-E7r"/>
+                                            <constraint firstItem="3Kz-2v-Zb4" firstAttribute="top" secondItem="zIU-aL-qI6" secondAttribute="top" id="cXh-Fa-MTd"/>
+                                            <constraint firstAttribute="height" constant="1" id="kEV-KO-rcT"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mex-eF-wi1">
-                                        <rect key="frame" x="0.0" y="207" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="248" width="375" height="100"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成注册" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTO-zg-4g4">
                                                 <rect key="frame" x="74.5" y="32" width="225" height="36"/>
@@ -895,6 +943,7 @@
                     <connections>
                         <outlet property="backIcon" destination="zTx-G5-2Lm" id="KSQ-rV-Kgf"/>
                         <outlet property="backText" destination="PV9-KE-JfL" id="dU7-9j-647"/>
+                        <outlet property="invitationCode" destination="3DT-WH-ew8" id="QSC-wd-yj6"/>
                         <outlet property="nickName" destination="qOs-A1-Du6" id="Dxf-eL-xJk"/>
                         <outlet property="password" destination="ep3-2Q-htG" id="8YE-Wt-9BE"/>
                         <outlet property="passwordVisible" destination="OSl-1w-Jth" id="PeS-hY-1rl"/>

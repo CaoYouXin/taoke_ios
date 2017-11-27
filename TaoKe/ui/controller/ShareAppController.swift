@@ -11,6 +11,7 @@ import UIKit
 import FontAwesomeKit
 import RxSwift
 import ELWaterFallLayout
+import RxBus
 
 class ShareAppController: UIViewController {
 
@@ -20,7 +21,7 @@ class ShareAppController: UIViewController {
     @IBOutlet weak var shareTemplateList: UICollectionView!
     
     private let disposeBag = DisposeBag()
-    private var shareImages: [ShareImage]?
+    private var cache: [Int: CGFloat] = [:];
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class ShareAppController: UIViewController {
     private func initShareTemplates() {
         let shareTemplateLayout = ELWaterFlowLayout()
         shareTemplateList.collectionViewLayout = shareTemplateLayout
-        
+
         shareTemplateLayout.delegate = self
         shareTemplateLayout.lineCount = 1
         shareTemplateLayout.vItemSpace = 10//垂直间距10
@@ -47,22 +48,36 @@ class ShareAppController: UIViewController {
         shareTemplateLayout.edge = UIEdgeInsets.zero
         shareTemplateLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
         
+        //refresh layout
+        RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
+            .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+            .rxSchedulerHelper()
+            .subscribe { event in
+                shareTemplateLayout.lineCount = 1
+            }.disposed(by: disposeBag)
+        
         let shareImageListCellFactory: (UICollectionView, Int, ShareImage) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ShareTemplateCell
-            cell.template.layer.borderWidth = 1
-            cell.template.layer.borderColor = UIColor("#bdbdbd").cgColor
-            cell.template.addConstraint(NSLayoutConstraint(item: cell.template, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0))
-            cell.template.kf.setImage(with: URL(string: element.thumb!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-                if let tmp = image {
-                    let ratio = tmp.size.width / tmp.size.height
-                    let width = cell.template.frame.height * ratio
-                    
-                    if let constraint = (cell.template.constraints.filter{$0.firstAttribute == NSLayoutAttribute.width}.first) {
-                        constraint.constant = width
+            
+            if (self.cache[row] ?? 0 == 0) {
+                cell.template.layer.borderWidth = 1
+                cell.template.layer.borderColor = UIColor("#bdbdbd").cgColor
+                cell.template.addConstraint(NSLayoutConstraint(item: cell.template, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 0))
+                cell.template.kf.setImage(with: URL(string: element.thumb!), placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+                    if let tmp = image {
+                        let ratio = tmp.size.width / tmp.size.height
+                        let width = cell.template.frame.height * ratio
+                        
+                        if let constraint = (cell.template.constraints.filter{$0.firstAttribute == NSLayoutAttribute.width}.first) {
+                            constraint.constant = width
+                        }
+                        
+                        self.cache[row] = width
+                        RxBus.shared.post(event: Events.WaterFallLayout())
                     }
-                }
-            })
+                })
+            }
             
             let checkCircleIcon = FAKFontAwesome.checkCircleIcon(withSize: 24)
             checkCircleIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor(element.selected! ? "#e65100" : "#00000080"))
@@ -71,13 +86,13 @@ class ShareAppController: UIViewController {
         }
         
         let shareImageListDataSource = ShareTemplateDataSource(viewController: self)
+        shareImageListDataSource.selected = -1
         
         let shareImageListDataHook: ([ShareImage]) -> [ShareImage] = {
             shareImages in
-            if shareImages.count > 0 {
+            if shareImages.count > 0 && shareImageListDataSource.selected == -1 {
                 shareImages[0].selected = true
             }
-            self.shareImages = shareImages
             return shareImages
         }
         
@@ -90,17 +105,7 @@ class ShareAppController: UIViewController {
         shareImageListHelper.refresh()
         
         shareTemplateList.rx.itemSelected.subscribe(onNext: { indexPath in
-            for shareImage in self.shareImages! {
-                shareImage.selected = false
-            }
-            do{
-                let model = try self.shareTemplateList.rx.model(at: indexPath) as ShareImage
-                model.selected = !model.selected!
-            }catch {
-                Log.error?.message(error.localizedDescription)
-            }
-            
-            shareImageListDataSource.cache = self.shareImages
+            shareImageListDataSource.selected = indexPath.row
             shareImageListHelper.refresh()
         }, onError: { error in
             Log.error?.message(error.localizedDescription)
@@ -124,10 +129,7 @@ class ShareAppController: UIViewController {
 
 extension ShareAppController: ELWaterFlowLayoutDelegate  {
     func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
-        let cell = self.shareTemplateList.cellForItem(at: IndexPath(row: index, section: 0)) as? ShareTemplateCell
-        
-        
-        
-        return CGFloat(0)
+        print("set from cache or not = \(self.cache[index] ?? 0)")
+        return self.cache[index] ?? 0
     }
 }

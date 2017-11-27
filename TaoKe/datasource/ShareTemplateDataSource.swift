@@ -10,6 +10,7 @@ import RxSwift
 
 class ShareTemplateDataSource: RxDataSource<ShareImage> {
     
+    var selected: Int = -1
     var cache: [ShareImage]?
     
     init(viewController: UIViewController) {
@@ -18,19 +19,24 @@ class ShareTemplateDataSource: RxDataSource<ShareImage> {
     
     override func refresh() -> Observable<[ShareImage]> {
         if cache != nil {
+            for index in 0 ..< (cache?.count)! {
+                let shareImage = cache?[index]
+                shareImage?.selected = index == self.selected
+            }
             return Observable.just(cache!)
         }
         
         return TaoKeApi.getShareTemplates((UserData.get()?.getShareType())!).map({ (urls) -> [ShareImage] in
             var items: [ShareImage] = []
             if let shareUrls = urls {
-                for url in shareUrls {
+                for index in 0 ..< shareUrls.count {
                     let shareImage = ShareImage()
-                    shareImage.thumb = url
-                    shareImage.selected = false
+                    shareImage.thumb = shareUrls[index]
+                    shareImage.selected = index == self.selected
                     items.append(shareImage)
                 }
             }
+            self.cache = items
             return items
         })
     }

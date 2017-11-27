@@ -15,13 +15,13 @@ class TaoKeApi {
 
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_VERIFICATION)
+            .tao(api: TaoKeService.API_VERIFICATION, auth: "", data: ["phone": phone])
             .handleResult()
     }
 
     public static func signUp(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_SIGN_UP)
+            .tao(api: TaoKeService.API_SIGN_UP, auth: "", data: [])
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
                 UserData.setBy(from: taoKeData)?.cache()

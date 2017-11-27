@@ -83,19 +83,6 @@ class AccountController: UIViewController {
         if let constraint = (self.teamBtn.constraints.filter({$0.firstAttribute == .height}).first) {
             constraint.constant = !(UserData.get()?.isBuyer())! ? 50 : 0
         }
-
-        if let constraint = (self.enrollImage.constraints.filter({$0.firstAttribute == .height}).first) {
-            constraint.constant = (UserData.get()?.candidate)! ? 30 : 0
-        }
-        if let constraint = (self.teamImage.constraints.filter({$0.firstAttribute == .height}).first) {
-            constraint.constant = !(UserData.get()?.isBuyer())! ? 30 : 0
-        }
-        if let constraint = (self.rightArrow3.constraints.filter({$0.firstAttribute == .height}).first) {
-            constraint.constant = (UserData.get()?.candidate)! ? 30 : 0
-        }
-        if let constraint = (self.rightArrow4.constraints.filter({$0.firstAttribute == .height}).first) {
-            constraint.constant = !(UserData.get()?.isBuyer())! ? 30 : 0
-        }
         
         if !(UserData.get()?.candidate)! {
             self.enrollBtn.isHidden = true

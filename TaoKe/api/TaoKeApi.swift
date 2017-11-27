@@ -21,7 +21,7 @@ class TaoKeApi {
 
     public static func signUp(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_SIGN_UP, auth: "", data: [])
+            .tao(api: TaoKeService.API_SIGN_UP)
             .handleResult()
             .map({ (taoKeData) -> TaoKeData? in
                 UserData.setBy(from: taoKeData)?.cache()

@@ -12,6 +12,8 @@ import FontAwesomeKit
 import RxSwift
 import ELWaterFallLayout
 import RxBus
+import Kingfisher
+import QRCode
 
 class ShareAppController: UIViewController {
 
@@ -21,7 +23,8 @@ class ShareAppController: UIViewController {
     @IBOutlet weak var shareTemplateList: UICollectionView!
     
     private let disposeBag = DisposeBag()
-    private var cache: [Int: CGFloat] = [:];
+    private var cache: [Int: CGFloat] = [:]
+    private var shareTemplateDS: ShareTemplateDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,30 @@ class ShareAppController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "分享", style: UIBarButtonItemStyle.plain, target: self, action: #selector(share))
         
         initShareTemplates()
+        initGenerateZone()
+    }
+    
+    private func initGenerateZone() {
+        if (UserData.get()?.isBuyer())! {
+            specification.text = "识别二维码可打开应用市场"
+        } else {
+            let text = "邀请码\n->\(UserData.get()?.shareCode! ?? "")<-\n识别二维码可打开应用市场"
+            let location = text.index(of: ">")!.encodedOffset + 1
+            let length = text.index(of: "<")!.encodedOffset - location
+            let range = NSRange(location: location, length: length)
+            let attributedText = NSMutableAttributedString(string: text)
+            attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.orange, range: range)
+            attributedText.addAttribute(NSAttributedStringKey.font, value: UIFont.boldSystemFont(ofSize: 22), range: range)
+            specification.attributedText = attributedText
+        }
+        specification.preferredMaxLayoutWidth = self.view.frame.width / 18 * 11 - 80
+        specification.textAlignment = .left;
+        specification.numberOfLines = 0;
+        specification.sizeToFit()
+        
+        var qr = QRCode("https://fir.im/7qrm")
+        qr?.size = CGSize(width: self.qrCode.frame.size.width - 6, height: self.qrCode.frame.size.height - 6)
+        qrCode.image = qr?.image
     }
     
     private func initShareTemplates() {
@@ -56,7 +83,7 @@ class ShareAppController: UIViewController {
                 shareTemplateLayout.lineCount = 1
             }.disposed(by: disposeBag)
         
-        let shareImageListCellFactory: (UICollectionView, Int, ShareImage) -> UICollectionViewCell = { (collectionView, row, element) in
+        let shareTemplateFac: (UICollectionView, Int, ShareImage) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ShareTemplateCell
             
@@ -85,28 +112,28 @@ class ShareAppController: UIViewController {
             return cell
         }
         
-        let shareImageListDataSource = ShareTemplateDataSource(viewController: self)
-        shareImageListDataSource.selected = -1
+        shareTemplateDS = ShareTemplateDataSource(viewController: self)
+        shareTemplateDS?.selected = -1
         
-        let shareImageListDataHook: ([ShareImage]) -> [ShareImage] = {
+        let shareTemplateDH: ([ShareImage]) -> [ShareImage] = {
             shareImages in
-            if shareImages.count > 0 && shareImageListDataSource.selected == -1 {
+            if shareImages.count > 0 && self.shareTemplateDS?.selected == -1 {
                 shareImages[0].selected = true
             }
             return shareImages
         }
         
-        let shareImageListHelper = MVCHelper<ShareImage>(shareTemplateList)
+        let shareTempalteHelper = MVCHelper<ShareImage>(shareTemplateList)
         
-        shareImageListHelper.set(cellFactory: shareImageListCellFactory)
-        shareImageListHelper.set(dataSource: shareImageListDataSource)
-        shareImageListHelper.set(dataHook: shareImageListDataHook)
+        shareTempalteHelper.set(cellFactory: shareTemplateFac)
+        shareTempalteHelper.set(dataSource: shareTemplateDS)
+        shareTempalteHelper.set(dataHook: shareTemplateDH)
         
-        shareImageListHelper.refresh()
+        shareTempalteHelper.refresh()
         
         shareTemplateList.rx.itemSelected.subscribe(onNext: { indexPath in
-            shareImageListDataSource.selected = indexPath.row
-            shareImageListHelper.refresh()
+            self.shareTemplateDS?.selected = indexPath.row
+            shareTempalteHelper.refresh()
         }, onError: { error in
             Log.error?.message(error.localizedDescription)
         }).disposed(by: disposeBag)
@@ -122,9 +149,97 @@ class ShareAppController: UIViewController {
     }
     
     @objc private func share() {
-        navigationController?.popViewController(animated: true)
+        if let generateShareImage = self.generateShareImage(false) {
+            self.view.makeToastActivity(.center)
+            generateShareImage.subscribe(onNext: { shareImage in
+                self.view.hideToastActivity()
+                
+                var actvityItems:[Any] = []
+                if let image = shareImage {
+                    actvityItems.append(image)
+                }
+                
+                let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
+                self.present(activityViewController, animated: true)
+                
+            }, onError: { (error) in
+                self.view.hideToastActivity()
+                Log.error?.message(error.localizedDescription)
+            }).disposed(by: self.disposeBag)
+        }
     }
 
+    private func fetchShareImages(_ save: Bool) -> Observable<[UIImage?]>? {
+        var observables: [Observable<UIImage?>] = []
+        if let shareImages = self.shareTemplateDS?.cache {
+            for i in 0..<shareImages.count {
+                let shareImage = shareImages[i]
+                if shareImage.selected! {
+                    observables.append(Observable.create({ (observer) -> Disposable in
+                        KingfisherManager.shared.downloader.downloadImage(with: URL(string: shareImage.thumb!)!, retrieveImageTask: nil, options: nil, progressBlock: nil, completionHandler: { (image, error, url, data) in
+                            if let data = image {
+                                if save {
+                                    UIImageWriteToSavedPhotosAlbum(data, nil, nil, nil)
+                                }
+                                observer.onNext(image)
+                            } else {
+                                observer.onNext(nil)
+                            }
+                            observer.onCompleted()
+                        })
+                        return Disposables.create()
+                    }))
+                }
+            }
+        }
+        if observables.count == 0 {
+            return nil
+        }else {
+            return Observable.zip(observables).rxSchedulerHelper()
+        }
+    }
+    
+    private func generateShareImage(_ save: Bool) -> Observable<UIImage?>? {
+        if let fetch = fetchShareImages(save) {
+            return fetch.map({ (shareImages) -> UIImage? in
+                var renderer = UIGraphicsImageRenderer(size: self.generateZone.frame.size)
+                var shareImage = renderer.image(actions: { (context) in
+                    self.generateZone.layer.render(in: context.cgContext)
+                })
+                
+                let width = self.view.frame.size.width
+                var height = CGFloat(0)
+                for shareImage in shareImages {
+                    if let image = shareImage {
+                        let radio = image.size.width / image.size.height
+                        height += width / radio
+                    }
+                }
+                let size = CGSize(width: width, height: height)
+                var y = CGFloat(0)
+                
+                renderer = UIGraphicsImageRenderer(size: size)
+                shareImage = renderer.image(actions: { (context) in
+                    for shareImage in shareImages {
+                        if let image = shareImage {
+                            let radio = image.size.width / image.size.height
+                            image.draw(in: CGRect(x: 0, y: y, width: width, height: width / radio))
+                            y += width / radio
+                        }
+                    }
+                    shareImage.draw(at: CGPoint(x: 0, y: y - shareImage.size.height))
+                })
+                
+                if save {
+                    UIImageWriteToSavedPhotosAlbum(shareImage, nil, nil, nil)
+                }
+                return shareImage
+            })
+        } else {
+            return nil
+        }
+    }
+    
 }
 
 extension ShareAppController: ELWaterFlowLayoutDelegate  {

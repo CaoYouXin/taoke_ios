@@ -113,20 +113,18 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(shareAppController, animated: true)
             break
         case enrollBtn:
-            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true)
+            let enrollController = UIStoryboard(name: "Enroll", bundle: nil).instantiateViewController(withIdentifier: "EnrollController") as! EnrollController
+            self.navigationController?.pushViewController(enrollController, animated: true)
             break
         case teamBtn:
-            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            let alert = UIAlertController(title: "", message: "待开发", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
             }))
             self.present(alert, animated: true)
             break
         case helpReportBtn:
-            let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+            let alert = UIAlertController(title: "", message: "待开发", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
             }))
             self.present(alert, animated: true)
             break

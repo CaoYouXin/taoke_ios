@@ -63,6 +63,7 @@ class SignUpController: UIViewController {
         switch sender.view! {
         case backIcon, backText:
             navigationController?.popViewController(animated: true)
+            break
         case signUp:
             view.makeToastActivity(.center)
             if let phone = phoneNo.text {
@@ -85,6 +86,7 @@ class SignUpController: UIViewController {
                         self.view.makeToast("注册失败，网络连接异常...")
                     }).disposed(by: disposeBag)
             }
+            break
         default:
             break
         }

@@ -89,6 +89,7 @@ class SignUpInfoController: UIViewController {
         switch sender.view! {
         case backIcon, backText:
             navigationController?.popViewController(animated: true)
+            break
         case verificationCodeResend:
             if verificationCodeResend.text?.compare("重新获取").rawValue == 0 {
                 verificationCodeResend.textColor = UIColor("#bdbdbd")
@@ -111,11 +112,13 @@ class SignUpInfoController: UIViewController {
                     .rxSchedulerHelper()
                     .subscribe().disposed(by: disposeBag)
             }
+            break
         case passwordVisible:
             password.isSecureTextEntry = !password.isSecureTextEntry
             let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
             eyeIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: password.isSecureTextEntry ? UIColor("#bdbdbd") : UIColor.black)
             passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
+            break
         case signUp:
             if invitationCode.text == nil || invitationCode.text?.count == 0 {
                 let alert = UIAlertController(title: "", message: "输入邀请码，可以实时准确的获得优惠信息", preferredStyle: .alert)

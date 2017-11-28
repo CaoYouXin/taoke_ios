@@ -113,14 +113,20 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(shareAppController, animated: true)
             break
         case enrollBtn:
+            if !(UserData.get()?.isBuyer())! {
+                let alert = UIAlertController(title: "", message: "您已经是合伙人了", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "好的", style: .cancel, handler: { (action) in
+                }))
+                self.present(alert, animated: true)
+                return
+            }
+            
             let enrollController = UIStoryboard(name: "Enroll", bundle: nil).instantiateViewController(withIdentifier: "EnrollController") as! EnrollController
             self.navigationController?.pushViewController(enrollController, animated: true)
             break
         case teamBtn:
-            let alert = UIAlertController(title: "", message: "待开发", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true)
+            let teamController = UIStoryboard(name: "Team", bundle: nil).instantiateViewController(withIdentifier: "TeamController") as! TeamController
+            self.navigationController?.pushViewController(teamController, animated: true)
             break
         case helpReportBtn:
             let alert = UIAlertController(title: "", message: "待开发", preferredStyle: .alert)

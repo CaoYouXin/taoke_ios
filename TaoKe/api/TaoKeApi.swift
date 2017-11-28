@@ -252,4 +252,22 @@ class TaoKeApi {
             .handleResult()
     }
     
+    public static func getTeamCommition() -> Observable<[TeamDataView]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_FRIENDS_LIST, auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> [TeamDataView] in
+                var result: [TeamDataView] = []
+                if let recs = taoKeData?.getList() {
+                    for rec in recs {
+                        let item = TeamDataView()
+                        item.amount = rec["commit"] as? String
+                        item.name = rec["name"] as? String
+                        result.append(item)
+                    }
+                }
+                return result
+            })
+    }
+    
 }

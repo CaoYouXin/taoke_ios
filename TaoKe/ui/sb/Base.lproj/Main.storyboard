@@ -668,7 +668,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="avatar" width="90" height="90"/>
+        <image name="avatar" width="256" height="256"/>
         <image name="icon_account" width="24" height="24"/>
         <image name="icon_chart" width="24" height="24"/>
         <image name="icon_discover" width="24" height="24"/>

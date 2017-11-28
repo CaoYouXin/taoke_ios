@@ -124,7 +124,9 @@ class ProductListController: UIViewController {
         
         productListLayout.delegate = self
         productListLayout.lineCount = 2
-        productListLayout.vItemSpace = 10        productListLayout.hItemSpace = 10        productListLayout.edge = UIEdgeInsets.zero
+        productListLayout.vItemSpace = 10//垂直间距10
+        productListLayout.hItemSpace = 10//水平间距10
+        productListLayout.edge = UIEdgeInsets.zero
         
                 RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
             .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))

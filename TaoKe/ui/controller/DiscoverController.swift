@@ -37,7 +37,7 @@ class DiscoverController: UIViewController {
     }
     
     private func initHeaderView() {
-                RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
+        RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
                 self.couponList.setContentOffset(CGPoint(x: 0, y: 1 - self.discoverHeaderView!.maximumContentHeight), animated: false)

@@ -80,15 +80,11 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                 constraint.constant = height
                 
-                                let newMaximumContentHeight = self.maxContentHeight + height
-                if (self.maximumContentHeight != newMaximumContentHeight) {
-                    self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
-                    self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
-                    self.maximumContentHeight = newMaximumContentHeight
-                    
-                                        RxBus.shared.post(event: Events.ViewDidLoad())
-                                        self.couponTab.selectedSegmentIndex = 0
-                }
+                self.maximumContentHeight = self.maxContentHeight + height
+                self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
+                self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
+                print("max = \(self.maxContentHeight)")
+                RxBus.shared.post(event: Events.ViewDidLoad())
             }
             return brandItems
         }

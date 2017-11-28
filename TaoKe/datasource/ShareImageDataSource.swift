@@ -1,10 +1,3 @@
-//
-//  ShareImageDataSource.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/16/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 import RxSwift
 
 class ShareImageDataSource: RxDataSource<ShareImage> {

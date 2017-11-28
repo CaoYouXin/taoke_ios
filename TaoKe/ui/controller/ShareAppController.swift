@@ -1,10 +1,3 @@
-//
-//  ShareAppController.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/11/25.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import CleanroomLogger
 import UIKit
@@ -59,8 +52,7 @@ class ShareAppController: UIViewController {
         specification.numberOfLines = 0;
         specification.sizeToFit()
         
-        var qr = QRCode("https://fir.im/7qrm")
-        qr?.size = CGSize(width: self.qrCode.frame.size.width - 6, height: self.qrCode.frame.size.height - 6)
+        var qr = QRCode("https:        qr?.size = CGSize(width: self.qrCode.frame.size.width - 6, height: self.qrCode.frame.size.height - 6)
         qrCode.image = qr?.image
     }
     
@@ -70,13 +62,10 @@ class ShareAppController: UIViewController {
 
         shareTemplateLayout.delegate = self
         shareTemplateLayout.lineCount = 1
-        shareTemplateLayout.vItemSpace = 10//垂直间距10
-        shareTemplateLayout.hItemSpace = 10//水平间距10
-        shareTemplateLayout.edge = UIEdgeInsets.zero
+        shareTemplateLayout.vItemSpace = 10        shareTemplateLayout.hItemSpace = 10        shareTemplateLayout.edge = UIEdgeInsets.zero
         shareTemplateLayout.scrollDirection = UICollectionViewScrollDirection.horizontal
         
-        //refresh layout
-        RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
+                RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
             .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .rxSchedulerHelper()
             .subscribe { event in
@@ -141,8 +130,7 @@ class ShareAppController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
     
     @objc private func back() {
         navigationController?.popViewController(animated: true)

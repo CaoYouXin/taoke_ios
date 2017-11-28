@@ -1,10 +1,3 @@
-//
-//  NewerGuideController.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/11/20.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import CleanroomLogger
 import UIKit
@@ -58,8 +51,7 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
     
     @objc private func back() {
         navigationController?.popViewController(animated: true)

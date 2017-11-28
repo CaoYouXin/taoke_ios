@@ -1,10 +1,3 @@
-//
-//  ProductListController.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/15/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 
 import CleanroomLogger
 import RxSwift
@@ -45,8 +38,7 @@ class ProductListController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+                
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -132,17 +124,13 @@ class ProductListController: UIViewController {
         
         productListLayout.delegate = self
         productListLayout.lineCount = 2
-        productListLayout.vItemSpace = 10//垂直间距10
-        productListLayout.hItemSpace = 10//水平间距10
-        productListLayout.edge = UIEdgeInsets.zero
+        productListLayout.vItemSpace = 10        productListLayout.hItemSpace = 10        productListLayout.edge = UIEdgeInsets.zero
         
-        //refresh layout
-        RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
+                RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
             .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .rxSchedulerHelper()
             .subscribe { event in
-                //                productListLayout.lineCount = 2
-            }.disposed(by: disposeBag)
+                            }.disposed(by: disposeBag)
         
         let productCellFactory: (UICollectionView, Int, CouponItem) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
@@ -151,8 +139,7 @@ class ProductListController: UIViewController {
                 if let tmp = image {
                     self.sizeCache[element.pictUrl!] = tmp.size
                 }
-                //refresh layout
-                RxBus.shared.post(event: Events.WaterFallLayout())
+                                RxBus.shared.post(event: Events.WaterFallLayout())
             })
             
             if let constraint = (cell.noCouponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {

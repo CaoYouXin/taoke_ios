@@ -1,10 +1,3 @@
-//
-//  TaoKeService.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/7/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 
 import RestKit
 import RxSwift
@@ -43,9 +36,7 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_ENROLL = "tbk/user/apply/4/agent"
 
-    public static let HOST = "http://192.168.0.115:8080/api/"
-//    public static let HOST = "http://server.tkmqr.com:8080/api/"
-
+    public static let HOST = "http:
     private static var instance: TaoKeProtocol?
 
     private var manager: RKObjectManager?
@@ -68,7 +59,6 @@ class TaoKeService: TaoKeProtocol {
     public static func getInstance() -> TaoKeProtocol {
         if instance == nil {
             instance = TaoKeService()
-//            instance = TaoKeTestService.getInstance()
         }
         return instance!
     }

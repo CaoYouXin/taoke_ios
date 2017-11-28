@@ -1,10 +1,3 @@
-//
-//  SplashController.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/6/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 import CleanroomLogger
 import RxSwift
 
@@ -25,8 +18,7 @@ class SplashController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.        
-        signUp.layer.borderWidth = 1
+                signUp.layer.borderWidth = 1
         signUp.layer.borderColor = UIColor("#FFB74D").cgColor
         signUp.layer.cornerRadius = 6
         signIn.layer.borderWidth = 1
@@ -61,6 +53,5 @@ class SplashController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
 }

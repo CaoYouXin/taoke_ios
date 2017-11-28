@@ -1,18 +1,9 @@
-//
-//  TaoKeApi.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/7/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 
 import RxSwift
 
 class TaoKeApi {
 
-    private static var CDN = "http://192.168.0.115:8070/"
-//    private static var CDN = "http://server.tkmqr.com:8070/"
-
+    private static var CDN = "http:
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_VERIFICATION, auth: "", data: ["phone": phone])

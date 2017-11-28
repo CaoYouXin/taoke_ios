@@ -1,10 +1,3 @@
-//
-//  IntroController.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/20/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 import EAIntroView
 
 class IntroController: UIViewController {
@@ -14,14 +7,12 @@ class IntroController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        initIntroView()
+                initIntroView()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
     
     private func initIntroView() {
         introView.pages = []

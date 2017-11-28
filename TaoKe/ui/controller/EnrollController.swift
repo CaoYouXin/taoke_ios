@@ -1,10 +1,3 @@
-//
-//  EnrollController.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/11/27.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import UIKit
 import FontAwesomeKit
@@ -85,8 +78,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
     
     @objc private func back() {
         self.navigationController?.popViewController(animated: true)

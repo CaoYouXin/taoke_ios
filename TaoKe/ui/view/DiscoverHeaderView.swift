@@ -1,10 +1,3 @@
-//
-//  DiscoverHeaderView.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/9/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 
 import CleanroomLogger
 import RxSwift
@@ -51,8 +44,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func initSlider() {
         slideshow.slideshowInterval = 3
         slideshow.contentScaleMode = .scaleAspectFill
-        //slideshow.draggingEnabled = false
-        
+                
         updateSlider()
     }
     
@@ -77,8 +69,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             
             cell.thumb.layer.borderWidth = 1
             cell.thumb.layer.borderColor = UIColor.white.cgColor
-            //cell.thumb.image = #imageLiteral(resourceName: "splash")
-            cell.thumb.kf.setImage(with: URL(string: element.imgUrl!))
+                        cell.thumb.kf.setImage(with: URL(string: element.imgUrl!))
             return cell
         }
         
@@ -89,17 +80,14 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                 constraint.constant = height
                 
-                // fix refresh discover white blank bug
-                let newMaximumContentHeight = self.maxContentHeight + height
+                                let newMaximumContentHeight = self.maxContentHeight + height
                 if (self.maximumContentHeight != newMaximumContentHeight) {
                     self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height + height)
                     self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
                     self.maximumContentHeight = newMaximumContentHeight
                     
-                    //fix the content offset bug, any better way?
-                    RxBus.shared.post(event: Events.ViewDidLoad())
-                    //fix the tab layout click bug
-                    self.couponTab.selectedSegmentIndex = 0
+                                        RxBus.shared.post(event: Events.ViewDidLoad())
+                                        self.couponTab.selectedSegmentIndex = 0
                 }
             }
             return brandItems

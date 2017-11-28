@@ -1,10 +1,3 @@
-//
-//  DiscoverController.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/6/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 import CleanroomLogger
 import RxSwift
 import RxBus
@@ -37,16 +30,14 @@ class DiscoverController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        initMJRefresh()
+                initMJRefresh()
         initFloatingButton()
         initCouponList()
         initHeaderView()
     }
     
     private func initHeaderView() {
-        //fix the headerview bug, any better way?
-        RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
+                RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
                 self.couponList.setContentOffset(CGPoint(x: 0, y: 1 - self.discoverHeaderView!.maximumContentHeight), animated: false)
@@ -58,8 +49,7 @@ class DiscoverController: UIViewController {
         if let headerView = discoverHeaderView {
             headerView.setController(ctrl: self)
             
-            //fix the headerview bug, any better way?
-            var adjust = CGFloat(0)
+                        var adjust = CGFloat(0)
             let height = self.view.frame.size.height
             if height == 568 {
                 adjust -= 16
@@ -108,8 +98,7 @@ class DiscoverController: UIViewController {
                 constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 15
             }
             
-            //cell.thumb.image = #imageLiteral(resourceName: "splash")
-            cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
+                        cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
             cell.couponTitle.text = element.title!
             cell.couponPriceBefore.text = "现价 ¥ \(element.zkFinalPrice!)        月销量 \(element.volume!) 件"
             
@@ -182,13 +171,10 @@ class DiscoverController: UIViewController {
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.couponList.mj_footer.endRefreshing()
-                //self.couponList.mj_footer.isHidden = true
-                //self.couponList.mj_footer.isHidden = false
-            }
+                                            }
         })
         
-        //couponList.mj_footer.isAutomaticallyHidden = false
-    }
+            }
     
     private func initFloatingButton() {
         floatingButton.isHidden = true
@@ -208,8 +194,7 @@ class DiscoverController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
     
     public func refreshCouponList(cid: String) {
         couponDataSource?.set(cid: cid)

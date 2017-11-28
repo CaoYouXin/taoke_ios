@@ -1,10 +1,3 @@
-//
-//  RegExpUtil.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/20/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 
 class RegExpUtil {
     public static func isPhoneNo(phoneNo: String) -> Bool {

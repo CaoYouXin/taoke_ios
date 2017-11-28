@@ -1,10 +1,3 @@
-//
-//  SignInController.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/20/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 import CleanroomLogger
 import RxSwift
 import RxCocoa
@@ -28,8 +21,7 @@ class SignInController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
+                let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
         eyeIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
         passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
         
@@ -72,8 +64,7 @@ class SignInController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {

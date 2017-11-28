@@ -1,7 +1,3 @@
-//
-// Created by CaoYouxin on 2017/11/23.
-// Copyright (c) 2017 jason tsang. All rights reserved.
-//
 
 class UserData {
 

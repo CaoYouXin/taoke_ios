@@ -1,10 +1,3 @@
-//
-//  couponDataSource.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/13/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 import RxSwift
 
 class CouponDataSource: RxDataSource<CouponItem> {

@@ -1,10 +1,3 @@
-//
-//  ShareController.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/16/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 
 import CleanroomLogger
 import RxSwift
@@ -54,8 +47,7 @@ class ShareController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+                
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -389,48 +381,7 @@ class ShareController: UIViewController {
                 }))
                 self.present(alert, animated: true)
             })
-            //        case wechatWrapper, weiboWrapper, qqWrapper:
-            //            let share = {
-            //                if let shareText = self.generateShareText() {
-            //                    let pasteboard = UIPasteboard.general
-            //                    pasteboard.string = shareText
-            //                }
-            //                let alert = UIAlertController(title: "", message: "『照片已保存相册，文案已复制到粘贴板』", preferredStyle: .alert)
-            //                alert.addAction(UIAlertAction(title: "分享", style: .default, handler: { (action) in
-            //                    var url: URL?
-            //                    switch sender.view! {
-            //                    case self.wechatWrapper:
-            //                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
-            //                    case self.weiboWrapper:
-            //                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
-            //                    case self.qqWrapper:
-            //                        url = URL(string: "wx60b7e2af0fe4c38c://weixin")
-            //                    default:
-            //                        break
-            //                    }
-            //                    if url != nil {
-            //                        if UIApplication.shared.canOpenURL(url!) {
-            //                            UIApplication.shared.open(url!, options: [:])
-            //                        }
-            //                    }
-            //                }))
-            //                self.present(alert, animated: true)
-            //            }
-            //
-            //            if let generateShareImage = generateShareImage(true) {
-            //                self.view.makeToastActivity(.center)
-            //                generateShareImage.subscribe(onNext: { _ in
-            //                    self.view.hideToastActivity()
-            //                    share()
-            //                }, onError: { (error) in
-            //                    self.view.hideToastActivity()
-            //                    share()
-            //                    Log.error?.message(error.localizedDescription)
-            //                }).disposed(by: disposeBag)
-            //            } else {
-            //                share()
-        //            }
-        default:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                default:
             break
         }
     }

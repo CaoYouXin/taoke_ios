@@ -1,10 +1,3 @@
-//
-//  CouponItem.swift
-//  TaoKe
-//
-//  Created by jason tsang on 11/11/17.
-//  Copyright © 2017 jason tsang. All rights reserved.
-//
 
 class CouponItem {
     public var category: Int64?

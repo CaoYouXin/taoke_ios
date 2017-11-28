@@ -65,6 +65,8 @@ class UserData {
         UserDefaults.standard.removeObject(forKey: UserData.DEFAULT_USER_PID)
         UserDefaults.standard.removeObject(forKey: UserData.DEFAULT_USER_SHARE_CODE)
         UserDefaults.standard.removeObject(forKey: UserData.DEFAULT_DIRECT_USER)
+        
+        EnrollSubmit.clear()
     }
 
     public func cache() {

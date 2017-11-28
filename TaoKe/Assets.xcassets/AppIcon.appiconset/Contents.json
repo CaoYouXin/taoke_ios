@@ -3,109 +3,109 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "LOGO29@2x-1.jpg",
+      "filename" : "Icon-40.jpg",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "LOGO29@3x-1.jpg",
+      "filename" : "Icon-60.jpg",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "LOGO29@2x.jpg",
+      "filename" : "Icon-58.jpg",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "LOGO29@3x.jpg",
+      "filename" : "Icon-87.jpg",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "LOGO40@2x.jpg",
+      "filename" : "Icon-80.jpg",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "LOGO40@3x.jpg",
+      "filename" : "Icon-120.jpg",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "LOGO60@2x.jpg",
+      "filename" : "Icon-121.jpg",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "LOGO60@3x.jpg",
+      "filename" : "Icon-180.jpg",
       "scale" : "3x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "LOGO29.jpg",
+      "filename" : "Icon-20.jpg",
       "scale" : "1x"
     },
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "LOGO29@2x-2.jpg",
+      "filename" : "Icon-41.jpg",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "LOGO29-1.jpg",
+      "filename" : "Icon-29.jpg",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "LOGO29@2x-3.jpg",
+      "filename" : "Icon-59.jpg",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "LOGO40.jpg",
+      "filename" : "Icon-42.jpg",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "LOGO40@2x-1.jpg",
+      "filename" : "Icon-81.jpg",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "LOGO60@2x-1.jpg",
+      "filename" : "Icon-76.jpg",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "LOGO60@3x-1.jpg",
+      "filename" : "Icon-144.jpg",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "LOGO@1024.jpg",
+      "filename" : "Icon-167.jpg",
       "scale" : "2x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "LOGO@1024-1.jpg",
+      "filename" : "ic_launcher.jpg",
       "scale" : "1x"
     }
   ],

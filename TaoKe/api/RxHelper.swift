@@ -45,6 +45,21 @@ extension ObservableType {
             return Observable.empty()
         })
     }
+    
+    public func handleUnAuth(viewController: UIViewController?) -> Observable<Self.E> {
+        return self.catchError({(error) -> Observable<Self.E> in
+            if error is ApiUnAuth, let view = viewController {
+                let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "好的", style: .default, handler: { (action) in
+                    UserData.clear()
+                    UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
+                    viewController?.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
+                }))
+                view.present(alert, animated: true)
+            }
+            return Observable.empty()
+        })
+    }
 }
 
 class ApiErrorHook: Hook {

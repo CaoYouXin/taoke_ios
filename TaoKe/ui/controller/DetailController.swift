@@ -62,8 +62,10 @@ class DetailController: UIViewController {
         self.picSliders.slideshowInterval = 3
         self.picSliders.contentScaleMode = .scaleAspectFill
         var imageSources: [KingfisherSource] = [KingfisherSource(urlString: (couponItem?.pictUrl)!)!];
-        for url in (couponItem?.smallImages)! {
-            imageSources.append(KingfisherSource(urlString: url)!)
+        if let smallImages = couponItem?.smallImages {
+            for url in smallImages {
+                imageSources.append(KingfisherSource(urlString: url)!)
+            }
         }
         self.picSliders.setImageInputs(imageSources)
         

@@ -10,7 +10,7 @@ import RxSwift
 
 class TaoKeApi {
 
-    private static var CDN = "http://192.168.1.115:8070/"
+    private static var CDN = "http://192.168.0.115:8070/"
 //    private static var CDN = "http://server.tkmqr.com:8070/"
 
     public static func verification(phone: String) -> Observable<TaoKeData?> {
@@ -146,6 +146,12 @@ class TaoKeApi {
                 var items: [CouponItem] = []
                 for rec in (taoKeData?.getList())! {
                     let item = CouponItem()
+                    
+                    item.couponInfo = rec["couponInfo"] as? String
+                    if nil == item.couponInfo {
+                        continue
+                    }
+                    
                     item.category = rec["category"] as? Int64
                     item.couponRemainCount = rec["couponRemainCount"] as? Int64
                     item.couponTotalCount = rec["couponTotalCount"] as? Int64
@@ -157,7 +163,6 @@ class TaoKeApi {
                     item.commissionRate = rec["commissionRate"] as? String
                     item.couponClickUrl = rec["couponClickUrl"] as? String
                     item.couponEndTime = rec["couponEndTime"] as? String
-                    item.couponInfo = rec["couponInfo"] as? String
                     item.couponStartTime = rec["couponStartTime"] as? String
                     item.zkFinalPrice = rec["zkFinalPrice"] as? String
                     item.itemUrl = rec["itemUrl"] as? String
@@ -239,6 +244,12 @@ class TaoKeApi {
                 }
                 return ret
             })
+    }
+    
+    public static func toEnroll(submit: EnrollSubmit) -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_ENROLL, auth: (UserData.get()?.token)!, data: submit.toBody())
+            .handleResult()
     }
     
 }

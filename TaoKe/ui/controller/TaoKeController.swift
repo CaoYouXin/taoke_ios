@@ -24,7 +24,7 @@ class TaoKeController: RAMAnimatedTabBarController {
     override func tapHandler(_ gesture: UIGestureRecognizer) {
         super.tapHandler(gesture)
         if selectedIndex == 2 {
-                        RxBus.shared.post(event: Events.Message())
+            RxBus.shared.post(event: Events.Message())
         }
     }
 

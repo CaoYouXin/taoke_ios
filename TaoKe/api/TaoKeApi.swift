@@ -2,16 +2,16 @@
 import RxSwift
 
 class TaoKeApi {
-
+    
     private static var CDN = "http://192.168.1.115:8070/"
-//    private static var CDN = "http://server.tkmqr.com:8070/"
-
+    //    private static var CDN = "http://server.tkmqr.com:8070/"
+    
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_VERIFICATION, auth: "", data: ["phone": phone])
             .handleResult()
     }
-
+    
     public static func signUp(phone: String, verificationCode: String, password: String, nick: String, invication: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_SIGN_UP, auth: "", data: ["code": verificationCode, "invitation": invication, "user": ["phone": phone, "name": nick, "pwd": password.md5()]])
@@ -21,7 +21,7 @@ class TaoKeApi {
                 return taoKeData
             })
     }
-
+    
     public static func signIn(phone: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_SIGN_IN, auth: "nil", data: ["phone": phone, "pwd": password.md5()])
@@ -31,7 +31,7 @@ class TaoKeApi {
                 return taoKeData
             })
     }
-
+    
     public static func resetPassword(phone: String, verificationCode: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_RESET_PASSWORD, auth: "", data: ["phone": phone, "smsCode": verificationCode, "pwd": password.md5()])
@@ -41,7 +41,7 @@ class TaoKeApi {
                 return taoKeData
             })
     }
-
+    
     public static func getBrandList() -> Observable<[HomeBtn]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_BRAND_LIST)
@@ -59,7 +59,7 @@ class TaoKeApi {
                 return items
             })
     }
-
+    
     public static func getProductList(_ gourpId: String) -> Observable<[CouponItem]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_PRODUCT_LIST.replacingOccurrences(of: "{favId}", with: gourpId).replacingOccurrences(of: "{pageNo}", with: "1"), auth: (UserData.get()?.token)!)
@@ -113,7 +113,7 @@ class TaoKeApi {
                 return items
             })
     }
-
+    
     public static func getCouponTab() -> Observable<[CouponTab]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_COUPON_TAB)
@@ -130,7 +130,7 @@ class TaoKeApi {
                 return tabs
             })
     }
-
+    
     public static func getCouponList(cid: String) -> Observable<[CouponItem]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_COUPON_LIST.replacingOccurrences(of: "{cid}", with: cid).replacingOccurrences(of: "{pageNo}", with: "1"), auth: (UserData.get()?.token)!)
@@ -180,7 +180,7 @@ class TaoKeApi {
                 return items
             })
     }
-
+    
     public static func getShareView(_ link: String, _ title: String) -> Observable<ShareView?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_GET_SHARE_LINK, auth: (UserData.get()?.token)!, data: ["title": title, "url": link])
@@ -192,7 +192,7 @@ class TaoKeApi {
                 return shareView
             })
     }
-
+    
     public static func getNewerGuideList() -> Observable<[String]?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_NOVICE_LIST)
@@ -269,6 +269,27 @@ class TaoKeApi {
             .handleResult()
             .map({ (taoKeData) -> Int64 in
                 return (taoKeData?.body as? Int64)!
+            })
+    }
+    
+    public static func getMessageList(_ pageNo: Int) -> Observable<[MessageView]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_MESSAGE_LIST.replacingOccurrences(of: "{pageNo}", with: "\(pageNo)"), auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) in
+                var result: [MessageView] = []
+                if let recs = taoKeData?.getList() {
+                    for rec in recs {
+                        let item = MessageView()
+                        item.id = rec["id"] as? Int64
+                        item.dateStr = rec["createTime"] as? String
+                        let message = rec["message"] as? [String: AnyObject]
+                        item.title = message!["title"] as? String
+                        item.content = message!["content"] as? String
+                        result.append(item)
+                    }
+                }
+                return result
             })
     }
     

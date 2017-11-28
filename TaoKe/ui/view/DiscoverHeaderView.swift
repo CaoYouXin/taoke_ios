@@ -88,6 +88,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 print("debug->height = \(height)")
             }
             
+            self.wrapper.layoutIfNeeded()
             RxBus.shared.post(event: Events.ViewDidLoad())
             return brandItems
         }

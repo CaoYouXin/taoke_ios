@@ -45,7 +45,7 @@
                             <color key="textColor" red="0.93725490199999995" green="0.42352941179999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VDq-1i-Bt0">
+                        <collectionView opaque="NO" multipleTouchEnabled="YES" contentMode="redraw" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VDq-1i-Bt0">
                             <rect key="frame" x="0.0" y="187" width="375" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>

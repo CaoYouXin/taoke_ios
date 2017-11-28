@@ -54,7 +54,7 @@ class DiscoverController: UIViewController {
         if let headerView = discoverHeaderView {
             headerView.setController(ctrl: self)
             
-                        var adjust = CGFloat(0)
+            var adjust = CGFloat(0)
             let height = self.view.frame.size.height
             if height == 568 {
                 adjust -= 16
@@ -103,7 +103,7 @@ class DiscoverController: UIViewController {
                 constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 15
             }
             
-                        cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
+            cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
             cell.couponTitle.text = element.title!
             cell.couponPriceBefore.text = "现价 ¥ \(element.zkFinalPrice!)        月销量 \(element.volume!) 件"
             
@@ -176,10 +176,9 @@ class DiscoverController: UIViewController {
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.couponList.mj_footer.endRefreshing()
-                                            }
-        })
-        
             }
+        })
+    }
     
     private func initFloatingButton() {
         floatingButton.isHidden = true
@@ -199,7 +198,7 @@ class DiscoverController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     public func refreshCouponList(cid: String) {
         couponDataSource?.set(cid: cid)

@@ -15,6 +15,9 @@
 		2B1466A31FCD2EE500FBE98B /* TeamDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1466A21FCD2EE500FBE98B /* TeamDataView.swift */; };
 		2B1466A51FCD30D700FBE98B /* TeamDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1466A41FCD30D700FBE98B /* TeamDataSource.swift */; };
 		2B1466A71FCD36B600FBE98B /* TeamDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1466A61FCD36B600FBE98B /* TeamDataCell.swift */; };
+		2B1466A91FCD9FA000FBE98B /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1466A81FCD9FA000FBE98B /* MessageView.swift */; };
+		2B1466AB1FCDA11300FBE98B /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1466AA1FCDA11300FBE98B /* MessageCell.swift */; };
+		2B1466AD1FCDA3E900FBE98B /* MessageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1466AC1FCDA3E900FBE98B /* MessageDataSource.swift */; };
 		2B2F69F91FC27048004D9B28 /* NewerGuide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F69F81FC27048004D9B28 /* NewerGuide.storyboard */; };
 		2B2F69FB1FC270A5004D9B28 /* NewerGuideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2F69FA1FC270A5004D9B28 /* NewerGuideController.swift */; };
 		2B2F69FD1FC28667004D9B28 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2F69FC1FC28667004D9B28 /* About.storyboard */; };
@@ -91,6 +94,9 @@
 		2B1466A21FCD2EE500FBE98B /* TeamDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDataView.swift; sourceTree = "<group>"; };
 		2B1466A41FCD30D700FBE98B /* TeamDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDataSource.swift; sourceTree = "<group>"; };
 		2B1466A61FCD36B600FBE98B /* TeamDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDataCell.swift; sourceTree = "<group>"; };
+		2B1466A81FCD9FA000FBE98B /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		2B1466AA1FCDA11300FBE98B /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		2B1466AC1FCDA3E900FBE98B /* MessageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDataSource.swift; sourceTree = "<group>"; };
 		2B2F69F81FC27048004D9B28 /* NewerGuide.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewerGuide.storyboard; sourceTree = "<group>"; };
 		2B2F69FA1FC270A5004D9B28 /* NewerGuideController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewerGuideController.swift; sourceTree = "<group>"; };
 		2B2F69FC1FC28667004D9B28 /* About.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 				F98D011A1FBD7472003A3F4F /* ShareImageDataSource.swift */,
 				2B82218B1FC950AD00B695A4 /* ShareTemplateDataSource.swift */,
 				2B1466A41FCD30D700FBE98B /* TeamDataSource.swift */,
+				2B1466AC1FCDA3E900FBE98B /* MessageDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -222,6 +229,7 @@
 				F98D01181FBD73C7003A3F4F /* ShareImageCell.swift */,
 				2B8221891FC94F5C00B695A4 /* ShareTemplateCell.swift */,
 				2B1466A61FCD36B600FBE98B /* TeamDataCell.swift */,
+				2B1466AA1FCDA11300FBE98B /* MessageCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -313,6 +321,7 @@
 				2B08C1761FC8466300CE6C70 /* ShareView.swift */,
 				2B14669C1FCD0FC900FBE98B /* EnrollSubmit.swift */,
 				2B1466A21FCD2EE500FBE98B /* TeamDataView.swift */,
+				2B1466A81FCD9FA000FBE98B /* MessageView.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -595,6 +604,7 @@
 				2B396FD61FC0765A00B1CBA0 /* AccountController.swift in Sources */,
 				F9D6FAE71FB03C7500930751 /* DiscoverController.swift in Sources */,
 				F99662111FB41083002CF243 /* CouponCell.swift in Sources */,
+				2B1466A91FCD9FA000FBE98B /* MessageView.swift in Sources */,
 				F97841F41FC2548F001954D3 /* IntroController.swift in Sources */,
 				2B14669D1FCD0FC900FBE98B /* EnrollSubmit.swift in Sources */,
 				2B8221881FC944B600B695A4 /* ShareAppController.swift in Sources */,
@@ -606,6 +616,7 @@
 				F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
 				F92C68CE1FAAE32C005CD910 /* TaoKeController.swift in Sources */,
+				2B1466AD1FCDA3E900FBE98B /* MessageDataSource.swift in Sources */,
 				2B6943271FC6B28300DE197D /* HomeBtn.swift in Sources */,
 				F9B7E01D1FBC197600E4CCE2 /* ProductCell.swift in Sources */,
 				2B1466A11FCD2BB300FBE98B /* TeamController.swift in Sources */,
@@ -635,6 +646,7 @@
 				F92DA5961FB169D600FDF3E4 /* TaoKeApi.swift in Sources */,
 				2B2F69FF1FC28696004D9B28 /* AboutController.swift in Sources */,
 				1812A85E074248BB0973763B /* UserData.swift in Sources */,
+				2B1466AB1FCDA11300FBE98B /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

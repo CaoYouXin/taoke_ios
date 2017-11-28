@@ -3,7 +3,7 @@ import RxSwift
 
 class TaoKeApi {
 
-    private static var CDN = "http://192.168.0.115:8070/"
+    private static var CDN = "http://192.168.1.115:8070/"
 //    private static var CDN = "http://server.tkmqr.com:8070/"
 
     public static func verification(phone: String) -> Observable<TaoKeData?> {
@@ -260,6 +260,15 @@ class TaoKeApi {
                     }
                 }
                 return result
+            })
+    }
+    
+    public static func countUnreadMessages() -> Observable<Int64> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_UNREAD_MSG, auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> Int64 in
+                return (taoKeData?.body as? Int64)!
             })
     }
     

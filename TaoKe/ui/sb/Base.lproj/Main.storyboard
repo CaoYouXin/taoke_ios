@@ -177,7 +177,39 @@
                     <view key="view" contentMode="scaleToFill" id="Vhd-1m-e9M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VvJ-nx-rRX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AV8-Ez-nbg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AT1-tN-K9x">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="AV8-Ez-nbg" secondAttribute="trailing" id="6XI-oA-WGv"/>
+                                    <constraint firstItem="AV8-Ez-nbg" firstAttribute="leading" secondItem="VvJ-nx-rRX" secondAttribute="leading" id="Aod-IC-tK1"/>
+                                    <constraint firstItem="AV8-Ez-nbg" firstAttribute="top" secondItem="VvJ-nx-rRX" secondAttribute="top" id="alK-eb-ZTt"/>
+                                    <constraint firstItem="AV8-Ez-nbg" firstAttribute="centerX" secondItem="VvJ-nx-rRX" secondAttribute="centerX" id="nKA-rM-VGM"/>
+                                    <constraint firstItem="AV8-Ez-nbg" firstAttribute="height" secondItem="VvJ-nx-rRX" secondAttribute="height" id="wct-u9-JG8"/>
+                                    <constraint firstAttribute="bottom" secondItem="AV8-Ez-nbg" secondAttribute="bottom" id="zVA-M1-A23"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5sC-BP-zys" firstAttribute="trailing" secondItem="VvJ-nx-rRX" secondAttribute="trailing" id="6Md-uN-Ahh"/>
+                            <constraint firstItem="VvJ-nx-rRX" firstAttribute="top" secondItem="5sC-BP-zys" secondAttribute="top" id="EO5-V2-MeM"/>
+                            <constraint firstItem="5sC-BP-zys" firstAttribute="bottom" secondItem="VvJ-nx-rRX" secondAttribute="bottom" id="NYJ-8O-UIP"/>
+                            <constraint firstItem="VvJ-nx-rRX" firstAttribute="leading" secondItem="5sC-BP-zys" secondAttribute="leading" id="eJB-DX-gyM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5sC-BP-zys"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="消息" image="icon_message" id="Z4C-e6-Bzj" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
@@ -193,6 +225,10 @@
                             <outlet property="animation" destination="8uz-MM-0ie" id="Tcu-wZ-a3R"/>
                         </connections>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="messageList" destination="AV8-Ez-nbg" id="BGf-Vw-ozk"/>
+                        <outlet property="scrollWrapper" destination="VvJ-nx-rRX" id="dKg-NR-Oyd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lno-p2-GnF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="8uz-MM-0ie" userLabel="Animation" customClass="RAMScaleUpAnimation" customModule="TaoKe" customModuleProvider="target">

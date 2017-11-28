@@ -8,6 +8,7 @@ import TabLayoutView
 class DiscoverHeaderView: GSKStretchyHeaderView {
     @IBOutlet weak var slideshow: ImageSlideshow!
     
+    @IBOutlet weak var wrapper: UIStackView!
     @IBOutlet weak var brandList: UICollectionView!
     @IBOutlet weak var brandListFlowLayout: UICollectionViewFlowLayout!
     
@@ -62,6 +63,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     private func initBrandList() {
         brandList.register(UINib(nibName: "BrandCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
         
         let brandCellFactory: (UICollectionView, Int, HomeBtn) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
@@ -76,16 +78,17 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         let brandDataSource = BrandDataSource()
         
         let brandDataHook = { (brandItems: [HomeBtn]) -> [HomeBtn] in
+            let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
+            self.maximumContentHeight = self.maxContentHeight + height
+            
             if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
-                let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
                 constraint.constant = height
-                
-                self.maximumContentHeight = self.maxContentHeight + height
-                self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
-                self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
-                print("max = \(self.maxContentHeight)")
-                RxBus.shared.post(event: Events.ViewDidLoad())
+                self.brandList.contentSize = CGSize(width: self.frame.size.width, height: height)
+                self.brandList.sizeToFit()
+                print("debug->height = \(height)")
             }
+            
+            RxBus.shared.post(event: Events.ViewDidLoad())
             return brandItems
         }
         

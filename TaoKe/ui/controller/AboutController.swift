@@ -3,12 +3,12 @@ import UIKit
 import FontAwesomeKit
 
 class AboutController: UIViewController {
-
+    
     @IBOutlet weak var aboutText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -20,13 +20,13 @@ class AboutController: UIViewController {
         self.aboutText.numberOfLines = 0;
         self.aboutText.sizeToFit()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     @objc private func back() {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
 }

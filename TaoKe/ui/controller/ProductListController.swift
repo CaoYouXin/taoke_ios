@@ -132,6 +132,7 @@ class ProductListController: UIViewController {
             .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .rxSchedulerHelper()
             .subscribe { event in
+                productListLayout.lineCount = 2
             }.disposed(by: disposeBag)
         
         let productCellFactory: (UICollectionView, Int, CouponItem) -> UICollectionViewCell = { (collectionView, row, element) in
@@ -229,7 +230,11 @@ class ProductListController: UIViewController {
 
 extension ProductListController: ELWaterFlowLayoutDelegate  {
     func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
-        let cell = productList.cellForItem(at: IndexPath(row: index, section: 0)) as? ProductCell
+        var cell: ProductCell?
+        
+        if productList.numberOfItems(inSection: 0) > index {
+            cell = productList.cellForItem(at: IndexPath(row: index, section: 0)) as? ProductCell
+        }
         
         var itemHeight: CGFloat = 50
         

@@ -119,8 +119,7 @@ extension MessageController: ELWaterFlowLayoutDelegate  {
             cellHeight += (height + 15)
         } else if self.messageList.numberOfItems(inSection: 0) > index {
             if let cell = self.messageList.cellForItem(at: IndexPath(row: index, section: 0)) as? MessageCell {
-                cell.content.sizeToFit()
-                let height = cell.content.frame.size.height
+                let height = cell.content.sizeThatFits(CGSize(width: cell.frame.width - 20, height: 0)).height
                 self.cache[index] = height
                 cellHeight += (height + 15)
             }

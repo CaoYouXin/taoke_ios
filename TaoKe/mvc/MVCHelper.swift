@@ -53,11 +53,12 @@ class MVCHelper<T> {
                     return self.dataSource!.loadCacheProxy()
                 case 1:
                     self.data = []
-                    return Observable.empty().concat(self.dataSource!.refreshProxy().map({ (data) -> [T] in
-                        self.data = []
-                        self.data.append(contentsOf: data)
-                        return self.data
-                    }))
+                    return Observable.empty()
+                        .concat(self.dataSource!.refreshProxy().map({ (data) -> [T] in
+                            self.data = []
+                            self.data.append(contentsOf: data)
+                            return self.data
+                        }))
                 case 2:
                     return self.dataSource!.loadMoreProxy().map({ (data) -> [T] in
                         self.data.append(contentsOf: data)
@@ -67,7 +68,7 @@ class MVCHelper<T> {
                     return Observable.empty()
                 }
         }).rxSchedulerHelper()
-
+        
         if let handler = errorHandler {
             signal = signal.catchError({ (error) -> Observable<[T]> in
                 return handler(error)
@@ -80,12 +81,12 @@ class MVCHelper<T> {
         }
         
         signal = signal.flatMap({ (origin) -> Observable<[T]> in
-                var data = origin
-                if let hook = self.dataHook {
-                    data = hook(origin)
-                }
-                return Observable.just(data)
-            })
+            var data = origin
+            if let hook = self.dataHook {
+                data = hook(origin)
+            }
+            return Observable.just(data)
+        })
         
         signal.bind(to: collectionView.rx.items)(cellFactory!)
             .disposed(by: disposeBag)

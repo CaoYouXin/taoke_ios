@@ -293,4 +293,31 @@ class TaoKeApi {
             })
     }
     
+    public static func getCanDraw() -> Observable<String> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_USER_AMOUNT, auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> String in
+                return (taoKeData?.body as? String)!
+            })
+    }
+    
+    public static func getThisEstimate() -> Observable<String> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_THIS_MOUNT_ESTIMATE, auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> String in
+                return (taoKeData?.body as? String)!
+            })
+    }
+    
+    public static func getThatEstimate() -> Observable<String> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_LAST_MOUNT_ESTIMATE, auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> String in
+                return (taoKeData?.body as? String)!
+            })
+    }
+    
 }

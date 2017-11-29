@@ -67,12 +67,10 @@ class MessageController: UIViewController {
             cell.time.text = element.dateStr
             cell.content.text = element.content
             
-            cell.title.preferredMaxLayoutWidth = self.view.frame.width - 40
             cell.title.textAlignment = .left;
             cell.title.numberOfLines = 0;
             cell.title.sizeToFit()
             
-            cell.content.preferredMaxLayoutWidth = self.view.frame.width - 40
             cell.content.textAlignment = .left;
             cell.content.numberOfLines = 0;
             cell.content.sizeToFit()
@@ -81,7 +79,10 @@ class MessageController: UIViewController {
             cell.layer.borderColor = UIColor("#FFD500").cgColor
             cell.layer.cornerRadius = 5
             
-            self.cache[row] = cell.title.frame.size.height + cell.time.frame.size.height + cell.content.frame.size.height + CGFloat(40)
+            print("debug 1 = \(cell.title.frame.size.height)")
+            print("debug 2 = \(cell.time.frame.size.height)")
+            print("debug 3 = \(cell.content.frame.size.height)")
+            self.cache[row] = cell.title.frame.size.height + cell.time.frame.size.height + cell.content.frame.size.height + CGFloat(45)
             
             RxBus.shared.post(event: Events.WaterFallLayout())
             return cell

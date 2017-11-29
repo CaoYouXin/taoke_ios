@@ -64,7 +64,7 @@ class TeamController: UIViewController {
             self.teamDataHelper?.refresh()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.teamDataList.mj_header.endRefreshing()
+                self.scrollWrapper.mj_header.endRefreshing()
             }
         })
     }

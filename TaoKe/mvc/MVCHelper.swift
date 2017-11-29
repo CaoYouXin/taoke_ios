@@ -27,6 +27,13 @@ class MVCHelper<T> {
     }
     
     func refresh() {
+        if data.count > 0 {
+            var toDelete: [IndexPath] = []
+            for row in 0 ..< data.count {
+                toDelete.append(IndexPath(row: row, section: 0))
+            }
+            collectionView.deleteItems(at: toDelete)
+        }
         viewModel.active = false
         mode = 1
         viewModel.active = true
@@ -52,13 +59,11 @@ class MVCHelper<T> {
                 case 0:
                     return self.dataSource!.loadCacheProxy()
                 case 1:
-                    self.data = []
-                    return Observable.empty()
-                        .concat(self.dataSource!.refreshProxy().map({ (data) -> [T] in
+                    return self.dataSource!.refreshProxy().map({ (data) -> [T] in
                             self.data = []
                             self.data.append(contentsOf: data)
                             return self.data
-                        }))
+                        })
                 case 2:
                     return self.dataSource!.loadMoreProxy().map({ (data) -> [T] in
                         self.data.append(contentsOf: data)

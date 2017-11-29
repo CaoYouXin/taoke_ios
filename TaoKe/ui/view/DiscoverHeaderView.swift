@@ -8,15 +8,16 @@ import TabLayoutView
 class DiscoverHeaderView: GSKStretchyHeaderView {
     @IBOutlet weak var slideshow: ImageSlideshow!
     
-    @IBOutlet weak var wrapper: UIStackView!
     @IBOutlet weak var brandList: UICollectionView!
     @IBOutlet weak var brandListFlowLayout: UICollectionViewFlowLayout!
-    
+    @IBOutlet weak var brandListHeightConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var couponTab: TabLayoutView!
     
-    var maxContentHeight = CGFloat(0)
     private var brandListHelper: MVCHelper<HomeBtn>?
     private var controller: DiscoverController?
+    
+    var maxContentHeight = CGFloat(0)
     
     public func setController(ctrl: DiscoverController) {
         self.controller = ctrl
@@ -81,14 +82,12 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
             self.maximumContentHeight = self.maxContentHeight + height
             
-            if let constraint = (self.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
-                constraint.constant = height
-                self.brandList.contentSize = CGSize(width: self.frame.size.width, height: height)
-                self.brandList.sizeToFit()
-                print("debug->height = \(height)")
+            self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
+            
+            if self.brandListHeightConstraint.constant != height {
+                self.brandListHeightConstraint.constant = height
             }
             
-            self.wrapper.layoutIfNeeded()
             RxBus.shared.post(event: Events.ViewDidLoad())
             return brandItems
         }

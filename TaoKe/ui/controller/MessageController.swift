@@ -9,7 +9,9 @@ class MessageController: UIViewController {
     @IBOutlet weak var messageList: UICollectionView!
     
     private let disposeBag = DisposeBag()
+    
     private var messageListHelper: MVCHelper<MessageView>?
+    
     private var cache: [Int:CGFloat] = [:]
     
     override func viewDidLoad() {
@@ -17,14 +19,57 @@ class MessageController: UIViewController {
         
         initBadge()
         initList()
-        initScroll()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    private func initScroll() {
+
+    private func initList() {
+        messageList.register(UINib(nibName: "MessageCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        
+        let messageListLayout = ELWaterFlowLayout()
+        messageList.collectionViewLayout = messageListLayout
+        messageListLayout.prepare()
+        
+        messageListLayout.delegate = self
+        messageListLayout.lineCount = 1
+        messageListLayout.vItemSpace = 10
+        messageListLayout.hItemSpace = 10
+        messageListLayout.edge = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
+            .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+            .rxSchedulerHelper()
+            .subscribe { event in
+                messageListLayout.lineCount = 1
+            }.disposed(by: disposeBag)
+        
+        let messageFactory: (UICollectionView, Int, MessageView) -> UICollectionViewCell = { (collectionView, row, element) in
+            let indexPath = IndexPath(row: row, section: 0)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! MessageCell
+            
+            cell.content.text = nil
+            
+            cell.title.text = element.title
+            cell.time.text = element.dateStr
+            cell.content.text = element.content
+            
+            RxBus.shared.post(event: Events.WaterFallLayout())
+            
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor("#ffd500").cgColor
+            cell.layer.cornerRadius = 5
+
+            return cell
+        }
+        
+        messageListHelper = MVCHelper<MessageView>(messageList)
+        messageListHelper?.set(cellFactory: messageFactory)
+        messageListHelper?.set(dataSource: MessageDataSource(self))
+        
+        messageListHelper?.refresh()
+        
         messageList.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.messageListHelper?.refresh()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -40,65 +85,6 @@ class MessageController: UIViewController {
                 self.messageList.mj_footer.endRefreshing()
             }
         })
-    }
-    
-    private func initList() {
-        let messageListLayout = ELWaterFlowLayout()
-        messageList.collectionViewLayout = messageListLayout
-        
-        messageListLayout.delegate = self
-        messageListLayout.lineCount = 1
-        messageListLayout.vItemSpace = 10
-        messageListLayout.hItemSpace = 10
-        messageListLayout.edge = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
-        
-        RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
-            .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
-            .rxSchedulerHelper()
-            .subscribe { event in
-                messageListLayout.lineCount = 1
-            }.disposed(by: disposeBag)
-        
-        let messageFactory: (UICollectionView, Int, MessageView) -> UICollectionViewCell = { (collectionView, row, element) in
-            let indexPath = IndexPath(row: row, section: 0)
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
-            
-            cell.title.text = element.title
-            cell.time.text = element.dateStr
-            cell.content.text = element.content
-            
-            cell.title.textAlignment = .left;
-            cell.title.numberOfLines = 0;
-            cell.title.sizeToFit()
-            
-            cell.content.textAlignment = .left;
-            cell.content.numberOfLines = 0;
-            cell.content.sizeToFit()
-            
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor("#FFD500").cgColor
-            cell.layer.cornerRadius = 5
-            
-            if (self.cache[row] == nil) {
-                let titleLines = CGFloat((element.title?.utf8.count)!) * cell.title.font.pointSize / self.view.frame.size.width
-                let titleHeight = (titleLines + 1) * cell.title.font.lineHeight
-                let timeLines = CGFloat((element.dateStr?.utf8.count)!) * cell.time.font.pointSize / self.view.frame.size.width
-                let timeHeight = (timeLines + 1) * cell.time.font.lineHeight
-                let contentLines = CGFloat((element.content?.utf8.count)!) * cell.content.font.pointSize / self.view.frame.size.width
-                let contentHeight = (contentLines + 1) * cell.content.font.lineHeight
-                self.cache[row] = titleHeight + timeHeight + contentHeight + CGFloat(40)
-                
-                RxBus.shared.post(event: Events.WaterFallLayout())
-            }
-            
-            return cell
-        }
-        
-        messageListHelper = MVCHelper<MessageView>(messageList)
-        messageListHelper?.set(cellFactory: messageFactory)
-        messageListHelper?.set(dataSource: MessageDataSource(self))
-        
-        messageListHelper?.refresh()
     }
     
     private func initBadge() {
@@ -127,9 +113,18 @@ class MessageController: UIViewController {
 
 extension MessageController: ELWaterFlowLayoutDelegate  {
     func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
-        if let _ = messageList.cellForItem(at: IndexPath(row: index, section: 0)) as? MessageCell {
-            return self.cache[index] ?? 0
+        var cellHeight = CGFloat(60)
+        
+        if let height = self.cache[index] {
+            cellHeight += (height + 15)
+        } else if self.messageList.numberOfItems(inSection: 0) > index {
+            if let cell = self.messageList.cellForItem(at: IndexPath(row: index, section: 0)) as? MessageCell {
+                cell.content.sizeToFit()
+                let height = cell.content.frame.size.height
+                self.cache[index] = height
+                cellHeight += (height + 15)
+            }
         }
-        return 0
+        return cellHeight
     }
 }

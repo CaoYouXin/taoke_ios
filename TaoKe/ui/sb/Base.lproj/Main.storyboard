@@ -198,8 +198,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="171"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AQv-86-iYg">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AQv-86-iYg">
                                                             <rect key="frame" x="0.0" y="1" width="376" height="170"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBl-LL-C2P">
                                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -259,18 +260,11 @@
                                                         </stackView>
                                                     </subviews>
                                                 </view>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="AQv-86-iYg" secondAttribute="trailing" id="2i5-yf-sks"/>
-                                                    <constraint firstItem="AQv-86-iYg" firstAttribute="leading" secondItem="KNb-ry-gqy" secondAttribute="leading" id="4XQ-dU-7cD"/>
-                                                    <constraint firstAttribute="bottom" secondItem="AQv-86-iYg" secondAttribute="bottom" id="7xW-gL-hsb"/>
-                                                    <constraint firstItem="AQv-86-iYg" firstAttribute="top" secondItem="KNb-ry-gqy" secondAttribute="top" id="DhH-lL-oAg"/>
-                                                    <constraint firstItem="AQv-86-iYg" firstAttribute="centerX" secondItem="KNb-ry-gqy" secondAttribute="centerX" id="JcC-31-Ptr"/>
-                                                    <constraint firstItem="AQv-86-iYg" firstAttribute="width" secondItem="KNb-ry-gqy" secondAttribute="width" id="lSX-Li-5B9"/>
-                                                </constraints>
                                                 <connections>
                                                     <outlet property="content" destination="rXL-Uf-CmG" id="foL-jX-2XY"/>
                                                     <outlet property="time" destination="zlc-IG-9RV" id="Fuw-8J-PAA"/>
                                                     <outlet property="title" destination="XRB-oJ-YG1" id="gYk-Dh-UWY"/>
+                                                    <outlet property="wrapper" destination="AQv-86-iYg" id="P8v-90-kNQ"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

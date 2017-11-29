@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                RKlcl_configure_by_name("RestKit/Network", RKlcl_vTrace.rawValue);
+        RKlcl_configure_by_name("RestKit/Network", RKlcl_vTrace.rawValue);
         RKlcl_configure_by_name("RestKit/ObjectMapping", RKlcl_vOff.rawValue);
         Log.enable()
         Log.info?.message("The application has finished launching.")
@@ -25,19 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-                    }
+    }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-                    }
+    }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-            }
+    }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-            }
+    }
     
     func applicationWillTerminate(_ application: UIApplication) {
-            }
+    }
     
     
 }

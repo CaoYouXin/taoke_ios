@@ -74,6 +74,7 @@ class MessageController: UIViewController {
             cell.content.numberOfLines = 0;
             cell.content.sizeToFit()
             
+            RxBus.shared.post(event: Events.WaterFallLayout())
             return cell
         }
         
@@ -99,15 +100,24 @@ class MessageController: UIViewController {
                         RxBus.shared.post(event: Events.Message(count: Int(unreads)))
                     })
             })
+        
+        let _ = TaoKeApi.countUnreadMessages().rxSchedulerHelper().handleUnAuth(viewController: self)
+            .subscribe(onNext: { (unreads) in
+                RxBus.shared.post(event: Events.Message(count: Int(unreads)))
+            })
     }
     
 }
 
 extension MessageController: ELWaterFlowLayoutDelegate  {
     func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
-        if let cell = self.messageList.cellForItem(at: IndexPath(row: index, section: 0)) {
-            return cell.frame.size.height
+        if let cell = self.messageList.cellForItem(at: IndexPath(row: index, section: 0)) as? MessageCell  {
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor("#FFD500").cgColor
+            cell.layer.cornerRadius = 5
+            print("debug height = \(cell.wrapper.frame.size.height)")
+            return cell.wrapper.frame.size.height
         }
-        return 10
+        return 0
     }
 }

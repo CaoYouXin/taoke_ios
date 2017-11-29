@@ -38,7 +38,7 @@ class ProductListController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-                
+        
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -124,15 +124,15 @@ class ProductListController: UIViewController {
         
         productListLayout.delegate = self
         productListLayout.lineCount = 2
-        productListLayout.vItemSpace = 10//垂直间距10
-        productListLayout.hItemSpace = 10//水平间距10
+        productListLayout.vItemSpace = 10
+        productListLayout.hItemSpace = 10
         productListLayout.edge = UIEdgeInsets.zero
         
-                RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
+        RxBus.shared.asObservable(event: Events.WaterFallLayout.self)
             .throttle(RxTimeInterval(1), latest: true, scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .rxSchedulerHelper()
             .subscribe { event in
-                            }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
         
         let productCellFactory: (UICollectionView, Int, CouponItem) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
@@ -141,7 +141,7 @@ class ProductListController: UIViewController {
                 if let tmp = image {
                     self.sizeCache[element.pictUrl!] = tmp.size
                 }
-                                RxBus.shared.post(event: Events.WaterFallLayout())
+                RxBus.shared.post(event: Events.WaterFallLayout())
             })
             
             if let constraint = (cell.noCouponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {

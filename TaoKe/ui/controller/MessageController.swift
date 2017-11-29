@@ -6,7 +6,6 @@ import ELWaterFallLayout
 
 class MessageController: UIViewController {
     
-    @IBOutlet weak var scrollWrapper: UIScrollView!
     @IBOutlet weak var messageList: UICollectionView!
     
     private let disposeBag = DisposeBag()
@@ -25,19 +24,19 @@ class MessageController: UIViewController {
     }
     
     private func initScroll() {
-        scrollWrapper.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+        messageList.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.messageListHelper?.refresh()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.scrollWrapper.mj_header.endRefreshing()
+                self.messageList.mj_header.endRefreshing()
             }
         })
         
-        scrollWrapper.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
+        messageList.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.messageListHelper?.loadMore()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.scrollWrapper.mj_footer.endRefreshing()
+                self.messageList.mj_footer.endRefreshing()
             }
         })
     }
@@ -73,6 +72,10 @@ class MessageController: UIViewController {
             cell.content.textAlignment = .left;
             cell.content.numberOfLines = 0;
             cell.content.sizeToFit()
+            
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor("#FFD500").cgColor
+            cell.layer.cornerRadius = 5
             
             RxBus.shared.post(event: Events.WaterFallLayout())
             return cell
@@ -112,11 +115,7 @@ class MessageController: UIViewController {
 extension MessageController: ELWaterFlowLayoutDelegate  {
     func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
         if let cell = self.messageList.cellForItem(at: IndexPath(row: index, section: 0)) as? MessageCell  {
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor("#FFD500").cgColor
-            cell.layer.cornerRadius = 5
-            print("debug height = \(cell.wrapper.frame.size.height)")
-            return cell.wrapper.frame.size.height
+            return cell.title.frame.size.height + cell.time.frame.size.height + cell.content.frame.size.height + CGFloat(40)
         }
         return 0
     }

@@ -10,7 +10,6 @@ import UIKit
 
 class MessageCell: UICollectionViewCell {
     
-    @IBOutlet weak var wrapper: UIStackView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var content: UILabel!

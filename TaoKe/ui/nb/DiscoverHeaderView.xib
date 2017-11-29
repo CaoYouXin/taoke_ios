@@ -124,7 +124,7 @@
             <connections>
                 <outlet property="brandList" destination="VDq-1i-Bt0" id="niu-Bl-F4c"/>
                 <outlet property="brandListFlowLayout" destination="rJd-fd-C4f" id="fCZ-fc-vyv"/>
-                <outlet property="brandListHeightContraint" destination="Oqo-bB-EjU" id="SzX-mB-fsE"/>
+                <outlet property="brandListHeightConstraint" destination="Oqo-bB-EjU" id="xWv-8R-dGQ"/>
                 <outlet property="couponTab" destination="V0x-6g-GB6" id="EDu-as-cHY"/>
                 <outlet property="slideshow" destination="pme-Ez-pM7" id="pLS-Q1-C9R"/>
             </connections>

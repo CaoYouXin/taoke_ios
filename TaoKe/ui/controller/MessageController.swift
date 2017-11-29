@@ -10,6 +10,7 @@ class MessageController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private var messageListHelper: MVCHelper<MessageView>?
+    private var cache: [Int:CGFloat] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,9 +67,12 @@ class MessageController: UIViewController {
             cell.time.text = element.dateStr
             cell.content.text = element.content
             
+            cell.title.preferredMaxLayoutWidth = self.view.frame.width - 40
             cell.title.textAlignment = .left;
             cell.title.numberOfLines = 0;
             cell.title.sizeToFit()
+            
+            cell.content.preferredMaxLayoutWidth = self.view.frame.width - 40
             cell.content.textAlignment = .left;
             cell.content.numberOfLines = 0;
             cell.content.sizeToFit()
@@ -76,6 +80,8 @@ class MessageController: UIViewController {
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor("#FFD500").cgColor
             cell.layer.cornerRadius = 5
+            
+            self.cache[row] = cell.title.frame.size.height + cell.time.frame.size.height + cell.content.frame.size.height + CGFloat(40)
             
             RxBus.shared.post(event: Events.WaterFallLayout())
             return cell
@@ -114,9 +120,6 @@ class MessageController: UIViewController {
 
 extension MessageController: ELWaterFlowLayoutDelegate  {
     func el_flowLayout(_ flowLayout: ELWaterFlowLayout, heightForRowAt index: Int) -> CGFloat {
-        if let cell = self.messageList.cellForItem(at: IndexPath(row: index, section: 0)) as? MessageCell  {
-            return cell.title.frame.size.height + cell.time.frame.size.height + cell.content.frame.size.height + CGFloat(40)
-        }
-        return 0
+        return self.cache[index] ?? 0
     }
 }

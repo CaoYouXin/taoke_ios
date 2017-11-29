@@ -79,12 +79,10 @@ class MessageController: UIViewController {
             cell.layer.borderColor = UIColor("#FFD500").cgColor
             cell.layer.cornerRadius = 5
             
-            print("debug 1 = \(cell.title.frame.size.height)")
-            print("debug 2 = \(cell.time.frame.size.height)")
-            print("debug 3 = \(cell.content.frame.size.height)")
-            self.cache[row] = cell.title.frame.size.height + cell.time.frame.size.height + cell.content.frame.size.height + CGFloat(45)
-            
-            RxBus.shared.post(event: Events.WaterFallLayout())
+            if self.cache[row] == nil {
+                self.cache[row] = cell.title.frame.size.height + cell.time.frame.size.height * 2 + cell.content.frame.size.height + CGFloat(45)
+                RxBus.shared.post(event: Events.WaterFallLayout())
+            }
             return cell
         }
         

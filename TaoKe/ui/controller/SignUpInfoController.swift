@@ -28,7 +28,7 @@ class SignUpInfoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))
+        backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))
         let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
         eyeIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
         passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
@@ -59,7 +59,7 @@ class SignUpInfoController: UIViewController {
         password.rx.text.orEmpty
             .throttle(0.3, scheduler: MainScheduler.instance)
             .distinctUntilChanged().bind(to: binder).disposed(by: disposeBag)
-  
+        
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         backIcon.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
@@ -74,7 +74,7 @@ class SignUpInfoController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {

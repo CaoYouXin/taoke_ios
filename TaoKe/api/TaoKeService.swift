@@ -38,8 +38,8 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_ENROLL = "tbk/user/apply/4/agent"
 
-//    public static let HOST = "http://192.168.1.115:8080/api/"
-    public static let HOST = "http://server.tkmqr.com:8080/api/"
+    public static let HOST = "http://192.168.1.115:8080/api/"
+//    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     private static var instance: TaoKeProtocol?
 

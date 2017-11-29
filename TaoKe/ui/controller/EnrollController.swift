@@ -3,7 +3,7 @@ import UIKit
 import FontAwesomeKit
 
 class EnrollController: UIViewController, UITextViewDelegate {
-
+    
     @IBOutlet weak var enrollSpec: UILabel!
     @IBOutlet weak var submitBtn: UILabel!
     @IBOutlet weak var announcement: UITextView!
@@ -32,7 +32,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -75,10 +75,10 @@ class EnrollController: UIViewController, UITextViewDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         submitBtn.addGestureRecognizer(tapGestureRecognizer)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     @objc private func back() {
         self.navigationController?.popViewController(animated: true)

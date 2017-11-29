@@ -52,11 +52,12 @@ class MVCHelper<T> {
                 case 0:
                     return self.dataSource!.loadCacheProxy()
                 case 1:
-                    return self.dataSource!.refreshProxy().map({ (data) -> [T] in
+                    self.data = []
+                    return Observable.empty().concat(self.dataSource!.refreshProxy().map({ (data) -> [T] in
                         self.data = []
                         self.data.append(contentsOf: data)
                         return self.data
-                    })
+                    }))
                 case 2:
                     return self.dataSource!.loadMoreProxy().map({ (data) -> [T] in
                         self.data.append(contentsOf: data)

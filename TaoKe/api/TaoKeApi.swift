@@ -3,8 +3,8 @@ import RxSwift
 
 class TaoKeApi {
     
-//    private static var CDN = "http://192.168.1.115:8070/"
-    private static var CDN = "http://server.tkmqr.com:8070/"
+    private static var CDN = "http://192.168.1.115:8070/"
+//    private static var CDN = "http://server.tkmqr.com:8070/"
     
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
@@ -318,6 +318,12 @@ class TaoKeApi {
             .map({ (taoKeData) -> String in
                 return (taoKeData?.body as? String)!
             })
+    }
+    
+    public static func withDraw(_ amount: String) -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_SEND_WITHDRAW.replacingOccurrences(of: "{amount}", with: amount), auth: (UserData.get()?.token)!)
+            .handleResult()
     }
     
 }

@@ -28,7 +28,7 @@ target 'TaoKe' do
   pod 'ImageSlideshow'
   pod 'ImageSlideshow/Kingfisher'
   pod 'TabLayoutView'
-  pod 'ELWaterFallLayout'
+  pod 'ELWaterFallLayout', :git => 'https://github.com/NicolasKim/ELWaterFallLayout.git'
   pod 'Toast-Swift', '~> 2.0.0'
   pod 'EAIntroView'
   pod 'QRCode'

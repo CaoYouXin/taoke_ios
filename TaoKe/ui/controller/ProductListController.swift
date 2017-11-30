@@ -211,16 +211,21 @@ class ProductListController: UIViewController {
             }
         })
         
-        productList.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-            self.productListHelper?.loadMore()
+        let customFooter = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.productList.mj_footer.endRefreshingWithNoMoreData()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.productList.mj_footer.isHidden = true
-                self.productList.mj_footer.isHidden = false
+                self.productList.mj_footer.resetNoMoreData()
             }
         })
+        customFooter?.setTitle("我们是有底线的！😊", for: .noMoreData)
+        customFooter?.setTitle("我们是有底线的！😊", for: .idle)
+        customFooter?.setTitle("我们是有底线的！😊", for: .pulling)
+        customFooter?.setTitle("我们是有底线的！😊", for: .refreshing)
+        customFooter?.setTitle("我们是有底线的！😊", for: .willRefresh)
+        productList.mj_footer = customFooter
         
-        productList.mj_footer.isAutomaticallyHidden = false
+        productList.mj_footer.isAutomaticallyHidden = true
     }
     
     @objc private func back() {

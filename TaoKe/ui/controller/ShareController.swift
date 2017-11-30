@@ -47,7 +47,7 @@ class ShareController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -381,7 +381,7 @@ class ShareController: UIViewController {
                 }))
                 self.present(alert, animated: true)
             })
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                default:
+        default:
             break
         }
     }

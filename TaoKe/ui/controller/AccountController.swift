@@ -129,10 +129,8 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(teamController, animated: true)
             break
         case helpReportBtn:
-            let alert = UIAlertController(title: "", message: "待开发", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true)
+            let helpController = UIStoryboard(name: "HelpReport", bundle: nil).instantiateViewController(withIdentifier: "HelpController") as! HelpController
+            self.navigationController?.pushViewController(helpController, animated: true)
             break
         case aboutBtn:
             let aboutController = UIStoryboard(name: "About", bundle: nil).instantiateViewController(withIdentifier: "AboutController") as! AboutController

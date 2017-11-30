@@ -41,10 +41,6 @@ class DiscoverController: UIViewController {
         RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
-                print("debug->brands height = \(self.discoverHeaderView!.brandList.frame.size.height)")
-                if let constraint = (self.discoverHeaderView!.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
-                    print("debug->look height = \(constraint.constant)")
-                }
                 self.couponList.setContentOffset(CGPoint(x: 0, y: 1 - self.discoverHeaderView!.maximumContentHeight), animated: false)
             }.disposed(by: disposeBag)
         
@@ -61,7 +57,6 @@ class DiscoverController: UIViewController {
             }else if height == 736 {
                 adjust += 16
             }
-            print("adjust = \(adjust)")
             headerView.maxContentHeight += adjust
             
             couponList.addSubview(headerView)

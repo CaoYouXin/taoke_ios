@@ -110,10 +110,8 @@ class ChartController: UIViewController, UITextFieldDelegate {
             self.present(alert, animated: true)
             break;
         case orderDetails:
-            let alert = UIAlertController(title: "", message: "待开发", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
-            }))
-            self.present(alert, animated: true)
+            let ordersController = UIStoryboard(name: "Orders", bundle: nil).instantiateViewController(withIdentifier: "OrdersController") as! OrdersController
+            self.navigationController?.pushViewController(ordersController, animated: true)
             break;
         default:
             break;

@@ -30,6 +30,7 @@
 		2B7B95381FCFBADD0023A0D6 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95371FCFBADD0023A0D6 /* HelpView.swift */; };
 		2B7B953A1FCFBC9E0023A0D6 /* HelpDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95391FCFBC9E0023A0D6 /* HelpDataSource.swift */; };
 		2B7B953C1FCFC28A0023A0D6 /* HelpDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B953B1FCFC28A0023A0D6 /* HelpDetailController.swift */; };
+		2B7B953E1FCFC4B50023A0D6 /* ReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B953D1FCFC4B50023A0D6 /* ReportController.swift */; };
 		2B8221861FC9443B00B695A4 /* ShareApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8221851FC9443B00B695A4 /* ShareApp.storyboard */; };
 		2B8221881FC944B600B695A4 /* ShareAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8221871FC944B600B695A4 /* ShareAppController.swift */; };
 		2B82218A1FC94F5C00B695A4 /* ShareTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8221891FC94F5C00B695A4 /* ShareTemplateCell.swift */; };
@@ -116,6 +117,7 @@
 		2B7B95371FCFBADD0023A0D6 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		2B7B95391FCFBC9E0023A0D6 /* HelpDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDataSource.swift; sourceTree = "<group>"; };
 		2B7B953B1FCFC28A0023A0D6 /* HelpDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDetailController.swift; sourceTree = "<group>"; };
+		2B7B953D1FCFC4B50023A0D6 /* ReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportController.swift; sourceTree = "<group>"; };
 		2B8221851FC9443B00B695A4 /* ShareApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShareApp.storyboard; sourceTree = "<group>"; };
 		2B8221871FC944B600B695A4 /* ShareAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAppController.swift; sourceTree = "<group>"; };
 		2B8221891FC94F5C00B695A4 /* ShareTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTemplateCell.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				2B8469021FCE8158006F0176 /* ChartController.swift */,
 				2B7B95351FCFB9420023A0D6 /* HelpController.swift */,
 				2B7B953B1FCFC28A0023A0D6 /* HelpDetailController.swift */,
+				2B7B953D1FCFC4B50023A0D6 /* ReportController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				2B45D8861FC69FBF00D1CBFE /* StringMd5.swift in Sources */,
 				F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */,
 				F98D01191FBD73C7003A3F4F /* ShareImageCell.swift in Sources */,
+				2B7B953E1FCFC4B50023A0D6 /* ReportController.swift in Sources */,
 				2B7B953C1FCFC28A0023A0D6 /* HelpDetailController.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,
 				2B1466A71FCD36B600FBE98B /* TeamDataCell.swift in Sources */,

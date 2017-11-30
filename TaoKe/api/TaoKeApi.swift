@@ -345,4 +345,10 @@ class TaoKeApi {
             })
     }
     
+    public static func report(_ input: String) -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_REPORT, auth: (UserData.get()?.token)!, data: ["report": input])
+            .handleResult()
+    }
+    
 }

@@ -377,7 +377,11 @@ class ShareController: UIViewController {
         case copyIcon, copyText:
             let _ = generateShareText().subscribe(onNext: { (shareText) in
                 let alert = UIAlertController(title: "分享文案已经复制到剪切板", message: shareText, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "去微信粘贴", style: .cancel, handler: { (action) in
+                    let url = URL(string: "weixin://")
+                    if UIApplication.shared.canOpenURL(url!) {
+                        UIApplication.shared.open(url!, options: [:])
+                    }
                 }))
                 self.present(alert, animated: true)
             })

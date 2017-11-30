@@ -293,6 +293,12 @@ class TaoKeApi {
             })
     }
     
+    public static func readMessage(_ id: Int64) {
+        TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_READ_MSG.replacingOccurrences(of: "{id}", with: "\(id)"), auth: (UserData.get()?.token)!)
+            .subscribe().dispose()
+    }
+    
     public static func getCanDraw() -> Observable<String> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_USER_AMOUNT, auth: (UserData.get()?.token)!)

@@ -74,6 +74,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
                 amountTooLow.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
                 }))
                 self.present(amountTooLow, animated: true)
+                return;
             }
             
             canDrawState = false

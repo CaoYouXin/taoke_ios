@@ -60,6 +60,8 @@ class MessageController: UIViewController {
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor("#ffd500").cgColor
             cell.layer.cornerRadius = 5
+            
+            TaoKeApi.readMessage(element.id!)
 
             return cell
         }

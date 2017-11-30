@@ -1,3 +1,10 @@
+//
+//  MVCHelper.swift
+//  TaoKe
+//
+//  Created by jason tsang on 11/13/17.
+//  Copyright © 2017 jason tsang. All rights reserved.
+//
 import CleanroomLogger
 import RxSwift
 import RxCocoa
@@ -27,13 +34,6 @@ class MVCHelper<T> {
     }
     
     func refresh() {
-        if data.count > 0 {
-            var toDelete: [IndexPath] = []
-            for row in 0 ..< data.count {
-                toDelete.append(IndexPath(row: row, section: 0))
-            }
-            collectionView.deleteItems(at: toDelete)
-        }
         viewModel.active = false
         mode = 1
         viewModel.active = true
@@ -60,10 +60,10 @@ class MVCHelper<T> {
                     return self.dataSource!.loadCacheProxy()
                 case 1:
                     return self.dataSource!.refreshProxy().map({ (data) -> [T] in
-                            self.data = []
-                            self.data.append(contentsOf: data)
-                            return self.data
-                        })
+                        self.data = []
+                        self.data.append(contentsOf: data)
+                        return self.data
+                    })
                 case 2:
                     return self.dataSource!.loadMoreProxy().map({ (data) -> [T] in
                         self.data.append(contentsOf: data)
@@ -73,7 +73,7 @@ class MVCHelper<T> {
                     return Observable.empty()
                 }
         }).rxSchedulerHelper()
-        
+
         if let handler = errorHandler {
             signal = signal.catchError({ (error) -> Observable<[T]> in
                 return handler(error)
@@ -86,12 +86,12 @@ class MVCHelper<T> {
         }
         
         signal = signal.flatMap({ (origin) -> Observable<[T]> in
-            var data = origin
-            if let hook = self.dataHook {
-                data = hook(origin)
-            }
-            return Observable.just(data)
-        })
+                var data = origin
+                if let hook = self.dataHook {
+                    data = hook(origin)
+                }
+                return Observable.just(data)
+            })
         
         signal.bind(to: collectionView.rx.items)(cellFactory!)
             .disposed(by: disposeBag)

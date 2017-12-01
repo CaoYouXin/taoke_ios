@@ -33,13 +33,15 @@ class SearchController: PYSearchViewController {
 
         let menuItems = ["聚划算", "好券"]
         let menuView = BTNavigationDropdownMenu(title: BTTitle.index(1), items: menuItems)
-        menuView.cellTextLabelColor = UIColor("#424242")
+        menuView.menuTitleColor = UIColor("#424242")
+        menuView.navigationBarTitleFont = UIFont.systemFont(ofSize: 15)
         menuView.arrowTintColor = UIColor("#424242")
-        menuView.cellTextLabelFont = UIFont.systemFont(ofSize: 15)
-
+    
         menuView.cellBackgroundColor = UIColor("#ffb74d")
         menuView.cellSeparatorColor = .white
         menuView.cellSelectionColor = UIColor("#ffa726")
+        menuView.cellTextLabelColor = UIColor("#424242")
+        menuView.cellTextLabelFont = UIFont.systemFont(ofSize: 15)
 
         menuView.didSelectItemAtIndexHandler = {[weak self] (indexPath: Int) -> () in
             print("Did select item at index: \(indexPath)")

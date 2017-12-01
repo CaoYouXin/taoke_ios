@@ -3,7 +3,7 @@ import RxSwift
 
 class TaoKeApi {
     
-    private static var CDN = "http://192.168.0.115:8070/"
+    private static var CDN = "http://192.168.0.136:8070/"
 //    private static var CDN = "http://server.tkmqr.com:8070/"
     
     public static func verification(phone: String) -> Observable<TaoKeData?> {
@@ -293,6 +293,12 @@ class TaoKeApi {
             })
     }
     
+    public static func readMessage(_ id: Int64) {
+        TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_READ_MSG.replacingOccurrences(of: "{id}", with: "\(id)"), auth: (UserData.get()?.token)!)
+            .subscribe().dispose()
+    }
+    
     public static func getCanDraw() -> Observable<String> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_USER_AMOUNT, auth: (UserData.get()?.token)!)
@@ -349,6 +355,35 @@ class TaoKeApi {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_REPORT, auth: (UserData.get()?.token)!, data: ["report": input])
             .handleResult()
+    }
+    
+    public static func getOrderList(_ type: OrderFetchType, _ pageNo: Int) -> Observable<[OrderView]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_ORDER_LIST
+                .replacingOccurrences(of: "{type}", with: "\(type.rawValue)")
+                .replacingOccurrences(of: "{pageNo}", with: "\(pageNo)"), auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> [OrderView] in
+                var result: [OrderView] = []
+                if let recs = taoKeData?.getList() {
+                    for rec in recs {
+                        let item = OrderView()
+                        item.itemName = rec["itemTitle"] as? String
+                        item.itemStoreName = rec["shopTitle"] as? String
+                        item.dateStr = rec["createTime"] as? String
+                        item.status = rec["orderStatus"] as? String
+                        item.itemTradePrice = rec["payedAmount"] as? String
+                        item.commission = rec["commissionRate"] as? String
+                        item.estimateIncome = rec["estimateIncome"] as? String
+                        item.estimateEffect = rec["estimateEffect"] as? String
+                        item.picUrl = rec["picUrl"] as? String
+                        item.isSelf = rec["self"] as? Bool
+                        item.teammateName = rec["teammateName"] as? String
+                        result.append(item)
+                    }
+                }
+                return result
+            })
     }
     
 }

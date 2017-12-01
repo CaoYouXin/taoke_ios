@@ -67,31 +67,20 @@ class DetailController: UIViewController {
         newspaperOIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#424242"))
         self.detailViewIcon.image = newspaperOIcon?.image(with: CGSize(width: 20, height: 20))
         
-        if let constraint = (self.couponInfoWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 20
-        }
-        
-        if let constraint = (self.couponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 30
-        }
-        
-        if let constraint = (self.noCouponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = self.couponItem?.couponInfo == nil ? 30 : 0
-        }
-        
-        if let constraint = (self.couponPriceWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 30
-        }
-        
-        if let constraint = (self.earnWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 20
-        }
-        
         if couponItem?.couponInfo == nil {
+            couponWrapper.isHidden = true
+            couponInfoWrapper.isHidden = true
+            noCouponWrapper.isHidden = false
+            couponPriceWrapper.isHidden = true
             
             self.couponPriceBefore.text = "现价 ¥ \(couponItem?.zkFinalPrice! ?? "")"
             self.saleVolume.text = "已售\(couponItem?.volume! ?? 0)件"
         } else {
+            
+            couponWrapper.isHidden = false
+            couponInfoWrapper.isHidden = false
+            noCouponWrapper.isHidden = true
+            couponPriceWrapper.isHidden = false
             
             self.detailPriceAfterIcon.layer.cornerRadius = 2;
             self.detailPriceAfterIcon.layer.masksToBounds = true;
@@ -114,10 +103,38 @@ class DetailController: UIViewController {
         }
         
         if !(UserData.get()?.isBuyer())! {
+            earnWrapper.isHidden = false
+            buyerWrapper.isHidden = true
+            agentShare.isHidden = false
+            
             let moneyIcon = FAKFontAwesome.moneyIcon(withSize: 16)
             moneyIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#757575"))
             self.detailCommissionIcon.image = moneyIcon?.image(with: CGSize(width: 16, height: 16))
             self.detailCommission.text = "分享预计赚 ¥ \(couponItem?.earnPrice! ?? "")"
+        } else {
+            earnWrapper.isHidden = true
+            buyerWrapper.isHidden = false
+            agentShare.isHidden = true
+        }
+        
+        if let constraint = (self.couponInfoWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 20
+        }
+        
+        if let constraint = (self.couponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 30
+        }
+        
+        if let constraint = (self.noCouponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = self.couponItem?.couponInfo == nil ? 30 : 0
+        }
+        
+        if let constraint = (self.couponPriceWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 30
+        }
+        
+        if let constraint = (self.earnWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
+            constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 20
         }
         
         if let constraint = (self.agentShare.constraints.filter{$0.firstAttribute == .height}.first) {

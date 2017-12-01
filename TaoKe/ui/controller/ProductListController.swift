@@ -150,6 +150,34 @@ class ProductListController: UIViewController {
                 RxBus.shared.post(event: Events.WaterFallLayout())
             })
             
+            if element.couponInfo != nil {
+                cell.noCouponWrapper.isHidden = true
+                cell.couponWrapper.isHidden = false
+                cell.couponInfo.isHidden = false
+                
+                cell.priceBefore.attributedText = NSAttributedString(string: "¥ \(element.zkFinalPrice!)", attributes: [NSAttributedStringKey.strikethroughStyle: 1])
+                cell.priceAfter.text = "¥ \(element.couponPrice!)"
+                cell.volume.text = "月销\(element.volume!)笔"
+                cell.couponInfo.text = "券 | \(element.couponInfo!)"
+            } else {
+                cell.noCouponWrapper.isHidden = false
+                cell.couponWrapper.isHidden = true
+                cell.couponInfo.isHidden = true
+                
+                cell.price.text = "¥ \(element.zkFinalPrice!)"
+                cell.sales.text = "月销\(element.volume!)笔"
+            }
+            
+            if !(UserData.get()?.isBuyer())! {
+                cell.earnWrapper.isHidden = false
+                
+                cell.earn.text = " 分享赚 ¥ \(element.earnPrice!)  "
+                cell.earn.layer.cornerRadius = 8
+                cell.earn.clipsToBounds = true
+            } else {
+                cell.earnWrapper.isHidden = true
+            }
+            
             if let constraint = (cell.noCouponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
                 constraint.constant = element.couponInfo == nil ? 30 : 0
             }
@@ -163,22 +191,6 @@ class ProductListController: UIViewController {
             }
             
             cell.title.text = element.title
-            
-            if element.couponInfo != nil {
-                cell.priceBefore.attributedText = NSAttributedString(string: "¥ \(element.zkFinalPrice!)", attributes: [NSAttributedStringKey.strikethroughStyle: 1])
-                cell.priceAfter.text = "¥ \(element.couponPrice!)"
-                cell.volume.text = "月销\(element.volume!)笔"
-                cell.couponInfo.text = "券 | \(element.couponInfo!)"
-            } else {
-                cell.price.text = "¥ \(element.zkFinalPrice!)"
-                cell.sales.text = "月销\(element.volume!)笔"
-            }
-            
-            if !(UserData.get()?.isBuyer())! {
-                cell.earn.text = " 分享赚 ¥ \(element.earnPrice!)  "
-                cell.earn.layer.cornerRadius = 8
-                cell.earn.clipsToBounds = true
-            }
             
             return cell
         }
@@ -216,16 +228,21 @@ class ProductListController: UIViewController {
             }
         })
         
-        productList.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-            self.productListHelper?.loadMore()
+        let customFooter = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.productList.mj_footer.endRefreshingWithNoMoreData()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.productList.mj_footer.isHidden = true
-                self.productList.mj_footer.isHidden = false
+                self.productList.mj_footer.resetNoMoreData()
             }
         })
+        customFooter?.setTitle("我们是有底线的！😊", for: .noMoreData)
+        customFooter?.setTitle("我们是有底线的！😊", for: .idle)
+        customFooter?.setTitle("我们是有底线的！😊", for: .pulling)
+        customFooter?.setTitle("我们是有底线的！😊", for: .refreshing)
+        customFooter?.setTitle("我们是有底线的！😊", for: .willRefresh)
+        productList.mj_footer = customFooter
         
-        productList.mj_footer.isAutomaticallyHidden = false
+        productList.mj_footer.isAutomaticallyHidden = true
     }
     
     @objc private func back() {

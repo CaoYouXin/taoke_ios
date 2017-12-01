@@ -41,10 +41,6 @@ class DiscoverController: UIViewController {
         RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
-                print("debug->brands height = \(self.discoverHeaderView!.brandList.frame.size.height)")
-                if let constraint = (self.discoverHeaderView!.brandList.constraints.filter{$0.firstAttribute == .height}.first) {
-                    print("debug->look height = \(constraint.constant)")
-                }
                 self.couponList.setContentOffset(CGPoint(x: 0, y: 1 - self.discoverHeaderView!.maximumContentHeight), animated: false)
             }.disposed(by: disposeBag)
         
@@ -61,7 +57,6 @@ class DiscoverController: UIViewController {
             }else if height == 736 {
                 adjust += 16
             }
-            print("adjust = \(adjust)")
             headerView.maxContentHeight += adjust
             
             couponList.addSubview(headerView)
@@ -171,13 +166,20 @@ class DiscoverController: UIViewController {
             }
         })
         
-        couponList.mj_footer = MJRefreshAutoNormalFooter(refreshingBlock: {
-            self.couponListHelper?.loadMore()
+        let customFooter = MJRefreshAutoNormalFooter(refreshingBlock: {
+            self.couponList.mj_footer.endRefreshingWithNoMoreData()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
-                self.couponList.mj_footer.endRefreshing()
+                self.couponList.mj_footer.resetNoMoreData()
             }
         })
+        customFooter?.setTitle("我们是有底线的！😊", for: .noMoreData)
+        customFooter?.setTitle("我们是有底线的！😊", for: .idle)
+        customFooter?.setTitle("我们是有底线的！😊", for: .pulling)
+        customFooter?.setTitle("我们是有底线的！😊", for: .refreshing)
+        customFooter?.setTitle("我们是有底线的！😊", for: .willRefresh)
+        
+        couponList.mj_footer = customFooter
     }
     
     private func initFloatingButton() {

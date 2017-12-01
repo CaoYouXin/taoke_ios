@@ -42,10 +42,15 @@ class ProductListController: UIViewController {
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
-        navigationItem.title = homeBtn!.name!
+        if homeBtn != nil {
+            navigationItem.title = homeBtn!.name!
+        }
         
         initSortBar()
-        initProductList()
+        
+        if homeBtn != nil {
+            initProductList()
+        }
     }
     
     private func initSortBar() {

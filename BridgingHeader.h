@@ -15,6 +15,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import <MEVFloatingButton/UIScrollView+FloatingButton.h>
 #import <EAIntroView/EAIntroView.h>
+#import <PYSearch/PYSearch.h>
 @import GSKStretchyHeaderView;
 
 #endif /* BridgingHeader_h */

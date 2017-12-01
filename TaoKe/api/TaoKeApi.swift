@@ -357,4 +357,33 @@ class TaoKeApi {
             .handleResult()
     }
     
+    public static func getOrderList(_ type: OrderFetchType, _ pageNo: Int) -> Observable<[OrderView]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_ORDER_LIST
+                .replacingOccurrences(of: "{type}", with: "\(type.rawValue)")
+                .replacingOccurrences(of: "{pageNo}", with: "\(pageNo)"), auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> [OrderView] in
+                var result: [OrderView] = []
+                if let recs = taoKeData?.getList() {
+                    for rec in recs {
+                        let item = OrderView()
+                        item.itemName = rec["itemTitle"] as? String
+                        item.itemStoreName = rec["shopTitle"] as? String
+                        item.dateStr = rec["createTime"] as? String
+                        item.status = rec["orderStatus"] as? String
+                        item.itemTradePrice = rec["payedAmount"] as? String
+                        item.commission = rec["commissionRate"] as? String
+                        item.estimateIncome = rec["estimateIncome"] as? String
+                        item.estimateEffect = rec["estimateEffect"] as? String
+                        item.picUrl = rec["picUrl"] as? String
+                        item.isSelf = rec["self"] as? Bool
+                        item.teammateName = rec["teammateName"] as? String
+                        result.append(item)
+                    }
+                }
+                return result
+            })
+    }
+    
 }

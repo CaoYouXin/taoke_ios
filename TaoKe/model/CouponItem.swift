@@ -23,4 +23,8 @@ class CouponItem {
     public var couponPrice: String?
     public var earnPrice: String?
     public var tkLink: String?
+    
+    public var numEarn: Float64?
+    public var numCoupon: Float64?
+    public var numPrice: Float64?
 }

@@ -9,31 +9,35 @@ import MJRefresh
 
 class ProductListController: UIViewController {
     
-    @IBOutlet weak var sortMultiple: UILabel!
-    
     @IBOutlet weak var sortSales: UILabel!
     
+    @IBOutlet weak var sortCommissionWrapper: UIView!
     @IBOutlet weak var sortCommission: UILabel!
+    @IBOutlet weak var sortCommissionUp: UIImageView!
+    @IBOutlet weak var sortCommissionDown: UIImageView!
+    
+    @IBOutlet weak var sortCouponWrapper: UIView!
+    @IBOutlet weak var sortCoupon: UILabel!
+    @IBOutlet weak var sortCouponUp: UIImageView!
+    @IBOutlet weak var sortCouponDown: UIImageView!
     
     @IBOutlet weak var sortPriceWrapper: UIView!
-    
     @IBOutlet weak var sortPrice: UILabel!
-    
     @IBOutlet weak var sortPriceUp: UIImageView!
-    
     @IBOutlet weak var sortPriceDown: UIImageView!
     
     @IBOutlet weak var productList: UICollectionView!
     
     var homeBtn: HomeBtn?
     
-    private var sort: Int = 0
+    private var sortHelper: SortHelper?
     
     private var sizeCache: [String: CGSize] = [:]
     
     private let disposeBag = DisposeBag()
     
     private var productListHelper: MVCHelper<CouponItem>?
+    private var productDataSource: ProductDataSource?
     
     override func viewDidLoad() {
         
@@ -44,81 +48,41 @@ class ProductListController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         if homeBtn != nil {
             navigationItem.title = homeBtn!.name!
-        }
-        
-        initSortBar()
-        
-        if homeBtn != nil {
             initProductList()
+            initSortBar()
         }
     }
     
     private func initSortBar() {
+        print("debug = \(sortCommissionWrapper.restorationIdentifier!)")
+        print("debug = \(sortCouponWrapper.restorationIdentifier!)")
+        
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(updateSortBar))
-        sortMultiple.addGestureRecognizer(tapGestureRecognizer)
-        
-        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(updateSortBar))
         sortSales.addGestureRecognizer(tapGestureRecognizer)
-        
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(updateSortBar))
-        sortCommission.addGestureRecognizer(tapGestureRecognizer)
-        
+        sortCommissionWrapper.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(updateSortBar))
+        sortCouponWrapper.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(updateSortBar))
         sortPriceWrapper.addGestureRecognizer(tapGestureRecognizer)
         
-        let chevronUpIcon = FAKFontAwesome.chevronUpIcon(withSize: 8)
-        chevronUpIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
-        sortPriceUp.image = chevronUpIcon?.image(with: CGSize(width: 8, height: 8))
+        sortHelper = SortHelper()
+        sortHelper?.setup(id: sortSales.restorationIdentifier!, main: sortSales, directions: nil, types: [.sales, .sales], flag: false)
+        sortHelper?.setup(id: sortCommissionWrapper.restorationIdentifier!, main: sortCommission, directions: [sortCommissionUp, sortCommissionDown], types: [.commissionUp, .commissionDown], flag: true)
+        sortHelper?.setup(id: sortCouponWrapper.restorationIdentifier!, main: sortCoupon, directions: [sortCouponUp, sortCouponDown], types: [.couponUp, .couponDown], flag: true)
+        sortHelper?.setup(id: sortPriceWrapper.restorationIdentifier!, main: sortPrice, directions: [sortPriceUp, sortPriceDown], types: [.priceUp, .priceDown], flag: false)
         
-        let chevronDownIcon = FAKFontAwesome.chevronDownIcon(withSize: 8)
-        chevronDownIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
-        sortPriceDown.image = chevronDownIcon?.image(with: CGSize(width: 8, height: 8))
+        barClicked(on: sortSales)
     }
     
     @objc private func updateSortBar(_ sender: UITapGestureRecognizer) {
-        let grey400 = UIColor("#bdbdbd")
-        let grey900 = UIColor("#212121")
-        sortMultiple.textColor = grey400
-        sortSales.textColor = grey400
-        sortCommission.textColor = grey400
-        sortPrice.textColor = grey400
-        
-        let chevronUpIcon = FAKFontAwesome.chevronUpIcon(withSize: 8)
-        chevronUpIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey400)
-        sortPriceUp.image = chevronUpIcon?.image(with: CGSize(width: 8, height: 8))
-        
-        let chevronDownIcon = FAKFontAwesome.chevronDownIcon(withSize: 8)
-        chevronDownIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey400)
-        sortPriceDown.image = chevronDownIcon?.image(with: CGSize(width: 8, height: 8))
-        
-        switch sender.view! {
-        case sortMultiple:
-            sort = ProductDataSource.SORT_MULTIPLE
-            sortMultiple.textColor = grey900
-            break
-        case sortSales:
-            sort = ProductDataSource.SORT_SALES
-            sortSales.textColor = grey900
-            break
-        case sortCommission:
-            sort = ProductDataSource.SORT_COMMISSION
-            sortCommission.textColor = grey900
-            break
-        default:
-            sortPrice.textColor = grey900
-            if sort == ProductDataSource.SORT_PRICE_UP {
-                sort = ProductDataSource.SORT_PRICE_DOWN
-                let chevronDownIcon = FAKFontAwesome.chevronDownIcon(withSize: 8)
-                chevronDownIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey900)
-                sortPriceDown.image = chevronDownIcon?.image(with: CGSize(width: 8, height: 8))
-            } else {
-                sort = ProductDataSource.SORT_PRICE_UP
-                let chevronUpIcon = FAKFontAwesome.chevronUpIcon(withSize: 8)
-                chevronUpIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: grey900)
-                sortPriceUp.image = chevronUpIcon?.image(with: CGSize(width: 8, height: 8))
-            }
-            break
-        }
+        print(sender.view?.restorationIdentifier)
+        barClicked(on: sender.view!)
+    }
+    
+    private func barClicked(on: UIView) {
+        productDataSource?.sortBy = sortHelper?.calcSortBy(clickOn: on.restorationIdentifier!)
+        productListHelper?.refresh()
     }
     
     private func initProductList() {
@@ -195,14 +159,12 @@ class ProductListController: UIViewController {
             return cell
         }
         
-        let productDataSource = ProductDataSource(viewController: self, homeBtn: homeBtn)
+        productDataSource = ProductDataSource(viewController: self, homeBtn: homeBtn)
         
         productListHelper = MVCHelper<CouponItem>(productList)
         
         productListHelper?.set(cellFactory: productCellFactory)
         productListHelper?.set(dataSource: productDataSource)
-        
-        productListHelper?.refresh()
         
         let segue: AnyObserver<CouponItem> = NavigationSegue(
             fromViewController: self.navigationController!,

@@ -15,6 +15,8 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_HINT_LIST = "tbk/hints/{keyword}"
     public static let API_SEARCH_LIST = "tbk/search/{keyword}"
+    public static let API_TOP_SEARCH = "tbk/hints/top"
+    public static let API_JU_SEARCH = "tbk/ju/{keyword}";
 
     public static let API_MESSAGE_LIST = "msg/list/{pageNo}"
     public static let API_UNREAD_MSG = "msg/unread/count"
@@ -38,7 +40,7 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_ENROLL = "tbk/user/apply/4/agent"
 
-    public static let HOST = "http://192.168.0.136:8080/api/"
+    public static let HOST = "http://192.168.1.115:8080/api/"
 //    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     private static var instance: TaoKeProtocol?

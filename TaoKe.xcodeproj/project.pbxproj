@@ -43,6 +43,9 @@
 		2B8469031FCE8158006F0176 /* ChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8469021FCE8158006F0176 /* ChartController.swift */; };
 		2BD0FCF71FD0EF8A00F0D94A /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0FCF61FD0EF8A00F0D94A /* OrderCell.xib */; };
 		2BD0FCF91FD0FF5900F0D94A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCF81FD0FF5900F0D94A /* OrderCell.swift */; };
+		2BD0FCFB1FD13AFF00F0D94A /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */; };
+		2BD0FCFD1FD1532400F0D94A /* SortableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */; };
+		2BD0FCFF1FD156E400F0D94A /* SortHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCFE1FD156E400F0D94A /* SortHelper.swift */; };
 		2BFC39D11FCC469D007A041A /* Enroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BFC39D01FCC469C007A041A /* Enroll.storyboard */; };
 		2BFC39D31FCC480D007A041A /* EnrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC39D21FCC480D007A041A /* EnrollController.swift */; };
 		F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8BE1FB93DF4000BC49F /* DetailController.swift */; };
@@ -136,6 +139,9 @@
 		2B8469021FCE8158006F0176 /* ChartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartController.swift; sourceTree = "<group>"; };
 		2BD0FCF61FD0EF8A00F0D94A /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		2BD0FCF81FD0FF5900F0D94A /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
+		2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
+		2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableDataSource.swift; sourceTree = "<group>"; };
+		2BD0FCFE1FD156E400F0D94A /* SortHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHelper.swift; sourceTree = "<group>"; };
 		2BFC39D01FCC469C007A041A /* Enroll.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Enroll.storyboard; sourceTree = "<group>"; };
 		2BFC39D21FCC480D007A041A /* EnrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollController.swift; sourceTree = "<group>"; };
 		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -245,6 +251,7 @@
 				2B1466AC1FCDA3E900FBE98B /* MessageDataSource.swift */,
 				2B7B95391FCFBC9E0023A0D6 /* HelpDataSource.swift */,
 				2B4F89311FD00BB3004BC79D /* OrderDataSource.swift */,
+				2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -365,6 +372,7 @@
 			children = (
 				F97842051FC2AE06001954D3 /* RegExpUtil.swift */,
 				2B45D8851FC69FBF00D1CBFE /* StringMd5.swift */,
+				2BD0FCFE1FD156E400F0D94A /* SortHelper.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -431,6 +439,7 @@
 				2B7B953B1FCFC28A0023A0D6 /* HelpDetailController.swift */,
 				2B7B953D1FCFC4B50023A0D6 /* ReportController.swift */,
 				2B7B95411FCFEDE70023A0D6 /* OrdersController.swift */,
+				2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -565,6 +574,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/CleanroomLogger/CleanroomLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/EAIntroView/EAIntroView.framework",
@@ -578,6 +588,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MEVFloatingButton/MEVFloatingButton.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/PYSearch/PYSearch.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/RKValueTransformers/RKValueTransformers.framework",
@@ -596,6 +607,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BTNavigationDropdownMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CleanroomLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EAIntroView.framework",
@@ -609,6 +621,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MEVFloatingButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PYSearch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKValueTransformers.framework",
@@ -641,6 +654,7 @@
 				2B4F89301FD00B98004BC79D /* OrderView.swift in Sources */,
 				F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */,
 				F95361FF1FBD5677008A5819 /* ShareController.swift in Sources */,
+				2BD0FCFB1FD13AFF00F0D94A /* SearchResultController.swift in Sources */,
 				F97842021FC2A201001954D3 /* SignUpInfoController.swift in Sources */,
 				2B7B95361FCFB9420023A0D6 /* HelpController.swift in Sources */,
 				F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */,
@@ -662,6 +676,7 @@
 				F92DA5981FB1780800FDF3E4 /* RxHelper.swift in Sources */,
 				F97842061FC2AE06001954D3 /* RegExpUtil.swift in Sources */,
 				F90EA8101FB3E57600184D04 /* DiscoverHeaderView.swift in Sources */,
+				2BD0FCFD1FD1532400F0D94A /* SortableDataSource.swift in Sources */,
 				2B82218C1FC950AD00B695A4 /* ShareTemplateDataSource.swift in Sources */,
 				F95B203B1FB1A54200AC57E4 /* CouponTab.swift in Sources */,
 				F92DA5891FB14B7500FDF3E4 /* SearchController.swift in Sources */,
@@ -700,6 +715,7 @@
 				F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */,
 				F92DA5961FB169D600FDF3E4 /* TaoKeApi.swift in Sources */,
 				2B2F69FF1FC28696004D9B28 /* AboutController.swift in Sources */,
+				2BD0FCFF1FD156E400F0D94A /* SortHelper.swift in Sources */,
 				1812A85E074248BB0973763B /* UserData.swift in Sources */,
 				2B8469031FCE8158006F0176 /* ChartController.swift in Sources */,
 				2B1466AB1FCDA11300FBE98B /* MessageCell.swift in Sources */,

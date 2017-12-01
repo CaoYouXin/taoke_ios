@@ -32,6 +32,8 @@ target 'TaoKe' do
   pod 'Toast-Swift', '~> 2.0.0'
   pod 'EAIntroView'
   pod 'QRCode'
+  pod 'PYSearch'
+  pod 'BTNavigationDropdownMenu', :git => 'https://github.com/zkrige/BTNavigationDropdownMenu.git'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

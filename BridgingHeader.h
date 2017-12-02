@@ -16,6 +16,7 @@
 #import <MEVFloatingButton/UIScrollView+FloatingButton.h>
 #import <EAIntroView/EAIntroView.h>
 #import <PYSearch/PYSearch.h>
+#import <AlibcTradeSDK/AlibcTradeSDK.h>
 @import GSKStretchyHeaderView;
 
 #endif /* BridgingHeader_h */

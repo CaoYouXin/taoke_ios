@@ -3,6 +3,7 @@ import UIKit
 import RestKit
 import CleanroomLogger
 import UserNotifications
+import AlibcTradeBiz
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Log.error?.message(error!.localizedDescription)
             }
         }
+
+        AlibcTradeSDK.sharedInstance().asyncInit(success: { () in
+            print("alibc init success")
+            AlibcTradeSDK.sharedInstance().setIsForceH5(false)
+        }, failure: { (error) in
+            print("alibc init fail \(error.debugDescription)")
+        })
+        
         return true
     }
     

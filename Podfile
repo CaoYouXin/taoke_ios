@@ -4,7 +4,7 @@ platform :ios, '11.1'
 target 'TaoKe' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  
   # Pods for TaoKe
   pod 'RxSwift',    '~> 4.0'
   pod 'RxCocoa',    '~> 4.0'
@@ -34,6 +34,10 @@ target 'TaoKe' do
   pod 'QRCode'
   pod 'PYSearch'
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/zkrige/BTNavigationDropdownMenu.git'
+  
+  # Alibc
+  source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
+  pod 'AlibcTradeSDK', '~> 3.1'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

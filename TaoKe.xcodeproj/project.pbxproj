@@ -46,6 +46,7 @@
 		2BD0FCFB1FD13AFF00F0D94A /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */; };
 		2BD0FCFD1FD1532400F0D94A /* SortableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */; };
 		2BD0FCFF1FD156E400F0D94A /* SortHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCFE1FD156E400F0D94A /* SortHelper.swift */; };
+		2BD0FD011FD182F000F0D94A /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FD001FD182F000F0D94A /* SearchDataSource.swift */; };
 		2BFC39D11FCC469D007A041A /* Enroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BFC39D01FCC469C007A041A /* Enroll.storyboard */; };
 		2BFC39D31FCC480D007A041A /* EnrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC39D21FCC480D007A041A /* EnrollController.swift */; };
 		F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8BE1FB93DF4000BC49F /* DetailController.swift */; };
@@ -142,6 +143,7 @@
 		2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortableDataSource.swift; sourceTree = "<group>"; };
 		2BD0FCFE1FD156E400F0D94A /* SortHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHelper.swift; sourceTree = "<group>"; };
+		2BD0FD001FD182F000F0D94A /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		2BFC39D01FCC469C007A041A /* Enroll.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Enroll.storyboard; sourceTree = "<group>"; };
 		2BFC39D21FCC480D007A041A /* EnrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollController.swift; sourceTree = "<group>"; };
 		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				2B7B95391FCFBC9E0023A0D6 /* HelpDataSource.swift */,
 				2B4F89311FD00BB3004BC79D /* OrderDataSource.swift */,
 				2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */,
+				2BD0FD001FD182F000F0D94A /* SearchDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				F95361FF1FBD5677008A5819 /* ShareController.swift in Sources */,
 				2BD0FCFB1FD13AFF00F0D94A /* SearchResultController.swift in Sources */,
 				F97842021FC2A201001954D3 /* SignUpInfoController.swift in Sources */,
+				2BD0FD011FD182F000F0D94A /* SearchDataSource.swift in Sources */,
 				2B7B95361FCFB9420023A0D6 /* HelpController.swift in Sources */,
 				F92DA5921FB1528A00FDF3E4 /* TaoKeProtocol.swift in Sources */,
 				F9B65BE21FBBDCBB00413211 /* BrandDateSource.swift in Sources */,

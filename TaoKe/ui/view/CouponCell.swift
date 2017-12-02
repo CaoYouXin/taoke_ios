@@ -7,6 +7,7 @@ class CouponCell: UICollectionViewCell {
     @IBOutlet weak var couponTitle: UILabel!
     
     @IBOutlet weak var couponPriceBefore: UILabel!
+    @IBOutlet weak var volume: UILabel!
     
     @IBOutlet weak var couponPriceAfter: UILabel!
     

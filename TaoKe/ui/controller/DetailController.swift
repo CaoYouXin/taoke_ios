@@ -13,6 +13,7 @@ class DetailController: UIViewController {
     @IBOutlet weak var detailViewIcon: UIImageView!
     @IBOutlet weak var couponPriceWrapper: UIView!
     @IBOutlet weak var detailPriceAfterIcon: UILabel!
+    @IBOutlet weak var detailPriceAfterIconWidth: NSLayoutConstraint!
     @IBOutlet weak var detailPriceAfter: UILabel!
     @IBOutlet weak var noCouponWrapper: UIView!
     @IBOutlet weak var detailPriceBefore: UILabel!
@@ -68,13 +69,42 @@ class DetailController: UIViewController {
         self.detailViewIcon.image = newspaperOIcon?.image(with: CGSize(width: 20, height: 20))
         
         if couponItem?.couponInfo == nil {
-            couponWrapper.isHidden = true
             couponInfoWrapper.isHidden = true
-            noCouponWrapper.isHidden = false
-            couponPriceWrapper.isHidden = true
             
-            self.couponPriceBefore.text = "现价 ¥ \(couponItem?.zkFinalPrice! ?? "")"
-            self.saleVolume.text = "已售\(couponItem?.volume! ?? 0)件"
+            if couponItem?.commissionRate == nil {
+                couponWrapper.isHidden = false
+                noCouponWrapper.isHidden = true
+                couponPriceWrapper.isHidden = false
+                saleVolume.isHidden = true
+                
+                self.detailPriceAfterIcon.layer.cornerRadius = 2;
+                self.detailPriceAfterIcon.layer.masksToBounds = true;
+                self.detailPriceAfterIcon.layer.borderWidth = 1
+                self.detailPriceAfterIcon.layer.borderColor = UIColor("#f57c00").cgColor
+                self.detailPriceAfterIcon.text = "聚划算价"
+                self.detailPriceAfterIconWidth.constant = self.detailPriceAfterIcon.sizeThatFits(CGSize(width: 0, height: 0)).width + 10
+                
+                var text = "现价 ¥ \(couponItem?.zkFinalPrice! ?? "")"
+                var location = text.index(of: "¥")!.encodedOffset + 2
+                var range = NSRange(location: location, length: text.utf16.count - location)
+                var attributedText = NSMutableAttributedString(string: text)
+                attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle, value: NSUnderlineStyle.patternSolid.rawValue | NSUnderlineStyle.styleSingle.rawValue, range: range)
+                self.detailPriceBefore.attributedText = attributedText
+                
+                text = "¥ \(couponItem?.couponPrice ?? "0.0")"
+                location = text.index(of: ".")!.encodedOffset
+                range = NSRange(location: 0, length: location)
+                attributedText = NSMutableAttributedString(string: text)
+                attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: range)
+                self.detailPriceAfter.attributedText = attributedText
+            } else {
+                couponWrapper.isHidden = true
+                noCouponWrapper.isHidden = false
+                couponPriceWrapper.isHidden = true
+                saleVolume.isHidden = false
+                couponPriceBefore.text = "现价 ¥ \(couponItem?.zkFinalPrice! ?? "")"
+                saleVolume.text = "已售\(couponItem?.volume! ?? 0)件"
+            }
         } else {
             
             couponWrapper.isHidden = false
@@ -86,23 +116,38 @@ class DetailController: UIViewController {
             self.detailPriceAfterIcon.layer.masksToBounds = true;
             self.detailPriceAfterIcon.layer.borderWidth = 1
             self.detailPriceAfterIcon.layer.borderColor = UIColor("#f57c00").cgColor
-            self.detailPriceAfter.text = couponItem?.couponPrice
+            self.detailPriceAfterIcon.text = "券后价"
+            self.detailPriceAfterIconWidth.constant = self.detailPriceAfterIcon.sizeThatFits(CGSize(width: 0, height: 0)).width + 10
             
             var text = "现价 ¥ \(couponItem?.zkFinalPrice! ?? "")"
-            let location = text.index(of: "¥")!.encodedOffset + 2
-            let range = NSRange(location: location, length: text.utf16.count - location)
-            let attributedText = NSMutableAttributedString(string: text)
+            var location = text.index(of: "¥")!.encodedOffset + 2
+            var range = NSRange(location: location, length: text.utf16.count - location)
+            var attributedText = NSMutableAttributedString(string: text)
             attributedText.addAttribute(NSAttributedStringKey.strikethroughStyle, value: NSUnderlineStyle.patternSolid.rawValue | NSUnderlineStyle.styleSingle.rawValue, range: range)
             self.detailPriceBefore.attributedText = attributedText
+            
+            text = "¥ \(couponItem?.couponPrice ?? "0.0")"
+            location = text.index(of: ".")!.encodedOffset
+            range = NSRange(location: 0, length: location)
+            attributedText = NSMutableAttributedString(string: text)
+            attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: range)
+            self.detailPriceAfter.attributedText = attributedText
+            
+            text = "优惠券 \(couponItem?.couponInfo! ?? "")"
+            location = text.index(of: "减")!.encodedOffset
+            range = NSRange(location: location, length: text.count - location)
+            attributedText = NSMutableAttributedString(string: text)
+            attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 18), range: range)
+            self.detailCoupon.attributedText = attributedText
+            
             self.detailSales.text = "已售\(couponItem?.volume! ?? 0)件"
             
             let ticketStarIcon = FAKMaterialIcons.ticketStarIcon(withSize: 16)
             ticketStarIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#757575"))
             self.detailCouponIcon.image = ticketStarIcon?.image(with: CGSize(width: 16, height: 16))
-            self.detailCoupon.text = "优惠券 \(couponItem?.couponInfo! ?? "")"
         }
         
-        if !(UserData.get()?.isBuyer())! {
+        if !(UserData.get()?.isBuyer())!, let earn = couponItem?.earnPrice {
             earnWrapper.isHidden = false
             buyerWrapper.isHidden = true
             agentShare.isHidden = false
@@ -110,7 +155,14 @@ class DetailController: UIViewController {
             let moneyIcon = FAKFontAwesome.moneyIcon(withSize: 16)
             moneyIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#757575"))
             self.detailCommissionIcon.image = moneyIcon?.image(with: CGSize(width: 16, height: 16))
-            self.detailCommission.text = "分享预计赚 ¥ \(couponItem?.earnPrice! ?? "")"
+            
+            let text = "分享预计赚 ¥ \(earn)"
+            let location = text.index(of: "¥")!.encodedOffset + 2
+            let length = (text.index(of: ".")?.encodedOffset)! - location
+            let range = NSRange(location: location, length: length)
+            let attributedText = NSMutableAttributedString(string: text)
+            attributedText.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: range)
+            self.detailCommission.attributedText = attributedText
         } else {
             earnWrapper.isHidden = true
             buyerWrapper.isHidden = false
@@ -122,19 +174,19 @@ class DetailController: UIViewController {
         }
         
         if let constraint = (self.couponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 30
+            constraint.constant = self.couponItem?.couponInfo == nil && couponItem?.commissionRate != nil ? 0 : 30
         }
         
         if let constraint = (self.noCouponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = self.couponItem?.couponInfo == nil ? 30 : 0
+            constraint.constant = self.couponItem?.couponInfo == nil && couponItem?.commissionRate != nil ? 30 : 0
         }
         
         if let constraint = (self.couponPriceWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = self.couponItem?.couponInfo == nil ? 0 : 30
+            constraint.constant = self.couponItem?.couponInfo == nil && couponItem?.commissionRate != nil ? 0 : 30
         }
         
         if let constraint = (self.earnWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-            constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 20
+            constraint.constant = (UserData.get()?.isBuyer())! || couponItem?.earnPrice == nil ? 0 : 20
         }
         
         if let constraint = (self.agentShare.constraints.filter{$0.firstAttribute == .height}.first) {

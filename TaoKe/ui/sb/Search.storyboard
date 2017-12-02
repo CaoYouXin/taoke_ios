@@ -28,7 +28,7 @@
         <!--Search Result Controller-->
         <scene sceneID="BF4-zO-pkj">
             <objects>
-                <viewController id="fSz-6W-Z1w" customClass="SearchResultController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultController" id="fSz-6W-Z1w" customClass="SearchResultController" customModule="TaoKe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QE0-Z5-CBC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,13 +39,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jIF-QR-X2i">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                         <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销量" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bE-Si-Amd">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="sales" text="销量" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bE-Si-Amd">
                                                 <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOW-8h-6e7">
+                                            <view contentMode="scaleToFill" restorationIdentifier="commission" translatesAutoresizingMaskIntoConstraints="NO" id="LOW-8h-6e7">
                                                 <rect key="frame" x="94" y="0.0" width="93.5" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJr-yl-ujc">
@@ -91,7 +91,7 @@
                                                     <constraint firstItem="rJr-yl-ujc" firstAttribute="top" secondItem="LOW-8h-6e7" secondAttribute="top" id="hqd-iX-rxj"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njP-zi-i60">
+                                            <view contentMode="scaleToFill" restorationIdentifier="coupon" translatesAutoresizingMaskIntoConstraints="NO" id="njP-zi-i60">
                                                 <rect key="frame" x="187.5" y="0.0" width="94" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqN-At-3Yg">
@@ -137,7 +137,7 @@
                                                     <constraint firstItem="NqN-At-3Yg" firstAttribute="centerX" secondItem="njP-zi-i60" secondAttribute="centerX" id="sg7-xe-gop"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoA-tZ-XpE">
+                                            <view contentMode="scaleToFill" restorationIdentifier="price" translatesAutoresizingMaskIntoConstraints="NO" id="QoA-tZ-XpE">
                                                 <rect key="frame" x="281.5" y="0.0" width="93.5" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFE-Es-Itr">
@@ -186,10 +186,22 @@
                                         </subviews>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="8bE-Si-Amd" secondAttribute="bottom" id="87s-CZ-5Dk"/>
-                                            <constraint firstItem="QoA-tZ-XpE" firstAttribute="top" secondItem="jIF-QR-X2i" secondAttribute="top" id="FsD-Zj-Z4g"/>
-                                            <constraint firstAttribute="bottom" secondItem="QoA-tZ-XpE" secondAttribute="bottom" id="YQx-fL-sE8"/>
-                                            <constraint firstItem="8bE-Si-Amd" firstAttribute="top" secondItem="jIF-QR-X2i" secondAttribute="top" id="vQy-Zm-VYJ"/>
+                                            <constraint firstItem="njP-zi-i60" firstAttribute="leading" secondItem="LOW-8h-6e7" secondAttribute="trailing" id="5tf-4M-Rdz"/>
+                                            <constraint firstItem="LOW-8h-6e7" firstAttribute="top" secondItem="jIF-QR-X2i" secondAttribute="top" id="Beb-fg-Sm8"/>
+                                            <constraint firstItem="njP-zi-i60" firstAttribute="top" secondItem="jIF-QR-X2i" secondAttribute="top" id="L3N-Ri-gH5"/>
+                                            <constraint firstItem="QoA-tZ-XpE" firstAttribute="leading" secondItem="njP-zi-i60" secondAttribute="trailing" id="MPs-3K-ejv"/>
+                                            <constraint firstAttribute="trailing" secondItem="QoA-tZ-XpE" secondAttribute="trailing" id="ODS-FW-n1Y"/>
+                                            <constraint firstAttribute="bottom" secondItem="LOW-8h-6e7" secondAttribute="bottom" id="OJf-cu-oQR"/>
+                                            <constraint firstItem="njP-zi-i60" firstAttribute="leading" secondItem="LOW-8h-6e7" secondAttribute="trailing" id="QqG-ZB-ibu"/>
+                                            <constraint firstAttribute="bottom" secondItem="njP-zi-i60" secondAttribute="bottom" id="U3q-9i-zYL"/>
+                                            <constraint firstItem="LOW-8h-6e7" firstAttribute="leading" secondItem="8bE-Si-Amd" secondAttribute="trailing" id="Yc4-aL-Zf6"/>
+                                            <constraint firstItem="8bE-Si-Amd" firstAttribute="top" secondItem="jIF-QR-X2i" secondAttribute="top" id="ZU4-zd-PTg"/>
+                                            <constraint firstAttribute="bottom" secondItem="QoA-tZ-XpE" secondAttribute="bottom" id="fFE-bX-xYh"/>
+                                            <constraint firstItem="8bE-Si-Amd" firstAttribute="leading" secondItem="jIF-QR-X2i" secondAttribute="leading" id="gpS-yv-1hd"/>
+                                            <constraint firstItem="QoA-tZ-XpE" firstAttribute="leading" secondItem="njP-zi-i60" secondAttribute="trailing" id="pM8-XS-aXy"/>
+                                            <constraint firstItem="QoA-tZ-XpE" firstAttribute="top" secondItem="jIF-QR-X2i" secondAttribute="top" id="rIq-YK-ozG"/>
+                                            <constraint firstItem="LOW-8h-6e7" firstAttribute="leading" secondItem="8bE-Si-Amd" secondAttribute="trailing" id="vMv-Lh-XDI"/>
+                                            <constraint firstAttribute="bottom" secondItem="8bE-Si-Amd" secondAttribute="bottom" id="y3q-up-oDQ"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -203,15 +215,47 @@
                                     <constraint firstItem="jIF-QR-X2i" firstAttribute="top" secondItem="660-Un-KD1" secondAttribute="top" id="yyA-6Q-aGc"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MIn-a1-dun">
+                                <rect key="frame" x="0.0" y="60" width="375" height="607"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4JQ-5V-BWE">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="MIn-a1-dun" firstAttribute="top" secondItem="660-Un-KD1" secondAttribute="bottom" id="8fL-rw-JEl"/>
                             <constraint firstItem="o9m-Kq-Azx" firstAttribute="trailing" secondItem="660-Un-KD1" secondAttribute="trailing" id="Nau-ug-uoA"/>
+                            <constraint firstItem="MIn-a1-dun" firstAttribute="leading" secondItem="o9m-Kq-Azx" secondAttribute="leading" id="Qbb-hd-u5c"/>
+                            <constraint firstItem="o9m-Kq-Azx" firstAttribute="trailing" secondItem="MIn-a1-dun" secondAttribute="trailing" id="bms-tp-vjM"/>
                             <constraint firstItem="660-Un-KD1" firstAttribute="leading" secondItem="QE0-Z5-CBC" secondAttribute="leading" id="kg8-WG-f6b"/>
                             <constraint firstItem="660-Un-KD1" firstAttribute="top" secondItem="o9m-Kq-Azx" secondAttribute="top" id="pPb-Oe-W37"/>
+                            <constraint firstItem="o9m-Kq-Azx" firstAttribute="bottom" secondItem="MIn-a1-dun" secondAttribute="bottom" id="qvD-z4-avh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="o9m-Kq-Azx"/>
                     </view>
+                    <connections>
+                        <outlet property="itemList" destination="MIn-a1-dun" id="ngB-xD-g9h"/>
+                        <outlet property="itemListLayout" destination="4JQ-5V-BWE" id="vxr-lg-nYQ"/>
+                        <outlet property="sortCommission" destination="3hL-rt-zBc" id="Qx9-Ye-Xpr"/>
+                        <outlet property="sortCommissionDown" destination="vJY-1N-62x" id="9GR-cQ-JMa"/>
+                        <outlet property="sortCommissionUp" destination="9Hr-76-5Mx" id="Zzh-YJ-dYN"/>
+                        <outlet property="sortCommissionWrapper" destination="LOW-8h-6e7" id="Bfs-O2-xjZ"/>
+                        <outlet property="sortCoupon" destination="ZCu-q0-WRv" id="ytu-ub-7iO"/>
+                        <outlet property="sortCouponDown" destination="o1O-jo-53m" id="ysU-6p-9Nt"/>
+                        <outlet property="sortCouponUp" destination="ifP-7o-ubH" id="EeM-sn-e2W"/>
+                        <outlet property="sortCouponWrapper" destination="njP-zi-i60" id="Fxh-CA-xNV"/>
+                        <outlet property="sortPrice" destination="hMk-tf-PJx" id="ccz-Fc-8wV"/>
+                        <outlet property="sortPriceDown" destination="umi-jD-1GM" id="Sep-O0-KvU"/>
+                        <outlet property="sortPriceUp" destination="6eq-vr-Dgb" id="nFK-rI-WcV"/>
+                        <outlet property="sortPriceWrapper" destination="QoA-tZ-XpE" id="fam-Yh-rJa"/>
+                        <outlet property="sortSales" destination="8bE-Si-Amd" id="JzD-jo-6uk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HvD-dg-YFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

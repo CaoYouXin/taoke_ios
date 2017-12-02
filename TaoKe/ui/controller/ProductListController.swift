@@ -54,9 +54,6 @@ class ProductListController: UIViewController {
     }
     
     private func initSortBar() {
-        print("debug = \(sortCommissionWrapper.restorationIdentifier!)")
-        print("debug = \(sortCouponWrapper.restorationIdentifier!)")
-        
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(updateSortBar))
         sortSales.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(updateSortBar))
@@ -72,11 +69,14 @@ class ProductListController: UIViewController {
         sortHelper?.setup(id: sortCouponWrapper.restorationIdentifier!, main: sortCoupon, directions: [sortCouponUp, sortCouponDown], types: [.couponUp, .couponDown], flag: true)
         sortHelper?.setup(id: sortPriceWrapper.restorationIdentifier!, main: sortPrice, directions: [sortPriceUp, sortPriceDown], types: [.priceUp, .priceDown], flag: false)
         
+        if (UserData.get()?.isBuyer())! {
+            sortCommissionWrapper.isHidden = true
+        }
+        
         barClicked(on: sortSales)
     }
     
     @objc private func updateSortBar(_ sender: UITapGestureRecognizer) {
-        print(sender.view?.restorationIdentifier)
         barClicked(on: sender.view!)
     }
     

@@ -100,7 +100,8 @@ class DiscoverController: UIViewController {
             
             cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
             cell.couponTitle.text = element.title!
-            cell.couponPriceBefore.text = "现价 ¥ \(element.zkFinalPrice!)        月销量 \(element.volume!) 件"
+            cell.couponPriceBefore.text = "现价 ¥ \(element.zkFinalPrice!)"
+            cell.volume.text = "月销 \(element.volume!) 件"
             
             let couponPriceAfter = "券后价 ¥ \(element.couponPrice!)"
             let couponPriceAfterMutableAttributed = NSMutableAttributedString(string: couponPriceAfter)

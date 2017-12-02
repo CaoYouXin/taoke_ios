@@ -3,7 +3,7 @@ import RxSwift
 
 class TaoKeApi {
     
-    private static var CDN = "http://192.168.1.115:8070/"
+    private static var CDN = "http://192.168.0.136:8070/"
 //    private static var CDN = "http://server.tkmqr.com:8070/"
     
     public static func verification(phone: String) -> Observable<TaoKeData?> {
@@ -232,7 +232,7 @@ class TaoKeApi {
                     item.numIid = format(rec, "itemId")
                     item.title = rec["title"] as? String
                     
-                    item.pictUrl = rec["picUrlForWL"] as? String
+                    item.pictUrl = "http:" + (rec["picUrlForWL"] as? String)!
                     item.smallImages = []
                     
                     item.itemUrl = rec["wapUrl"] as? String
@@ -250,9 +250,8 @@ class TaoKeApi {
                     item.zkFinalPrice = rec["origPrice"] as? String
                     item.couponPrice = rec["actPrice"] as? String
                     item.numPrice = Float64(item.couponPrice!)
+                    item.couponPrice = String(format: "%.2f", arguments: [item.numPrice!])
                     item.numCoupon = Float64(item.zkFinalPrice!)! - item.numPrice!
-                    
-                    item.earnPrice = "0.0"
                     item.numEarn = 0
                     item.volume = 0
                     

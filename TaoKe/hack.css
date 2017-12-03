@@ -1,0 +1,33 @@
+.header-warp #s-header a.review { display: none; }
+section.actionBar-bg { display: none; }
+.smart-jump { display: none; }
+.module-wrap[data-module='mods/module-sku/index'] { display: none; }
+.module-wrap[data-module='mods/module-coupon/index'] { display: none; }
+.module-wrap[data-module='mods/module-prom/index'] { display: none; }
+.module-wrap[data-module='mods/module-related/index'] { display: none; }
+.module-wrap[data-module='mods/module-review/index'] { display: none; }
+.module-wrap[data-module='mods/module-recommend/index'] { display: none; }
+.module-wrap[data-module='mods/module-smartjump/index'] { display: none; }
+.module-wrap[data-module='mods/module-app-download-popup/index'] { display: none; }
+.module-wrap[data-module='mods/module-recommend-down/index'] { display: none; }
+.module-wrap[data-module='mods/module-shop/index'] { display: none; }
+
+.pull-loading-active > #modules-desc > .hot_recommanded { display: none; }
+.pull-loading-active > #modules-desc > .shop_discount { display: none; }
+.pull-loading-active > #modules-desc > .miao2o-store-list { display: none; }
+
+#J_skuPop { display: none; }
+#J_ratePop { display: none; }
+#J_newDetail > .app-detail > .navi_bar { display: none; }
+#J_newDetail > .app-detail > .bottom_bar { display: none; }
+#J_newDetail > .app-detail > .main_layout > .coupon_info { display: none; }
+#J_newDetail > .app-detail > .main_layout > .promotion_info { display: none; }
+#J_newDetail > .app-detail > .main_layout .d-choosedsku { display: none; }
+#J_newDetail > .app-detail > .main_layout > .rate_header { display: none; }
+#J_newDetail > .app-detail > .main_layout > .rate_tags { display: none; }
+#J_newDetail > .app-detail > .main_layout > .rate_single { display: none; }
+#J_newDetail > .app-detail > .main_layout > .button_container { display: none; }
+#J_newDetail > .app-detail > .main_layout > .shop_header { display: none; }
+#J_newDetail > .app-detail > .main_layout > .shop_info { display: none; }
+#J_newDetail > .app-detail > .main_layout > .combo_default { display: none; }
+#J_newDetail > .app-detail > .d-InfoMain > .d-tabbar > ul > li:last-child { display: none; }

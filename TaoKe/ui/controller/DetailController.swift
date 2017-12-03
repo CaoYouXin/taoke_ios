@@ -32,6 +32,7 @@ class DetailController: UIViewController {
     @IBOutlet weak var detailShare: UILabel!
     @IBOutlet weak var detailApp: UILabel!
     @IBOutlet weak var agentShare: UILabel!
+    @IBOutlet weak var itemPage: UIView!
     
     override func viewDidLoad() {
 
@@ -48,6 +49,8 @@ class DetailController: UIViewController {
         detailApp.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         agentShare.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        itemPage.addGestureRecognizer(tapGestureRecognizer)
         
         initView()
     }
@@ -210,6 +213,7 @@ class DetailController: UIViewController {
             let shareController = UIStoryboard(name: "Share", bundle: nil).instantiateViewController(withIdentifier: "ShareController") as! ShareController
             shareController.couponItem = couponItem
             self.navigationController?.pushViewController(shareController, animated: true)
+            break
         case detailApp:
             if let taokeUrl = couponItem?.couponClickUrl ?? couponItem?.tkLink {
                 let page = AlibcTradePageFactory.page(taokeUrl)
@@ -223,6 +227,14 @@ class DetailController: UIViewController {
                     self.view.makeToast("alibc open taobao fail \(error.debugDescription)")
                  })
             }
+            break
+        case itemPage:
+            if let itemId = couponItem?.numIid {
+                let h5DetailController = UIStoryboard(name: "H5Detail", bundle: nil).instantiateViewController(withIdentifier: "H5DetailController") as! H5DetailController
+                h5DetailController.itemId = String(itemId)
+                self.navigationController?.pushViewController(h5DetailController, animated: true)
+            }
+            break
         default:
             break
         }

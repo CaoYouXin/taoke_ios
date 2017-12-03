@@ -380,6 +380,7 @@
                         <outlet property="detailTitle" destination="Lkb-zl-KJw" id="fUX-xE-iLD"/>
                         <outlet property="detailViewIcon" destination="mOP-MG-M9g" id="9PS-OR-ERu"/>
                         <outlet property="earnWrapper" destination="duA-Ck-IU1" id="mO4-Rx-rev"/>
+                        <outlet property="itemPage" destination="88R-Fc-MK0" id="NxZ-gb-IKQ"/>
                         <outlet property="noCouponWrapper" destination="ask-GC-ntX" id="RjM-wu-QCC"/>
                         <outlet property="picSliders" destination="v5E-MU-W1t" id="1p1-Dc-9n4"/>
                         <outlet property="saleVolume" destination="IDj-b1-1fC" id="GYx-YO-hxH"/>

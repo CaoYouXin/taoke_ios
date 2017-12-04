@@ -16,6 +16,7 @@ class SignUpInfoController: UIViewController {
     @IBOutlet weak var signUp: UILabel!
 
     var phoneNo: String?
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,11 +127,9 @@ class SignUpInfoController: UIViewController {
             .handleApiError(self, { (error) in
                 self.view.hideToastActivity()
                 Log.error?.message(error.localizedDescription)
-                if let error = error as? ApiError {
-                    if let message = error.message {
-                        self.view.makeToast(message)
-                        return
-                    }
+                if let error = error as? ApiError, let message = error.message {
+                    self.view.makeToast(message)
+                    return
                 }
                 self.view.makeToast("注册失败，网络连接异常...")
             })

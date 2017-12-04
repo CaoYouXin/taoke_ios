@@ -18,6 +18,8 @@ class ShareAppController: UIViewController {
     private var cache: [Int: CGFloat] = [:]
     private var shareTemplateDS: ShareTemplateDataSource?
     
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

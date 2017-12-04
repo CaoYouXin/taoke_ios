@@ -1,12 +1,6 @@
-//
-//  H5DetailController.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/12/3.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import UIKit
+import RxSwift
 import FontAwesomeKit
 
 class H5DetailController: UIViewController {
@@ -14,6 +8,7 @@ class H5DetailController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     
     var itemId: String?
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

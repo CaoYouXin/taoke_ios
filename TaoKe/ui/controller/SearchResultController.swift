@@ -34,6 +34,8 @@ class SearchResultController: UIViewController {
     private var isJu: Bool?
     private var keyword: String?
     
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

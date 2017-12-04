@@ -1,11 +1,14 @@
 
 import RxBus
+import RxSwift
 import CleanroomLogger
 import RAMAnimatedTabBarController
 import UIColor_Hex_Swift
 import FontAwesomeKit
 
 class TaoKeController: RAMAnimatedTabBarController {
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

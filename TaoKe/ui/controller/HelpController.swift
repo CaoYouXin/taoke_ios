@@ -12,6 +12,8 @@ class HelpController: UIViewController {
     
     private var cache: [Int: CGFloat] = [:]
     
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

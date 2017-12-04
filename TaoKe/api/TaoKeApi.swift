@@ -53,7 +53,7 @@ class TaoKeApi {
                     item.name = rec["name"] as? String
                     item.ext = rec["ext"] as? String
                     item.imgUrl = CDN + (rec["imgUrl"] as? String)!
-                    item.openType = rec["openType"] as? Int
+                    item.openType = rec["openType"] as! Int
                     items.append(item)
                 }
                 return items
@@ -298,7 +298,7 @@ class TaoKeApi {
                     item.name = rec["name"] as? String
                     item.ext = rec["ext"] as? String
                     item.imgUrl = CDN + (rec["imgUrl"] as? String)!
-                    item.openType = rec["openType"] as? Int
+                    item.openType = rec["openType"] as! Int
                     items.append(item)
                 }
                 return items

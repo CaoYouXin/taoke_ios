@@ -8,6 +8,8 @@ class SplashController: UIViewController {
     @IBOutlet weak var signUp: UIButton!
     @IBOutlet weak var signIn: UIButton!
     
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         signUp.layer.borderWidth = 1

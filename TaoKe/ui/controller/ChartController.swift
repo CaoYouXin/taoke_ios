@@ -1,12 +1,6 @@
-//
-//  ChartController.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/11/29.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import UIKit
+import RxSwift
 import FontAwesomeKit
 import MJRefresh
 
@@ -24,6 +18,8 @@ class ChartController: UIViewController, UITextFieldDelegate {
     private var numberRegex: NSRegularExpression?
     private var maxWithDraw: Float64?
     private var canDrawState: Bool = false
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +96,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
                                 msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
                                 }))
                                 self.present(msg, animated: true)
-                            }).disposed(by: disposeBag)
+                            }).disposed(by: self.disposeBag)
                         }
                     } else {
                         self.canDrawState = true

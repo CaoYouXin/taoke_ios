@@ -1,3 +1,5 @@
+
+import RxSwift
 import EAIntroView
 
 class IntroController: UIViewController {
@@ -5,6 +7,8 @@ class IntroController: UIViewController {
     public static let INTRO_READ = "intro_read"
     
     @IBOutlet weak var introView: EAIntroView!
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

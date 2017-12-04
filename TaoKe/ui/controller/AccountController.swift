@@ -1,12 +1,6 @@
-//
-//  AccountViewController.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/11/18.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import UIKit
+import RxSwift
 import FontAwesomeKit
 
 class AccountController: UIViewController {
@@ -35,6 +29,8 @@ class AccountController: UIViewController {
     
     @IBOutlet weak var accountName: UILabel!
     @IBOutlet weak var viewWrapper: UIView!
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

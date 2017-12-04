@@ -8,6 +8,8 @@ class ReportController: UIViewController, UITextViewDelegate {
     
     private let reportHint = "反馈内容"
     
+    var disposeBag = DisposeBag()
+    
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text.elementsEqual(reportHint) {
             textView.text = ""
@@ -49,11 +51,10 @@ class ReportController: UIViewController, UITextViewDelegate {
     
     @objc private func report() {
         if let input = reportText.text {
-            TaoKeApi.report(input).rxSchedulerHelper().handleApiError(viewController: self)
-                .handlerError({
+            TaoKeApi.report(input).rxSchedulerHelper()
+                .handleApiError(self, { _ in
                     self.navigationController?.popViewController(animated: true)
-                })
-                .subscribe(onNext: { _ in
+                }).subscribe(onNext: { _ in
                     self.navigationController?.popViewController(animated: true)
                 }).disposed(by: disposeBag)
         }

@@ -14,6 +14,8 @@ class ResetPasswordController: UIViewController {
     @IBOutlet weak var passwordVisible: UIImageView!
     @IBOutlet weak var resetPassword: UILabel!
 
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))

@@ -6,10 +6,10 @@ import RxSwift
 class SearchController: PYSearchViewController {
     
     private var menuView: BTNavigationDropdownMenu?
-    private var disposeBag = DisposeBag()
     private var resultViewHolder: SearchResultController?
     private var isJu = false
     
+    var disposeBag = DisposeBag()
     var shouldBeginEditingFlag: Bool = true
     
     override func awakeFromNib() {

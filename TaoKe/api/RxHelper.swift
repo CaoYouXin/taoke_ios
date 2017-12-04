@@ -4,8 +4,6 @@ import Toast_Swift
 
 extension ObservableType {
     
-    private var showingDialog = false
-    
     public func rxSchedulerHelper() -> Observable<Self.E> {
         return self.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .observeOn(MainScheduler.instance)
@@ -36,33 +34,29 @@ extension ObservableType {
         }
     }
     
-    public func handleApiError(_ viewController: UIViewController?, _ callback: ((ApiError) -> Void)?) -> Observable<Self.E> {
+    public func handleApiError(_ viewController: UIViewController?, _ callback: ((Error) -> Void)? = nil) -> Observable<Self.E> {
         return self.observeOn(MainScheduler.instance).catchError({(error) -> Observable<Self.E> in
-            if !self.showingDialog && error is ApiUnAuth, let view = viewController {
+            if error is ApiUnAuth, let view = viewController {
                 let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "好的", style: .default, handler: { (action) in
-                    self.showingDialog = false
                     UserData.clear()
                     UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
                     view.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
                 }))
                 view.present(alert, animated: true)
-                self.showingDialog = true
             }
             
-            if !self.showingDialog && error is ApiVersionLow, let view = viewController {
+            if error is ApiVersionLow, let view = viewController {
                 let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "好的", style: .default, handler: { (action) in
-                    self.showingDialog = fasle
-                    TaoKeApi.getDownloadUrl().subscribe(onNext: { (downloadUrl) in
+                    let _ = TaoKeApi.getDownloadUrl().subscribe(onNext: { (downloadUrl) in
                         let url = URL(string: downloadUrl)
-                        if UIApplication.shared.canOpenURL(url) {
-                            UIApplication.shared.open(url, options: [:])
+                        if UIApplication.shared.canOpenURL(url!) {
+                            UIApplication.shared.open(url!, options: [:])
                         }
-                    }).disposed(by: view.disposeBag)
+                    })
                 }))
                 view.present(alert, animated: true)
-                self.showingDialog = true
             }
             
             if error is ApiError, let cb = callback {
@@ -77,31 +71,27 @@ extension ObservableType {
 class ApiErrorHook: Hook {
     func hook<T>(viewController: UIViewController?, observable: Observable<T>) -> Observable<T> {
         return observable.observeOn(MainScheduler.instance).catchError({(error) -> Observable<T> in
-            if !self.showingDialog && error is ApiUnAuth, let view = viewController {
+            if error is ApiUnAuth, let view = viewController {
                 let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "好的", style: .default, handler: { (action) in
-                    self.showingDialog = false
                     UserData.clear()
                     UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
                     view.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
                 }))
                 view.present(alert, animated: true)
-                self.showingDialog = true
             }
             
-            if !self.showingDialog && error is ApiVersionLow, let view = viewController {
+            if error is ApiVersionLow, let view = viewController {
                 let alert = UIAlertController(title: "", message: "您当前版本过低，为了更好的使用觅券儿，请立刻升级！", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "去下载", style: .default, handler: { (action) in
-                    self.showingDialog = false
-                    TaoKeApi.getDownloadUrl().subscribe(onNext: { (downloadUrl) in
+                    let _ = TaoKeApi.getDownloadUrl().subscribe(onNext: { (downloadUrl) in
                         let url = URL(string: downloadUrl)
-                        if UIApplication.shared.canOpenURL(url) {
-                            UIApplication.shared.open(url, options: [:])
+                        if UIApplication.shared.canOpenURL(url!) {
+                            UIApplication.shared.open(url!, options: [:])
                         }
-                    }).disposed(by: view.disposeBag)
+                    })
                 }))
                 view.present(alert, animated: true)
-                self.showingDialog = true
             }
             
             return Observable.empty()

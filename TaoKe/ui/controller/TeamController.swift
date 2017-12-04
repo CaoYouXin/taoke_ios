@@ -1,12 +1,6 @@
-//
-//  TeamController.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/11/28.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import UIKit
+import RxSwift
 import FontAwesomeKit
 import MJRefresh
 
@@ -17,6 +11,8 @@ class TeamController: UIViewController {
     @IBOutlet weak var teamDataListLayout: UICollectionViewFlowLayout!
     
     private var teamDataHelper: MVCHelper<TeamDataView>?
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

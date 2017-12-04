@@ -1,5 +1,6 @@
 
 import UIKit
+import RxSwift
 import FontAwesomeKit
 
 class EnrollController: UIViewController, UITextViewDelegate {
@@ -13,6 +14,8 @@ class EnrollController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var realName: UITextField!
     
     private let announcementHint = "申请理由"
+    
+    var disposeBag = DisposeBag()
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text.elementsEqual(announcementHint) {
@@ -124,7 +127,8 @@ class EnrollController: UIViewController, UITextViewDelegate {
         let submit = EnrollSubmit(realName.text, alipay.text, qq.text, wechat.text, announcement.text)
         submit.cache()
         let _ = TaoKeApi.toEnroll(submit: submit)
-            .handleApiError(viewController: self, nil)
+            .rxSchedulerHelper()
+            .handleApiError(self, nil)
             .subscribe({_ in
                 self.navigationController?.popViewController(animated: true)
             })

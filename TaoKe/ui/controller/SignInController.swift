@@ -12,6 +12,8 @@ class SignInController: UIViewController {
     @IBOutlet weak var signUp: UILabel!
     @IBOutlet weak var resetPassword: UILabel!
     
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                 let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)

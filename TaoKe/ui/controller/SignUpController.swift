@@ -11,6 +11,8 @@ class SignUpController: UIViewController {
     @IBOutlet weak var phoneNo: UITextField!
     @IBOutlet weak var signUp: UILabel!
     
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))

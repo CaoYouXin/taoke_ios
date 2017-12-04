@@ -61,6 +61,9 @@ class TaoKeService: TaoKeProtocol {
         manager?.addRequestDescriptor(requestDescriptor)
         manager?.addResponseDescriptor(responseDescriptor)
         manager?.requestSerializationMIMEType = RKMIMETypeJSON
+        
+        manager?.httpClient.setDefaultHeader("platform", value: "ios")
+        manager?.httpClient.setDefaultHeader("version", value: "1.0.0")
     }
 
     public static func getInstance() -> TaoKeProtocol {

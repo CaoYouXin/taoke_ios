@@ -1,4 +1,6 @@
+
 import UIKit
+import RxSwift
 import FontAwesomeKit
 
 class HelpDetailController: UIViewController {
@@ -7,6 +9,7 @@ class HelpDetailController: UIViewController {
     @IBOutlet weak var answer: UILabel!
     
     var helpView: HelpView?
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

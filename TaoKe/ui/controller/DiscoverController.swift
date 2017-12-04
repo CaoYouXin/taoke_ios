@@ -18,6 +18,8 @@ class DiscoverController: UIViewController {
     private var couponDataSource: CouponDataSource?
     private var couponListHelper: MVCHelper<CouponItem>?
     
+    var disposeBag = DisposeBag()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         couponDataSource = CouponDataSource(self)

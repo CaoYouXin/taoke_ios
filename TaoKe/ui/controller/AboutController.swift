@@ -1,10 +1,13 @@
 
 import UIKit
+import RxSwift
 import FontAwesomeKit
 
 class AboutController: UIViewController {
     
     @IBOutlet weak var aboutText: UILabel!
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

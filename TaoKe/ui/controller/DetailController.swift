@@ -7,7 +7,9 @@ import RxSegue
 import AlibcTradeBiz
 
 class DetailController: UIViewController {
+    
     var couponItem: CouponItem?
+    var disposeBag = DisposeBag()
     
     @IBOutlet weak var picSliders: ImageSlideshow!
     @IBOutlet weak var detailTitle: UILabel!

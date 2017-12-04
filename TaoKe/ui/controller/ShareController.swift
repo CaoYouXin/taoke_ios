@@ -10,6 +10,7 @@ import QRCode
 class ShareController: UIViewController {
     
     var couponItem: CouponItem?
+    var disposeBag = DisposeBag()
     
     @IBOutlet weak var selectCount: UILabel!
     @IBOutlet weak var shareImageList: UICollectionView!

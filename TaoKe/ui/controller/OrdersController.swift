@@ -1,5 +1,6 @@
 
 import UIKit
+import RxSwift
 import FontAwesomeKit
 import MJRefresh
 
@@ -34,6 +35,8 @@ class OrdersController: UIViewController {
     
     private var orderListHelper: MVCHelper<OrderView>?
     private var orderListDataSource: OrderDataSource?
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -15,8 +15,10 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     private var brandListHelper: MVCHelper<HomeBtn>?
     private var controller: DiscoverController?
+    private var sliders: [HomeBtn]?
     
     var maxContentHeight = CGFloat(0)
+    var disposeBag = DisposeBag()
     
     public func setController(ctrl: DiscoverController) {
         self.controller = ctrl
@@ -34,6 +36,18 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         initSlider()
         initBrandList()
         initCouponTab()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        slideshow.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc private func tap(_ sender: UITapGestureRecognizer) {
+        if let slides = self.sliders {
+            let btn = slides[slideshow.currentPage]
+            let productListController = UIStoryboard(name: "ProductList", bundle: nil).instantiateViewController(withIdentifier: "ProductListController") as! ProductListController
+            productListController.homeBtn = btn
+            self.controller?.navigationController?.pushViewController(productListController, animated: true)
+        }
     }
     
     public func refreshHeader() {
@@ -50,15 +64,16 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     }
     
     private func updateSlider() {
-        let _ = TaoKeApi.getBannerList().rxSchedulerHelper().subscribe(onNext: { btns in
-            var imageSources: [KingfisherSource] = [];
-            for btn in btns! {
-                imageSources.append(KingfisherSource(urlString: btn.imgUrl!)!)
-            }
-            self.slideshow.setImageInputs(imageSources)
-        }, onError: { error in
-            Log.error?.message(error.localizedDescription)
-        })
+        let _ = TaoKeApi.getBannerList().rxSchedulerHelper()
+            .handleApiError(controller)
+            .subscribe(onNext: { btns in
+                self.sliders = btns
+                var imageSources: [KingfisherSource] = [];
+                for btn in btns! {
+                    imageSources.append(KingfisherSource(urlString: btn.imgUrl!)!)
+                }
+                self.slideshow.setImageInputs(imageSources)
+            })
     }
     
     private func initBrandList() {
@@ -133,6 +148,6 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 self.controller?.refreshCouponList(cid: tabs[0].cid!)
             }, onError: { error in
                 Log.error?.message(error.localizedDescription)
-            }).disposed(by: controller?.disposeBag)
+            }).disposed(by: disposeBag)
     }
 }

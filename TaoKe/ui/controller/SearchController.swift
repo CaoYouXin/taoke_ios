@@ -9,7 +9,6 @@ class SearchController: PYSearchViewController {
     private var disposeBag = DisposeBag()
     private var resultViewHolder: SearchResultController?
     private var isJu = false
-    private let disposeBagg = DisposeBag()
     
     var shouldBeginEditingFlag: Bool = true
     
@@ -38,7 +37,10 @@ class SearchController: PYSearchViewController {
         self.initNavigationBar()
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         
-        TaoKeApi.getTopHints().subscribe(onNext: { (data) in
+        TaoKeApi.getTopHints()
+            .rxSchedulerHelper()
+            .handleApiError(self, nil)
+            .subscribe(onNext: { (data) in
             self.hotSearches = data
         }).disposed(by: disposeBag)
         
@@ -97,7 +99,10 @@ extension SearchController: PYSearchViewControllerDelegate {
         if searchText.elementsEqual("") {
             self.searchSuggestions = []
         } else {
-            TaoKeApi.getSearchHint(searchText).subscribe(onNext: { (data) in
+            TaoKeApi.getSearchHint(searchText)
+                .rxSchedulerHelper()
+                .handleApiError(self, nil)
+                .subscribe(onNext: { (data) in
                 self.searchSuggestions = data
             }).disposed(by: disposeBag)
         }

@@ -39,6 +39,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_LAST_MOUNT_ESTIMATE = "tbk/estimate/that"
 
     public static let API_ENROLL = "tbk/user/apply/4/agent"
+    public static let API_DOWNLOAD_URL = "app/download/url"
 
     public static let HOST = "http://192.168.0.136:8080/api/"
 //    public static let HOST = "http://server.tkmqr.com:8080/api/"

@@ -9,19 +9,18 @@ import Kingfisher
 import QRCode
 
 class ShareAppController: UIViewController {
-
+    
     @IBOutlet weak var generateZone: UIView!
     @IBOutlet weak var qrCode: UIImageView!
     @IBOutlet weak var specification: UILabel!
     @IBOutlet weak var shareTemplateList: UICollectionView!
     
-    private let disposeBag = DisposeBag()
     private var cache: [Int: CGFloat] = [:]
     private var shareTemplateDS: ShareTemplateDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -60,7 +59,7 @@ class ShareAppController: UIViewController {
     private func initShareTemplates() {
         let shareTemplateLayout = ELWaterFlowLayout()
         shareTemplateList.collectionViewLayout = shareTemplateLayout
-
+        
         shareTemplateLayout.delegate = self
         shareTemplateLayout.lineCount = 1
         shareTemplateLayout.vItemSpace = 10
@@ -131,10 +130,10 @@ class ShareAppController: UIViewController {
             Log.error?.message(error.localizedDescription)
         }).disposed(by: disposeBag)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     @objc private func back() {
         navigationController?.popViewController(animated: true)
@@ -160,7 +159,7 @@ class ShareAppController: UIViewController {
             }).disposed(by: self.disposeBag)
         }
     }
-
+    
     private func fetchShareImages(_ save: Bool) -> Observable<[UIImage?]>? {
         var observables: [Observable<UIImage?>] = []
         if let shareImages = self.shareTemplateDS?.cache {

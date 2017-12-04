@@ -9,7 +9,7 @@ class TaoKeController: RAMAnimatedTabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         self.initNavigationBar()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.searchIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(search))
@@ -19,7 +19,7 @@ class TaoKeController: RAMAnimatedTabBarController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     override func tapHandler(_ gesture: UIGestureRecognizer) {
         super.tapHandler(gesture)
@@ -27,7 +27,7 @@ class TaoKeController: RAMAnimatedTabBarController {
             RxBus.shared.post(event: Events.Message())
         }
     }
-
+    
     @objc private func search() {
         let searchController = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchController") as! SearchController
         self.navigationController?.pushViewController(searchController, animated: true)

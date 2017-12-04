@@ -12,17 +12,11 @@ class ShareController: UIViewController {
     var couponItem: CouponItem?
     
     @IBOutlet weak var selectCount: UILabel!
-    
     @IBOutlet weak var shareImageList: UICollectionView!
-    
     @IBOutlet weak var shareText: UITextView!
-    
     @IBOutlet weak var saveIcon: UIImageView!
-    
     @IBOutlet weak var saveText: UILabel!
-    
     @IBOutlet weak var copyIcon: UIImageView!
-    
     @IBOutlet weak var copyText: UILabel!
     
     @IBOutlet weak var wechatWrapper: UIView!
@@ -33,7 +27,7 @@ class ShareController: UIViewController {
     
     @IBOutlet weak var qqWrapper: UIView!
     @IBOutlet weak var qqIcon: UIImageView!
-    
+
     @IBOutlet weak var descWrapper: UIView!
     @IBOutlet weak var descTitle: UILabel!
     @IBOutlet weak var descPriceBefore: UILabel!
@@ -41,7 +35,6 @@ class ShareController: UIViewController {
     @IBOutlet weak var descPriceAfter: UILabel!
     @IBOutlet weak var descQRCode: UIImageView!
     
-    private let disposeBag = DisposeBag()
     private var shareView: ShareView?
     private var shareImages: [ShareImage]?
     
@@ -319,7 +312,10 @@ class ShareController: UIViewController {
         } else {
             self.view.makeToastActivity(.center)
             return TaoKeApi.getShareView(self.couponItem!.couponClickUrl ?? self.couponItem!.tkLink!, self.couponItem!.title!)
-                .rxSchedulerHelper().map({ (data) -> String? in
+                .rxSchedulerHelper()
+                .handleApiError(self, { (error) in
+                    self.view.hideToastActivity()
+                }).map({ (data) -> String? in
                     self.view.hideToastActivity()
                     
                     var qrCode = QRCode((data?.shortUrl)!)
@@ -329,9 +325,7 @@ class ShareController: UIViewController {
                     self.shareView = data
                     
                     return genLink(data!)
-                }).handlerError {
-                    self.view.hideToastActivity()
-            }
+                })
         }
     }
     

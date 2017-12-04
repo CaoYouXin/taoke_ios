@@ -7,18 +7,13 @@ import Toast_Swift
 class SignUpController: UIViewController {
     
     @IBOutlet weak var backIcon: UIImageView!
-    
     @IBOutlet weak var backText: UILabel!
-    
     @IBOutlet weak var phoneNo: UITextField!
-    
     @IBOutlet weak var signUp: UILabel!
-    
-    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))
+        backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))
         signUp.layer.borderWidth = 1
         signUp.layer.borderColor = UIColor("#FFB74D").cgColor
         signUp.layer.cornerRadius = 18
@@ -48,7 +43,7 @@ class SignUpController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
@@ -60,12 +55,7 @@ class SignUpController: UIViewController {
             if let phone = phoneNo.text {
                 TaoKeApi.verification(phone: phone)
                     .rxSchedulerHelper()
-                    .subscribe(onNext: { _ in
-                        self.view.hideToastActivity()
-                        let signUpInfoController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewController(withIdentifier: "SignUpInfoController") as! SignUpInfoController
-                        signUpInfoController.phoneNo = phone
-                        self.navigationController?.pushViewController(signUpInfoController, animated: true)
-                    }, onError: { (error) in
+                    .handleApiError(self, { (error) in
                         self.view.hideToastActivity()
                         Log.error?.message(error.localizedDescription)
                         if let error = error as? ApiError {
@@ -75,6 +65,12 @@ class SignUpController: UIViewController {
                             }
                         }
                         self.view.makeToast("注册失败，网络连接异常...")
+                    })
+                    .subscribe(onNext: { _ in
+                        self.view.hideToastActivity()
+                        let signUpInfoController = UIStoryboard(name: "SignIn", bundle: nil).instantiateViewController(withIdentifier: "SignUpInfoController") as! SignUpInfoController
+                        signUpInfoController.phoneNo = phone
+                        self.navigationController?.pushViewController(signUpInfoController, animated: true)
                     }).disposed(by: disposeBag)
             }
             break

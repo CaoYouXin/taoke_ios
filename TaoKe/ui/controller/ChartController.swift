@@ -88,7 +88,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
                 if let input = alert.textFields?[0].text {
                     if let inputAmount = Float64(input) {
                         if inputAmount >= self.maxWithDraw! {
-                            let _ = TaoKeApi.withDraw(input).rxSchedulerHelper().handlerError({
+                            TaoKeApi.withDraw(input).rxSchedulerHelper().handleApiError(self, { _ in
                                 self.canDrawState = true
                                 let msg = UIAlertController(title: "", message: "购买者不享有此功能", preferredStyle: .actionSheet)
                                 msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
@@ -100,7 +100,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
                                 msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
                                 }))
                                 self.present(msg, animated: true)
-                            })
+                            }).disposed(by: disposeBag)
                         }
                     } else {
                         self.canDrawState = true
@@ -133,7 +133,8 @@ class ChartController: UIViewController, UITextFieldDelegate {
     }
     
     private func initThatEstimate() {
-        let _ = TaoKeApi.getThisEstimate().rxSchedulerHelper().handleUnAuth(viewController: self)
+        TaoKeApi.getThisEstimate().rxSchedulerHelper()
+            .handleApiError(self, nil)
             .subscribe(onNext: { (data) in
                 let text = "本月结算效果预估\n¥ \(data)"
                 let attribuites = NSMutableAttributedString(string: text)
@@ -143,11 +144,12 @@ class ChartController: UIViewController, UITextFieldDelegate {
                 attribuites.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 28), range: range)
                 self.thisEstimate.attributedText = attribuites
                 self.thisEstimate.numberOfLines = 0
-            })
+            }).disposed(by: disposeBag)
     }
     
     private func initThisEstimate() {
-        let _ = TaoKeApi.getThatEstimate().rxSchedulerHelper().handleUnAuth(viewController: self)
+        TaoKeApi.getThatEstimate().rxSchedulerHelper()
+            .handleApiError(self, nil)
             .subscribe(onNext: { (data) in
                 let text = "上月结算效果预估\n¥ \(data)"
                 let attribuites = NSMutableAttributedString(string: text)
@@ -157,11 +159,12 @@ class ChartController: UIViewController, UITextFieldDelegate {
                 attribuites.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 28), range: range)
                 self.thatEstimate.attributedText = attribuites
                 self.thatEstimate.numberOfLines = 0
-            })
+            }).disposed(by: disposeBag)
     }
     
     private func initCanDraw() {
-        let _ = TaoKeApi.getCanDraw().rxSchedulerHelper().handleUnAuth(viewController: self)
+        TaoKeApi.getCanDraw().rxSchedulerHelper()
+            .handleApiError(self, nil)
             .subscribe(onNext: { (data) in
                 let text = "¥ \(data)"
                 let attribuites = NSMutableAttributedString(string: text)
@@ -172,12 +175,11 @@ class ChartController: UIViewController, UITextFieldDelegate {
                 self.canDraw.attributedText = attribuites
                 self.maxWithDraw = Float64(data)
                 self.canDrawState = true
-            })
+            }).disposed(by: disposeBag)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }

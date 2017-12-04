@@ -7,7 +7,6 @@ class ReportController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var reportText: UITextView!
     
     private let reportHint = "反馈内容"
-    private let disposeBag = DisposeBag()
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text.elementsEqual(reportHint) {
@@ -46,12 +45,11 @@ class ReportController: UIViewController, UITextViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @objc private func report() {
         if let input = reportText.text {
-            TaoKeApi.report(input).rxSchedulerHelper().handleUnAuth(viewController: self)
+            TaoKeApi.report(input).rxSchedulerHelper().handleApiError(viewController: self)
                 .handlerError({
                     self.navigationController?.popViewController(animated: true)
                 })

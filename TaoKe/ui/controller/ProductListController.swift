@@ -31,11 +31,7 @@ class ProductListController: UIViewController {
     var homeBtn: HomeBtn?
     
     private var sortHelper: SortHelper?
-    
     private var sizeCache: [String: CGSize] = [:]
-    
-    private let disposeBag = DisposeBag()
-    
     private var productListHelper: MVCHelper<CouponItem>?
     private var productDataSource: ProductDataSource?
     

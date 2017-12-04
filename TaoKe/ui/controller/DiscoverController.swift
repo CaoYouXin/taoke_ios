@@ -10,16 +10,11 @@ import FontAwesomeKit
 class DiscoverController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    private let floatingButton: MEVFloatingButton = MEVFloatingButton()
-    
     @IBOutlet weak var couponList: UICollectionView!
     @IBOutlet weak var couponListFlowLayout: UICollectionViewFlowLayout!
     
+    private let floatingButton: MEVFloatingButton = MEVFloatingButton()
     private var discoverHeaderView: DiscoverHeaderView?
-    
-    private let disposeBag = DisposeBag()
-    
     private var couponDataSource: CouponDataSource?
     private var couponListHelper: MVCHelper<CouponItem>?
     

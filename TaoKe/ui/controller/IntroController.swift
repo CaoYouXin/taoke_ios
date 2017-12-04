@@ -1,18 +1,19 @@
 import EAIntroView
 
 class IntroController: UIViewController {
+    
     public static let INTRO_READ = "intro_read"
     
     @IBOutlet weak var introView: EAIntroView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                initIntroView()
+        initIntroView()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     private func initIntroView() {
         introView.pages = []

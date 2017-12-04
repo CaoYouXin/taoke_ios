@@ -10,7 +10,6 @@ class HelpController: UIViewController {
 
     @IBOutlet weak var helpList: UICollectionView!
     
-    private var disposeBag = DisposeBag()
     private var cache: [Int: CGFloat] = [:]
     
     override func viewDidLoad() {
@@ -96,7 +95,6 @@ class HelpController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

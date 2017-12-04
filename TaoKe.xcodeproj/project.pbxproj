@@ -72,6 +72,7 @@
 		2BA72B3A1FD3B95F00D449F4 /* H5Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA72B391FD3B95F00D449F4 /* H5Detail.storyboard */; };
 		2BA72B3C1FD3B9BD00D449F4 /* H5DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA72B3B1FD3B9BD00D449F4 /* H5DetailController.swift */; };
 		2BA72B3E1FD3C09B00D449F4 /* hack.css in Resources */ = {isa = PBXBuildFile; fileRef = 2BA72B3D1FD3C09B00D449F4 /* hack.css */; };
+		2BA72B401FD50BE000D449F4 /* UIViewController+DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA72B3F1FD50BE000D449F4 /* UIViewController+DisposeBag.swift */; };
 		2BD0FCF71FD0EF8A00F0D94A /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BD0FCF61FD0EF8A00F0D94A /* OrderCell.xib */; };
 		2BD0FCF91FD0FF5900F0D94A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCF81FD0FF5900F0D94A /* OrderCell.swift */; };
 		2BD0FCFB1FD13AFF00F0D94A /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */; };
@@ -200,6 +201,7 @@
 		2BA72B391FD3B95F00D449F4 /* H5Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = H5Detail.storyboard; sourceTree = "<group>"; };
 		2BA72B3B1FD3B9BD00D449F4 /* H5DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H5DetailController.swift; sourceTree = "<group>"; };
 		2BA72B3D1FD3C09B00D449F4 /* hack.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = hack.css; path = TaoKe/hack.css; sourceTree = "<group>"; };
+		2BA72B3F1FD50BE000D449F4 /* UIViewController+DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+DisposeBag.swift"; sourceTree = "<group>"; };
 		2BD0FCF61FD0EF8A00F0D94A /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		2BD0FCF81FD0FF5900F0D94A /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				F97842051FC2AE06001954D3 /* RegExpUtil.swift */,
 				2B45D8851FC69FBF00D1CBFE /* StringMd5.swift */,
 				2BD0FCFE1FD156E400F0D94A /* SortHelper.swift */,
+				2BA72B3F1FD50BE000D449F4 /* UIViewController+DisposeBag.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -789,6 +792,7 @@
 				F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */,
 				F95361FF1FBD5677008A5819 /* ShareController.swift in Sources */,
 				2BD0FCFB1FD13AFF00F0D94A /* SearchResultController.swift in Sources */,
+				2BA72B401FD50BE000D449F4 /* UIViewController+DisposeBag.swift in Sources */,
 				F97842021FC2A201001954D3 /* SignUpInfoController.swift in Sources */,
 				2BD0FD011FD182F000F0D94A /* SearchDataSource.swift in Sources */,
 				2B7B95361FCFB9420023A0D6 /* HelpController.swift in Sources */,

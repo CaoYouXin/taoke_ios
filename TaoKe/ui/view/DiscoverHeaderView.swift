@@ -6,12 +6,11 @@ import ImageSlideshow
 import TabLayoutView
 
 class DiscoverHeaderView: GSKStretchyHeaderView {
-    @IBOutlet weak var slideshow: ImageSlideshow!
     
+    @IBOutlet weak var slideshow: ImageSlideshow!
     @IBOutlet weak var brandList: UICollectionView!
     @IBOutlet weak var brandListFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var brandListHeightConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var couponTab: TabLayoutView!
     
     private var brandListHelper: MVCHelper<HomeBtn>?
@@ -46,7 +45,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func initSlider() {
         slideshow.slideshowInterval = 3
         slideshow.contentScaleMode = .scaleAspectFill
-                
+        
         updateSlider()
     }
     
@@ -72,7 +71,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             
             cell.thumb.layer.borderWidth = 1
             cell.thumb.layer.borderColor = UIColor.white.cgColor
-                        cell.thumb.kf.setImage(with: URL(string: element.imgUrl!))
+            cell.thumb.kf.setImage(with: URL(string: element.imgUrl!))
             return cell
         }
         
@@ -117,20 +116,23 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     }
     
     private func updateCouponTab() {
-        let _ = TaoKeApi.getCouponTab().rxSchedulerHelper().subscribe(onNext: { tabs in
-            var items: [String] = []
-            for tab in tabs {
-                items.append(tab.name == nil ? "" : tab.name!)
-            }
-            self.couponTab.items = items
-            
-            if tabs.count == 0 {
-                return
-            }
-            
-            self.controller?.refreshCouponList(cid: tabs[0].cid!)
-        }, onError: { error in
-            Log.error?.message(error.localizedDescription)
-        })
+        TaoKeApi.getCouponTab()
+            .rxSchedulerHelper()
+            .handleApiError(controller, nil)
+            .subscribe(onNext: { tabs in
+                var items: [String] = []
+                for tab in tabs {
+                    items.append(tab.name == nil ? "" : tab.name!)
+                }
+                self.couponTab.items = items
+                
+                if tabs.count == 0 {
+                    return
+                }
+                
+                self.controller?.refreshCouponList(cid: tabs[0].cid!)
+            }, onError: { error in
+                Log.error?.message(error.localizedDescription)
+            }).disposed(by: controller?.disposeBag)
     }
 }

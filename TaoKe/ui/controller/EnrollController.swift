@@ -124,7 +124,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
         let submit = EnrollSubmit(realName.text, alipay.text, qq.text, wechat.text, announcement.text)
         submit.cache()
         let _ = TaoKeApi.toEnroll(submit: submit)
-            .handleUnAuth(viewController: self)
+            .handleApiError(viewController: self, nil)
             .subscribe({_ in
                 self.navigationController?.popViewController(animated: true)
             })

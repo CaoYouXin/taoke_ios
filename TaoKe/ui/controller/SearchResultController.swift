@@ -30,7 +30,6 @@ class SearchResultController: UIViewController {
     private var itemListHelper: MVCHelper<CouponItem>?
     private var itemDataSource: SearchDataSource?
     private var setClickHandler = false
-    private var disposeBag = DisposeBag()
     private var navigationControllerHolder: UINavigationController?
     private var isJu: Bool?
     private var keyword: String?

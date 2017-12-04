@@ -2,23 +2,15 @@ import CleanroomLogger
 import RxSwift
 
 class SplashController: UIViewController {
+    
     @IBOutlet weak var splashImage: UIImageView!
-    
     @IBOutlet weak var appName: UIImageView!
-    
     @IBOutlet weak var signUp: UIButton!
-    
     @IBOutlet weak var signIn: UIButton!
-    
-    private let disposeBag = DisposeBag()
-    
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                signUp.layer.borderWidth = 1
+        signUp.layer.borderWidth = 1
         signUp.layer.borderColor = UIColor("#FFB74D").cgColor
         signUp.layer.cornerRadius = 6
         signIn.layer.borderWidth = 1
@@ -53,5 +45,6 @@ class SplashController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
+    
 }

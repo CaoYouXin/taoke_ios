@@ -8,10 +8,7 @@ class MessageController: UIViewController {
     
     @IBOutlet weak var messageList: UICollectionView!
     
-    private let disposeBag = DisposeBag()
-    
     private var messageListHelper: MVCHelper<MessageView>?
-    
     private var cache: [Int:CGFloat] = [:]
     
     override func viewDidLoad() {
@@ -100,13 +97,13 @@ class MessageController: UIViewController {
         
         let _ = Observable<Int>.interval(RxTimeInterval(600), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { _ in
-                let _ = TaoKeApi.countUnreadMessages().rxSchedulerHelper().handleUnAuth(viewController: self)
+                let _ = TaoKeApi.countUnreadMessages().rxSchedulerHelper().handleApiError(viewController: self)
                     .subscribe(onNext: { (unreads) in
                         RxBus.shared.post(event: Events.Message(count: Int(unreads)))
                     })
             })
         
-        let _ = TaoKeApi.countUnreadMessages().rxSchedulerHelper().handleUnAuth(viewController: self)
+        let _ = TaoKeApi.countUnreadMessages().rxSchedulerHelper().handleApiError(viewController: self)
             .subscribe(onNext: { (unreads) in
                 RxBus.shared.post(event: Events.Message(count: Int(unreads)))
             })

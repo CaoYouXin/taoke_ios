@@ -6,23 +6,14 @@ import FontAwesomeKit
 class ResetPasswordController: UIViewController {
     
     @IBOutlet weak var backIcon: UIImageView!
-    
     @IBOutlet weak var backText: UILabel!
-    
     @IBOutlet weak var phoneNo: UITextField!
-    
     @IBOutlet weak var verificationCode: UITextField!
-    
     @IBOutlet weak var verificationCodeSend: UILabel!
-    
     @IBOutlet weak var password: UITextField!
-    
     @IBOutlet weak var passwordVisible: UIImageView!
-    
     @IBOutlet weak var resetPassword: UILabel!
-    
-    private let disposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
                 backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))
@@ -109,6 +100,7 @@ class ResetPasswordController: UIViewController {
                 
                 TaoKeApi.verification(phone: phoneNo.text!)
                     .rxSchedulerHelper()
+                    .handleApiError(self, nil)
                     .subscribe().disposed(by: disposeBag)
             }
         case passwordVisible:
@@ -120,14 +112,7 @@ class ResetPasswordController: UIViewController {
             view.makeToastActivity(.center)
             TaoKeApi.resetPassword(phone: phoneNo.text!, verificationCode: verificationCode.text!, password: password.text!)
                 .rxSchedulerHelper()
-                .subscribe(onNext: { _ in
-                    self.view.hideToastActivity()
-                    if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
-                    } else {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
-                    }
-                }, onError: { (error) in
+                .handleApiError(self, { (error) in
                     self.view.hideToastActivity()
                     Log.error?.message(error.localizedDescription)
                     if let error = error as? ApiError {
@@ -137,6 +122,14 @@ class ResetPasswordController: UIViewController {
                         }
                     }
                     self.view.makeToast("重置密码失败，网络连接异常...")
+                })
+                .subscribe(onNext: { _ in
+                    self.view.hideToastActivity()
+                    if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
+                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
+                    } else {
+                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
+                    }
                 }).disposed(by: disposeBag)
         default:
             break

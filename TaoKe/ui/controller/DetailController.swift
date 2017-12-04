@@ -35,9 +35,9 @@ class DetailController: UIViewController {
     @IBOutlet weak var itemPage: UIView!
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
-                
+        
         self.initNavigationBar()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
@@ -205,7 +205,7 @@ class DetailController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
@@ -221,11 +221,11 @@ class DetailController: UIViewController {
                 showParam.openType = .native
                 let taokeParams = AlibcTradeTaokeParams()
                 taokeParams.pid = UserData.get()?.pid
-                 AlibcTradeSDK.sharedInstance().tradeService().show(self, page: page, showParams: showParam, taoKeParams: taokeParams, trackParam: nil, tradeProcessSuccessCallback: { (alibcTradeResult) in
+                AlibcTradeSDK.sharedInstance().tradeService().show(self, page: page, showParams: showParam, taoKeParams: taokeParams, trackParam: nil, tradeProcessSuccessCallback: { (alibcTradeResult) in
                     self.view.makeToast("alibc open taobao successfully")
-                 }, tradeProcessFailedCallback: { (error) in
+                }, tradeProcessFailedCallback: { (error) in
                     self.view.makeToast("alibc open taobao fail \(error.debugDescription)")
-                 })
+                })
             }
             break
         case itemPage:

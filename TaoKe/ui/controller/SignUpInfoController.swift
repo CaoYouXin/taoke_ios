@@ -4,27 +4,18 @@ import RxCocoa
 import FontAwesomeKit
 
 class SignUpInfoController: UIViewController {
+   
     @IBOutlet weak var backIcon: UIImageView!
-    
     @IBOutlet weak var backText: UILabel!
-    
     @IBOutlet weak var verificationCode: UITextField!
-    
     @IBOutlet weak var verificationCodeResend: UILabel!
-    
     @IBOutlet weak var password: UITextField!
-    
     @IBOutlet weak var passwordVisible: UIImageView!
-    
     @IBOutlet weak var nickName: UITextField!
-    
     @IBOutlet weak var invitationCode: UITextField!
-    
     @IBOutlet weak var signUp: UILabel!
-    
+
     var phoneNo: String?
-    
-    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,12 +86,11 @@ class SignUpInfoController: UIViewController {
                         } else {
                             self.verificationCodeResend.text = "\(59 - time)"
                         }
-                    }, onError: { (error) in
-                        Log.error?.message(error.localizedDescription)
                     }).disposed(by: disposeBag)
                 
                 TaoKeApi.verification(phone: phoneNo!)
                     .rxSchedulerHelper()
+                    .handleApiError(self, nil)
                     .subscribe().disposed(by: disposeBag)
             }
             break
@@ -133,14 +123,7 @@ class SignUpInfoController: UIViewController {
         view.makeToastActivity(.center)
         TaoKeApi.signUp(phone: phoneNo!, verificationCode: verificationCode.text!, password: password.text!, nick: nickName.text!, invication: invitationCode.text!)
             .rxSchedulerHelper()
-            .subscribe(onNext: { _ in
-                self.view.hideToastActivity()
-                if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
-                } else {
-                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
-                }
-            }, onError: { (error) in
+            .handleApiError(self, { (error) in
                 self.view.hideToastActivity()
                 Log.error?.message(error.localizedDescription)
                 if let error = error as? ApiError {
@@ -150,6 +133,14 @@ class SignUpInfoController: UIViewController {
                     }
                 }
                 self.view.makeToast("注册失败，网络连接异常...")
+            })
+            .subscribe(onNext: { _ in
+                self.view.hideToastActivity()
+                if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
+                } else {
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
+                }
             }).disposed(by: disposeBag)
     }
     

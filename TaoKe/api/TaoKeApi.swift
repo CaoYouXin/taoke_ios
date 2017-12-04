@@ -484,4 +484,13 @@ class TaoKeApi {
             })
     }
     
+    public static func getDownloadUrl() -> Observable<String> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_DOWNLOAD_URL)
+            .handleResult()
+            .map({ (taoKeData) -> String in
+                return taoKeData?.body as! String
+            })
+    }
+    
 }

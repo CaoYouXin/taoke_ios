@@ -9,7 +9,14 @@
 #ifndef BridgingHeader_h
 #define BridgingHeader_h
 
+#import <CommonCrypto/CommonDigest.h>
 #import <RestKit/RestKit.h>
 #import <FontAwesomeKit/FontAwesomeKit.h>
+#import <MJRefresh/MJRefresh.h>
+#import <MEVFloatingButton/UIScrollView+FloatingButton.h>
+#import <EAIntroView/EAIntroView.h>
+#import <PYSearch/PYSearch.h>
+#import <AlibcTradeSDK/AlibcTradeSDK.h>
+@import GSKStretchyHeaderView;
 
 #endif /* BridgingHeader_h */

@@ -12,6 +12,7 @@ target 'TaoKe' do
   pod 'RxDataSources'
   pod 'RxSegue', :git => 'https://github.com/gnastnosaj/RxSegue.git'
   pod 'RxBus'
+  pod 'RealmSwift'
   
   pod 'CleanroomLogger'
   pod 'RestKit'
@@ -36,8 +37,8 @@ target 'TaoKe' do
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/zkrige/BTNavigationDropdownMenu.git'
   
   # Alibc
-  source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
-  pod 'AlibcTradeSDK', '~> 3.1'
+  # source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
+  # pod 'AlibcTradeSDK', '~> 3.1'
   
   post_install do |installer|
       installer.pods_project.targets.each do |target|

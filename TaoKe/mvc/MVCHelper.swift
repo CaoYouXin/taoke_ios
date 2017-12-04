@@ -27,7 +27,7 @@ class MVCHelper<T> {
     
     private var data: [T] = []
     
-    private var mode = 0
+    private var modes: [Int] = []
     
     init(_ collectionView: UICollectionView) {
         self.collectionView = collectionView
@@ -35,13 +35,13 @@ class MVCHelper<T> {
     
     func refresh() {
         viewModel.active = false
-        mode = 1
+        modes = [0, 1]
         viewModel.active = true
     }
     
     func loadMore() {
         viewModel.active = false
-        mode = 2
+        modes = [2]
         viewModel.active = true
     }
     
@@ -53,27 +53,30 @@ class MVCHelper<T> {
         self.cellFactory = cellFactory
         
         var signal = viewModel.forwardSignalWhileActive(
-            Observable.just(refresh).flatMap{
-                refresh -> Observable<[T]> in
-                switch self.mode {
-                case 0:
-                    return self.dataSource!.loadCacheProxy()
-                case 1:
-                    return self.dataSource!.refreshProxy().map({ (data) -> [T] in
-                        self.data = []
-                        self.data.append(contentsOf: data)
-                        return self.data
-                    })
-                case 2:
-                    return self.dataSource!.loadMoreProxy().map({ (data) -> [T] in
-                        self.data.append(contentsOf: data)
-                        return self.data
-                    })
-                default:
-                    return Observable.empty()
-                }
+            Observable.just(dataSource)
+                .flatMap({ dataSource -> Observable<Int> in
+                    return Observable.from(self.modes)
+                }).flatMap{
+                    mode -> Observable<[T]> in
+                    switch mode {
+                    case 0:
+                        return self.dataSource!.loadCacheProxy()
+                    case 1:
+                        return self.dataSource!.refreshProxy().map({ (data) -> [T] in
+                            self.data = []
+                            self.data.append(contentsOf: data)
+                            return self.data
+                        })
+                    case 2:
+                        return self.dataSource!.loadMoreProxy().map({ (data) -> [T] in
+                            self.data.append(contentsOf: data)
+                            return self.data
+                        })
+                    default:
+                        return Observable.empty()
+                    }
         }).rxSchedulerHelper()
-
+        
         if let handler = errorHandler {
             signal = signal.catchError({ (error) -> Observable<[T]> in
                 return handler(error)
@@ -86,12 +89,12 @@ class MVCHelper<T> {
         }
         
         signal = signal.flatMap({ (origin) -> Observable<[T]> in
-                var data = origin
-                if let hook = self.dataHook {
-                    data = hook(origin)
-                }
-                return Observable.just(data)
-            })
+            var data = origin
+            if let hook = self.dataHook {
+                data = hook(origin)
+            }
+            return Observable.just(data)
+        })
         
         signal.bind(to: collectionView.rx.items)(cellFactory!)
             .disposed(by: disposeBag)

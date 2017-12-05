@@ -64,6 +64,18 @@ class SignUpInfoController: UIViewController {
         signUp.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
+        
+        Observable<Int>.interval(RxTimeInterval(1), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+            .take(60)
+            .rxSchedulerHelper()
+            .subscribe(onNext: { time in
+                if time == 59 {
+                    self.verificationCodeResend.textColor = .black
+                    self.verificationCodeResend.text = "重新获取"
+                } else {
+                    self.verificationCodeResend.text = "\(59 - time)"
+                }
+            }).disposed(by: disposeBag)
     }
     
     override func didReceiveMemoryWarning() {

@@ -83,7 +83,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "提交", style: .default, handler: { (action) in
                 if let input = alert.textFields?[0].text {
                     if let inputAmount = Float64(input) {
-                        if inputAmount >= self.maxWithDraw! {
+                        if inputAmount >= 10.0 {
                             TaoKeApi.withDraw(input).rxSchedulerHelper().handleApiError(self, { _ in
                                 self.canDrawState = true
                                 let msg = UIAlertController(title: "", message: "购买者不享有此功能", preferredStyle: .actionSheet)
@@ -97,10 +97,22 @@ class ChartController: UIViewController, UITextFieldDelegate {
                                 }))
                                 self.present(msg, animated: true)
                             }).disposed(by: self.disposeBag)
+                        } else {
+                            let msg = UIAlertController(title: "", message: "至少10元才可提现", preferredStyle: .actionSheet)
+                            msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                                self.canDrawState = true
+                            }))
+                            self.present(msg, animated: true)
                         }
                     } else {
-                        self.canDrawState = true
+                        let msg = UIAlertController(title: "", message: "请输入正确的金额", preferredStyle: .actionSheet)
+                        msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                            self.canDrawState = true
+                        }))
+                        self.present(msg, animated: true)
                     }
+                } else {
+                    self.canDrawState = true
                 }
             }))
             self.present(alert, animated: true)

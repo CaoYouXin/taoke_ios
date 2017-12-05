@@ -17,6 +17,7 @@ class ShareAppController: UIViewController {
     
     private var cache: [Int: CGFloat] = [:]
     private var shareTemplateDS: ShareTemplateDataSource?
+    private var busy = true
     
     var disposeBag = DisposeBag()
     
@@ -33,6 +34,14 @@ class ShareAppController: UIViewController {
         
         initShareTemplates()
         initGenerateZone()
+        
+        TaoKeApi.getDownloadUrl().rxSchedulerHelper().handleApiError(self)
+            .subscribe(onNext: { (downloadUrl) in
+                var qr = QRCode(downloadUrl)
+                qr?.size = CGSize(width: self.qrCode.frame.size.width - 6, height: self.qrCode.frame.size.height - 6)
+                self.qrCode.image = qr?.image
+                self.busy = false
+            }).disposed(by: disposeBag)
     }
     
     private func initGenerateZone() {
@@ -52,10 +61,6 @@ class ShareAppController: UIViewController {
         specification.textAlignment = .left;
         specification.numberOfLines = 0;
         specification.sizeToFit()
-        
-        var qr = QRCode("https://fir.im/7qrm")
-        qr?.size = CGSize(width: self.qrCode.frame.size.width - 6, height: self.qrCode.frame.size.height - 6)
-        qrCode.image = qr?.image
     }
     
     private func initShareTemplates() {
@@ -142,6 +147,14 @@ class ShareAppController: UIViewController {
     }
     
     @objc private func share() {
+        if self.busy {
+            let alert = UIAlertController(title: "", message: "正在生成二维码，请稍后重试", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "好的", style: .cancel, handler: { (action) in
+            }))
+            self.present(alert, animated: true)
+            return
+        }
+        
         if let generateShareImage = self.generateShareImage(false) {
             self.view.makeToastActivity(.center)
             generateShareImage.subscribe(onNext: { shareImage in

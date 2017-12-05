@@ -55,7 +55,11 @@ class ReportController: UIViewController, UITextViewDelegate {
                 .handleApiError(self, { _ in
                     self.navigationController?.popViewController(animated: true)
                 }).subscribe(onNext: { _ in
-                    self.navigationController?.popViewController(animated: true)
+                    let alert = UIAlertController(title: "", message: "我们已经收到您的反馈信息！", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "好的", style: .cancel, handler: { (action) in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true)
                 }).disposed(by: disposeBag)
         }
     }

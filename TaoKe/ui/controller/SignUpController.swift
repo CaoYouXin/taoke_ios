@@ -41,6 +41,8 @@ class SignUpController: UIViewController {
         backText.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         signUp.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,6 +79,7 @@ class SignUpController: UIViewController {
             }
             break
         default:
+            self.view.endEditing(true)
             break
         }
     }

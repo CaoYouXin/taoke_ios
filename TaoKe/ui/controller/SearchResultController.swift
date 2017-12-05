@@ -29,10 +29,12 @@ class SearchResultController: UIViewController {
     private var sortHelper: SortHelper?
     private var itemListHelper: MVCHelper<CouponItem>?
     private var itemDataSource: SearchDataSource?
-    private var setClickHandler = false
-    private var navigationControllerHolder: UINavigationController?
+    
     private var isJu: Bool?
     private var keyword: String?
+    private var navigationControllerHolder: UINavigationController?
+    private var setClickEventHandler: Bool = false
+    private var firstAppear: Bool = true
     
     var disposeBag = DisposeBag()
     
@@ -45,6 +47,11 @@ class SearchResultController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        itemDataSource?.cache = nil
+        itemDataSource?.keyword = self.keyword
+        itemDataSource?.isJu = self.isJu
+        barClicked(on: sortSales)
     }
     
     private func initSortBar() {
@@ -66,8 +73,6 @@ class SearchResultController: UIViewController {
         if (UserData.get()?.isBuyer())! {
             sortCommissionWrapper.isHidden = true
         }
-        
-        barClicked(on: sortSales)
     }
     
     @objc private func updateSortBar(_ sender: UITapGestureRecognizer) {
@@ -166,32 +171,63 @@ class SearchResultController: UIViewController {
         
         itemList.mj_footer = customFooter
         
-        let segue: AnyObserver<CouponItem> = NavigationSegue(
-            fromViewController: self.navigationControllerHolder!,
-            toViewControllerFactory:
-            { (sender, context) -> DetailController in
-                let detailController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
-                detailController.couponItem = context
-                return detailController
-        }).asObserver()
+        if !setClickEventHandler, let navigationController = self.navigationControllerHolder {
+            let segue: AnyObserver<CouponItem> = NavigationSegue(
+                fromViewController: navigationController,
+                toViewControllerFactory:
+                { (sender, context) -> DetailController in
+                    let detailController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+                    detailController.couponItem = context
+                    return detailController
+            }).asObserver()
+            
+            itemList.rx.itemSelected
+                .map{ indexPath -> CouponItem in
+                    return try self.itemList.rx.model(at: indexPath)
+                }
+                .bind(to: segue)
+                .disposed(by: disposeBag)
         
-        itemList.rx.itemSelected
-            .map{ indexPath -> CouponItem in
-                return try self.itemList.rx.model(at: indexPath)
-            }
-            .bind(to: segue)
-            .disposed(by: disposeBag)
+            setClickEventHandler = true
+        }
+        
     }
     
-    public func search(_ navigationController: UINavigationController, _ input: String, _ isJu: Bool) {
+    public func search(_ navigationController: UINavigationController, _ input: String, _ isJu: Bool, _ searchController: SearchController) {
         self.keyword = input
         self.isJu = isJu
-        
-        if setClickHandler {
-            return;
-        }
         self.navigationControllerHolder = navigationController
-        setClickHandler = true
+        
+        if !setClickEventHandler, let navigationController = self.navigationControllerHolder, let itemList = self.itemList {
+            let segue: AnyObserver<CouponItem> = NavigationSegue(
+                fromViewController: navigationController,
+                toViewControllerFactory:
+                { (sender, context) -> DetailController in
+                    searchController.shouldBeginEditingFlag = false
+                    let detailController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+                    detailController.couponItem = context
+                    return detailController
+            }).asObserver()
+            
+            itemList.rx.itemSelected
+                .map{ indexPath -> CouponItem in
+                    return try self.itemList.rx.model(at: indexPath)
+                }
+                .bind(to: segue)
+                .disposed(by: disposeBag)
+            
+            setClickEventHandler = true
+        }
+        
+        if firstAppear {
+            firstAppear = false
+            return
+        }
+        
+        itemDataSource?.cache = nil
+        itemDataSource?.keyword = input
+        itemDataSource?.isJu = isJu
+        barClicked(on: sortSales)
     }
 
     override func didReceiveMemoryWarning() {

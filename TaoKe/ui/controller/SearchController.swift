@@ -18,7 +18,7 @@ class SearchController: PYSearchViewController {
         delegate = self
         
         searchResultShowMode = .embed
-        self.resultViewHolder = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchResultController") as? SearchResultController
+        resultViewHolder = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchResultController") as? SearchResultController
         searchResultController = resultViewHolder
         
         searchBar.delegate = self
@@ -83,17 +83,14 @@ extension SearchController: UISearchBarDelegate {
 
 extension SearchController: PYSearchViewControllerDelegate {
     func searchViewController(_ searchViewController: PYSearchViewController!, didSelectHotSearchAt index: Int, searchText: String!) {
-        self.shouldBeginEditingFlag = false
-        resultViewHolder?.search(self.navigationController!, searchText, isJu)
+        resultViewHolder?.search(self.navigationController!, searchText, isJu, self)
     }
     
     func searchViewController(_ searchViewController: PYSearchViewController!, didSelectSearchHistoryAt index: Int, searchText: String!) {
-        self.shouldBeginEditingFlag = false
-        resultViewHolder?.search(self.navigationController!, searchText, isJu)
+        resultViewHolder?.search(self.navigationController!, searchText, isJu, self)
     }
     func searchViewController(_ searchViewController: PYSearchViewController!, didSearchWith searchBar: UISearchBar!, searchText: String!) {
-        self.shouldBeginEditingFlag = false
-        resultViewHolder?.search(self.navigationController!, searchText, isJu)
+        resultViewHolder?.search(self.navigationController!, searchText, isJu, self)
     }
     func searchViewController(_ searchViewController: PYSearchViewController!, searchTextDidChange searchBar: UISearchBar!, searchText: String!) {
         if searchText.elementsEqual("") {
@@ -108,8 +105,7 @@ extension SearchController: PYSearchViewControllerDelegate {
         }
     }
     func searchViewController(_ searchViewController: PYSearchViewController!, didSelectSearchSuggestionAt indexPath: IndexPath!, searchBar: UISearchBar!) {
-        self.shouldBeginEditingFlag = false
-        resultViewHolder?.search(self.navigationController!, self.searchSuggestions[indexPath.row], isJu)
+        resultViewHolder?.search(self.navigationController!, self.searchSuggestions[indexPath.row], isJu, self)
     }
 }
 

@@ -273,9 +273,9 @@ class TaoKeApi {
             })
     }
     
-    public static func getNewerGuideList() -> Observable<[String]?> {
+    public static func getNewerGuideList(_ type: Int) -> Observable<[String]?> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_NOVICE_LIST)
+            .tao(api: TaoKeService.API_NOVICE_LIST.replacingOccurrences(of: "{type}", with: "\(type)"))
             .handleResult()
             .map({(taokeData) -> [String]? in
                 var ret: [String] = []

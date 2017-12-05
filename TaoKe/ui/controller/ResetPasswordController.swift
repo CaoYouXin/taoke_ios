@@ -72,6 +72,8 @@ class ResetPasswordController: UIViewController {
         passwordVisible.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         resetPassword.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
@@ -134,6 +136,7 @@ class ResetPasswordController: UIViewController {
                     }
                 }).disposed(by: disposeBag)
         default:
+            self.view.endEditing(true)
             break
         }
     }

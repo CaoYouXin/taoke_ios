@@ -1,3 +1,4 @@
+
 import CleanroomLogger
 import RxSwift
 import RxCocoa
@@ -16,7 +17,7 @@ class SignInController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
+        let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
         eyeIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
         passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
         
@@ -55,11 +56,13 @@ class SignInController: UIViewController {
         signUp.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         resetPassword.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-            }
+    }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
@@ -96,6 +99,7 @@ class SignInController: UIViewController {
         case resetPassword:
             performSegue(withIdentifier: "segue_sign_in_to_reset_password", sender: nil)
         default:
+            self.view.endEditing(true)
             break
         }
     }

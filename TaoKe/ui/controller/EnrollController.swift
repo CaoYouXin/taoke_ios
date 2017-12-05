@@ -41,7 +41,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         navigationItem.title = "申请成为合伙人"
         
-        self.enrollSpec.text = "\t\t申请后，我们的工作人员会及时审核。当审核通过后，您将需要重新登录，以更新客户端状态。\n\n一旦成为代理，您将拥有自己的团队，通过将APP分享给好友注册以及直接分享商品给好友带来收入。\n\n同时，由于相关规定，成为代理后将不能享受普通购买者的优惠，不能在APP内跳转手淘。"
+        self.enrollSpec.text = "\t\t申请后，我们的工作人员会及时审核。当审核通过后，您将需要重新登录，以更新客户端状态。\n\n一旦成为合伙人，您将拥有自己的团队，通过将APP分享给好友注册以及直接分享商品给好友带来收入。\n\n同时，由于相关规定，成为合伙人后将不能享受普通购买者的优惠，不能在APP内跳转手淘。"
         self.enrollSpec.textAlignment = .left;
         self.enrollSpec.numberOfLines = 0;
         self.enrollSpec.sizeToFit()

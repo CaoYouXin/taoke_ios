@@ -62,6 +62,8 @@ class SignUpInfoController: UIViewController {
         passwordVisible.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         signUp.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
@@ -116,6 +118,7 @@ class SignUpInfoController: UIViewController {
             
             register()
         default:
+            self.view.endEditing(true)
             break
         }
     }

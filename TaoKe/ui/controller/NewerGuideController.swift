@@ -19,7 +19,7 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
         navigationItem.title = "新手引导"
         newerGuideList.spacing = 0
         
-        TaoKeApi.getNewerGuideList().rxSchedulerHelper()
+        TaoKeApi.getNewerGuideList((UserData.get()?.isBuyer())! ? 1 : 2).rxSchedulerHelper()
             .handleApiError(self, nil)
             .subscribe({ event in
                 switch event {

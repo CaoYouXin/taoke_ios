@@ -8,6 +8,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_SIGN_IN = "tbk/user/login"
     public static let API_SIGN_UP = "tbk/user/register"
     public static let API_RESET_PASSWORD = "tbk/user/reset/pwd"
+    public static let API_ANONYMOUS_LOGIN = "tbk/user/anonymous/{hash}"
 
     public static let API_BANNER_LIST = "home/banner/list"
     public static let API_COUPON_TAB = "home/cate/list"

@@ -22,6 +22,22 @@ class TaoKeApi {
             })
     }
     
+    public static func anonymous() -> Observable<TaoKeData?> {
+        var anonymous = UserDefaults.standard.string(forKey: "anonymous")
+        if (nil == anonymous) {
+            anonymous = "\(Date())".md5()
+            UserDefaults.standard.setValue(anonymous, forKey: "anonymous")
+        }
+        print(">>>\(anonymous!)")
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_ANONYMOUS_LOGIN.replacingOccurrences(of: "{hash}", with: anonymous!))
+            .handleResult()
+            .map({ (taoKeData) -> TaoKeData? in
+                UserData.setBy(from: taoKeData)?.cache()
+                return taoKeData
+            })
+    }
+    
     public static func signIn(phone: String, password: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_SIGN_IN, auth: "nil", data: ["phone": phone, "pwd": password.md5()])

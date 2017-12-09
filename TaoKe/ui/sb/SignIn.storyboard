@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0lZ-7K-mzN">
-                                <rect key="frame" x="0.0" y="200.5" width="375" height="266"/>
+                                <rect key="frame" x="0.0" y="192.5" width="375" height="282"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQD-Oc-gFJ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="24"/>
@@ -144,20 +144,50 @@
                                             <constraint firstAttribute="height" constant="1" id="tN7-u9-wjH"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RqH-CS-TZj">
-                                        <rect key="frame" x="0.0" y="166" width="375" height="100"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k71-yK-NXc">
+                                        <rect key="frame" x="0.0" y="166" width="375" height="86"/>
                                         <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fid-Qp-bDu">
-                                                <rect key="frame" x="74.5" y="32" width="225" height="36"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9w-GV-t0J">
+                                                <rect key="frame" x="75.5" y="50" width="225" height="36"/>
+                                                <subviews>
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fid-Qp-bDu">
+                                                        <rect key="frame" x="0.0" y="0.0" width="112.5" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="36" id="MBj-kd-5yk"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <color key="textColor" red="1" green="0.71764705880000002" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="游客登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsN-6H-qUc">
+                                                        <rect key="frame" x="112.5" y="0.0" width="112.5" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="36" id="OIj-hs-b4A"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <color key="textColor" red="1" green="0.71764705880000002" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="H73-S7-E1M"/>
+                                                    <constraint firstItem="AsN-6H-qUc" firstAttribute="width" secondItem="Fid-Qp-bDu" secondAttribute="width" id="jtF-Pa-4ud"/>
+                                                    <constraint firstAttribute="height" constant="36" id="y3c-sy-MBe"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" red="1" green="0.71764705880000002" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="T9w-GV-t0J" secondAttribute="bottom" id="bia-2O-evP"/>
+                                            <constraint firstItem="T9w-GV-t0J" firstAttribute="width" secondItem="k71-yK-NXc" secondAttribute="width" multiplier="0.6" id="dV9-P8-hbH"/>
+                                            <constraint firstAttribute="height" constant="86" id="tNF-vC-H8t"/>
+                                            <constraint firstItem="T9w-GV-t0J" firstAttribute="centerX" secondItem="k71-yK-NXc" secondAttribute="centerX" id="yMM-Pm-7zg"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RqH-CS-TZj">
+                                        <rect key="frame" x="0.0" y="252" width="375" height="30"/>
+                                        <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="SLA-Yq-ijR">
-                                                <rect key="frame" x="83" y="70" width="209" height="30"/>
+                                                <rect key="frame" x="83" y="0.0" width="209" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册账号" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlJ-De-9D2">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
@@ -202,10 +232,7 @@
                                         <constraints>
                                             <constraint firstItem="SLA-Yq-ijR" firstAttribute="centerX" secondItem="RqH-CS-TZj" secondAttribute="centerX" id="DSL-Bb-Zcq"/>
                                             <constraint firstAttribute="bottom" secondItem="SLA-Yq-ijR" secondAttribute="bottom" id="UhO-Tg-ZDG"/>
-                                            <constraint firstItem="Fid-Qp-bDu" firstAttribute="centerX" secondItem="RqH-CS-TZj" secondAttribute="centerX" id="Xmm-R3-CHI"/>
-                                            <constraint firstItem="Fid-Qp-bDu" firstAttribute="centerY" secondItem="RqH-CS-TZj" secondAttribute="centerY" id="fwm-iJ-Pwt"/>
-                                            <constraint firstAttribute="height" constant="100" id="nA7-x5-6rK"/>
-                                            <constraint firstItem="Fid-Qp-bDu" firstAttribute="width" secondItem="RqH-CS-TZj" secondAttribute="width" multiplier="0.6" id="qWf-FH-Xlz"/>
+                                            <constraint firstAttribute="height" constant="30" id="nA7-x5-6rK"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -220,6 +247,7 @@
                         <viewLayoutGuide key="safeArea" id="xI9-Fa-7x8"/>
                     </view>
                     <connections>
+                        <outlet property="anonymous" destination="AsN-6H-qUc" id="Kya-u9-Gmp"/>
                         <outlet property="password" destination="qoB-l7-LwN" id="VP9-35-M4r"/>
                         <outlet property="passwordVisible" destination="PEM-Hp-NSZ" id="85R-LR-uqA"/>
                         <outlet property="phoneNo" destination="rdq-QW-t72" id="XPB-cK-vgE"/>

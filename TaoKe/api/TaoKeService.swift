@@ -8,6 +8,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_SIGN_IN = "tbk/user/login"
     public static let API_SIGN_UP = "tbk/user/register"
     public static let API_RESET_PASSWORD = "tbk/user/reset/pwd"
+    public static let API_ANONYMOUS_LOGIN = "tbk/user/anonymous/{hash}"
 
     public static let API_BANNER_LIST = "home/banner/list"
     public static let API_COUPON_TAB = "home/cate/list"
@@ -41,7 +42,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_ENROLL = "tbk/user/apply/4/agent"
     public static let API_DOWNLOAD_URL = "app/download/url"
 
-    public static let HOST = "http://192.168.0.136:8080/api/"
+    public static let HOST = "http://192.168.1.102:8080/api/"
 //    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     private static var instance: TaoKeProtocol?

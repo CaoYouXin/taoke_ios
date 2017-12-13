@@ -26,8 +26,9 @@ class SignInController: UIViewController {
         signIn.layer.borderColor = UIColor("#FFB74D").cgColor
         signIn.layer.cornerRadius = 18
         anonymous.layer.borderWidth = 1
-        anonymous.layer.borderColor = UIColor("#FFB74D").cgColor
+        anonymous.layer.borderColor = UIColor("#999999").cgColor
         anonymous.layer.cornerRadius = 18
+        anonymous.layer.masksToBounds = true
         
         let binder = { (observable: Observable<String>) -> Disposable in
             return observable.subscribe(onNext: { _ in

@@ -78,7 +78,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     
     private func initBrandList() {
         brandList.register(UINib(nibName: "BrandCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
-        brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
+        
         
         let brandCellFactory: (UICollectionView, Int, HomeBtn) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
@@ -93,6 +93,8 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         let brandDataSource = BrandDataSource()
         
         let brandDataHook = { (brandItems: [HomeBtn]) -> [HomeBtn] in
+            self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
+            
             let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
             self.maximumContentHeight = self.maxContentHeight + height
             

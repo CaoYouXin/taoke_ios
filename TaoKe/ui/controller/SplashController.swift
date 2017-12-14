@@ -79,7 +79,6 @@ class SplashController: UIViewController {
                 } else {
                     self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
                 }
-                print(">>>")
             }).disposed(by: disposeBag)
     }
     

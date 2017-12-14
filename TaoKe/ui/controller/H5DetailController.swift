@@ -27,9 +27,9 @@ class H5DetailController: UIViewController {
             let taokeParams = AlibcTradeTaokeParams()
             taokeParams.pid = UserData.get()?.pid
             AlibcTradeSDK.sharedInstance().tradeService().show(self, webView: webView, page: page, showParams: showParam, taoKeParams: taokeParams, trackParam: nil, tradeProcessSuccessCallback: { (alibcTradeResult) in
-                self.view.makeToast("alibc open taobao successfully")
+                print(">>> alibc open taobao successfully")
             }, tradeProcessFailedCallback: { (error) in
-                self.view.makeToast("alibc open taobao fail \(error.debugDescription)")
+                print(">>> alibc open taobao fail \(error.debugDescription)")
             })
         }
     }

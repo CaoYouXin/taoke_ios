@@ -156,13 +156,16 @@ class DiscoverController: UIViewController {
     }
     
     private func initMJRefresh() {
-        scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+        let customHeader = MJRefreshNormalHeader(refreshingBlock: {
             self.discoverHeaderView?.refreshHeader()
+            print(">>>refresh discover page")
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.scrollView.mj_header.endRefreshing()
             }
         })
+
+        scrollView.mj_header = customHeader
         
         let customFooter = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.couponList.mj_footer.endRefreshingWithNoMoreData()

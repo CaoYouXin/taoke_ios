@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V2O-Ad-bRs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V2O-Ad-bRs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -75,11 +75,24 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
+                                            <label opaque="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="随便看看" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-5K-6ow">
+                                                <rect key="frame" x="137.5" y="55" width="100" height="36"/>
+                                                <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="7Sd-Ch-bn4"/>
+                                                    <constraint firstAttribute="height" constant="36" id="PsN-I5-eNM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="MQf-R3-SqM" firstAttribute="leading" secondItem="rK9-M9-tGP" secondAttribute="leading" id="7q8-xR-gOL"/>
+                                            <constraint firstItem="dYr-5K-6ow" firstAttribute="centerX" secondItem="rK9-M9-tGP" secondAttribute="centerX" id="J6K-wS-n0C"/>
                                             <constraint firstAttribute="trailing" secondItem="MQf-R3-SqM" secondAttribute="trailing" id="NVf-sP-rz9"/>
+                                            <constraint firstItem="dYr-5K-6ow" firstAttribute="top" secondItem="AKh-kw-x92" secondAttribute="bottom" constant="20" id="e5p-2b-itB"/>
                                             <constraint firstItem="AKh-kw-x92" firstAttribute="centerX" secondItem="rK9-M9-tGP" secondAttribute="centerX" id="gyj-86-JJk"/>
                                             <constraint firstItem="AKh-kw-x92" firstAttribute="top" secondItem="rK9-M9-tGP" secondAttribute="top" id="hAt-Bk-C8Y"/>
                                             <constraint firstAttribute="bottom" secondItem="MQf-R3-SqM" secondAttribute="bottom" constant="16" id="oLq-z7-yOn"/>
@@ -103,6 +116,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LBA-5o-Y0J"/>
                     <connections>
+                        <outlet property="anonymous" destination="dYr-5K-6ow" id="dr1-OW-cy7"/>
                         <outlet property="signIn" destination="nCh-cr-Qku" id="uaL-AS-B59"/>
                         <outlet property="signUp" destination="VCL-va-5jb" id="dbC-Ai-K0L"/>
                         <outlet property="splashImage" destination="NFx-46-PVK" id="Crz-fI-wzb"/>
@@ -650,7 +664,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Dcx-wG-nfn" secondAttribute="bottom" constant="150" id="49f-H2-b7q"/>
                                             <constraint firstItem="UiL-qd-h54" firstAttribute="leading" secondItem="pWp-tL-7bK" secondAttribute="leading" constant="16" id="4sE-Q0-xjh"/>
@@ -705,11 +719,12 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="pWp-tL-7bK" firstAttribute="top" secondItem="Nzd-h6-SP5" secondAttribute="top" id="7e7-iX-He6"/>
                                     <constraint firstItem="pWp-tL-7bK" firstAttribute="leading" secondItem="Nzd-h6-SP5" secondAttribute="leading" id="J0L-p9-5tb"/>
                                     <constraint firstAttribute="trailing" secondItem="pWp-tL-7bK" secondAttribute="trailing" id="RkX-wz-Qx3"/>
-                                    <constraint firstAttribute="bottom" secondItem="pWp-tL-7bK" secondAttribute="bottom" constant="-113" id="cIL-Nu-wG7"/>
+                                    <constraint firstAttribute="bottom" secondItem="pWp-tL-7bK" secondAttribute="bottom" id="cIL-Nu-wG7"/>
                                 </constraints>
                             </scrollView>
                         </subviews>

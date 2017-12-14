@@ -4,9 +4,9 @@ import RxSwift
 class SplashController: UIViewController {
     
     @IBOutlet weak var splashImage: UIImageView!
-    @IBOutlet weak var appName: UIImageView!
     @IBOutlet weak var signUp: UIButton!
     @IBOutlet weak var signIn: UIButton!
+    @IBOutlet weak var anonymous: UILabel!
     
     var disposeBag = DisposeBag()
     
@@ -18,6 +18,10 @@ class SplashController: UIViewController {
         signIn.layer.borderWidth = 1
         signIn.layer.borderColor = UIColor("#FFB74D").cgColor
         signIn.layer.cornerRadius = 6
+        anonymous.layer.borderWidth = 1
+        anonymous.layer.borderColor = UIColor("#999999").cgColor
+        anonymous.layer.cornerRadius = 18
+        anonymous.layer.masksToBounds = true
         
         UIView.animate(withDuration: 1.5, animations: { () -> Void in
             self.splashImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
@@ -41,12 +45,42 @@ class SplashController: UIViewController {
             UIView.animate(withDuration: 1.5, animations: { () -> Void in
                 self.signUp.alpha = 1
                 self.signIn.alpha = 1
+                self.anonymous.alpha = 1
             })
         }
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        anonymous.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @objc private func tap(_ sender: UITapGestureRecognizer) {
+        view.makeToastActivity(.center)
+        TaoKeApi.anonymous()
+            .rxSchedulerHelper()
+            .handleApiError(self, { (error) in
+                self.view.hideToastActivity()
+                Log.error?.message(error.localizedDescription)
+                if let error = error as? ApiError {
+                    if let message = error.message {
+                        self.view.makeToast(message)
+                        return
+                    }
+                }
+                self.view.makeToast("登录失败，网络连接异常...")
+            })
+            .subscribe(onNext: { _ in
+                self.view.hideToastActivity()
+                if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
+                } else {
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
+                }
+                print(">>>")
+            }).disposed(by: disposeBag)
     }
     
 }

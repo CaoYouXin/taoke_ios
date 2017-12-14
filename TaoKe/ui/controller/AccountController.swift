@@ -52,6 +52,13 @@ class AccountController: UIViewController {
         shareToIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#9AD2FF"))
         self.shareToImage.image = shareToIcon?.image(with: CGSize(width: 20, height: 20))
         
+        self.shareToImage.isHidden = true
+        self.shareToBtn.isHidden = true
+        self.rightArrow2.isHidden = true
+        if let constraint = (self.shareToBtn.constraints.filter({$0.firstAttribute == .height}).first) {
+            constraint.constant = 0
+        }
+        
         let enrollIcon = FAKFontAwesome.codeForkIcon(withSize: 20)
         enrollIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#666666"))
         self.enrollImage.image = enrollIcon?.image(with: CGSize(width: 20, height: 20))

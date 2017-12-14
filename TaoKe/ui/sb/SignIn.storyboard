@@ -151,7 +151,7 @@
                                                 <rect key="frame" x="75.5" y="50" width="225" height="36"/>
                                                 <subviews>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fid-Qp-bDu">
-                                                        <rect key="frame" x="0.0" y="0.0" width="112.5" height="36"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="225" height="36"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="36" id="MBj-kd-5yk"/>
@@ -160,19 +160,8 @@
                                                         <color key="textColor" red="1" green="0.71764705880000002" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRY 游客" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsN-6H-qUc">
-                                                        <rect key="frame" x="112.5" y="0.0" width="112.5" height="36"/>
-                                                        <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="36" id="OIj-hs-b4A"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="AsN-6H-qUc" firstAttribute="width" secondItem="Fid-Qp-bDu" secondAttribute="width" id="jtF-Pa-4ud"/>
                                                     <constraint firstAttribute="height" constant="36" id="y3c-sy-MBe"/>
                                                 </constraints>
                                             </stackView>
@@ -239,17 +228,47 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2OJ-rp-W9b">
+                                <rect key="frame" x="0.0" y="20" width="375" height="40"/>
+                                <subviews>
+                                    <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gBC-UF-zVe">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="gBC-UF-zVe" secondAttribute="height" multiplier="1:1" id="miC-zX-bgq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="返回" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0h-GT-ZIe">
+                                        <rect key="frame" x="40" y="10" width="33" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="gBC-UF-zVe" firstAttribute="leading" secondItem="2OJ-rp-W9b" secondAttribute="leading" id="06u-zB-tr3"/>
+                                    <constraint firstAttribute="bottom" secondItem="gBC-UF-zVe" secondAttribute="bottom" id="7oE-zf-kSd"/>
+                                    <constraint firstAttribute="height" constant="40" id="DR2-fC-2CQ"/>
+                                    <constraint firstItem="I0h-GT-ZIe" firstAttribute="centerY" secondItem="2OJ-rp-W9b" secondAttribute="centerY" id="I2O-OQ-kFL"/>
+                                    <constraint firstItem="gBC-UF-zVe" firstAttribute="top" secondItem="2OJ-rp-W9b" secondAttribute="top" id="h9c-j0-nVi"/>
+                                    <constraint firstItem="I0h-GT-ZIe" firstAttribute="leading" secondItem="gBC-UF-zVe" secondAttribute="trailing" id="ntK-R6-FXX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="xI9-Fa-7x8" firstAttribute="trailing" secondItem="2OJ-rp-W9b" secondAttribute="trailing" id="5KA-1r-Mqf"/>
                             <constraint firstItem="xI9-Fa-7x8" firstAttribute="trailing" secondItem="0lZ-7K-mzN" secondAttribute="trailing" id="Emr-dV-qTC"/>
+                            <constraint firstItem="2OJ-rp-W9b" firstAttribute="leading" secondItem="xI9-Fa-7x8" secondAttribute="leading" id="Jku-is-YIm"/>
+                            <constraint firstItem="2OJ-rp-W9b" firstAttribute="top" secondItem="xI9-Fa-7x8" secondAttribute="top" id="bXv-L2-XgX"/>
                             <constraint firstItem="0lZ-7K-mzN" firstAttribute="centerY" secondItem="8kL-pe-wBo" secondAttribute="centerY" id="jda-io-lFQ"/>
                             <constraint firstItem="0lZ-7K-mzN" firstAttribute="leading" secondItem="xI9-Fa-7x8" secondAttribute="leading" id="lzP-YD-6wf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xI9-Fa-7x8"/>
                     </view>
                     <connections>
-                        <outlet property="anonymous" destination="AsN-6H-qUc" id="Kya-u9-Gmp"/>
+                        <outlet property="backIcon" destination="gBC-UF-zVe" id="R4T-c5-WIG"/>
+                        <outlet property="backText" destination="I0h-GT-ZIe" id="dAq-IU-W9X"/>
                         <outlet property="password" destination="qoB-l7-LwN" id="VP9-35-M4r"/>
                         <outlet property="passwordVisible" destination="PEM-Hp-NSZ" id="85R-LR-uqA"/>
                         <outlet property="phoneNo" destination="rdq-QW-t72" id="XPB-cK-vgE"/>

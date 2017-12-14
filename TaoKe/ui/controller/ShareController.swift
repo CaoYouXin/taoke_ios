@@ -48,7 +48,7 @@ class ShareController: UIViewController {
         
         navigationItem.title = "创建分享"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "分享", style: UIBarButtonItemStyle.plain, target: self, action: #selector(share))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "分享", style: UIBarButtonItemStyle.plain, target: self, action: #selector(share))
         
         let text = "已选 1 张"
         let selectCountMutableAttributedString = NSMutableAttributedString(string: text)

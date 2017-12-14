@@ -200,8 +200,6 @@ class ProductListController: UIViewController {
         customFooter?.setTitle("我们是有底线的！😊", for: .refreshing)
         customFooter?.setTitle("我们是有底线的！😊", for: .willRefresh)
         productList.mj_footer = customFooter
-        
-        productList.mj_footer.isAutomaticallyHidden = true
     }
     
     @objc private func back() {

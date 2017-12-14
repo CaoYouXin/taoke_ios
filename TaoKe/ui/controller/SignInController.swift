@@ -6,11 +6,12 @@ import FontAwesomeKit
 
 class SignInController: UIViewController {
     
+    @IBOutlet weak var backIcon: UIImageView!
+    @IBOutlet weak var backText: UILabel!
     @IBOutlet weak var phoneNo: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var passwordVisible: UIImageView!
     @IBOutlet weak var signIn: UILabel!
-    @IBOutlet weak var anonymous: UILabel!
     @IBOutlet weak var signUp: UILabel!
     @IBOutlet weak var resetPassword: UILabel!
     
@@ -18,6 +19,7 @@ class SignInController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        backIcon.image = FAKFontAwesome.chevronLeftIcon(withSize: 20).image(with: CGSize(width: 20, height: 20))
         let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
         eyeIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#bdbdbd"))
         passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
@@ -25,10 +27,6 @@ class SignInController: UIViewController {
         signIn.layer.borderWidth = 1
         signIn.layer.borderColor = UIColor("#FFB74D").cgColor
         signIn.layer.cornerRadius = 18
-        anonymous.layer.borderWidth = 1
-        anonymous.layer.borderColor = UIColor("#999999").cgColor
-        anonymous.layer.cornerRadius = 18
-        anonymous.layer.masksToBounds = true
         
         let binder = { (observable: Observable<String>) -> Disposable in
             return observable.subscribe(onNext: { _ in
@@ -56,13 +54,15 @@ class SignInController: UIViewController {
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         passwordVisible.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        backIcon.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        backText.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         signIn.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         signUp.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         resetPassword.addGestureRecognizer(tapGestureRecognizer)
-        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
-        anonymous.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         self.view.addGestureRecognizer(tapGestureRecognizer)
     }
@@ -73,6 +73,9 @@ class SignInController: UIViewController {
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
+        case backIcon, backText:
+            navigationController?.popViewController(animated: true)
+            break
         case passwordVisible:
             password.isSecureTextEntry = !password.isSecureTextEntry
             let eyeIcon = FAKMaterialIcons.eyeIcon(withSize: 20)
@@ -81,29 +84,6 @@ class SignInController: UIViewController {
         case signIn:
             view.makeToastActivity(.center)
             TaoKeApi.signIn(phone: phoneNo.text!, password: password.text!)
-                .rxSchedulerHelper()
-                .handleApiError(self, { (error) in
-                    self.view.hideToastActivity()
-                    Log.error?.message(error.localizedDescription)
-                    if let error = error as? ApiError {
-                        if let message = error.message {
-                            self.view.makeToast(message)
-                            return
-                        }
-                    }
-                    self.view.makeToast("登录失败，网络连接异常...")
-                })
-                .subscribe(onNext: { _ in
-                    self.view.hideToastActivity()
-                    if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
-                    } else {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
-                    }
-                }).disposed(by: disposeBag)
-        case anonymous:
-            view.makeToastActivity(.center)
-            TaoKeApi.anonymous()
                 .rxSchedulerHelper()
                 .handleApiError(self, { (error) in
                     self.view.hideToastActivity()

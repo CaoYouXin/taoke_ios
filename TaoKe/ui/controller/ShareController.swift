@@ -280,7 +280,8 @@ class ShareController: UIViewController {
                 if save {
                     UIImageWriteToSavedPhotosAlbum(shareImage, nil, nil, nil)
                 }
-                return shareImage
+                
+                return UIImage(data: UIImageJPEGRepresentation(shareImage, 0.0)!)
             })
         } else {
             return nil

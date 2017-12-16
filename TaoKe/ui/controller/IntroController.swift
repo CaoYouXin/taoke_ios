@@ -4,7 +4,7 @@ import EAIntroView
 
 class IntroController: UIViewController {
     
-    public static let INTRO_READ = "intro_read"
+    public static let INTRO_READ = "intro_read_2"
     
     @IBOutlet weak var introView: EAIntroView!
     

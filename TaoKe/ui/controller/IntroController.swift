@@ -20,21 +20,26 @@ class IntroController: UIViewController {
     }
     
     private func initIntroView() {
-        introView.pages = []
-        var introPage = EAIntroPage()
-        introPage.bgImage = #imageLiteral(resourceName: "intro_1")
-        introView.pages.append(introPage)
-        introPage = EAIntroPage()
-        introPage.bgImage = #imageLiteral(resourceName: "intro_2")
-        introView.pages.append(introPage)
-        introPage = EAIntroPage()
-        introPage.bgImage = #imageLiteral(resourceName: "intro_3")
-        introView.pages.append(introPage)
-        introPage = EAIntroPage()
-        introPage.bgImage = #imageLiteral(resourceName: "intro_4")
-        introView.pages.append(introPage)
-        
-        introView.delegate = self
+        if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
+            self.navigationController?.performSegue(withIdentifier: "segue_to_splash", sender: nil)
+        } else {
+            
+            introView.pages = []
+            var introPage = EAIntroPage()
+            introPage.bgImage = #imageLiteral(resourceName: "intro_1")
+            introView.pages.append(introPage)
+            introPage = EAIntroPage()
+            introPage.bgImage = #imageLiteral(resourceName: "intro_2")
+            introView.pages.append(introPage)
+            introPage = EAIntroPage()
+            introPage.bgImage = #imageLiteral(resourceName: "intro_3")
+            introView.pages.append(introPage)
+            introPage = EAIntroPage()
+            introPage.bgImage = #imageLiteral(resourceName: "intro_4")
+            introView.pages.append(introPage)
+            
+            introView.delegate = self
+        }
     }
 }
 

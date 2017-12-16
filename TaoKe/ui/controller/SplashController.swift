@@ -32,11 +32,7 @@ class SplashController: UIViewController {
                 .observeOn(MainScheduler.instance)
                 .subscribe(onNext: {
                     _ in
-                    if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
-                    } else {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
-                    }
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
                 }, onError: {
                     error in
                     Log.error?.message(error.localizedDescription)

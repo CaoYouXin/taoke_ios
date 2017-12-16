@@ -36,6 +36,8 @@ target 'TaoKe' do
   pod 'PYSearch'
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/zkrige/BTNavigationDropdownMenu.git'
   
+  pod 'Bugly'
+  
   # Alibc
   # source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
   # pod 'AlibcTradeSDK', '~> 3.1'

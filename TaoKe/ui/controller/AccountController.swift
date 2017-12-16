@@ -143,7 +143,6 @@ class AccountController: UIViewController {
             let alert = UIAlertController(title: "", message: "确定注销吗？", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "注销", style: .default, handler: { (action) in
                 UserData.clear()
-                UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
                 self.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
             }))
             alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in

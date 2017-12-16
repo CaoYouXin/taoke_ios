@@ -142,7 +142,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Pc5-2b-eGg" kind="relationship" relationship="rootViewController" id="XYP-Td-EIi"/>
+                        <segue destination="i8O-TE-rx8" kind="relationship" relationship="rootViewController" id="gnv-Pr-OlW"/>
+                        <segue destination="Pc5-2b-eGg" kind="showDetail" identifier="segue_to_splash" id="UxE-K5-1N0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-sz-4Bd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -158,9 +159,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Cze-mm-IlI"/>
-                        <segue destination="1t0-ML-JoR" kind="showDetail" identifier="segue_splash_to_taoke" id="I0u-fa-lHM"/>
-                        <segue destination="i8O-TE-rx8" kind="showDetail" identifier="segue_splash_to_intro" id="4sl-qT-Vb2"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="YHS-q3-bSy"/>
+                        <segue destination="1t0-ML-JoR" kind="showDetail" identifier="segue_splash_to_taoke" id="ZDT-pD-a9y"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SPR-JY-mhg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,7 +180,9 @@
         <!--IntroController-->
         <scene sceneID="msh-Ol-Rwu">
             <objects>
-                <viewControllerPlaceholder storyboardName="Intro" referencedIdentifier="IntroController" id="i8O-TE-rx8" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Intro" referencedIdentifier="IntroController" id="i8O-TE-rx8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="O0r-Pw-vpV"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9AA-Qg-3Pu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="238" y="-445"/>
@@ -453,8 +455,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Ydh-Z0-3O4" kind="relationship" relationship="rootViewController" id="QBS-bR-QmU"/>
-                        <segue destination="Pc5-2b-eGg" kind="showDetail" identifier="segue_taoke_to_splash" id="IYj-EG-kuS"/>
+                        <segue destination="Pc5-2b-eGg" kind="showDetail" identifier="segue_taoke_to_splash" id="leT-sw-YAd"/>
+                        <segue destination="Ydh-Z0-3O4" kind="relationship" relationship="rootViewController" id="dlK-se-qbd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3I4-XX-X1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -875,6 +877,6 @@
         <image name="splash" width="540" height="960"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IYj-EG-kuS"/>
+        <segue reference="leT-sw-YAd"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -11,6 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Bugly.start(withAppId: "e1813186f2")
+        
         RKlcl_configure_by_name("RestKit/Network", RKlcl_vTrace.rawValue);
         RKlcl_configure_by_name("RestKit/ObjectMapping", RKlcl_vOff.rawValue);
         Log.enable()

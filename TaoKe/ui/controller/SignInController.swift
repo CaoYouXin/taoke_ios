@@ -98,11 +98,7 @@ class SignInController: UIViewController {
                 })
                 .subscribe(onNext: { _ in
                     self.view.hideToastActivity()
-                    if UserDefaults.standard.bool(forKey: IntroController.INTRO_READ) {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
-                    } else {
-                        self.navigationController?.performSegue(withIdentifier: "segue_splash_to_intro", sender: nil)
-                    }
+                    self.navigationController?.performSegue(withIdentifier: "segue_splash_to_taoke", sender: nil)
                 }).disposed(by: disposeBag)
         case signUp:
             performSegue(withIdentifier: "segue_sign_in_to_sign_up", sender: nil)

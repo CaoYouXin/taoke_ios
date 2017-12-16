@@ -40,7 +40,6 @@ extension ObservableType {
                 let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "好的", style: .default, handler: { (action) in
                     UserData.clear()
-                    UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
                     view.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
                 }))
                 view.present(alert, animated: true)
@@ -75,7 +74,6 @@ class ApiErrorHook: Hook {
                 let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "好的", style: .default, handler: { (action) in
                     UserData.clear()
-                    UserDefaults.standard.setValue(false, forKey: IntroController.INTRO_READ)
                     view.navigationController?.performSegue(withIdentifier: "segue_taoke_to_splash", sender: nil)
                 }))
                 view.present(alert, animated: true)

@@ -47,13 +47,9 @@ class DiscoverController: UIViewController {
         if let headerView = discoverHeaderView {
             headerView.setController(ctrl: self)
             
-            var adjust = CGFloat(0)
-            let height = self.view.frame.size.height
-            if height == 568 {
-                adjust -= 16
-            }else if height == 736 {
-                adjust += 16
-            }
+            let adjust = 9 * (self.view.frame.size.width - 375) / 25
+            print(">>>\(self.view.frame.size.width), \(adjust)")
+//            轮播高度随宽度变化导致，界面设计中使用iphone8模型，即375.
             headerView.maxContentHeight += adjust
             
             couponList.addSubview(headerView)

@@ -17,6 +17,7 @@
 #import <EAIntroView/EAIntroView.h>
 #import <PYSearch/PYSearch.h>
 #import <AlibcTradeSDK/AlibcTradeSDK.h>
+#import <Bugly/Bugly.h>
 @import GSKStretchyHeaderView;
 
 #endif /* BridgingHeader_h */

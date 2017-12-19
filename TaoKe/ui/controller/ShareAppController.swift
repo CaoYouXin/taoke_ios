@@ -166,6 +166,7 @@ class ShareAppController: UIViewController {
                 }
                 
                 let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
                 self.present(activityViewController, animated: true)
                 
             }, onError: { (error) in

@@ -75,8 +75,10 @@ class EnrollController: UIViewController, UITextViewDelegate {
             announcement.textColor = UIColor.black
         }
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         submitBtn.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+        self.view.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,50 +90,57 @@ class EnrollController: UIViewController, UITextViewDelegate {
     }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
-        if (realName.text?.elementsEqual(""))! {
-            let alert = UIAlertController(title: "", message: "必须填写真实姓名！", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
-                self.realName.becomeFirstResponder()
-            }))
-            self.present(alert, animated: true)
-            return
+        switch sender.view! {
+        case submitBtn:
+            if (realName.text?.elementsEqual(""))! {
+                let alert = UIAlertController(title: "", message: "必须填写真实姓名！", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
+                    self.realName.becomeFirstResponder()
+                }))
+                self.present(alert, animated: true)
+                return
+            }
+            
+            if (alipay.text?.elementsEqual(""))! {
+                let alert = UIAlertController(title: "", message: "必须填写支付宝账号，用户提现。", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
+                    self.alipay.becomeFirstResponder()
+                }))
+                self.present(alert, animated: true)
+                return
+            }
+            
+            if (qq.text?.elementsEqual(""))! && (wechat.text?.elementsEqual(""))! {
+                let alert = UIAlertController(title: "", message: "QQ和微信至少写一个吧", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
+                    self.qq.becomeFirstResponder()
+                }))
+                self.present(alert, animated: true)
+                return
+            }
+            
+            if (announcement.text?.elementsEqual(""))! {
+                let alert = UIAlertController(title: "", message: "必须填写申请理由，谢谢🙏", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
+                    self.announcement.becomeFirstResponder()
+                }))
+                self.present(alert, animated: true)
+                return
+            }
+            
+            let submit = EnrollSubmit(realName.text, alipay.text, qq.text, wechat.text, announcement.text)
+            submit.cache()
+            let _ = TaoKeApi.toEnroll(submit: submit)
+                .rxSchedulerHelper()
+                .handleApiError(self, nil)
+                .subscribe({_ in
+                    self.navigationController?.popViewController(animated: true)
+                })
+            break;
+        default:
+            self.view.endEditing(true)
+            break
         }
-        
-        if (alipay.text?.elementsEqual(""))! {
-            let alert = UIAlertController(title: "", message: "必须填写支付宝账号，用户提现。", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
-                self.alipay.becomeFirstResponder()
-            }))
-            self.present(alert, animated: true)
-            return
-        }
-        
-        if (qq.text?.elementsEqual(""))! && (wechat.text?.elementsEqual(""))! {
-            let alert = UIAlertController(title: "", message: "QQ和微信至少写一个吧", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
-                self.qq.becomeFirstResponder()
-            }))
-            self.present(alert, animated: true)
-            return
-        }
-        
-        if (announcement.text?.elementsEqual(""))! {
-            let alert = UIAlertController(title: "", message: "必须填写申请理由，谢谢🙏", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
-                self.announcement.becomeFirstResponder()
-            }))
-            self.present(alert, animated: true)
-            return
-        }
-        
-        let submit = EnrollSubmit(realName.text, alipay.text, qq.text, wechat.text, announcement.text)
-        submit.cache()
-        let _ = TaoKeApi.toEnroll(submit: submit)
-            .rxSchedulerHelper()
-            .handleApiError(self, nil)
-            .subscribe({_ in
-                self.navigationController?.popViewController(animated: true)
-            })
     }
     
 }

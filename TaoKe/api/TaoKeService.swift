@@ -42,8 +42,8 @@ class TaoKeService: TaoKeProtocol {
     public static let API_ENROLL = "tbk/user/apply/4/agent"
     public static let API_DOWNLOAD_URL = "app/download/url"
 
-    public static let HOST = "http://192.168.0.136:8080/api/"
-//    public static let HOST = "http://server.tkmqr.com:8080/api/"
+//    public static let HOST = "http://192.168.0.136:8080/api/"
+    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     private static var instance: TaoKeProtocol?
 
@@ -64,7 +64,7 @@ class TaoKeService: TaoKeProtocol {
         manager?.requestSerializationMIMEType = RKMIMETypeJSON
         
         manager?.httpClient.setDefaultHeader("platform", value: "ios")
-        manager?.httpClient.setDefaultHeader("version", value: "1.0.0")
+        manager?.httpClient.setDefaultHeader("version", value: "1.1.0")
     }
 
     public static func getInstance() -> TaoKeProtocol {

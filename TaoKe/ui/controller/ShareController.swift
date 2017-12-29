@@ -348,6 +348,7 @@ class ShareController: UIViewController {
                     }
                     
                     let activityViewController = UIActivityViewController(activityItems: actvityItems, applicationActivities: nil)
+                    activityViewController.popoverPresentationController?.sourceView = self.view
                     self.present(activityViewController, animated: true)
                     
                 }, onError: { (error) in
@@ -373,8 +374,14 @@ class ShareController: UIViewController {
         case copyIcon, copyText:
             let _ = generateShareText().subscribe(onNext: { (shareText) in
                 let alert = UIAlertController(title: "分享文案已经复制到剪切板", message: shareText, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "去微信粘贴", style: .cancel, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "去微信粘贴", style: .default, handler: { (action) in
                     let url = URL(string: "weixin://")
+                    if UIApplication.shared.canOpenURL(url!) {
+                        UIApplication.shared.open(url!, options: [:])
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "去QQ粘贴", style: .default, handler: { (action) in
+                    let url = URL(string: "mqq://")
                     if UIApplication.shared.canOpenURL(url!) {
                         UIApplication.shared.open(url!, options: [:])
                     }

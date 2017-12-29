@@ -92,6 +92,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
         case submitBtn:
+            self.view.endEditing(true)
             if (realName.text?.elementsEqual(""))! {
                 let alert = UIAlertController(title: "", message: "必须填写真实姓名！", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in

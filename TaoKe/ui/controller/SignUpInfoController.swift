@@ -116,6 +116,7 @@ class SignUpInfoController: UIViewController {
             passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
             break
         case signUp:
+            self.view.endEditing(true)
             if invitationCode.text == nil || invitationCode.text?.count == 0 {
                 let alert = UIAlertController(title: "", message: "输入邀请码，可以实时准确的获得优惠信息", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "去填邀请码", style: .cancel, handler: { (action) in

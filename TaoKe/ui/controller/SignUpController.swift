@@ -55,6 +55,7 @@ class SignUpController: UIViewController {
             navigationController?.popViewController(animated: true)
             break
         case signUp:
+            self.view.endEditing(true)
             view.makeToastActivity(.center)
             if let phone = phoneNo.text {
                 TaoKeApi.verification(phone: phone)

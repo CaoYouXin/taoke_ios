@@ -195,10 +195,9 @@ class ProductListController: UIViewController {
             }
         })
         customFooter?.setTitle("我们是有底线的！😊", for: .noMoreData)
-        customFooter?.setTitle("我们是有底线的！😊", for: .idle)
         customFooter?.setTitle("我们是有底线的！😊", for: .pulling)
         customFooter?.setTitle("我们是有底线的！😊", for: .refreshing)
-        customFooter?.setTitle("我们是有底线的！😊", for: .willRefresh)
+        
         productList.mj_footer = customFooter
     }
     

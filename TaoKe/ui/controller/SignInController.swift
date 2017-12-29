@@ -82,6 +82,7 @@ class SignInController: UIViewController {
             eyeIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: password.isSecureTextEntry ? UIColor("#bdbdbd") : UIColor.black)
             passwordVisible.image = eyeIcon?.image(with: CGSize(width: 20, height: 20))
         case signIn:
+            self.view.endEditing(true)
             view.makeToastActivity(.center)
             TaoKeApi.signIn(phone: phoneNo.text!, password: password.text!)
                 .rxSchedulerHelper()

@@ -156,8 +156,15 @@ class DiscoverController: UIViewController {
                 self.scrollView.mj_header.endRefreshing()
             }
         })
-        
+        customHeader?.isAutomaticallyChangeAlpha = true
+
         scrollView.mj_header = customHeader
+        
+        if #available(iOS 11, *) {
+            // ignore
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0 - scrollView.frame.minY, left: 0, bottom: 0, right: 0)
+        }
         
         let customFooter = MJRefreshAutoNormalFooter(refreshingBlock: {
             self.couponList.mj_footer.endRefreshingWithNoMoreData()
@@ -167,10 +174,8 @@ class DiscoverController: UIViewController {
             }
         })
         customFooter?.setTitle("我们是有底线的！😊", for: .noMoreData)
-        customFooter?.setTitle("我们是有底线的！😊", for: .idle)
         customFooter?.setTitle("我们是有底线的！😊", for: .pulling)
         customFooter?.setTitle("我们是有底线的！😊", for: .refreshing)
-        customFooter?.setTitle("我们是有底线的！😊", for: .willRefresh)
         
         couponList.mj_footer = customFooter
     }

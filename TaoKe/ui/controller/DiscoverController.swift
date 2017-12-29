@@ -38,7 +38,7 @@ class DiscoverController: UIViewController {
         RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
-                self.couponList.setContentOffset(CGPoint(x: 0, y: 1 - self.discoverHeaderView!.maximumContentHeight), animated: false)
+                self.couponList.setContentOffset(CGPoint(x: 0, y: 0 - self.discoverHeaderView!.maximumContentHeight), animated: false)
             }.disposed(by: disposeBag)
         
         let nibViews = Bundle.main.loadNibNamed("DiscoverHeaderView", owner: self, options: nil)
@@ -75,10 +75,6 @@ class DiscoverController: UIViewController {
     }
     
     private func initCouponList() {
-        if #available(iOS 11.0, *) {
-            self.couponList.contentInsetAdjustmentBehavior = .never
-        }
-        
         couponList.register(UINib(nibName: "CouponCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
         couponListFlowLayout.itemSize = CGSize(width: view.frame.size.width, height: 112)
@@ -160,7 +156,7 @@ class DiscoverController: UIViewController {
                 self.scrollView.mj_header.endRefreshing()
             }
         })
-
+        
         scrollView.mj_header = customHeader
         
         let customFooter = MJRefreshAutoNormalFooter(refreshingBlock: {

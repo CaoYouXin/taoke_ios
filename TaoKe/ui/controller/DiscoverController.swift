@@ -38,7 +38,7 @@ class DiscoverController: UIViewController {
         RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
-                self.couponList.setContentOffset(CGPoint(x: 0, y: 0 - self.discoverHeaderView!.maximumContentHeight), animated: false)
+                self.couponList.setContentOffset(CGPoint(x: 0, y: 1 - self.discoverHeaderView!.maximumContentHeight), animated: false)
             }.disposed(by: disposeBag)
         
         let nibViews = Bundle.main.loadNibNamed("DiscoverHeaderView", owner: self, options: nil)

@@ -26,13 +26,26 @@ class SearchController: PYSearchViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        searchBar.py_width = navigationController!.navigationBar.frame.size.width - menuView!.frame.size.width - 75
-        searchBar.py_height = navigationController!.navigationBar.frame.size.height - 10
+        searchBar.py_origin = CGPoint(x: 0, y: 0)
+        searchBar.py_size = CGSize(width: navigationController!.navigationBar.frame.size.width - menuView!.frame.size.width - navigationController!.navigationBar.frame.size.height * 2,
+                                   height: navigationController!.navigationBar.frame.size.height - 10)
+        
+        if #available(iOS 11, *) {
+            // ignore
+        } else {
+            searchBar.frame = CGRect(x: searchBar.bounds.minX - searchBar.bounds.width / 2 - navigationController!.navigationBar.frame.size.height * 0.382,
+                                      y: searchBar.bounds.minY - searchBar.bounds.height / 2,
+                                      width: searchBar.bounds.width,
+                                      height: searchBar.bounds.height)
+        }
+        
         searchTextField.frame = searchBar.bounds
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         
         TaoKeApi.getTopHints()
             .rxSchedulerHelper()
@@ -57,11 +70,14 @@ class SearchController: PYSearchViewController {
             self.isJu = indexPath == 1
         }
         self.menuView = menuView
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @objc private func back() {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

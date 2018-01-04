@@ -34,9 +34,6 @@ class SearchController: PYSearchViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initNavigationBar()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
-        
         TaoKeApi.getTopHints()
             .rxSchedulerHelper()
             .handleApiError(self, nil)
@@ -60,15 +57,13 @@ class SearchController: PYSearchViewController {
             self.isJu = indexPath == 1
         }
         self.menuView = menuView
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    @objc private func back() {
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 extension SearchController: UISearchBarDelegate {

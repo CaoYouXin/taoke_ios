@@ -18,11 +18,13 @@ class ShareImageDataSource: RxDataSource<ShareImage> {
         shareImage.selected = true
         var shareImages: [ShareImage] = [shareImage]
         
-        for image in (couponItem?.smallImages)! {
-            let shareImage = ShareImage()
-            shareImage.thumb = image
-            shareImage.selected = false
-            shareImages.append(shareImage)
+        if let images = couponItem?.smallImages {
+            for image in images {
+                let shareImage = ShareImage()
+                shareImage.thumb = image
+                shareImage.selected = false
+                shareImages.append(shareImage)
+            }
         }
         
         return Observable.just(shareImages)

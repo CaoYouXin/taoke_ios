@@ -34,6 +34,7 @@ target 'TaoKe' do
   pod 'EAIntroView'
   pod 'QRCode'
   pod 'PYSearch'
+  pod 'ADMozaicCollectionViewLayout', '~> 4.0'
   pod 'BTNavigationDropdownMenu', :git => 'https://github.com/zkrige/BTNavigationDropdownMenu.git'
   
   pod 'Bugly'

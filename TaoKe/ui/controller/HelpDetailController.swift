@@ -5,6 +5,7 @@ import FontAwesomeKit
 
 class HelpDetailController: UIViewController {
 
+    @IBOutlet weak var scrollWrapper: UIScrollView!
     @IBOutlet weak var qWrapper: UIView!
     @IBOutlet weak var aWrapper: UIView!
     @IBOutlet weak var question: UILabel!

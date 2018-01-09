@@ -5,6 +5,8 @@ import FontAwesomeKit
 
 class AccountController: UIViewController {
 
+    @IBOutlet weak var scrollWrapper: UIScrollView!
+    
     @IBOutlet weak var rightArrow1: UIImageView!
     @IBOutlet weak var rightArrow2: UIImageView!
     @IBOutlet weak var rightArrow3: UIImageView!
@@ -97,6 +99,12 @@ class AccountController: UIViewController {
             self.teamBtn.isHidden = true
             self.teamImage.isHidden = true
             self.rightArrow4.isHidden = true
+        }
+        
+        if #available(iOS 11, *) {
+            // ignore
+        } else {
+            scrollWrapper.contentInset = UIEdgeInsets(top: 0 - scrollWrapper.frame.minY, left: 0, bottom: 0, right: 0)
         }
     }
 

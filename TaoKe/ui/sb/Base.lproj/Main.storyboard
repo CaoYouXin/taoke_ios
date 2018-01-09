@@ -39,7 +39,6 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright©️云南升玥信息技术有限公司 版权所有" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQf-R3-SqM">
                                                 <rect key="frame" x="0.0" y="192" width="375" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="AKh-kw-x92">
@@ -195,24 +194,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AV8-Ez-nbg">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndQ-CS-hgr">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AT1-tN-K9x">
-                                    <size key="itemSize" width="375" height="171"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zlP-Ys-Qn3">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yfP-o2-Upg">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="zlP-Ys-Qn3" firstAttribute="width" secondItem="ndQ-CS-hgr" secondAttribute="width" id="1WF-vp-EDw"/>
+                                    <constraint firstAttribute="trailing" secondItem="zlP-Ys-Qn3" secondAttribute="trailing" id="ChM-cN-zcT"/>
+                                    <constraint firstItem="zlP-Ys-Qn3" firstAttribute="leading" secondItem="ndQ-CS-hgr" secondAttribute="leading" id="JZO-lv-iPB"/>
+                                    <constraint firstItem="zlP-Ys-Qn3" firstAttribute="height" secondItem="ndQ-CS-hgr" secondAttribute="height" id="WuC-Yg-eeo"/>
+                                    <constraint firstItem="zlP-Ys-Qn3" firstAttribute="top" secondItem="ndQ-CS-hgr" secondAttribute="top" id="wb4-tO-PGi"/>
+                                    <constraint firstAttribute="bottom" secondItem="zlP-Ys-Qn3" secondAttribute="bottom" id="xQu-PO-4EM"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5sC-BP-zys" firstAttribute="bottom" secondItem="AV8-Ez-nbg" secondAttribute="bottom" id="0JL-vD-jsQ"/>
-                            <constraint firstItem="AV8-Ez-nbg" firstAttribute="leading" secondItem="5sC-BP-zys" secondAttribute="leading" id="DrP-0R-Nyj"/>
-                            <constraint firstItem="AV8-Ez-nbg" firstAttribute="trailing" secondItem="5sC-BP-zys" secondAttribute="trailing" id="g5g-9G-icw"/>
-                            <constraint firstItem="AV8-Ez-nbg" firstAttribute="top" secondItem="5sC-BP-zys" secondAttribute="top" id="sJ4-Z6-3X1"/>
+                            <constraint firstItem="ndQ-CS-hgr" firstAttribute="leading" secondItem="5sC-BP-zys" secondAttribute="leading" id="Jbr-pf-qMq"/>
+                            <constraint firstItem="5sC-BP-zys" firstAttribute="trailing" secondItem="ndQ-CS-hgr" secondAttribute="trailing" id="TkK-tu-5jO"/>
+                            <constraint firstItem="5sC-BP-zys" firstAttribute="bottom" secondItem="ndQ-CS-hgr" secondAttribute="bottom" id="edd-kg-chd"/>
+                            <constraint firstItem="ndQ-CS-hgr" firstAttribute="top" secondItem="5sC-BP-zys" secondAttribute="top" id="s09-5t-RM1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5sC-BP-zys"/>
                     </view>
@@ -230,7 +242,8 @@
                         </connections>
                     </tabBarItem>
                     <connections>
-                        <outlet property="messageList" destination="AV8-Ez-nbg" id="BGf-Vw-ozk"/>
+                        <outlet property="messageList" destination="zlP-Ys-Qn3" id="QWp-AT-bD7"/>
+                        <outlet property="scrollWrapper" destination="ndQ-CS-hgr" id="APQ-sP-Edo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lno-p2-GnF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -771,6 +784,7 @@
                         <outlet property="rightArrow4" destination="5jm-JO-Rdc" id="tQy-bt-pxn"/>
                         <outlet property="rightArrow5" destination="TMU-OA-zwR" id="8TX-tc-7pX"/>
                         <outlet property="rightArrow6" destination="UIT-Rn-vdA" id="Yf9-mg-kLh"/>
+                        <outlet property="scrollWrapper" destination="Nzd-h6-SP5" id="Xz2-MK-ABt"/>
                         <outlet property="shareToBtn" destination="Gnk-ll-1in" id="p34-eh-jbK"/>
                         <outlet property="shareToImage" destination="iFz-CH-AuW" id="TII-X1-N0c"/>
                         <outlet property="teamBtn" destination="fV2-57-p5Z" id="Tn7-Eb-9D2"/>

@@ -45,6 +45,12 @@ class ChartController: UIViewController, UITextFieldDelegate {
         withDraw.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         orderDetails.addGestureRecognizer(tapGestureRecognizer)
+        
+        if #available(iOS 11, *) {
+            // ignore
+        } else {
+            scrollWrapper.contentInset = UIEdgeInsets(top: 0 - scrollWrapper.frame.minY, left: 0, bottom: 0, right: 0)
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -6,6 +6,7 @@ import ELWaterFallLayout
 
 class MessageController: UIViewController {
     
+    @IBOutlet weak var scrollWrapper: UIScrollView!
     @IBOutlet weak var messageList: UICollectionView!
     
     private var messageListHelper: MVCHelper<MessageView>?
@@ -18,6 +19,12 @@ class MessageController: UIViewController {
         
         initBadge()
         initList()
+        
+        if #available(iOS 11, *) {
+            // ignore
+        } else {
+            scrollWrapper.contentInset = UIEdgeInsets(top: 0 - scrollWrapper.frame.minY, left: 0, bottom: 0, right: 0)
+        }
     }
     
     override func didReceiveMemoryWarning() {

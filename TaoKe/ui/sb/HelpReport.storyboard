@@ -86,10 +86,10 @@
                                                     <rect key="frame" x="0.0" y="1" width="376" height="110"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-5o-emL">
-                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="113"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="311" height="113"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="问题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtL-EX-cTy">
-                                                                    <rect key="frame" x="16" y="47" width="280" height="19.5"/>
+                                                                    <rect key="frame" x="16" y="47" width="279" height="19.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -103,7 +103,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1B-Uu-10H">
-                                                            <rect key="frame" x="312" y="0.0" width="63" height="113"/>
+                                                            <rect key="frame" x="311" y="0.0" width="64" height="113"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mCs-H9-rnA">
                                                                     <rect key="frame" x="17.5" y="41" width="30" height="30"/>
@@ -247,6 +247,7 @@
                         <outlet property="answer" destination="MuG-jh-tkY" id="cw9-sh-Ete"/>
                         <outlet property="qWrapper" destination="2ig-Rm-wWA" id="5E2-nf-6nM"/>
                         <outlet property="question" destination="fU2-T4-YQW" id="cFk-sh-k40"/>
+                        <outlet property="scrollWrapper" destination="fZ4-Tt-Qhx" id="Wkx-nP-ygq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OL1-NQ-ILk" userLabel="First Responder" sceneMemberID="firstResponder"/>

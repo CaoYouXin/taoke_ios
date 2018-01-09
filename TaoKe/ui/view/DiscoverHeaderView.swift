@@ -4,16 +4,16 @@ import RxSwift
 import RxBus
 import ImageSlideshow
 import TabLayoutView
+import ADMozaicCollectionViewLayout
 
 class DiscoverHeaderView: GSKStretchyHeaderView {
     
     @IBOutlet weak var slideshow: ImageSlideshow!
     @IBOutlet weak var brandList: UICollectionView!
-    @IBOutlet weak var brandListFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var brandListHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var couponTab: TabLayoutView!
     
-    private var brandListHelper: MVCHelper<HomeBtn>?
+    private var brandListHelper: MVCHelper<AdZoneItem>?
     private var controller: DiscoverController?
     private var sliders: [HomeBtn]?
     
@@ -79,40 +79,70 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func initBrandList() {
         brandList.register(UINib(nibName: "BrandCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
+        let adMozaikLayout = ADMozaikLayout(delegate: self)
+        brandList.collectionViewLayout = adMozaikLayout
         
-        let brandCellFactory: (UICollectionView, Int, HomeBtn) -> UICollectionViewCell = { (collectionView, row, element) in
+        let brandCellFactory: (UICollectionView, Int, AdZoneItem) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! BrandCell
             
-            cell.thumb.layer.borderWidth = 1
-            cell.thumb.layer.borderColor = UIColor.white.cgColor
-            cell.thumb.kf.setImage(with: URL(string: element.imgUrl!))
+//            cell.thumb.layer.borderWidth = 1
+//            cell.thumb.layer.borderColor = UIColor.white.cgColor
+            cell.thumb.kf.setImage(with: URL(string: element.thumb!))
+            
             return cell
         }
         
-        let brandDataSource = BrandDataSource()
-        
-        let brandDataHook = { (brandItems: [HomeBtn]) -> [HomeBtn] in
-            self.brandListFlowLayout.itemSize = CGSize(width: self.frame.size.width / 3, height: self.frame.size.width / 3)
+        brandListHelper = MVCHelper<AdZoneItem>(brandList)
+        brandListHelper?.set(cellFactory: brandCellFactory)
+        brandListHelper?.set(dataSource: BrandDataSource())
+        brandListHelper?.set(dataHook: { (data) -> [AdZoneItem] in
+//            var testData:[AdZoneItem] = []
+//            for i in 4...9 {
+//                testData.append(data[i])
+//            }
             
-            let height = (self.frame.size.width / 3) * CGFloat((brandItems.count / 3) + (brandItems.count % 3 > 0 ? 1 : 0))
-            self.maximumContentHeight = self.maxContentHeight + height
-            
-            self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
-            
-            if self.brandListHeightConstraint.constant != height {
-                self.brandListHeightConstraint.constant = height
+            var map:[Int:Int] = [:]
+            var min = 1, max = 0
+            for item in data {
+                while true {
+                    if nil == map[min] {
+                        for r in 1...item.rSpan! {
+                            map[min + r - 1] = 12 - item.cSpan!
+                        }
+                        if max < min + item.rSpan! - 1 {
+                            max = min + item.rSpan! - 1
+                        }
+                        break
+                    }
+                    
+                    if map[min]! >= item.cSpan! {
+                        for r in 1...item.rSpan! {
+                            if nil == map[min + r - 1] {
+                                map[min + r - 1] = 12
+                            }
+                            map[min + r - 1] = map[min + r - 1]! - item.cSpan!
+                        }
+                        if max < min + item.rSpan! - 1 {
+                            max = min + item.rSpan! - 1
+                        }
+                        break
+                    }
+                    
+                    min += 1
+                }
             }
             
-            RxBus.shared.post(event: Events.ViewDidLoad())
-            return brandItems
-        }
-        
-        brandListHelper = MVCHelper<HomeBtn>(brandList)
-        
-        brandListHelper?.set(cellFactory: brandCellFactory)
-        brandListHelper?.set(dataSource: brandDataSource)
-        brandListHelper?.set(dataHook: brandDataHook)
+            let height = CGFloat(max) * self.brandList.frame.size.width / 12
+            if self.brandListHeightConstraint.constant != height {
+                self.brandListHeightConstraint.constant = height
+                self.maximumContentHeight = self.maxContentHeight + self.brandListHeightConstraint.constant
+                self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: self.maximumContentHeight)
+                RxBus.shared.post(event: Events.ViewDidLoad())
+            }
+
+            return data
+        })
         
         updateBrandList()
     }
@@ -151,5 +181,26 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
             }, onError: { error in
                 Log.error?.message(error.localizedDescription)
             }).disposed(by: disposeBag)
+    }
+}
+
+extension DiscoverHeaderView: ADMozaikLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, mozaik layout: ADMozaikLayout, mozaikSizeForItemAt indexPath: IndexPath) -> ADMozaikLayoutSize {
+        do {
+            let model = try collectionView.rx.model(at: indexPath) as AdZoneItem
+            return ADMozaikLayoutSize(numberOfColumns: model.cSpan!, numberOfRows: model.rSpan!)
+        }catch {
+            Log.error?.message(error.localizedDescription)
+        }
+        return ADMozaikLayoutSize(numberOfColumns: 12, numberOfRows: 1)
+    }
+    
+    func collectonView(_ collectionView: UICollectionView, mozaik layoyt: ADMozaikLayout, geometryInfoFor section: ADMozaikLayoutSection) -> ADMozaikLayoutSectionGeometryInfo {
+        let unitOne = collectionView.frame.size.width / 12
+        var columns: [ADMozaikLayoutColumn] = []
+        for _ in 0...12 {
+            columns.append(ADMozaikLayoutColumn(width: unitOne))
+        }
+        return ADMozaikLayoutSectionGeometryInfo(rowHeight: unitOne, columns: columns)
     }
 }

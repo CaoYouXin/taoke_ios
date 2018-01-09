@@ -3,7 +3,7 @@ import RxSwift
 //import RealmSwift
 import CleanroomLogger
 
-class BrandDataSource: RxDataSource<HomeBtn> {
+class BrandDataSource: RxDataSource<AdZoneItem> {
 //    private var config: Realm.Configuration
     
 //    override init(_ viewController: UIViewController? = nil) {
@@ -13,7 +13,7 @@ class BrandDataSource: RxDataSource<HomeBtn> {
 //        super.init(viewController)
 //    }
     
-    override func loadCache() -> Observable<[HomeBtn]> {
+    override func loadCache() -> Observable<[AdZoneItem]> {
         return Observable.empty()
 //        return Observable.just(config).map({ config -> [HomeBtn] in
 //            let realm = try! Realm(configuration: config)
@@ -23,8 +23,8 @@ class BrandDataSource: RxDataSource<HomeBtn> {
 //        })
     }
     
-    override func refresh() -> Observable<[HomeBtn]> {
-        return TaoKeApi.getBrandList()
+    override func refresh() -> Observable<[AdZoneItem]> {
+        return TaoKeApi.getAdZoneItems()
 //        return TaoKeApi.getBrandList().map({ (homeBtns) -> [HomeBtn] in
 //            Realm.asyncOpen(configuration: self.config) { realm, error in
 //                if let realm = realm {

@@ -48,7 +48,7 @@ class DiscoverController: UIViewController {
             headerView.setController(ctrl: self)
             
             let adjust = 9 * (self.view.frame.size.width - 375) / 25
-            print(">>>\(self.view.frame.size.width), \(adjust)")
+//            print(">>>\(self.view.frame.size.width), \(adjust)")
 //            轮播高度随宽度变化导致，界面设计中使用iphone8模型，即375.
             headerView.maxContentHeight += adjust
             
@@ -150,7 +150,6 @@ class DiscoverController: UIViewController {
     private func initMJRefresh() {
         let customHeader = MJRefreshNormalHeader(refreshingBlock: {
             self.discoverHeaderView?.refreshHeader()
-            print(">>>refresh discover page")
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.scrollView.mj_header.endRefreshing()

@@ -97,18 +97,13 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
         brandListHelper?.set(cellFactory: brandCellFactory)
         brandListHelper?.set(dataSource: BrandDataSource())
         brandListHelper?.set(dataHook: { (data) -> [AdZoneItem] in
-//            var testData:[AdZoneItem] = []
-//            for i in 4...9 {
-//                testData.append(data[i])
-//            }
-            
             var map:[Int:Int] = [:]
             var min = 1, max = 0
             for item in data {
                 while true {
                     if nil == map[min] {
                         for r in 1...item.rSpan! {
-                            map[min + r - 1] = 12 - item.cSpan!
+                            map[min + r - 1] = 60 - item.cSpan!
                         }
                         if max < min + item.rSpan! - 1 {
                             max = min + item.rSpan! - 1
@@ -119,7 +114,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                     if map[min]! >= item.cSpan! {
                         for r in 1...item.rSpan! {
                             if nil == map[min + r - 1] {
-                                map[min + r - 1] = 12
+                                map[min + r - 1] = 60
                             }
                             map[min + r - 1] = map[min + r - 1]! - item.cSpan!
                         }
@@ -133,7 +128,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
                 }
             }
             
-            let height = CGFloat(max) * self.brandList.frame.size.width / 12
+            let height = CGFloat(max) * self.brandList.frame.size.width / 60
             if self.brandListHeightConstraint.constant != height {
                 self.brandListHeightConstraint.constant = height
                 self.maximumContentHeight = self.maxContentHeight + self.brandListHeightConstraint.constant
@@ -192,13 +187,13 @@ extension DiscoverHeaderView: ADMozaikLayoutDelegate {
         }catch {
             Log.error?.message(error.localizedDescription)
         }
-        return ADMozaikLayoutSize(numberOfColumns: 12, numberOfRows: 1)
+        return ADMozaikLayoutSize(numberOfColumns: 60, numberOfRows: 1)
     }
     
     func collectonView(_ collectionView: UICollectionView, mozaik layoyt: ADMozaikLayout, geometryInfoFor section: ADMozaikLayoutSection) -> ADMozaikLayoutSectionGeometryInfo {
-        let unitOne = collectionView.frame.size.width / 12
+        let unitOne = collectionView.frame.size.width / 60
         var columns: [ADMozaikLayoutColumn] = []
-        for _ in 0...12 {
+        for _ in 1...60 {
             columns.append(ADMozaikLayoutColumn(width: unitOne))
         }
         return ADMozaikLayoutSectionGeometryInfo(rowHeight: unitOne, columns: columns)

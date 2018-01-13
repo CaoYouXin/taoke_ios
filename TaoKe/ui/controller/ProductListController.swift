@@ -111,47 +111,66 @@ class ProductListController: UIViewController {
                 RxBus.shared.post(event: Events.WaterFallLayout())
             })
             
+            cell.title.text = element.title
+            
             if element.couponInfo != nil {
-                cell.noCouponWrapper.isHidden = true
-                cell.couponWrapper.isHidden = false
-                cell.couponInfo.isHidden = false
+                cell.coupon.isHidden = false
+                cell.couponHeight.constant = 30
+                cell.priceAfter.isHidden = false
+                cell.priceBefore.isHidden = false
+                cell.couponSales.isHidden = false
+                cell.noCouponHeight.constant = 0
+                cell.price.isHidden = true
+                cell.sales.isHidden = true
                 
                 cell.priceBefore.attributedText = NSAttributedString(string: "¥ \(element.zkFinalPrice!)", attributes: [NSAttributedStringKey.strikethroughStyle: 1])
                 cell.priceAfter.text = "¥ \(element.couponPrice!)"
-                cell.volume.text = "月销\(element.volume!)笔"
-                cell.couponInfo.text = "券 | \(element.couponInfo!)"
+                cell.couponSales.text = "销\(element.volume!)"
+                
+                var start = element.couponInfo?.index(of: "减")
+                start = element.couponInfo?.index(after: start!)
+                let coupon = element.couponInfo?[start!...]
+                cell.coupon.text = " 券 \(coupon!)  "
+                cell.coupon.sizeToFit()
+                
+                let arc = UIBezierPath()
+                arc.move(to: CGPoint(x: 0, y: 0))
+                arc.addLine(to: CGPoint(x: cell.coupon.frame.size.width, y: 0))
+                arc.addLine(to: CGPoint(x: cell.coupon.frame.size.width, y: cell.coupon.frame.size.height / 4))
+                arc.addArc(withCenter: CGPoint(x: cell.coupon.frame.size.width, y: cell.coupon.frame.size.height / 2), radius: cell.coupon.frame.size.height / 4, startAngle: CGFloat(Double.pi*3/2), endAngle: CGFloat(Double.pi/2), clockwise: false)
+                arc.addLine(to: CGPoint(x: cell.coupon.frame.size.width, y: cell.coupon.frame.size.height))
+                arc.addLine(to: CGPoint(x: 0, y: cell.coupon.frame.size.height))
+                arc.addLine(to: CGPoint(x: 0, y: cell.coupon.frame.size.height*3/4))
+                arc.addArc(withCenter: CGPoint(x: 0, y: cell.coupon.frame.size.height / 2), radius: cell.coupon.frame.size.height / 4, startAngle: CGFloat(Double.pi/2), endAngle: CGFloat(-Double.pi/2), clockwise: false)
+                arc.close()
+                let arcLayer = CAShapeLayer()
+                arcLayer.path = arc.cgPath
+                cell.coupon.layer.mask = arcLayer
             } else {
-                cell.noCouponWrapper.isHidden = false
-                cell.couponWrapper.isHidden = true
-                cell.couponInfo.isHidden = true
+                cell.coupon.isHidden = true
+                cell.couponHeight.constant = 0
+                cell.priceAfter.isHidden = true
+                cell.priceBefore.isHidden = true
+                cell.couponSales.isHidden = true
+                cell.noCouponHeight.constant = 30
+                cell.price.isHidden = false
+                cell.sales.isHidden = false
                 
                 cell.price.text = "¥ \(element.zkFinalPrice!)"
-                cell.sales.text = "月销\(element.volume!)笔"
+                cell.sales.text = "销\(element.volume!)"
             }
             
             if !(UserData.get()?.isBuyer())! {
-                cell.earnWrapper.isHidden = false
+                cell.earn.isHidden = false
                 
-                cell.earn.text = " 分享赚 ¥ \(element.earnPrice!)  "
+                cell.earn.text = " 赚 ¥\(element.earnPrice!)  "
                 cell.earn.layer.cornerRadius = 8
                 cell.earn.clipsToBounds = true
             } else {
-                cell.earnWrapper.isHidden = true
+                cell.earn.isHidden = true
             }
             
-            if let constraint = (cell.noCouponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-                constraint.constant = element.couponInfo == nil ? 30 : 0
-            }
-            
-            if let constraint = (cell.couponWrapper.constraints.filter{$0.firstAttribute == .height}.first) {
-                constraint.constant = element.couponInfo == nil ? 0 : 60
-            }
-            
-            if let constraint = (cell.earnWrapper.constraints.filter({$0.firstAttribute == .height}).first) {
-                constraint.constant = (UserData.get()?.isBuyer())! ? 0 : 25
-            }
-            
-            cell.title.text = element.title
+            cell.blockHeight.constant = element.couponInfo != nil || !(UserData.get()?.isBuyer())! ? 30 : 0
             
             return cell
         }

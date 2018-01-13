@@ -173,6 +173,11 @@ class DetailController: UIViewController {
             earnWrapper.isHidden = true
             buyerWrapper.isHidden = false
             agentShare.isHidden = true
+            
+            var start = couponItem?.couponInfo?.index(of: "减")
+            start = couponItem?.couponInfo?.index(after: start!)
+            let coupon = couponItem?.couponInfo?[start!...]
+            detailApp.text = "领 \(coupon!) 券"
         }
         
         if let constraint = (self.couponInfoWrapper.constraints.filter{$0.firstAttribute == .height}.first) {

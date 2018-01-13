@@ -94,16 +94,16 @@ class SearchResultController: UIViewController {
             
             cell.thumb.kf.setImage(with: URL(string: element.pictUrl!))
             cell.couponTitle.text = element.title!
-            cell.couponPriceBefore.text = "现价 ¥ \(element.zkFinalPrice!)"
+            cell.couponPriceBefore.attributedText = NSAttributedString(string: "¥ \(element.zkFinalPrice!)", attributes: [NSAttributedStringKey.strikethroughStyle: 1])
             
             var couponPriceAfter: String
             if element.commissionRate == nil {
                 cell.volume.isHidden = true
-                couponPriceAfter = "聚划算价 ¥ \(element.couponPrice!)"
+                couponPriceAfter = "¥ \(element.couponPrice!)"
             } else {
                 cell.volume.isHidden = false
-                cell.volume.text = "月销 \(element.volume!) 件"
-                couponPriceAfter = "券后价 ¥ \(element.couponPrice!)"
+                cell.volume.text = "销\(element.volume!)"
+                couponPriceAfter = "¥ \(element.couponPrice!)"
             }
             let couponPriceAfterMutableAttributed = NSMutableAttributedString(string: couponPriceAfter)
             let location = couponPriceAfter.index(of: "¥")?.encodedOffset

@@ -38,7 +38,7 @@ class DiscoverController: UIViewController {
         RxBus.shared.asObservable(event: Events.ViewDidLoad.self)
             .rxSchedulerHelper()
             .subscribe { event in
-                self.couponList.setContentOffset(CGPoint(x: 0, y: 1 - self.discoverHeaderView!.maximumContentHeight), animated: false)
+                self.couponList.setContentOffset(CGPoint(x: 0, y: 0 - self.discoverHeaderView!.maximumContentHeight), animated: false)
             }.disposed(by: disposeBag)
         
         let nibViews = Bundle.main.loadNibNamed("DiscoverHeaderView", owner: self, options: nil)
@@ -148,16 +148,14 @@ class DiscoverController: UIViewController {
     }
     
     private func initMJRefresh() {
-        let customHeader = MJRefreshNormalHeader(refreshingBlock: {
+        self.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             self.discoverHeaderView?.refreshHeader()
             let delayTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.scrollView.mj_header.endRefreshing()
             }
         })
-        customHeader?.isAutomaticallyChangeAlpha = true
-
-        scrollView.mj_header = customHeader
+        self.scrollView.mj_header.isAutomaticallyChangeAlpha = true
         
         if #available(iOS 11, *) {
             // ignore

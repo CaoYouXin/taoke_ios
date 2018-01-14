@@ -3,7 +3,8 @@ import RxSwift
 
 class TaoKeApi {
     
-    private static var CDN = "http://192.168.0.136:8070/"
+//    private static var CDN = "http://192.168.0.136:8070/"
+    public static let CDN = "http://192.168.1.115:8070/"
 //    private static var CDN = "http://server.tkmqr.com:8070/"
     
     public static func verification(phone: String) -> Observable<TaoKeData?> {
@@ -506,6 +507,27 @@ class TaoKeApi {
             .handleResult()
             .map({ (taoKeData) -> String in
                 return taoKeData?.body as! String
+            })
+    }
+    
+    public static func getAdZoneItems() -> Observable<[AdZoneItem]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_AD_ZONE_LIST)
+            .handleResult()
+            .map({ (taoKeData) -> [AdZoneItem] in
+                var ret:[AdZoneItem] = []
+                if let list = taoKeData?.getList() {
+                    for map in list {
+                        let adZoneItem = AdZoneItem()
+                        
+                        adZoneItem.thumb = CDN + (map["imgUrl"] as! String)
+                        adZoneItem.cSpan = map["colSpan"] as? Int
+                        adZoneItem.rSpan = map["rowSpan"] as? Int
+                        
+                        ret.append(adZoneItem)
+                    }
+                }
+                return ret
             })
     }
     

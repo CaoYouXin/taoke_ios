@@ -59,21 +59,30 @@ class DiscoverController: UIViewController {
                 toViewControllerFactory:
                 { (sender, context) -> ProductListController in
                     let productListController = UIStoryboard(name: "ProductList", bundle: nil).instantiateViewController(withIdentifier: "ProductListController") as! ProductListController
-                    let homeBtn = HomeBtn()
-                    homeBtn.name = context.name
-                    homeBtn.ext = context.ext
-                    productListController.homeBtn = homeBtn
+                    
+                    if context.openType! != 4 {
+                        
+                        productListController.isEditing = true
+                    } else {
+                        productListController.isEditing = false
+                        
+                        let homeBtn = HomeBtn()
+                        homeBtn.name = context.name
+                        homeBtn.ext = context.ext
+                        productListController.homeBtn = homeBtn
+                    }
                     return productListController
             }).asObserver()
             
             headerView.brandList.rx.itemSelected
                 .map{ indexPath -> AdZoneItem in
-                    let adZoneItem: AdZoneItem = try headerView.brandList.rx.model(at: indexPath)
-                    if adZoneItem.openType != 4 {
-                        throw Errors.PlainImg()
-                    }
-                    return adZoneItem
-//                    return try headerView.brandList.rx.model(at: indexPath)
+//                    let adZoneItem: AdZoneItem = try headerView.brandList.rx.model(at: indexPath)
+//                    print("\(adZoneItem.openType!)")
+//                    if adZoneItem.openType != 4 {
+//                        throw Errors.PlainImg()
+//                    }
+//                    return adZoneItem
+                    return try headerView.brandList.rx.model(at: indexPath)
                 }
                 .bind(to: segue)
                 .disposed(by: disposeBag)

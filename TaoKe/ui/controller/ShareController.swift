@@ -313,12 +313,21 @@ class ShareController: UIViewController {
             return Observable.just(genLink(shareView!))
         } else {
             self.view.makeToastActivity(.center)
-            return TaoKeApi.getShareView(self.couponItem!.couponClickUrl ?? self.couponItem!.tkLink!, self.couponItem!.title!)
+            
+            var shareImages: [String] = [(couponItem?.pictUrl)!]
+            if let images = couponItem?.smallImages {
+                for image in images {
+                    shareImages.append(image)
+                }
+            }
+            return TaoKeApi.getShareView2(shareImages, self.couponItem!.couponClickUrl ?? self.couponItem!.tkLink!, self.couponItem!.title!)
                 .rxSchedulerHelper()
                 .handleApiError(self, { (error) in
                     self.view.hideToastActivity()
                 }).map({ (data) -> String? in
                     self.view.hideToastActivity()
+                    
+                    data?.shortUrl = TaoKeService.HOST + (data?.shortUrl)!
                     
                     var qrCode = QRCode((data?.shortUrl)!)
                     qrCode?.size = CGSize(width: self.descQRCode.frame.size.width - 6, height: self.descQRCode.frame.size.height - 6)

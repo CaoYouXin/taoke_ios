@@ -3,6 +3,10 @@ import RestKit
 import RxSwift
 
 class TaoKeService: TaoKeProtocol {
+    
+//    public static let HOST = "http://192.168.0.136:8080/api/"
+    public static let HOST = "http://192.168.1.115:8080/api/"
+//    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     public static let API_VERIFICATION = "tbk/phone/verify"
     public static let API_SIGN_IN = "tbk/user/login"
@@ -30,6 +34,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_PRODUCT_LIST = "tbk/fav/{favId}/list/{pageNo}"
     public static let API_ORDER_LIST = "tbk/order/list/{type}/{pageNo}"
     public static let API_GET_SHARE_LINK = "tbk/url/trans"
+    public static let API_GET_SHARE_LINK2 = "tbk/share/save"
 
     public static let API_HELP_LIST = "app/help/list"
     public static let API_NOVICE_LIST = "app/guide/list/{type}"
@@ -43,17 +48,12 @@ class TaoKeService: TaoKeProtocol {
     public static let API_ENROLL = "tbk/user/apply/4/agent"
     public static let API_DOWNLOAD_URL = "app/download/url"
 
-    public static let HOST = "http://192.168.0.136:8080/api/"
-//    public static let HOST = "http://192.168.1.115:8080/api/"
-//    public static let HOST = "http://server.tkmqr.com:8080/api/"
-
     private static var instance: TaoKeProtocol?
-
     private var manager: RKObjectManager?
 
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
-        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report"])
+        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "images", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
 
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)

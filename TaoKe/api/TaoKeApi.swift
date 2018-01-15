@@ -3,9 +3,9 @@ import RxSwift
 
 class TaoKeApi {
     
-    private static var CDN = "http://192.168.0.136:8070/"
-//    public static let CDN = "http://192.168.1.115:8070/"
-//    private static var CDN = "http://server.tkmqr.com:8070/"
+//    public static var CDN = "http://192.168.0.136:8070/"
+    public static let CDN = "http://192.168.1.115:8070/"
+//    public static var CDN = "http://server.tkmqr.com:8070/"
     
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
@@ -281,6 +281,18 @@ class TaoKeApi {
     public static func getShareView(_ link: String, _ title: String) -> Observable<ShareView?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_GET_SHARE_LINK, auth: (UserData.get()?.token)!, data: ["title": title, "url": link])
+            .handleResult()
+            .map({ (taoKeData) -> ShareView? in
+                let shareView = ShareView()
+                shareView.shortUrl = taoKeData?.body!["shortUrl"] as? String
+                shareView.tPwd = taoKeData?.body!["tPwd"] as? String
+                return shareView
+            })
+    }
+    
+    public static func getShareView2(_ images: [String], _ link: String, _ title: String) -> Observable<ShareView?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_GET_SHARE_LINK2, auth: (UserData.get()?.token)!, data: ["images": images, "title": title, "url": link])
             .handleResult()
             .map({ (taoKeData) -> ShareView? in
                 let shareView = ShareView()

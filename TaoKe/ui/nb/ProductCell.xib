@@ -48,19 +48,19 @@
                                     <rect key="frame" x="0.0" y="473" width="419" height="0.0"/>
                                     <subviews>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMh-Sr-2OP">
-                                            <rect key="frame" x="0.0" y="-10" width="10.5" height="19.5"/>
+                                            <rect key="frame" x="10" y="-10" width="10.5" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jr-l1-yqf">
-                                            <rect key="frame" x="10.5" y="-8.5" width="9" height="17"/>
+                                            <rect key="frame" x="20.5" y="-8.5" width="9" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNr-fp-iUV">
-                                            <rect key="frame" x="404.5" y="-8" width="14.5" height="17"/>
+                                            <rect key="frame" x="394.5" y="-8" width="14.5" height="17"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,8 +72,8 @@
                                         <constraint firstItem="9jr-l1-yqf" firstAttribute="leading" secondItem="SMh-Sr-2OP" secondAttribute="trailing" id="0UO-9s-q3z"/>
                                         <constraint firstItem="GNr-fp-iUV" firstAttribute="centerY" secondItem="jLD-ty-eho" secondAttribute="centerY" id="2oj-9v-EBJ"/>
                                         <constraint firstAttribute="height" id="KBy-Sp-bmi"/>
-                                        <constraint firstItem="SMh-Sr-2OP" firstAttribute="leading" secondItem="jLD-ty-eho" secondAttribute="leading" id="bqu-dh-QPQ"/>
-                                        <constraint firstAttribute="trailing" secondItem="GNr-fp-iUV" secondAttribute="trailing" id="myf-lA-gaW"/>
+                                        <constraint firstItem="SMh-Sr-2OP" firstAttribute="leading" secondItem="jLD-ty-eho" secondAttribute="leading" constant="10" id="bqu-dh-QPQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="GNr-fp-iUV" secondAttribute="trailing" constant="10" id="myf-lA-gaW"/>
                                         <constraint firstItem="SMh-Sr-2OP" firstAttribute="centerY" secondItem="jLD-ty-eho" secondAttribute="centerY" id="q1L-Ce-dKg"/>
                                         <constraint firstItem="9jr-l1-yqf" firstAttribute="centerY" secondItem="jLD-ty-eho" secondAttribute="centerY" id="xjW-Hx-jZQ"/>
                                     </constraints>
@@ -82,13 +82,13 @@
                                     <rect key="frame" x="0.0" y="473" width="419" height="0.0"/>
                                     <subviews>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKl-OP-bYN">
-                                            <rect key="frame" x="0.0" y="-10" width="10.5" height="19.5"/>
+                                            <rect key="frame" x="10" y="-10" width="10.5" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQR-pZ-VkD">
-                                            <rect key="frame" x="404.5" y="-8.5" width="14.5" height="17"/>
+                                            <rect key="frame" x="394.5" y="-8.5" width="14.5" height="17"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,10 +97,10 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="RKl-OP-bYN" firstAttribute="leading" secondItem="E0O-aG-2h0" secondAttribute="leading" id="Eda-ax-Eym"/>
+                                        <constraint firstItem="RKl-OP-bYN" firstAttribute="leading" secondItem="E0O-aG-2h0" secondAttribute="leading" constant="10" id="Eda-ax-Eym"/>
                                         <constraint firstItem="RKl-OP-bYN" firstAttribute="centerY" secondItem="E0O-aG-2h0" secondAttribute="centerY" id="EpA-Dn-o9M"/>
                                         <constraint firstItem="XQR-pZ-VkD" firstAttribute="centerY" secondItem="E0O-aG-2h0" secondAttribute="centerY" id="jj2-fl-y1j"/>
-                                        <constraint firstAttribute="trailing" secondItem="XQR-pZ-VkD" secondAttribute="trailing" id="mio-ZY-V5V"/>
+                                        <constraint firstAttribute="trailing" secondItem="XQR-pZ-VkD" secondAttribute="trailing" constant="10" id="mio-ZY-V5V"/>
                                         <constraint firstAttribute="height" id="n1y-8u-ETp"/>
                                     </constraints>
                                 </view>
@@ -108,14 +108,14 @@
                                     <rect key="frame" x="0.0" y="473" width="419" height="0.0"/>
                                     <subviews>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="券" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbJ-gG-GbH">
-                                            <rect key="frame" x="0.0" y="-8.5" width="14.5" height="17"/>
+                                            <rect key="frame" x="10" y="-8.5" width="14.5" height="17"/>
                                             <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcZ-Fr-fcy">
-                                            <rect key="frame" x="404.5" y="-9" width="14.5" height="18"/>
+                                            <rect key="frame" x="394.5" y="-9" width="14.5" height="18"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -126,11 +126,11 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="hcZ-Fr-fcy" secondAttribute="trailing" id="7Ls-hG-vJY"/>
+                                        <constraint firstAttribute="trailing" secondItem="hcZ-Fr-fcy" secondAttribute="trailing" constant="10" id="7Ls-hG-vJY"/>
                                         <constraint firstItem="xbJ-gG-GbH" firstAttribute="centerY" secondItem="6RQ-va-mMM" secondAttribute="centerY" id="A95-kr-1s7"/>
                                         <constraint firstItem="hcZ-Fr-fcy" firstAttribute="centerY" secondItem="6RQ-va-mMM" secondAttribute="centerY" id="Rm8-iR-FNl"/>
                                         <constraint firstAttribute="height" id="fj6-aP-rLf"/>
-                                        <constraint firstItem="xbJ-gG-GbH" firstAttribute="leading" secondItem="6RQ-va-mMM" secondAttribute="leading" id="o6D-ps-Z6c"/>
+                                        <constraint firstItem="xbJ-gG-GbH" firstAttribute="leading" secondItem="6RQ-va-mMM" secondAttribute="leading" constant="10" id="o6D-ps-Z6c"/>
                                     </constraints>
                                 </view>
                             </subviews>

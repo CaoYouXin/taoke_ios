@@ -4,8 +4,8 @@ import RxSwift
 
 class TaoKeService: TaoKeProtocol {
     
-//    public static let HOST = "http://192.168.0.136:8080/api/"
-    public static let HOST = "http://192.168.1.115:8080/api/"
+    public static let HOST = "http://192.168.0.136:8080/api/"
+//    public static let HOST = "http://192.168.1.115:8080/api/"
 //    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     public static let API_VERIFICATION = "tbk/phone/verify"

@@ -7,6 +7,8 @@ class AccountController: UIViewController {
 
     @IBOutlet weak var scrollWrapper: UIScrollView!
     
+    @IBOutlet weak var avatar: UIImageView!
+    
     @IBOutlet weak var rightArrow1: UIImageView!
     @IBOutlet weak var rightArrow2: UIImageView!
     @IBOutlet weak var rightArrow3: UIImageView!
@@ -30,12 +32,18 @@ class AccountController: UIViewController {
     @IBOutlet weak var exitBtn: UIButton!
     
     @IBOutlet weak var accountName: UILabel!
+    @IBOutlet weak var accountType: UILabel!
     @IBOutlet weak var viewWrapper: UIView!
     
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let avatarMask = UIBezierPath(ovalIn: avatar.bounds)
+        let avatarMaskLayer = CAShapeLayer()
+        avatarMaskLayer.path = avatarMask.cgPath
+        avatar.layer.mask = avatarMaskLayer
         
         let rightArrowIcon = FAKFontAwesome.chevronRightIcon(withSize: 16)
         rightArrowIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#757575"))
@@ -78,6 +86,7 @@ class AccountController: UIViewController {
         self.aboutImage.image = aboutIcon?.image(with: CGSize(width: 20, height: 20))
         
         self.accountName.text = UserData.get()?.name
+        self.accountType.text = UserData.get()?.getUserType()
         
         if let constraint = (self.viewWrapper.constraints.filter({$0.firstAttribute == .top && ($0.firstItem?.isEqual(self.enrollBtn))!}).first) {
             constraint.constant = (UserData.get()?.candidate)! || !(UserData.get()?.isBuyer())! ? 20 : 0

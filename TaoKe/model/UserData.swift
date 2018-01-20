@@ -79,6 +79,18 @@ class UserData {
         return self.shareCode == nil || self.shareCode?.count == 0
     }
     
+    public func getUserType() -> String {
+        if (isBuyer()) {
+            return "\"消费者\"";
+        }
+        
+        if (self.directUser!) {
+            return "\"平台合伙人\"";
+        }
+        
+        return "\"合伙人\"";
+    }
+    
     public func getShareType() -> Int {
         if (isBuyer()) {
             return 2;

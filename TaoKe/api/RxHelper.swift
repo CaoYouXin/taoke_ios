@@ -106,7 +106,7 @@ class ApiVersionLow: Error {
 }
 
 class ApiError: Error {
-    var message: String?
+    public var message: String?
     
     init() {
         

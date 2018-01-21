@@ -101,7 +101,8 @@ class ChartController: UIViewController, UITextFieldDelegate {
     }
     
     private func showInfoCompetor() {
-        
+        let infoCompetorController = UIStoryboard(name: "Enroll", bundle: nil).instantiateViewController(withIdentifier: "InfoCompetorController")
+        self.navigationController?.pushViewController(infoCompetorController, animated: true)
     }
     
     private func showWithdrawInput() {

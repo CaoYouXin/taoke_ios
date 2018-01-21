@@ -354,6 +354,12 @@ class TaoKeApi {
             .handleResult()
     }
     
+    public static func toCompeteInfo(code: String, phone: String, alipay: String) -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_COMPETE_INFO, auth: (UserData.get()?.token)!, data: ["code": code, "user": ["phone": phone, "aliPayId": alipay]])
+            .handleResult()
+    }
+    
     public static func getTeamCommition() -> Observable<[TeamDataView]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_FRIENDS_LIST, auth: (UserData.get()?.token)!)

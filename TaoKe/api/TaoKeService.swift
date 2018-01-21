@@ -47,6 +47,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_CAN_WITHDRAW = "tbk/user/canWithdraw"
 
     public static let API_ENROLL = "tbk/user/apply/4/agent"
+    public static let API_COMPETE_INFO = "tbk/user/competeInfo"
     public static let API_DOWNLOAD_URL = "app/download/url"
 
     private static var instance: TaoKeProtocol?

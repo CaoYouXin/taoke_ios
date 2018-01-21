@@ -160,7 +160,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private func updateCouponTab() {
         TaoKeApi.getCouponTab()
             .rxSchedulerHelper()
-            .handleApiError(controller, nil)
+            .handleApiError(controller)
             .subscribe(onNext: { tabs in
                 var items: [String] = []
                 for tab in tabs {

@@ -1,3 +1,4 @@
+
 import CleanroomLogger
 import RxSwift
 import RxCocoa
@@ -62,14 +63,6 @@ class SignUpController: UIViewController {
                     .rxSchedulerHelper()
                     .handleApiError(self, { (error) in
                         self.view.hideToastActivity()
-                        Log.error?.message(error.localizedDescription)
-                        if let error = error as? ApiError {
-                            if let message = error.message {
-                                self.view.makeToast(message)
-                                return
-                            }
-                        }
-                        self.view.makeToast("注册失败，网络连接异常...")
                     })
                     .subscribe(onNext: { _ in
                         self.view.hideToastActivity()

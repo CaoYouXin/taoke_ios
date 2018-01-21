@@ -88,14 +88,6 @@ class SignInController: UIViewController {
                 .rxSchedulerHelper()
                 .handleApiError(self, { (error) in
                     self.view.hideToastActivity()
-                    Log.error?.message(error.localizedDescription)
-                    if let error = error as? ApiError {
-                        if let message = error.message {
-                            self.view.makeToast(message)
-                            return
-                        }
-                    }
-                    self.view.makeToast("登录失败，网络连接异常...")
                 })
                 .subscribe(onNext: { _ in
                     self.view.hideToastActivity()

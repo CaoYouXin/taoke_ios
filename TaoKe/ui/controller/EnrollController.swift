@@ -129,7 +129,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
             submit.cache()
             let _ = TaoKeApi.toEnroll(submit: submit)
                 .rxSchedulerHelper()
-                .handleApiError(self, nil)
+                .handleApiError(self)
                 .subscribe({_ in
                     self.navigationController?.popViewController(animated: true)
                 })

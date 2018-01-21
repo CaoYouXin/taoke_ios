@@ -70,16 +70,7 @@ class InfoCompetorController: UIViewController {
             }
             
             TaoKeApi.toCompeteInfo(code: vCode.text!, phone: phone.text!, alipay: alipay.text!)
-                .rxSchedulerHelper().handleApiError(self, { (error) in
-                    Log.error?.message(error.localizedDescription)
-                    if let error = error as? ApiError {
-                        if let message = error.message {
-                            self.view.makeToast(message)
-                            return
-                        }
-                    }
-                    self.view.makeToast("登录失败，网络连接异常...")
-                }).subscribe(onNext: { _ in
+                .rxSchedulerHelper().handleApiError(self).subscribe(onNext: { _ in
                     self.navigationController?.popViewController(animated: true)
                 }).disposed(by: disposeBag)
             break
@@ -102,7 +93,7 @@ class InfoCompetorController: UIViewController {
                 
                 TaoKeApi.verification(phone: self.phone.text!)
                     .rxSchedulerHelper()
-                    .handleApiError(self, nil)
+                    .handleApiError(self)
                     .subscribe().disposed(by: disposeBag)
             }
             break

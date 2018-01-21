@@ -20,7 +20,7 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
         newerGuideList.spacing = 0
         
         TaoKeApi.getNewerGuideList((UserData.get()?.isBuyer())! ? 1 : 2).rxSchedulerHelper()
-            .handleApiError(self, nil)
+            .handleApiError(self)
             .subscribe({ event in
                 switch event {
                 case .next(let urls):

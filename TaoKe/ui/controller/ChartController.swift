@@ -165,7 +165,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
     
     private func initThatEstimate() {
         TaoKeApi.getThisEstimate().rxSchedulerHelper()
-            .handleApiError(self, nil)
+            .handleApiError(self)
             .subscribe(onNext: { (data) in
                 let text = "本月结算效果预估\n¥ \(data)"
                 let attribuites = NSMutableAttributedString(string: text)
@@ -180,7 +180,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
     
     private func initThisEstimate() {
         TaoKeApi.getThatEstimate().rxSchedulerHelper()
-            .handleApiError(self, nil)
+            .handleApiError(self)
             .subscribe(onNext: { (data) in
                 let text = "上月结算效果预估\n¥ \(data)"
                 let attribuites = NSMutableAttributedString(string: text)
@@ -195,7 +195,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
     
     private func initCanDraw() {
         TaoKeApi.getCanDraw().rxSchedulerHelper()
-            .handleApiError(self, nil)
+            .handleApiError(self)
             .subscribe(onNext: { (data) in
                 let text = "¥ \(data)"
                 let attribuites = NSMutableAttributedString(string: text)

@@ -168,6 +168,10 @@ class AccountController: UIViewController {
             let helpController = UIStoryboard(name: "HelpReport", bundle: nil).instantiateViewController(withIdentifier: "HelpController") as! HelpController
             self.navigationController?.pushViewController(helpController, animated: true)
             break
+        case customerServBtn:
+            let customerServiceController = UIStoryboard(name: "CustomerService", bundle: nil).instantiateViewController(withIdentifier: "CustomerServiceController")
+            self.navigationController?.pushViewController(customerServiceController, animated: true)
+            break
         case aboutBtn:
             let aboutController = UIStoryboard(name: "About", bundle: nil).instantiateViewController(withIdentifier: "AboutController") as! AboutController
             self.navigationController?.pushViewController(aboutController, animated: true)

@@ -1,3 +1,4 @@
+
 import CleanroomLogger
 import RxSwift
 import RxCocoa
@@ -105,7 +106,7 @@ class SignUpInfoController: UIViewController {
                 
                 TaoKeApi.verification(phone: phoneNo!)
                     .rxSchedulerHelper()
-                    .handleApiError(self, nil)
+                    .handleApiError(self)
                     .subscribe().disposed(by: disposeBag)
             }
             break
@@ -142,12 +143,6 @@ class SignUpInfoController: UIViewController {
             .rxSchedulerHelper()
             .handleApiError(self, { (error) in
                 self.view.hideToastActivity()
-                Log.error?.message(error.localizedDescription)
-                if let error = error as? ApiError, let message = error.message {
-                    self.view.makeToast(message)
-                    return
-                }
-                self.view.makeToast("注册失败，网络连接异常...")
             })
             .subscribe(onNext: { _ in
                 self.view.hideToastActivity()

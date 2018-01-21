@@ -561,4 +561,17 @@ class TaoKeApi {
             })
     }
     
+    public static func getCustomerService() -> Observable<CustomerServiceView> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_CUSTOMER_SERVICE, auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> CustomerServiceView in
+                if let map = taoKeData?.getMap() {
+                    return CustomerServiceView(weChat: map["weChat"] as! String, mqq: map["mqq"] as! String)
+                } else {
+                    return CustomerServiceView(weChat: "", mqq: "")
+                }
+            })
+    }
+    
 }

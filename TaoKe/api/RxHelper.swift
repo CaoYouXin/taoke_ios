@@ -1,4 +1,5 @@
 
+import CleanroomLogger
 import RxSwift
 import Toast_Swift
 
@@ -58,8 +59,23 @@ public func handleApiError(_ viewController: UIViewController?, _ callback: ((Er
                 view.present(alert, animated: true)
             }
             
-            if error is ApiError, let cb = callback {
-                cb(error)
+            if let err = error as? ApiError {
+                if let cb = callback {
+                    cb(error)
+                }
+                
+                let errMsg = err.message ?? ""
+                Log.error?.message(errMsg)
+                if let view = viewController {
+                    view.view.makeToast(errMsg)
+                }
+            } else {
+                
+                let errMsg = "操作失败,错误未知"
+                Log.error?.message(errMsg)
+                if let view = viewController {
+                    view.view.makeToast(errMsg)
+                }
             }
             
             return Observable.empty()

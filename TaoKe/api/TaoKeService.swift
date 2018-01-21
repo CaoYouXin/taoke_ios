@@ -49,6 +49,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_ENROLL = "tbk/user/apply/4/agent"
     public static let API_COMPETE_INFO = "tbk/user/competeInfo"
     public static let API_DOWNLOAD_URL = "app/download/url"
+    public static let API_CUSTOMER_SERVICE = "tbk/user/customerService"
 
     private static var instance: TaoKeProtocol?
     private var manager: RKObjectManager?

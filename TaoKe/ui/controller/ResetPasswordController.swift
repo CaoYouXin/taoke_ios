@@ -1,3 +1,4 @@
+
 import CleanroomLogger
 import RxSwift
 import RxCocoa
@@ -104,7 +105,7 @@ class ResetPasswordController: UIViewController {
                 
                 TaoKeApi.verification(phone: phoneNo.text!)
                     .rxSchedulerHelper()
-                    .handleApiError(self, nil)
+                    .handleApiError(self)
                     .subscribe().disposed(by: disposeBag)
             }
         case passwordVisible:
@@ -119,14 +120,6 @@ class ResetPasswordController: UIViewController {
                 .rxSchedulerHelper()
                 .handleApiError(self, { (error) in
                     self.view.hideToastActivity()
-                    Log.error?.message(error.localizedDescription)
-                    if let error = error as? ApiError {
-                        if let message = error.message {
-                            self.view.makeToast(message)
-                            return
-                        }
-                    }
-                    self.view.makeToast("重置密码失败，网络连接异常...")
                 })
                 .subscribe(onNext: { _ in
                     self.view.hideToastActivity()

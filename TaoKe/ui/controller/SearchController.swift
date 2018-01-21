@@ -49,7 +49,7 @@ class SearchController: PYSearchViewController {
         
         TaoKeApi.getTopHints()
             .rxSchedulerHelper()
-            .handleApiError(self, nil)
+            .handleApiError(self)
             .subscribe(onNext: { (data) in
             self.hotSearches = data
         }).disposed(by: disposeBag)
@@ -109,7 +109,7 @@ extension SearchController: PYSearchViewControllerDelegate {
         } else {
             TaoKeApi.getSearchHint(searchText)
                 .rxSchedulerHelper()
-                .handleApiError(self, nil)
+                .handleApiError(self)
                 .subscribe(onNext: { (data) in
                 self.searchSuggestions = data
             }).disposed(by: disposeBag)

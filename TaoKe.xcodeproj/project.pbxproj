@@ -27,6 +27,9 @@
 		2B4F89301FD00B98004BC79D /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4F892F1FD00B98004BC79D /* OrderView.swift */; };
 		2B4F89321FD00BB3004BC79D /* OrderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4F89311FD00BB3004BC79D /* OrderDataSource.swift */; };
 		2B52C8CF201456B8008A385D /* InfoCompetorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52C8CE201456B8008A385D /* InfoCompetorController.swift */; };
+		2B52C8D12014A86B008A385D /* CustomerService.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B52C8D02014A86B008A385D /* CustomerService.storyboard */; };
+		2B52C8D32014A88A008A385D /* CustomerServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52C8D22014A88A008A385D /* CustomerServiceController.swift */; };
+		2B52C8D52014B76B008A385D /* CustomerServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52C8D42014B76B008A385D /* CustomerServiceView.swift */; };
 		2B6943271FC6B28300DE197D /* HomeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6943261FC6B28300DE197D /* HomeBtn.swift */; };
 		2B7B95341FCFB8D60023A0D6 /* HelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95331FCFB8D60023A0D6 /* HelpCell.swift */; };
 		2B7B95361FCFB9420023A0D6 /* HelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95351FCFB9420023A0D6 /* HelpController.swift */; };
@@ -159,6 +162,9 @@
 		2B4F892F1FD00B98004BC79D /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		2B4F89311FD00BB3004BC79D /* OrderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDataSource.swift; sourceTree = "<group>"; };
 		2B52C8CE201456B8008A385D /* InfoCompetorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCompetorController.swift; sourceTree = "<group>"; };
+		2B52C8D02014A86B008A385D /* CustomerService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomerService.storyboard; sourceTree = "<group>"; };
+		2B52C8D22014A88A008A385D /* CustomerServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerServiceController.swift; sourceTree = "<group>"; };
+		2B52C8D42014B76B008A385D /* CustomerServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerServiceView.swift; sourceTree = "<group>"; };
 		2B6943261FC6B28300DE197D /* HomeBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBtn.swift; sourceTree = "<group>"; };
 		2B7B95331FCFB8D60023A0D6 /* HelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCell.swift; sourceTree = "<group>"; };
 		2B7B95351FCFB9420023A0D6 /* HelpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpController.swift; sourceTree = "<group>"; };
@@ -498,6 +504,7 @@
 				2B7B95371FCFBADD0023A0D6 /* HelpView.swift */,
 				2B4F892F1FD00B98004BC79D /* OrderView.swift */,
 				2BDFA4B820047A4000EDFDB7 /* AdZoneItem.swift */,
+				2B52C8D42014B76B008A385D /* CustomerServiceView.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -532,6 +539,7 @@
 				2B14669E1FCD2B8D00FBE98B /* Team.storyboard */,
 				2B7B953F1FCFEA400023A0D6 /* Orders.storyboard */,
 				2BA72B391FD3B95F00D449F4 /* H5Detail.storyboard */,
+				2B52C8D02014A86B008A385D /* CustomerService.storyboard */,
 			);
 			path = sb;
 			sourceTree = "<group>";
@@ -579,6 +587,7 @@
 				2BD0FCFA1FD13AFF00F0D94A /* SearchResultController.swift */,
 				2BA72B3B1FD3B9BD00D449F4 /* H5DetailController.swift */,
 				2B52C8CE201456B8008A385D /* InfoCompetorController.swift */,
+				2B52C8D22014A88A008A385D /* CustomerServiceController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -669,6 +678,7 @@
 				2BA72B051FD2993A00D449F4 /* NBResource.bundle in Resources */,
 				F98D19F71FBA975700B0F9D0 /* Search.storyboard in Resources */,
 				2BA72B3E1FD3C09B00D449F4 /* hack.css in Resources */,
+				2B52C8D12014A86B008A385D /* CustomerService.storyboard in Resources */,
 				2B82218E1FC9681600B695A4 /* HelpReport.storyboard in Resources */,
 				F93802DF1FB3F1ED00803475 /* BrandCell.xib in Resources */,
 				2B2F69F91FC27048004D9B28 /* NewerGuide.storyboard in Resources */,
@@ -807,6 +817,7 @@
 				F93802DD1FB3F1D300803475 /* BrandCell.swift in Sources */,
 				F95361FF1FBD5677008A5819 /* ShareController.swift in Sources */,
 				2BD0FCFB1FD13AFF00F0D94A /* SearchResultController.swift in Sources */,
+				2B52C8D52014B76B008A385D /* CustomerServiceView.swift in Sources */,
 				2BA72B401FD50BE000D449F4 /* UIViewController+DisposeBag.swift in Sources */,
 				F97842021FC2A201001954D3 /* SignUpInfoController.swift in Sources */,
 				2BD0FD011FD182F000F0D94A /* SearchDataSource.swift in Sources */,
@@ -875,6 +886,7 @@
 				2BD0FCFF1FD156E400F0D94A /* SortHelper.swift in Sources */,
 				1812A85E074248BB0973763B /* UserData.swift in Sources */,
 				2BDFA4B920047A4000EDFDB7 /* AdZoneItem.swift in Sources */,
+				2B52C8D32014A88A008A385D /* CustomerServiceController.swift in Sources */,
 				2B8469031FCE8158006F0176 /* ChartController.swift in Sources */,
 				2B1466AB1FCDA11300FBE98B /* MessageCell.swift in Sources */,
 			);

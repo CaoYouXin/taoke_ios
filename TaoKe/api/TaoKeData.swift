@@ -17,5 +17,9 @@ class TaoKeData: NSObject, HandyJSON {
         return self.body as? [String]
     }
     
+    func getBool() -> Bool? {
+        return self.body as? Bool
+    }
+    
     override required init() {}
 }

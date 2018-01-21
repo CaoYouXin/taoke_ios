@@ -12,7 +12,7 @@ class TeamController: UIViewController {
     
     private var teamDataHelper: MVCHelper<TeamDataView>?
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -441,6 +441,15 @@ class TaoKeApi {
             .handleResult()
     }
     
+    public static func canWithdraw() -> Observable<Bool?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_CAN_WITHDRAW, auth: (UserData.get()?.token)!)
+            .handleResult()
+            .map({ (taoKeData) -> Bool? in
+                return taoKeData?.getBool()
+            })
+    }
+    
     public static func getHelpList() -> Observable<[HelpView]> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_HELP_LIST)

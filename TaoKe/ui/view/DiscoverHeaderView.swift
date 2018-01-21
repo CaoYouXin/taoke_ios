@@ -18,7 +18,7 @@ class DiscoverHeaderView: GSKStretchyHeaderView {
     private var sliders: [HomeBtn]?
     
     var maxContentHeight = CGFloat(0)
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     public func setController(ctrl: DiscoverController) {
         self.controller = ctrl

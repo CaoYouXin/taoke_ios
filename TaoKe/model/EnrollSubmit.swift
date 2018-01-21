@@ -7,7 +7,6 @@ class EnrollSubmit {
     public static let DEFAULT_ANNOUNCEMENT = "DEFAULT_ANNOUNCEMENT"
     
     public var realName: String?
-    public var aliPayId: String?
     public var qqId: String?
     public var weChatId: String?
     public var announcement: String?
@@ -15,9 +14,8 @@ class EnrollSubmit {
     init () {
     }
     
-    init (_ r: String?, _ a: String?, _ q: String?, _ w: String?, _ am: String?) {
+    init (_ r: String?, _ q: String?, _ w: String?, _ am: String?) {
         self.realName = r
-        self.aliPayId = a
         self.qqId = q
         self.weChatId = w
         self.announcement = am
@@ -27,9 +25,6 @@ class EnrollSubmit {
         let result = NSMutableDictionary()
         if let v = self.realName {
             result["realName"] = v
-        }
-        if let v = self.aliPayId {
-            result["aliPayId"] = v
         }
         if let v = self.qqId {
             result["qqId"] = v
@@ -45,7 +40,6 @@ class EnrollSubmit {
     
     public func cache() {
         UserDefaults.standard.setValue(self.realName, forKey: EnrollSubmit.DEFAULT_REALNAME)
-        UserDefaults.standard.setValue(self.aliPayId, forKey: EnrollSubmit.DEFAULT_ALIPAYID)
         UserDefaults.standard.setValue(self.qqId, forKey: EnrollSubmit.DEFAULT_QQID)
         UserDefaults.standard.setValue(self.weChatId, forKey: EnrollSubmit.DEFAULT_WECHATID)
         UserDefaults.standard.setValue(self.announcement, forKey: EnrollSubmit.DEFAULT_ANNOUNCEMENT)
@@ -55,7 +49,6 @@ class EnrollSubmit {
         if let realName = UserDefaults.standard.string(forKey: EnrollSubmit.DEFAULT_REALNAME) {
             let result = EnrollSubmit()
             result.realName = realName
-            result.aliPayId = UserDefaults.standard.string(forKey: EnrollSubmit.DEFAULT_ALIPAYID)
             result.qqId = UserDefaults.standard.string(forKey: EnrollSubmit.DEFAULT_QQID)
             result.weChatId = UserDefaults.standard.string(forKey: EnrollSubmit.DEFAULT_WECHATID)
             result.announcement = UserDefaults.standard.string(forKey: EnrollSubmit.DEFAULT_ANNOUNCEMENT)
@@ -67,7 +60,6 @@ class EnrollSubmit {
     public static func clear() {
         UserDefaults.standard.removeObject(forKey: EnrollSubmit.DEFAULT_REALNAME)
         UserDefaults.standard.removeObject(forKey: EnrollSubmit.DEFAULT_QQID)
-        UserDefaults.standard.removeObject(forKey: EnrollSubmit.DEFAULT_ALIPAYID)
         UserDefaults.standard.removeObject(forKey: EnrollSubmit.DEFAULT_WECHATID)
         UserDefaults.standard.removeObject(forKey: EnrollSubmit.DEFAULT_ANNOUNCEMENT)
     }

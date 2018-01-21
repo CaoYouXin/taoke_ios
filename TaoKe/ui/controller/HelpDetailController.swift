@@ -12,7 +12,7 @@ class HelpDetailController: UIViewController {
     @IBOutlet weak var answer: UILabel!
     
     var helpView: HelpView?
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

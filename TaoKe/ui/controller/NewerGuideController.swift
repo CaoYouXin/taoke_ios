@@ -8,7 +8,7 @@ class NewerGuideController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var newerGuideList: UIStackView!
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@ class SplashController: UIViewController {
     @IBOutlet weak var signIn: UIButton!
     @IBOutlet weak var anonymous: UILabel!
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

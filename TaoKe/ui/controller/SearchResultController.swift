@@ -36,7 +36,7 @@ class SearchResultController: UIViewController {
     private var setClickEventHandler: Bool = false
     private var firstAppear: Bool = true
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

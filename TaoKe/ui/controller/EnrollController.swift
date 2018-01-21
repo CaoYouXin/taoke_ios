@@ -10,12 +10,11 @@ class EnrollController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var announcement: UITextView!
     @IBOutlet weak var wechat: UITextField!
     @IBOutlet weak var qq: UITextField!
-    @IBOutlet weak var alipay: UITextField!
     @IBOutlet weak var realName: UITextField!
     
     private let announcementHint = "申请理由"
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text.elementsEqual(announcementHint) {
@@ -61,9 +60,6 @@ class EnrollController: UIViewController, UITextViewDelegate {
         if let v = lastSubmit?.realName {
             realName.text = v
         }
-        if let v = lastSubmit?.aliPayId {
-            alipay.text = v
-        }
         if let v = lastSubmit?.qqId {
             qq.text = v
         }
@@ -102,14 +98,14 @@ class EnrollController: UIViewController, UITextViewDelegate {
                 return
             }
             
-            if (alipay.text?.elementsEqual(""))! {
-                let alert = UIAlertController(title: "", message: "必须填写支付宝账号，用户提现。", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
-                    self.alipay.becomeFirstResponder()
-                }))
-                self.present(alert, animated: true)
-                return
-            }
+//            if (alipay.text?.elementsEqual(""))! {
+//                let alert = UIAlertController(title: "", message: "必须填写支付宝账号，用户提现。", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
+//                    self.alipay.becomeFirstResponder()
+//                }))
+//                self.present(alert, animated: true)
+//                return
+//            }
             
             if (qq.text?.elementsEqual(""))! && (wechat.text?.elementsEqual(""))! {
                 let alert = UIAlertController(title: "", message: "QQ和微信至少写一个吧", preferredStyle: .alert)
@@ -120,7 +116,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
                 return
             }
             
-            if (announcement.text?.elementsEqual(""))! {
+            if (announcement.text?.elementsEqual("申请理由"))! {
                 let alert = UIAlertController(title: "", message: "必须填写申请理由，谢谢🙏", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "去填写", style: .cancel, handler: { (action) in
                     self.announcement.becomeFirstResponder()
@@ -129,7 +125,7 @@ class EnrollController: UIViewController, UITextViewDelegate {
                 return
             }
             
-            let submit = EnrollSubmit(realName.text, alipay.text, qq.text, wechat.text, announcement.text)
+            let submit = EnrollSubmit(realName.text, qq.text, wechat.text, announcement.text)
             submit.cache()
             let _ = TaoKeApi.toEnroll(submit: submit)
                 .rxSchedulerHelper()

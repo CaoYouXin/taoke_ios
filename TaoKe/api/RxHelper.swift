@@ -34,7 +34,7 @@ extension ObservableType {
         }
     }
     
-    public func handleApiError(_ viewController: UIViewController?, _ callback: ((Error) -> Void)? = nil) -> Observable<Self.E> {
+public func handleApiError(_ viewController: UIViewController?, _ callback: ((Error) -> Void)? = nil) -> Observable<Self.E> {
         return self.observeOn(MainScheduler.instance).catchError({(error) -> Observable<Self.E> in
             if error is ApiUnAuth, let view = viewController {
                 let alert = UIAlertController(title: "", message: "您需要重新登录", preferredStyle: .alert)

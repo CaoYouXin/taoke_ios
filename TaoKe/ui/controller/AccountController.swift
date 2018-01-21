@@ -35,7 +35,7 @@ class AccountController: UIViewController {
     @IBOutlet weak var accountType: UILabel!
     @IBOutlet weak var viewWrapper: UIView!
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

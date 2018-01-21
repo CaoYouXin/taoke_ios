@@ -8,7 +8,7 @@ class IntroController: UIViewController {
     
     @IBOutlet weak var introView: EAIntroView!
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

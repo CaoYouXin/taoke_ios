@@ -36,7 +36,7 @@ class OrdersController: UIViewController {
     private var orderListHelper: MVCHelper<OrderView>?
     private var orderListDataSource: OrderDataSource?
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

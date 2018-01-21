@@ -8,7 +8,7 @@ import FontAwesomeKit
 
 class TaoKeController: RAMAnimatedTabBarController {
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,7 +9,7 @@ class SearchController: PYSearchViewController {
     private var resultViewHolder: SearchResultController?
     private var isJu = false
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     var shouldBeginEditingFlag: Bool = true
     
     override func awakeFromNib() {

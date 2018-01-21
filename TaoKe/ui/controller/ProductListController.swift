@@ -29,7 +29,7 @@ class ProductListController: UIViewController {
     @IBOutlet weak var productList: UICollectionView!
     
     var homeBtn: HomeBtn?
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     private var sortHelper: SortHelper?
     private var sizeCache: [String: CGSize] = [:]

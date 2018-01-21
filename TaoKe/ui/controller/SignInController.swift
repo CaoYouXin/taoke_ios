@@ -15,7 +15,7 @@ class SignInController: UIViewController {
     @IBOutlet weak var signUp: UILabel!
     @IBOutlet weak var resetPassword: UILabel!
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

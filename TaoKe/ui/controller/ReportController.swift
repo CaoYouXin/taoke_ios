@@ -8,7 +8,7 @@ class ReportController: UIViewController, UITextViewDelegate {
     
     private let reportHint = "反馈内容"
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text.elementsEqual(reportHint) {

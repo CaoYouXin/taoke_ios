@@ -8,7 +8,7 @@ class H5DetailController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     
     var itemId: String?
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

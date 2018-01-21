@@ -19,7 +19,7 @@ class ChartController: UIViewController, UITextFieldDelegate {
     private var maxWithDraw: Float64?
     private var canDrawState: Bool = false
     
-    var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,47 +81,15 @@ class ChartController: UIViewController, UITextFieldDelegate {
             
             canDrawState = false
             
-            let alert = UIAlertController(title: "", message: "请输入提现金额", preferredStyle: .alert)
-            alert.addTextField(configurationHandler: { (textField) in
-                textField.keyboardType = .numbersAndPunctuation
-                textField.delegate = self
-            })
-            alert.addAction(UIAlertAction(title: "提交", style: .default, handler: { (action) in
-                if let input = alert.textFields?[0].text {
-                    if let inputAmount = Float64(input) {
-                        if inputAmount >= 10.0 {
-                            TaoKeApi.withDraw(input).rxSchedulerHelper().handleApiError(self, { _ in
-                                self.canDrawState = true
-                                let msg = UIAlertController(title: "", message: "购买者不享有此功能", preferredStyle: .actionSheet)
-                                msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
-                                }))
-                                self.present(msg, animated: true)
-                            }).subscribe(onNext: { _ in
-                                self.initCanDraw()
-                                let msg = UIAlertController(title: "", message: "已经为您创建提现申请记录，工作人员会及时与您取得联系", preferredStyle: .actionSheet)
-                                msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
-                                }))
-                                self.present(msg, animated: true)
-                            }).disposed(by: self.disposeBag)
-                        } else {
-                            let msg = UIAlertController(title: "", message: "至少10元才可提现", preferredStyle: .actionSheet)
-                            msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
-                                self.canDrawState = true
-                            }))
-                            self.present(msg, animated: true)
-                        }
+            TaoKeApi.canWithdraw().rxSchedulerHelper().handleApiError(self)
+                .subscribe(onNext: { (can) in
+                    if (can!) {
+                        self.showWithdrawInput()
                     } else {
-                        let msg = UIAlertController(title: "", message: "请输入正确的金额", preferredStyle: .actionSheet)
-                        msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
-                            self.canDrawState = true
-                        }))
-                        self.present(msg, animated: true)
+                        self.canDrawState = true
+                        self.showInfoCompetor()
                     }
-                } else {
-                    self.canDrawState = true
-                }
-            }))
-            self.present(alert, animated: true)
+                }).disposed(by: disposeBag)
             break;
         case orderDetails:
             let ordersController = UIStoryboard(name: "Orders", bundle: nil).instantiateViewController(withIdentifier: "OrdersController") as! OrdersController
@@ -130,6 +98,54 @@ class ChartController: UIViewController, UITextFieldDelegate {
         default:
             break;
         }
+    }
+    
+    private func showInfoCompetor() {
+        
+    }
+    
+    private func showWithdrawInput() {
+        let alert = UIAlertController(title: "", message: "请输入提现金额", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.keyboardType = .numbersAndPunctuation
+            textField.delegate = self
+        })
+        alert.addAction(UIAlertAction(title: "提交", style: .default, handler: { (action) in
+            if let input = alert.textFields?[0].text {
+                if let inputAmount = Float64(input) {
+                    if inputAmount >= 10.0 {
+                        TaoKeApi.withDraw(input).rxSchedulerHelper().handleApiError(self, { _ in
+                            self.canDrawState = true
+                            let msg = UIAlertController(title: "", message: "购买者不享有此功能", preferredStyle: .actionSheet)
+                            msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                            }))
+                            self.present(msg, animated: true)
+                        }).subscribe(onNext: { _ in
+                            self.initCanDraw()
+                            let msg = UIAlertController(title: "", message: "已经为您创建提现申请记录，工作人员会及时与您取得联系", preferredStyle: .actionSheet)
+                            msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                            }))
+                            self.present(msg, animated: true)
+                        }).disposed(by: self.disposeBag)
+                    } else {
+                        let msg = UIAlertController(title: "", message: "至少10元才可提现", preferredStyle: .actionSheet)
+                        msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                            self.canDrawState = true
+                        }))
+                        self.present(msg, animated: true)
+                    }
+                } else {
+                    let msg = UIAlertController(title: "", message: "请输入正确的金额", preferredStyle: .actionSheet)
+                    msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                        self.canDrawState = true
+                    }))
+                    self.present(msg, animated: true)
+                }
+            } else {
+                self.canDrawState = true
+            }
+        }))
+        self.present(alert, animated: true)
     }
     
     private func initScroll() {

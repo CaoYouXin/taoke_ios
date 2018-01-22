@@ -509,7 +509,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Iyz-2p-c6D">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="732"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="860"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyt-yl-2YL">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
@@ -1049,10 +1049,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nPd-kD-RKC">
-                                                <rect key="frame" x="0.0" y="604" width="375" height="128"/>
+                                                <rect key="frame" x="0.0" y="604" width="375" height="256"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="128" id="E2C-Qm-BFh"/>
+                                                    <constraint firstAttribute="height" constant="256" id="E2C-Qm-BFh"/>
                                                 </constraints>
                                             </view>
                                         </subviews>

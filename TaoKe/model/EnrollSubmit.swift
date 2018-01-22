@@ -1,7 +1,6 @@
 
 class EnrollSubmit {
     public static let DEFAULT_REALNAME = "DEFAULT_REALNAME"
-    public static let DEFAULT_ALIPAYID = "DEFAULT_ALIPAYID"
     public static let DEFAULT_QQID = "DEFAULT_QQID"
     public static let DEFAULT_WECHATID = "DEFAULT_WECHATID"
     public static let DEFAULT_ANNOUNCEMENT = "DEFAULT_ANNOUNCEMENT"

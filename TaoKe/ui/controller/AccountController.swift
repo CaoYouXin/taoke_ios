@@ -98,7 +98,7 @@ class AccountController: UIViewController {
             self.rightArrow3.isHidden = true
         }
         
-        if (UserData.get()?.isBuyer())! {
+        if !(UserData.get()?.directUser)! {
             self.teamHeight.constant = 0
             self.teamBtn.isHidden = true
             self.teamImage.isHidden = true

@@ -11,7 +11,10 @@ class ProductDataSource: SortableDataSource {
     }
     
     override func refreshApi() -> Observable<[CouponItem]> {
-        return TaoKeApi.getProductList((homeBtn?.ext)!)
+        return TaoKeApi.getProductList((homeBtn?.ext)!).map({ (favItemsView) -> [CouponItem] in
+            self.ordered = favItemsView.orders
+            return favItemsView.items!
+        })
     }
     
 }

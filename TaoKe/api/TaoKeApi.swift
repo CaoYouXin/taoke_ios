@@ -77,13 +77,15 @@ class TaoKeApi {
             })
     }
     
-    public static func getProductList(_ gourpId: String) -> Observable<[CouponItem]> {
+    public static func getProductList(_ gourpId: String) -> Observable<FavItemsView> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_PRODUCT_LIST.replacingOccurrences(of: "{favId}", with: gourpId).replacingOccurrences(of: "{pageNo}", with: "1"), auth: (UserData.get()?.token)!)
             .handleResult()
-            .map({ (taoKeData) -> [CouponItem] in
+            .map({ (taoKeData) -> FavItemsView in
+                let map = taoKeData?.getMap()
+                
                 var items: [CouponItem] = []
-                for rec in (taoKeData?.getList())! {
+                for rec in (map!["items"] as! [Dictionary<String, AnyObject>]) {
                     let item = CouponItem()
                     item.category = rec["category"] as? Int64
                     item.userType = rec["userType"] as? Int64
@@ -133,7 +135,12 @@ class TaoKeApi {
                     
                     items.append(item)
                 }
-                return items
+                
+                let result = FavItemsView()
+                result.items = items
+                result.orders = map!["orders"] as? [Int64]
+                
+                return result
             })
     }
     

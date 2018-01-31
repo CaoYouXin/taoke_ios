@@ -31,7 +31,7 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_FRIENDS_LIST = "tbk/team/list"
     public static let API_COUPON_LIST = "tbk/coupon/{cid}/{pageNo}"
-    public static let API_PRODUCT_LIST = "tbk/fav/{favId}/list/{pageNo}"
+    public static let API_PRODUCT_LIST = "tbk/fav/{favId}/list/{pageNo}/v2"
     public static let API_ORDER_LIST = "tbk/order/list/{type}/{pageNo}"
     public static let API_GET_SHARE_LINK = "tbk/url/trans"
     public static let API_GET_SHARE_LINK2 = "tbk/share/save"

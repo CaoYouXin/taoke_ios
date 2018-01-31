@@ -3,8 +3,8 @@ import RxSwift
 
 class TaoKeApi {
     
-//    public static var CDN = "http://192.168.0.136:8070/"
-    public static let CDN = "http://192.168.1.115:8070/"
+    public static var CDN = "http://192.168.0.136:8070/"
+//    public static let CDN = "http://192.168.1.115:8070/"
 //    public static var CDN = "http://server.tkmqr.com:8070/"
     
     public static func verification(phone: String) -> Observable<TaoKeData?> {

@@ -12,8 +12,8 @@ target 'TaoKe' do
   pod 'RxDataSources'
   pod 'RxSegue', :git => 'https://github.com/gnastnosaj/RxSegue.git'
   pod 'RxBus'
-  pod 'RealmSwift'
-  
+#  pod 'RealmSwift'
+
   pod 'CleanroomLogger'
   pod 'RestKit'
   pod 'HandyJSON'

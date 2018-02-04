@@ -581,4 +581,28 @@ class TaoKeApi {
             })
     }
     
+    public static func getHelpDocs() -> Observable<[HelpDoc]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_HELP_DOC_LIST)
+            .handleResult()
+            .map({ (taoKeData) -> [HelpDoc] in
+                var result: [HelpDoc] = []
+
+                if let recs = taoKeData?.getList() {
+                    for rec in recs {
+                        let item = HelpDoc()
+                        
+                        item.id = rec["id"] as? Int64
+                        item.title = rec["title"] as? String
+                        item.path = rec["path"] as? String
+                        item.order = rec["order"] as? Int
+                        
+                        result.append(item)
+                    }
+                }
+                
+                return result
+            })
+    }
+    
 }

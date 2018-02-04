@@ -1,10 +1,3 @@
-//
-//  MessageDataSource.swift
-//  TaoKe
-//
-//  Created by CaoYouxin on 2017/11/28.
-//  Copyright © 2017年 jason tsang. All rights reserved.
-//
 
 import RxSwift
 

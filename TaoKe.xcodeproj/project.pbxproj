@@ -86,6 +86,8 @@
 		2BD0FD011FD182F000F0D94A /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD0FD001FD182F000F0D94A /* SearchDataSource.swift */; };
 		2BDFA4B920047A4000EDFDB7 /* AdZoneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDFA4B820047A4000EDFDB7 /* AdZoneItem.swift */; };
 		2BE2E6C1200C6E090003C4BE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2E6C0200C6E090003C4BE /* Errors.swift */; };
+		2BEABEDC20270737004C5D95 /* HelpDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEABEDB20270737004C5D95 /* HelpDoc.swift */; };
+		2BEABEDE202709D0004C5D95 /* HelpDocDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEABEDD202709D0004C5D95 /* HelpDocDataSource.swift */; };
 		2BFC39D11FCC469D007A041A /* Enroll.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BFC39D01FCC469C007A041A /* Enroll.storyboard */; };
 		2BFC39D31FCC480D007A041A /* EnrollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC39D21FCC480D007A041A /* EnrollController.swift */; };
 		F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F907D8BE1FB93DF4000BC49F /* DetailController.swift */; };
@@ -222,6 +224,8 @@
 		2BD0FD001FD182F000F0D94A /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		2BDFA4B820047A4000EDFDB7 /* AdZoneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdZoneItem.swift; sourceTree = "<group>"; };
 		2BE2E6C0200C6E090003C4BE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		2BEABEDB20270737004C5D95 /* HelpDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDoc.swift; sourceTree = "<group>"; };
+		2BEABEDD202709D0004C5D95 /* HelpDocDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDocDataSource.swift; sourceTree = "<group>"; };
 		2BFC39D01FCC469C007A041A /* Enroll.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Enroll.storyboard; sourceTree = "<group>"; };
 		2BFC39D21FCC480D007A041A /* EnrollController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollController.swift; sourceTree = "<group>"; };
 		60DAA4CA40448DBA119C2C64 /* Pods-TaoKe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaoKe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaoKe/Pods-TaoKe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 				2B4F89311FD00BB3004BC79D /* OrderDataSource.swift */,
 				2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */,
 				2BD0FD001FD182F000F0D94A /* SearchDataSource.swift */,
+				2BEABEDD202709D0004C5D95 /* HelpDocDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -508,6 +513,7 @@
 				2BDFA4B820047A4000EDFDB7 /* AdZoneItem.swift */,
 				2B52C8D42014B76B008A385D /* CustomerServiceView.swift */,
 				2BB56A582021E50100768A1E /* FavItemsView.swift */,
+				2BEABEDB20270737004C5D95 /* HelpDoc.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -829,6 +835,7 @@
 				F9B65BE21FBBDCBB00413211 /* BrandDateSource.swift in Sources */,
 				2BFC39D31FCC480D007A041A /* EnrollController.swift in Sources */,
 				2BB56A592021E50100768A1E /* FavItemsView.swift in Sources */,
+				2BEABEDC20270737004C5D95 /* HelpDoc.swift in Sources */,
 				2B7B95381FCFBADD0023A0D6 /* HelpView.swift in Sources */,
 				F907D8C61FB981DF000BC49F /* CouponDataSource.swift in Sources */,
 				F9B7E01B1FBC0DFC00E4CCE2 /* ProductDataSource.swift in Sources */,
@@ -858,6 +865,7 @@
 				2BD0FCF91FD0FF5900F0D94A /* OrderCell.swift in Sources */,
 				F9A44AAA1FB00AF200EC2EDD /* RAMScaleUpAnimation.swift in Sources */,
 				2BA72B3C1FD3B9BD00D449F4 /* H5DetailController.swift in Sources */,
+				2BEABEDE202709D0004C5D95 /* HelpDocDataSource.swift in Sources */,
 				2B08C1771FC8466300CE6C70 /* ShareView.swift in Sources */,
 				F97842001FC279B4001954D3 /* SignInController.swift in Sources */,
 				F9B65BE01FBBD7CA00413211 /* ProductListController.swift in Sources */,

@@ -43,7 +43,7 @@ class HelpController: UIViewController {
                 helpListLayout.lineCount = 1
             }.disposed(by: disposeBag)
         
-        let helpFactory: (UICollectionView, Int, HelpView) -> UICollectionViewCell = { (collectionView, row, element) in
+        let helpFactory: (UICollectionView, Int, HelpDoc) -> UICollectionViewCell = { (collectionView, row, element) in
             let indexPath = IndexPath(row: row, section: 0)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HelpCell", for: indexPath) as! HelpCell
             
@@ -59,9 +59,9 @@ class HelpController: UIViewController {
             return cell
         }
         
-        let helpListHelper = MVCHelper<HelpView>(helpList)
+        let helpListHelper = MVCHelper<HelpDoc>(helpList)
         helpListHelper.set(cellFactory: helpFactory)
-        helpListHelper.set(dataSource: HelpDataSource(self))
+        helpListHelper.set(dataSource: HelpDocDataSource(self))
         
         helpListHelper.refresh()
         
@@ -74,7 +74,7 @@ class HelpController: UIViewController {
             }
         })
         
-        let segue: AnyObserver<HelpView> = NavigationSegue(
+        let segue: AnyObserver<HelpDoc> = NavigationSegue(
             fromViewController: self.navigationController!,
             toViewControllerFactory:
             { (sender, context) -> HelpDetailController in
@@ -84,7 +84,7 @@ class HelpController: UIViewController {
         }).asObserver()
         
         helpList.rx.itemSelected
-            .map{ indexPath -> HelpView in
+            .map{ indexPath -> HelpDoc in
                 return try self.helpList.rx.model(at: indexPath)
             }
             .bind(to: segue)

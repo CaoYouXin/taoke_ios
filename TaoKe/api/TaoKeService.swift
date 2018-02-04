@@ -37,6 +37,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_GET_SHARE_LINK2 = "tbk/share/save"
 
     public static let API_HELP_LIST = "app/help/list"
+    public static let API_HELP_DOC_LIST = "blog/helpdoc/list"
     public static let API_NOVICE_LIST = "app/guide/list/{type}"
     public static let API_SHARE_APP_LIST = "app/share/img/url/list/{type}"
 

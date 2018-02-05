@@ -13,17 +13,17 @@ class UploadImageDataSource: RxDataSource<UploadImageItem> {
         super.init(viewController)
     }
     
-    public func addImage(uri: String) {
+    public func addImage(image: UIImage) {
         let item = UploadImageItem()
         item.isHandle = false
         item.uploaded = false
-        item.uri = uri
+        item.image = image
         self.data.insert(item, at: 0)
     }
     
-    public func setImageCode(uri: String, codeSource: String) {
+    public func setImageCode(image: UIImage, codeSource: String) {
         for datum in self.data {
-            if datum.uri == uri {
+            if datum.image == image {
                 datum.code = String.init(format: "![](%@)", codeSource)
                 return
             }

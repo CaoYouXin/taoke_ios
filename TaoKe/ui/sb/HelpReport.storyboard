@@ -57,6 +57,7 @@
                     <connections>
                         <outlet property="reportText" destination="6CS-0T-Nyo" id="QT8-0F-RPm"/>
                         <outlet property="uploadImages" destination="RHZ-Vp-Qdu" id="s9x-Mr-bfW"/>
+                        <outlet property="uploadImagesLayout" destination="Y8X-5h-Cgn" id="N5V-DK-2fu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8go-Py-5hV" userLabel="First Responder" sceneMemberID="firstResponder"/>

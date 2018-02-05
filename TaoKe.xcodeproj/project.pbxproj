@@ -41,6 +41,8 @@
 		2B7B95421FCFEDE70023A0D6 /* OrdersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95411FCFEDE70023A0D6 /* OrdersController.swift */; };
 		2B810DF1202896B6004B6BF1 /* UploadImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B810DF0202896B6004B6BF1 /* UploadImageItem.swift */; };
 		2B810DF320289796004B6BF1 /* UploadImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B810DF220289796004B6BF1 /* UploadImageDataSource.swift */; };
+		2B810DF520289F4D004B6BF1 /* UploadImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B810DF420289F4D004B6BF1 /* UploadImageCell.xib */; };
+		2B810DF72028A03B004B6BF1 /* UploadImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B810DF62028A03B004B6BF1 /* UploadImageCell.swift */; };
 		2B8221861FC9443B00B695A4 /* ShareApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8221851FC9443B00B695A4 /* ShareApp.storyboard */; };
 		2B8221881FC944B600B695A4 /* ShareAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8221871FC944B600B695A4 /* ShareAppController.swift */; };
 		2B82218A1FC94F5C00B695A4 /* ShareTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8221891FC94F5C00B695A4 /* ShareTemplateCell.swift */; };
@@ -181,6 +183,8 @@
 		2B7B95411FCFEDE70023A0D6 /* OrdersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersController.swift; sourceTree = "<group>"; };
 		2B810DF0202896B6004B6BF1 /* UploadImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageItem.swift; sourceTree = "<group>"; };
 		2B810DF220289796004B6BF1 /* UploadImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageDataSource.swift; sourceTree = "<group>"; };
+		2B810DF420289F4D004B6BF1 /* UploadImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadImageCell.xib; sourceTree = "<group>"; };
+		2B810DF62028A03B004B6BF1 /* UploadImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageCell.swift; sourceTree = "<group>"; };
 		2B8221851FC9443B00B695A4 /* ShareApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShareApp.storyboard; sourceTree = "<group>"; };
 		2B8221871FC944B600B695A4 /* ShareAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAppController.swift; sourceTree = "<group>"; };
 		2B8221891FC94F5C00B695A4 /* ShareTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTemplateCell.swift; sourceTree = "<group>"; };
@@ -417,6 +421,7 @@
 				2B1466AA1FCDA11300FBE98B /* MessageCell.swift */,
 				2B7B95331FCFB8D60023A0D6 /* HelpCell.swift */,
 				2BD0FCF81FD0FF5900F0D94A /* OrderCell.swift */,
+				2B810DF62028A03B004B6BF1 /* UploadImageCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				F949F8DF1FBC324800E8382A /* ProductCell.xib */,
 				F944CE091FCE4BA90013B035 /* MessageCell.xib */,
 				2BD0FCF61FD0EF8A00F0D94A /* OrderCell.xib */,
+				2B810DF420289F4D004B6BF1 /* UploadImageCell.xib */,
 			);
 			path = nb;
 			sourceTree = "<group>";
@@ -683,6 +689,7 @@
 				2B14669F1FCD2B8D00FBE98B /* Team.storyboard in Resources */,
 				2BA72B071FD2993A00D449F4 /* ALPLinkPartnerSDK.bundle in Resources */,
 				2BA72B041FD2993A00D449F4 /* AlibabaAuthSDK.bundle in Resources */,
+				2B810DF520289F4D004B6BF1 /* UploadImageCell.xib in Resources */,
 				2BD0FCF71FD0EF8A00F0D94A /* OrderCell.xib in Resources */,
 				F99662131FB410AD002CF243 /* CouponCell.xib in Resources */,
 				F92C68D11FAAE32C005CD910 /* Main.storyboard in Resources */,
@@ -764,8 +771,6 @@
 				"${BUILT_PRODUCTS_DIR}/QRCode/QRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/RKValueTransformers/RKValueTransformers.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RestKit/RestKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBus/RxBus.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -800,8 +805,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RKValueTransformers.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RestKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBus.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -901,6 +904,7 @@
 				F9F6439E1FB69ECC00EC14F3 /* CouponItem.swift in Sources */,
 				F9EA8FCE1FAFDE7F00EBB95C /* SplashController.swift in Sources */,
 				2BE2E6C1200C6E090003C4BE /* Errors.swift in Sources */,
+				2B810DF72028A03B004B6BF1 /* UploadImageCell.swift in Sources */,
 				F92DA5961FB169D600FDF3E4 /* TaoKeApi.swift in Sources */,
 				2B2F69FF1FC28696004D9B28 /* AboutController.swift in Sources */,
 				2BD0FCFF1FD156E400F0D94A /* SortHelper.swift in Sources */,

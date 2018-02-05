@@ -1,0 +1,6 @@
+framework module RxBus {
+  umbrella header "RxBus-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,6 +1,7 @@
 /Podfile.lock
-/Pods
 /TaoKe.xcworkspace
 UserInterfaceState.xcuserstate
 xcschememanagement.plist
 .idea
+*.lock
+Pods/Local Podspecs

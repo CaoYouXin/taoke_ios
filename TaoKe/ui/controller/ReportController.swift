@@ -5,6 +5,7 @@ import RxSwift
 class ReportController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var reportText: UITextView!
+    @IBOutlet weak var uploadImages: UICollectionView!
     
     private let reportHint = "反馈内容"
     

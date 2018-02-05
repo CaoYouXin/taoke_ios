@@ -39,6 +39,8 @@
 		2B7B953E1FCFC4B50023A0D6 /* ReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B953D1FCFC4B50023A0D6 /* ReportController.swift */; };
 		2B7B95401FCFEA400023A0D6 /* Orders.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B7B953F1FCFEA400023A0D6 /* Orders.storyboard */; };
 		2B7B95421FCFEDE70023A0D6 /* OrdersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95411FCFEDE70023A0D6 /* OrdersController.swift */; };
+		2B810DF1202896B6004B6BF1 /* UploadImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B810DF0202896B6004B6BF1 /* UploadImageItem.swift */; };
+		2B810DF320289796004B6BF1 /* UploadImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B810DF220289796004B6BF1 /* UploadImageDataSource.swift */; };
 		2B8221861FC9443B00B695A4 /* ShareApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8221851FC9443B00B695A4 /* ShareApp.storyboard */; };
 		2B8221881FC944B600B695A4 /* ShareAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8221871FC944B600B695A4 /* ShareAppController.swift */; };
 		2B82218A1FC94F5C00B695A4 /* ShareTemplateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8221891FC94F5C00B695A4 /* ShareTemplateCell.swift */; };
@@ -177,6 +179,8 @@
 		2B7B953D1FCFC4B50023A0D6 /* ReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportController.swift; sourceTree = "<group>"; };
 		2B7B953F1FCFEA400023A0D6 /* Orders.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Orders.storyboard; sourceTree = "<group>"; };
 		2B7B95411FCFEDE70023A0D6 /* OrdersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersController.swift; sourceTree = "<group>"; };
+		2B810DF0202896B6004B6BF1 /* UploadImageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageItem.swift; sourceTree = "<group>"; };
+		2B810DF220289796004B6BF1 /* UploadImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageDataSource.swift; sourceTree = "<group>"; };
 		2B8221851FC9443B00B695A4 /* ShareApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShareApp.storyboard; sourceTree = "<group>"; };
 		2B8221871FC944B600B695A4 /* ShareAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAppController.swift; sourceTree = "<group>"; };
 		2B8221891FC94F5C00B695A4 /* ShareTemplateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTemplateCell.swift; sourceTree = "<group>"; };
@@ -395,6 +399,7 @@
 				2BD0FCFC1FD1532400F0D94A /* SortableDataSource.swift */,
 				2BD0FD001FD182F000F0D94A /* SearchDataSource.swift */,
 				2BEABEDD202709D0004C5D95 /* HelpDocDataSource.swift */,
+				2B810DF220289796004B6BF1 /* UploadImageDataSource.swift */,
 			);
 			path = datasource;
 			sourceTree = "<group>";
@@ -514,6 +519,7 @@
 				2B52C8D42014B76B008A385D /* CustomerServiceView.swift */,
 				2BB56A582021E50100768A1E /* FavItemsView.swift */,
 				2BEABEDB20270737004C5D95 /* HelpDoc.swift */,
+				2B810DF0202896B6004B6BF1 /* UploadImageItem.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -872,6 +878,7 @@
 				2B52C8CF201456B8008A385D /* InfoCompetorController.swift in Sources */,
 				2B82218A1FC94F5C00B695A4 /* ShareTemplateCell.swift in Sources */,
 				2B4F89321FD00BB3004BC79D /* OrderDataSource.swift in Sources */,
+				2B810DF320289796004B6BF1 /* UploadImageDataSource.swift in Sources */,
 				2B2F69FB1FC270A5004D9B28 /* NewerGuideController.swift in Sources */,
 				F907D8C41FB97513000BC49F /* RxDataSource.swift in Sources */,
 				2B1466A31FCD2EE500FBE98B /* TeamDataView.swift in Sources */,
@@ -882,6 +889,7 @@
 				2B45D8861FC69FBF00D1CBFE /* StringMd5.swift in Sources */,
 				F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */,
 				F98D01191FBD73C7003A3F4F /* ShareImageCell.swift in Sources */,
+				2B810DF1202896B6004B6BF1 /* UploadImageItem.swift in Sources */,
 				2B7B953E1FCFC4B50023A0D6 /* ReportController.swift in Sources */,
 				2B7B953C1FCFC28A0023A0D6 /* HelpDetailController.swift in Sources */,
 				F92C68CC1FAAE32C005CD910 /* AppDelegate.swift in Sources */,

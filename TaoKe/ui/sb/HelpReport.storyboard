@@ -31,7 +31,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RHZ-Vp-Qdu">
                                         <rect key="frame" x="0.0" y="215.5" width="375" height="431.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Y8X-5h-Cgn">
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Y8X-5h-Cgn">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -107,10 +107,10 @@
                                                     <rect key="frame" x="0.0" y="1" width="376" height="110"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbt-5o-emL">
-                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="113"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="311" height="113"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="问题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KtL-EX-cTy">
-                                                                    <rect key="frame" x="16" y="47" width="280" height="19.5"/>
+                                                                    <rect key="frame" x="16" y="47" width="279" height="19.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -124,7 +124,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1B-Uu-10H">
-                                                            <rect key="frame" x="312" y="0.0" width="63" height="113"/>
+                                                            <rect key="frame" x="311" y="0.0" width="64" height="113"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mCs-H9-rnA">
                                                                     <rect key="frame" x="17.5" y="41" width="30" height="30"/>

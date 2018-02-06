@@ -61,13 +61,18 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
             
             let alert = UIAlertController(title: "提示", message: "您可以选择打开[相机]或者[相册]来上传一张图片.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "打开相机", style: .default, handler: { (action) in
+                let authStatus = AVCaptureDevice.authorizationStatus(for: .video)
+                if authStatus == AVAuthorizationStatus.restricted || authStatus == AVAuthorizationStatus.denied {
+                    self.view.makeToast("应用相机权限受限,请在iPhone的“设置-隐私-相机”选项中，允许觅券儿访问你的相机。")
+                    return
+                }
+                
                 let imagePickerController = UIImagePickerController()
                 imagePickerController.delegate = self
                 imagePickerController.allowsEditing = true
                 imagePickerController.sourceType = .camera
                 imagePickerController.mediaTypes = ["public.image"]
-                self.present(imagePickerController, animated: true) { () -> Void in
-                }
+                self.present(imagePickerController, animated: true)
             }))
             alert.addAction(UIAlertAction(title: "打开相册", style: .default, handler: { (action) in
                 let imagePickerController = UIImagePickerController()
@@ -75,8 +80,7 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
                 imagePickerController.allowsEditing = true
                 imagePickerController.sourceType = .photoLibrary
                 imagePickerController.mediaTypes = ["public.image"]
-                self.present(imagePickerController, animated: true) { () -> Void in
-                }
+                self.present(imagePickerController, animated: true)
             }))
             self.present(alert, animated: true)
         case .error:
@@ -89,8 +93,8 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
     private func initUploadImages() {
         uploadImages.register(UINib(nibName: "UploadImageCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         
-        let thirdOfWidth = (self.view.frame.size.width - 3) / 3
-        uploadImagesLayout.itemSize = CGSize(width: thirdOfWidth, height: thirdOfWidth)
+        let thirdOfWidth = self.view.frame.size.width / 3
+        self.uploadImagesLayout.itemSize = CGSize(width: thirdOfWidth, height: thirdOfWidth)
         
         uploadImagesHelper = MVCHelper<UploadImageItem>(uploadImages)
         uploadImagesHelper?.set(cellFactory: { (collectionView, row, element) in
@@ -109,6 +113,10 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
         
         uploadImagesDataSource = UploadImageDataSource(self)
         uploadImagesHelper?.set(dataSource: uploadImagesDataSource)
+//        uploadImagesHelper?.set(dataHook: { (data) -> [UploadImageItem] in
+//
+//            return data
+//        })
         
         uploadImages.rx.itemSelected
             .map{ indexPath -> UploadImageItem in
@@ -124,8 +132,6 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
         //获取媒体的类型
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         
-        print(">>>\(mediaType)")
-        
         //如果媒体是照片
         if mediaType == kUTTypeImage as String {
             //获取到拍摄的照片, UIImagePickerControllerEditedImage是经过剪裁过的照片,UIImagePickerControllerOriginalImage是原始的照片
@@ -135,8 +141,7 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
                 //调用方法保存到图像库中
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
             } else {
-                uploadImagesDataSource?.addImage(image: image)
-                uploadImagesHelper?.refresh()
+                self.addImage(image: image)
             }
         }
         
@@ -144,10 +149,22 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
         self.dismiss(animated: true, completion: nil)
     }
     
+    private func addImage(image: UIImage) {
+        uploadImagesDataSource?.addImage(image: image)
+        uploadImagesHelper?.refresh()
+        
+        TaoKeApi.uploadImage(image: image)
+            .rxSchedulerHelper()
+            .handleApiError(self)
+            .subscribe(onNext: { (codeSource) in
+                self.uploadImagesDataSource?.setImageCode(image: image, codeSource: codeSource)
+                self.uploadImagesHelper?.refresh()
+            }).disposed(by: disposeBag)
+    }
+    
     @objc private func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
         if error == nil {
-            uploadImagesDataSource?.addImage(image: image)
-            uploadImagesHelper?.refresh()
+            self.addImage(image: image)
         } else {
             let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

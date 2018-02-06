@@ -52,12 +52,15 @@ class TaoKeService: TaoKeProtocol {
     public static let API_DOWNLOAD_URL = "app/download/url"
     public static let API_CUSTOMER_SERVICE = "tbk/user/customerService"
 
+    public static let API_UPLOAD_IMAGE = "upload/client/images";
+    public static let API_SEND_FEEDBACK = "blog/feedback/post";
+    
     private static var instance: TaoKeProtocol?
     private var manager: RKObjectManager?
 
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
-        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "images", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report"])
+        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "images", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report", "uploadFiles"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
 
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)
@@ -114,6 +117,32 @@ class TaoKeService: TaoKeProtocol {
             }, failure: { (operation, error) in
                 observer.onError(error!)
             })
+            return Disposables.create()
+        })
+    }
+    
+    public func tao(api: String, auth: String, data: NSMutableDictionary, images: UIImage...) -> Observable<TaoKeData?> {
+        self.manager?.httpClient.setDefaultHeader("auth", value: auth)
+        return Observable.create({ (observer) -> Disposable in
+            self.manager?.objectRequestOperation(with:
+                self.manager?.multipartFormRequest(with: data, method: RKRequestMethod.POST,
+                                                   path: api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                                                   parameters: nil,
+                                                   constructingBodyWith: { (parts) -> Void in
+                                                    for image in images {
+                                                        parts?.appendPart(
+                                                            withFileData: UIImagePNGRepresentation(image),
+                                                            name: "uploadFiles",
+                                                            fileName: "\(Date())".md5() + ".png",
+                                                            mimeType: "image/*")
+                                                    }
+                })! as! URLRequest, success: { (operation, result) in
+                    observer.onNext(result?.firstObject as? TaoKeData)
+                    observer.onCompleted()
+                }, failure: { (operation, error) in
+                    observer.onError(error!)
+                })
+            
             return Disposables.create()
         })
     }

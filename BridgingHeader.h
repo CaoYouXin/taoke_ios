@@ -10,6 +10,7 @@
 #define BridgingHeader_h
 
 #import <CommonCrypto/CommonDigest.h>
+#import <AVFoundation/AVFoundation.h>
 #import <RestKit/RestKit.h>
 #import <FontAwesomeKit/FontAwesomeKit.h>
 #import <MJRefresh/MJRefresh.h>

@@ -605,4 +605,21 @@ class TaoKeApi {
             })
     }
     
+    public static func uploadImage(image: UIImage) -> Observable<String> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_UPLOAD_IMAGE, auth: (UserData.get()?.token)!, data: [:], images: image)
+            .handleResult()
+            .map({ (taoKeData) -> String in
+                if let values = taoKeData?.getMap()?.values {
+                    if values.count == 0 {
+                        return ""
+                    }
+                    
+                    return values.first as! String
+                }
+                
+                return ""
+            })
+    }
+    
 }

@@ -622,4 +622,10 @@ class TaoKeApi {
             })
     }
     
+    public static func sendFeedback(content: String) -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_SEND_FEEDBACK, auth: (UserData.get()?.token)!, data: ["content": content])
+            .handleResult()
+    }
+    
 }

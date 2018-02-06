@@ -67,6 +67,11 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
                     return
                 }
                 
+                if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    self.view.makeToast("您的相机不可用!")
+                    return
+                }
+                
                 let imagePickerController = UIImagePickerController()
                 imagePickerController.delegate = self
                 imagePickerController.allowsEditing = true
@@ -166,7 +171,7 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
         if error == nil {
             self.addImage(image: image)
         } else {
-            let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .alert)
+            let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .actionSheet)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(ac, animated: true, completion: nil)
         }
@@ -178,7 +183,39 @@ class ReportController: UIViewController, UITextViewDelegate, UIImagePickerContr
     
     @objc private func report() {
         if let input = reportText.text {
-            TaoKeApi.report(input).rxSchedulerHelper()
+            if input == "" {
+                let ac = UIAlertController(title: "提示", message: "反馈内容不能为空", preferredStyle: .actionSheet)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(ac, animated: true, completion: nil)
+                return
+            }
+            
+            var content = """
+            ---
+            title: 来自\((UserData.get()?.phone)!)的反馈
+            ---
+            \(input)
+            > 附件
+            >
+            """
+            
+            if let items = uploadImagesDataSource?.getData() {
+                for item in items {
+                    if item.isHandle! {
+                        continue
+                    }
+                    
+                    content += """
+                    
+                    >
+                    > \(item.code!)
+                    
+                    """
+                }
+            }
+            
+            TaoKeApi.sendFeedback(content: content)
+                .rxSchedulerHelper()
                 .handleApiError(self, { _ in
                     self.navigationController?.popViewController(animated: true)
                 }).subscribe(onNext: { _ in

@@ -60,7 +60,7 @@ class TaoKeService: TaoKeProtocol {
 
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
-        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "images", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report", "uploadFiles"])
+        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "images", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report", "uploadFiles", "content"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
 
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)
@@ -73,7 +73,7 @@ class TaoKeService: TaoKeProtocol {
         manager?.requestSerializationMIMEType = RKMIMETypeJSON
         
         manager?.httpClient.setDefaultHeader("platform", value: "ios")
-        manager?.httpClient.setDefaultHeader("version", value: "1.1.0")
+        manager?.httpClient.setDefaultHeader("version", value: "1.6.0")
     }
 
     public static func getInstance() -> TaoKeProtocol {
@@ -123,25 +123,29 @@ class TaoKeService: TaoKeProtocol {
     
     public func tao(api: String, auth: String, data: NSMutableDictionary, images: UIImage...) -> Observable<TaoKeData?> {
         self.manager?.httpClient.setDefaultHeader("auth", value: auth)
+        
+        let request = self.manager?.multipartFormRequest(with: data, method: RKRequestMethod.POST,
+                                           path: api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                                           parameters: nil,
+                                           constructingBodyWith: { (parts) -> Void in
+                                            for image in images {
+                                                parts?.appendPart(
+                                                    withFileData: UIImagePNGRepresentation(image),
+                                                    name: "uploadFiles",
+                                                    fileName: "\(Date())".md5() + ".png",
+                                                    mimeType: "image/*")
+                                            }
+        })
+        
         return Observable.create({ (observer) -> Disposable in
-            self.manager?.objectRequestOperation(with:
-                self.manager?.multipartFormRequest(with: data, method: RKRequestMethod.POST,
-                                                   path: api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                                                   parameters: nil,
-                                                   constructingBodyWith: { (parts) -> Void in
-                                                    for image in images {
-                                                        parts?.appendPart(
-                                                            withFileData: UIImagePNGRepresentation(image),
-                                                            name: "uploadFiles",
-                                                            fileName: "\(Date())".md5() + ".png",
-                                                            mimeType: "image/*")
-                                                    }
-                })! as! URLRequest, success: { (operation, result) in
-                    observer.onNext(result?.firstObject as? TaoKeData)
-                    observer.onCompleted()
-                }, failure: { (operation, error) in
-                    observer.onError(error!)
-                })
+            
+            let operation = self.manager?.objectRequestOperation(with: request! as URLRequest, success: { (operation, result) in
+                observer.onNext(result?.firstObject as? TaoKeData)
+                observer.onCompleted()
+            }, failure: { (operation, error) in
+                observer.onError(error!)
+            })
+            self.manager?.enqueue(operation)
             
             return Disposables.create()
         })

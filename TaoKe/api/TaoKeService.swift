@@ -55,6 +55,8 @@ class TaoKeService: TaoKeProtocol {
     public static let API_UPLOAD_IMAGE = "upload/client/images";
     public static let API_SEND_FEEDBACK = "blog/feedback/post";
     
+    public static let BI_ITEM_DETAIL_CLICKED = "bi/item/detail/clicked"
+    
     private static var instance: TaoKeProtocol?
     private var manager: RKObjectManager?
 

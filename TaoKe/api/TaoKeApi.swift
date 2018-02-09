@@ -628,4 +628,10 @@ class TaoKeApi {
             .handleResult()
     }
     
+    public static func biItemDetailClicked() -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.BI_ITEM_DETAIL_CLICKED, auth: (UserData.get()?.token)!)
+            .handleResult()
+    }
+    
 }

@@ -4,9 +4,9 @@ import RxSwift
 
 class TaoKeService: TaoKeProtocol {
     
-//    public static let HOST = "http://192.168.0.136:8080/api/"
+    public static let HOST = "http://192.168.0.136:8080/api/"
 //    public static let HOST = "http://192.168.1.115:8080/api/"
-    public static let HOST = "http://server.tkmqr.com:8080/api/"
+//    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     public static let API_VERIFICATION = "tbk/phone/verify"
     public static let API_SIGN_IN = "tbk/user/login"
@@ -31,12 +31,13 @@ class TaoKeService: TaoKeProtocol {
 
     public static let API_FRIENDS_LIST = "tbk/team/list"
     public static let API_COUPON_LIST = "tbk/coupon/{cid}/{pageNo}"
-    public static let API_PRODUCT_LIST = "tbk/fav/{favId}/list/{pageNo}"
+    public static let API_PRODUCT_LIST = "tbk/fav/{favId}/list/{pageNo}/v2"
     public static let API_ORDER_LIST = "tbk/order/list/{type}/{pageNo}"
     public static let API_GET_SHARE_LINK = "tbk/url/trans"
     public static let API_GET_SHARE_LINK2 = "tbk/share/save"
 
     public static let API_HELP_LIST = "app/help/list"
+    public static let API_HELP_DOC_LIST = "blog/helpdoc/list"
     public static let API_NOVICE_LIST = "app/guide/list/{type}"
     public static let API_SHARE_APP_LIST = "app/share/img/url/list/{type}"
 
@@ -51,12 +52,17 @@ class TaoKeService: TaoKeProtocol {
     public static let API_DOWNLOAD_URL = "app/download/url"
     public static let API_CUSTOMER_SERVICE = "tbk/user/customerService"
 
+    public static let API_UPLOAD_IMAGE = "upload/client/images";
+    public static let API_SEND_FEEDBACK = "blog/feedback/post";
+    
+    public static let BI_ITEM_DETAIL_CLICKED = "bi/item/detail/clicked"
+    
     private static var instance: TaoKeProtocol?
     private var manager: RKObjectManager?
 
     private init() {
         let requestDataMapping = RKObjectMapping(for: NSMutableDictionary.self)
-        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "images", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report"])
+        requestDataMapping?.addAttributeMappings(from: ["phone", "pwd", "images", "title", "url", "smsCode", "code", "invitation", "user", "realName", "aliPayId", "qqId", "weChatId", "announcement", "report", "uploadFiles", "content"])
         let requestDescriptor = RKRequestDescriptor(mapping: requestDataMapping, objectClass: NSMutableDictionary.self, rootKeyPath: nil, method: .POST)
 
         let taoKeDataMapping = RKObjectMapping(for: TaoKeData.self)
@@ -69,7 +75,7 @@ class TaoKeService: TaoKeProtocol {
         manager?.requestSerializationMIMEType = RKMIMETypeJSON
         
         manager?.httpClient.setDefaultHeader("platform", value: "ios")
-        manager?.httpClient.setDefaultHeader("version", value: "1.1.0")
+        manager?.httpClient.setDefaultHeader("version", value: "1.6.0")
     }
 
     public static func getInstance() -> TaoKeProtocol {
@@ -113,6 +119,36 @@ class TaoKeService: TaoKeProtocol {
             }, failure: { (operation, error) in
                 observer.onError(error!)
             })
+            return Disposables.create()
+        })
+    }
+    
+    public func tao(api: String, auth: String, data: NSMutableDictionary, images: UIImage...) -> Observable<TaoKeData?> {
+        self.manager?.httpClient.setDefaultHeader("auth", value: auth)
+        
+        let request = self.manager?.multipartFormRequest(with: data, method: RKRequestMethod.POST,
+                                           path: api.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                                           parameters: nil,
+                                           constructingBodyWith: { (parts) -> Void in
+                                            for image in images {
+                                                parts?.appendPart(
+                                                    withFileData: UIImagePNGRepresentation(image),
+                                                    name: "uploadFiles",
+                                                    fileName: "\(Date())".md5() + ".png",
+                                                    mimeType: "image/*")
+                                            }
+        })
+        
+        return Observable.create({ (observer) -> Disposable in
+            
+            let operation = self.manager?.objectRequestOperation(with: request! as URLRequest, success: { (operation, result) in
+                observer.onNext(result?.firstObject as? TaoKeData)
+                observer.onCompleted()
+            }, failure: { (operation, error) in
+                observer.onError(error!)
+            })
+            self.manager?.enqueue(operation)
+            
             return Disposables.create()
         })
     }

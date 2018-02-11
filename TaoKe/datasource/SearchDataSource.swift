@@ -7,6 +7,8 @@ class SearchDataSource: SortableDataSource {
     var isJu: Bool?
     
     override func refreshApi() -> Observable<[CouponItem]> {
+        self.ordered = []
+        
         if isJu == nil || keyword == nil {
             return Observable.empty()
         }

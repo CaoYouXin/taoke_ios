@@ -15,6 +15,7 @@ class SortableDataSource: RxDataSource<CouponItem> {
     
     var sortBy: SortBy?
     var cache: [CouponItem]?
+    var ordered: [Int64]?
     
     func refreshApi() -> Observable<[CouponItem]> {
         return Observable.empty()
@@ -37,7 +38,17 @@ class SortableDataSource: RxDataSource<CouponItem> {
             switch self.sortBy! {
             case .sales:
                 return data.sorted(by: { (item1, item2) -> Bool in
-                    return item1.volume! > item2.volume!
+                    let idx1 = self.ordered?.index(of: item1.numIid!)
+                    let idx2 = self.ordered?.index(of: item2.numIid!)
+                    if nil == idx1 && nil == idx2 {
+                        return item1.volume! > item2.volume!
+                    } else if nil == idx1 {
+                        return false
+                    } else if nil == idx2 {
+                        return true
+                    } else {
+                        return idx1! < idx2!
+                    }
                 })
             case .commissionUp:
                 return data.sorted(by: { (item1, item2) -> Bool in

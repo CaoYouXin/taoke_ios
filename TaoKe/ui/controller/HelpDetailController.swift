@@ -5,13 +5,9 @@ import FontAwesomeKit
 
 class HelpDetailController: UIViewController {
 
-    @IBOutlet weak var scrollWrapper: UIScrollView!
-    @IBOutlet weak var qWrapper: UIView!
-    @IBOutlet weak var aWrapper: UIView!
-    @IBOutlet weak var question: UILabel!
-    @IBOutlet weak var answer: UILabel!
+    @IBOutlet weak var theWebView: UIWebView!
     
-    var helpView: HelpView?
+    var helpView: HelpDoc?
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -22,13 +18,11 @@ class HelpDetailController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: FAKFontAwesome.chevronLeftIcon(withSize: 15).image(with: CGSize(width: 15, height: 15)), style: .plain, target: self, action: #selector(back))
         navigationItem.title = "帮助详情"
         
-        question.text = helpView?.title
-        let qSize = question.sizeThatFits(CGSize(width: self.view.frame.size.width - 32, height: 0))
-        qWrapper.frame = CGRect(x: qWrapper.frame.midX, y: qWrapper.frame.midY, width: qWrapper.frame.width, height: qSize.height + CGFloat(20))
+        theWebView.delegate = self
         
-        answer.text = helpView?.answer
-        let aSize = answer.sizeThatFits(CGSize(width: self.view.frame.size.width - 32, height: 0))
-        aWrapper.frame.size.height = aSize.height + CGFloat(20)
+        theWebView.loadRequest(URLRequest(url: URL(string: TaoKeService.HOST + "blog/"
+            + (helpView?.path?.replacingOccurrences(of: "/", with: "&@&"))!
+            + "//" + TaoKeApi.CDN.replacingOccurrences(of: "/", with: "&@&"))!))
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,4 +33,10 @@ class HelpDetailController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+}
+
+extension HelpDetailController: UIWebViewDelegate {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
+    }
 }

@@ -32,6 +32,11 @@ class H5DetailController: UIViewController {
                 print(">>> alibc open taobao fail \(error.debugDescription)")
             })
         }
+        
+        TaoKeApi.biItemDetailClicked()
+            .rxSchedulerHelper()
+            .subscribe()
+            .disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

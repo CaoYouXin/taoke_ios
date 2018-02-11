@@ -3,9 +3,9 @@ import RxSwift
 
 class TaoKeApi {
     
-//    public static var CDN = "http://192.168.0.136:8070/"
+    public static var CDN = "http://192.168.0.136:8070/"
 //    public static let CDN = "http://192.168.1.115:8070/"
-    public static var CDN = "http://server.tkmqr.com:8070/"
+//    public static var CDN = "http://server.tkmqr.com:8070/"
     
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
@@ -77,13 +77,15 @@ class TaoKeApi {
             })
     }
     
-    public static func getProductList(_ gourpId: String) -> Observable<[CouponItem]> {
+    public static func getProductList(_ gourpId: String) -> Observable<FavItemsView> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_PRODUCT_LIST.replacingOccurrences(of: "{favId}", with: gourpId).replacingOccurrences(of: "{pageNo}", with: "1"), auth: (UserData.get()?.token)!)
             .handleResult()
-            .map({ (taoKeData) -> [CouponItem] in
+            .map({ (taoKeData) -> FavItemsView in
+                let map = taoKeData?.getMap()
+                
                 var items: [CouponItem] = []
-                for rec in (taoKeData?.getList())! {
+                for rec in (map!["items"] as! [Dictionary<String, AnyObject>]) {
                     let item = CouponItem()
                     item.category = rec["category"] as? Int64
                     item.userType = rec["userType"] as? Int64
@@ -133,7 +135,12 @@ class TaoKeApi {
                     
                     items.append(item)
                 }
-                return items
+                
+                let result = FavItemsView()
+                result.items = items
+                result.orders = map!["orders"] as? [Int64]
+                
+                return result
             })
     }
     
@@ -572,6 +579,59 @@ class TaoKeApi {
                     return CustomerServiceView(weChat: "", mqq: "")
                 }
             })
+    }
+    
+    public static func getHelpDocs() -> Observable<[HelpDoc]> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_HELP_DOC_LIST)
+            .handleResult()
+            .map({ (taoKeData) -> [HelpDoc] in
+                var result: [HelpDoc] = []
+
+                if let recs = taoKeData?.getList() {
+                    for rec in recs {
+                        let item = HelpDoc()
+                        
+                        item.id = rec["id"] as? Int64
+                        item.title = rec["title"] as? String
+                        item.path = rec["path"] as? String
+                        item.order = rec["order"] as? Int
+                        
+                        result.append(item)
+                    }
+                }
+                
+                return result
+            })
+    }
+    
+    public static func uploadImage(image: UIImage) -> Observable<String> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_UPLOAD_IMAGE, auth: (UserData.get()?.token)!, data: [:], images: image)
+            .handleResult()
+            .map({ (taoKeData) -> String in
+                if let values = taoKeData?.getMap()?.values {
+                    if values.count == 0 {
+                        return ""
+                    }
+                    
+                    return values.first as! String
+                }
+                
+                return ""
+            })
+    }
+    
+    public static func sendFeedback(content: String) -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.API_SEND_FEEDBACK, auth: (UserData.get()?.token)!, data: ["content": content])
+            .handleResult()
+    }
+    
+    public static func biItemDetailClicked() -> Observable<TaoKeData?> {
+        return TaoKeService.getInstance()
+            .tao(api: TaoKeService.BI_ITEM_DETAIL_CLICKED, auth: (UserData.get()?.token)!)
+            .handleResult()
     }
     
 }

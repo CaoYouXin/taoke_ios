@@ -1,0 +1,6 @@
+framework module TabLayoutView {
+  umbrella header "TabLayoutView-umbrella.h"
+
+  export *
+  module * { export * }
+}

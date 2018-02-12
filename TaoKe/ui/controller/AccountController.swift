@@ -19,7 +19,7 @@ class AccountController: UIViewController {
     @IBOutlet weak var rightArrow6: UIImageView!
     @IBOutlet weak var rightArrow7: UIImageView!
     
-    @IBOutlet weak var newerGuideImage: UIImageView!
+    @IBOutlet weak var qAImage: UIImageView!
     @IBOutlet weak var shareToImage: UIImageView!
     @IBOutlet weak var enrollImage: UIImageView!
     @IBOutlet weak var teamImage: UIImageView!
@@ -27,7 +27,7 @@ class AccountController: UIViewController {
     @IBOutlet weak var customerServImage: UIImageView!
     @IBOutlet weak var aboutImage: UIImageView!
     
-    @IBOutlet weak var newerGuideBtn: UIView!
+    @IBOutlet weak var qABtn: UIView!
     @IBOutlet weak var shareToBtn: UIView!
     @IBOutlet weak var enrollBtn: UIView!
     @IBOutlet weak var teamBtn: UIView!
@@ -62,7 +62,7 @@ class AccountController: UIViewController {
         
         let newGuideIcon = FAKFontAwesome.questionCircleIcon(withSize: 20)
         newGuideIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#FFE24F"))
-        self.newerGuideImage.image = newGuideIcon?.image(with: CGSize(width: 20, height: 20))
+        self.qAImage.image = newGuideIcon?.image(with: CGSize(width: 20, height: 20))
         
         let shareToIcon = FAKFontAwesome.shareSquareOIcon(withSize: 20)
         shareToIcon?.addAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: UIColor("#9AD2FF"))
@@ -116,7 +116,7 @@ class AccountController: UIViewController {
         }
         
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
-        newerGuideBtn.addGestureRecognizer(tapGestureRecognizer)
+        qABtn.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
         shareToBtn.addGestureRecognizer(tapGestureRecognizer)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
@@ -140,9 +140,9 @@ class AccountController: UIViewController {
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
         switch sender.view! {
-        case newerGuideBtn:
-            let newerGuideController = UIStoryboard(name: "NewerGuide", bundle: nil).instantiateViewController(withIdentifier: "NewerGuideController") as! NewerGuideController
-            self.navigationController?.pushViewController(newerGuideController, animated: true)
+        case qABtn:
+            let qAController = UIStoryboard(name: "HelpReport", bundle: nil).instantiateViewController(withIdentifier: "HelpController") as! HelpController
+            self.navigationController?.pushViewController(qAController, animated: true)
             break
         case shareToBtn:
             let shareAppController = UIStoryboard(name: "ShareApp", bundle: nil).instantiateViewController(withIdentifier: "ShareAppController") as! ShareAppController
@@ -165,8 +165,8 @@ class AccountController: UIViewController {
             self.navigationController?.pushViewController(teamController, animated: true)
             break
         case helpReportBtn:
-            let helpController = UIStoryboard(name: "HelpReport", bundle: nil).instantiateViewController(withIdentifier: "HelpController") as! HelpController
-            self.navigationController?.pushViewController(helpController, animated: true)
+            let reportController = UIStoryboard(name: "HelpReport", bundle: nil).instantiateViewController(withIdentifier: "ReportController") as! ReportController
+            self.navigationController?.pushViewController(reportController, animated: true)
             break
         case customerServBtn:
             let customerServiceController = UIStoryboard(name: "CustomerService", bundle: nil).instantiateViewController(withIdentifier: "CustomerServiceController")

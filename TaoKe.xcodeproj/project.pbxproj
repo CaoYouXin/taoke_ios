@@ -30,6 +30,7 @@
 		2B52C8D12014A86B008A385D /* CustomerService.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B52C8D02014A86B008A385D /* CustomerService.storyboard */; };
 		2B52C8D32014A88A008A385D /* CustomerServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52C8D22014A88A008A385D /* CustomerServiceController.swift */; };
 		2B52C8D52014B76B008A385D /* CustomerServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B52C8D42014B76B008A385D /* CustomerServiceView.swift */; };
+		2B53CFC12032B38800EB0277 /* TaoKeDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53CFC02032B38800EB0277 /* TaoKeDomains.swift */; };
 		2B6943271FC6B28300DE197D /* HomeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6943261FC6B28300DE197D /* HomeBtn.swift */; };
 		2B7B95341FCFB8D60023A0D6 /* HelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95331FCFB8D60023A0D6 /* HelpCell.swift */; };
 		2B7B95361FCFB9420023A0D6 /* HelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B95351FCFB9420023A0D6 /* HelpController.swift */; };
@@ -172,6 +173,7 @@
 		2B52C8D02014A86B008A385D /* CustomerService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomerService.storyboard; sourceTree = "<group>"; };
 		2B52C8D22014A88A008A385D /* CustomerServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerServiceController.swift; sourceTree = "<group>"; };
 		2B52C8D42014B76B008A385D /* CustomerServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerServiceView.swift; sourceTree = "<group>"; };
+		2B53CFC02032B38800EB0277 /* TaoKeDomains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoKeDomains.swift; sourceTree = "<group>"; };
 		2B6943261FC6B28300DE197D /* HomeBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBtn.swift; sourceTree = "<group>"; };
 		2B7B95331FCFB8D60023A0D6 /* HelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCell.swift; sourceTree = "<group>"; };
 		2B7B95351FCFB9420023A0D6 /* HelpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpController.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				F92DA5931FB152F900FDF3E4 /* TaoKeData.swift */,
 				F92DA5951FB169D600FDF3E4 /* TaoKeApi.swift */,
 				F92DA5971FB1780800FDF3E4 /* RxHelper.swift */,
+				2B53CFC02032B38800EB0277 /* TaoKeDomains.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				F98D011D1FBD74A1003A3F4F /* ShareImage.swift in Sources */,
 				F92DA58B1FB1519100FDF3E4 /* TaoKeService.swift in Sources */,
 				2B45D8861FC69FBF00D1CBFE /* StringMd5.swift in Sources */,
+				2B53CFC12032B38800EB0277 /* TaoKeDomains.swift in Sources */,
 				F907D8BF1FB93DF4000BC49F /* DetailController.swift in Sources */,
 				F98D01191FBD73C7003A3F4F /* ShareImageCell.swift in Sources */,
 				2B810DF1202896B6004B6BF1 /* UploadImageItem.swift in Sources */,

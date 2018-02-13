@@ -61,20 +61,26 @@ public func handleApiError(_ viewController: UIViewController?, _ callback: ((Er
             
             if let err = error as? ApiError {
                 if let cb = callback {
-                    cb(error)
+                    cb(err)
                 }
                 
                 let errMsg = err.message ?? ""
                 Log.error?.message(errMsg)
                 if let view = viewController {
-                    view.view.makeToast(errMsg)
+                    let msg = UIAlertController(title: "", message: errMsg, preferredStyle: .actionSheet)
+                    msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                    }))
+                    view.present(msg, animated: true)
                 }
             } else {
                 
                 let errMsg = "操作失败,错误未知"
                 Log.error?.message(errMsg)
                 if let view = viewController {
-                    view.view.makeToast(errMsg)
+                    let msg = UIAlertController(title: "", message: errMsg, preferredStyle: .actionSheet)
+                    msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                    }))
+                    view.present(msg, animated: true)
                 }
             }
             
@@ -106,6 +112,28 @@ class ApiErrorHook: Hook {
                     })
                 }))
                 view.present(alert, animated: true)
+            }
+            
+            if let err = error as? ApiError {
+                
+                let errMsg = err.message ?? ""
+                Log.error?.message(errMsg)
+                if let view = viewController {
+                    let msg = UIAlertController(title: "", message: errMsg, preferredStyle: .actionSheet)
+                    msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                    }))
+                    view.present(msg, animated: true)
+                }
+            } else {
+                
+                let errMsg = "操作失败,错误未知"
+                Log.error?.message(errMsg)
+                if let view = viewController {
+                    let msg = UIAlertController(title: "", message: errMsg, preferredStyle: .actionSheet)
+                    msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
+                    }))
+                    view.present(msg, animated: true)
+                }
             }
             
             return Observable.empty()

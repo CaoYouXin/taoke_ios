@@ -3,10 +3,6 @@ import RxSwift
 
 class TaoKeApi {
     
-//    public static var CDN = "http://192.168.0.136:8070/"
-//    public static let CDN = "http://192.168.1.115:8070/"
-    public static var CDN = "http://server.tkmqr.com:8070/"
-    
     public static func verification(phone: String) -> Observable<TaoKeData?> {
         return TaoKeService.getInstance()
             .tao(api: TaoKeService.API_VERIFICATION, auth: "", data: ["phone": phone])
@@ -69,7 +65,7 @@ class TaoKeApi {
                     let item = HomeBtn();
                     item.name = rec["name"] as? String
                     item.ext = rec["ext"] as? String
-                    item.imgUrl = CDN + (rec["imgUrl"] as? String)!
+                    item.imgUrl = TaoKeDomains.CDN + (rec["imgUrl"] as? String)!
                     item.openType = rec["openType"] as! Int
                     items.append(item)
                 }
@@ -317,7 +313,7 @@ class TaoKeApi {
                 var ret: [String] = []
                 let recs = taokeData?.getList()!
                 for rec in recs! {
-                    ret.append(CDN + (rec["imgUrl"] as? String)!)
+                    ret.append(TaoKeDomains.CDN + (rec["imgUrl"] as? String)!)
                 }
                 return ret
             })
@@ -333,7 +329,7 @@ class TaoKeApi {
                     let item = HomeBtn();
                     item.name = rec["name"] as? String
                     item.ext = rec["ext"] as? String
-                    item.imgUrl = CDN + (rec["imgUrl"] as? String)!
+                    item.imgUrl = TaoKeDomains.CDN + (rec["imgUrl"] as? String)!
                     item.openType = rec["openType"] as! Int
                     items.append(item)
                 }
@@ -349,7 +345,7 @@ class TaoKeApi {
                 var ret: [String] = []
                 let recs = taokeData?.getList()!
                 for rec in recs! {
-                    ret.append(CDN + (rec["imgUrl"] as? String)!)
+                    ret.append(TaoKeDomains.CDN + (rec["imgUrl"] as? String)!)
                 }
                 return ret
             })
@@ -554,7 +550,7 @@ class TaoKeApi {
                     for map in list {
                         let adZoneItem = AdZoneItem()
                         
-                        adZoneItem.thumb = CDN + (map["imgUrl"] as! String)
+                        adZoneItem.thumb = TaoKeDomains.CDN + (map["imgUrl"] as! String)
                         adZoneItem.cSpan = map["colSpan"] as? Int
                         adZoneItem.rSpan = map["rowSpan"] as? Int
                         adZoneItem.name = map["name"] as? String
@@ -583,7 +579,7 @@ class TaoKeApi {
     
     public static func getHelpDocs() -> Observable<[HelpDoc]> {
         return TaoKeService.getInstance()
-            .tao(api: TaoKeService.API_HELP_DOC_LIST)
+            .tao(api: TaoKeService.API_HELP_DOC_LIST.replacingOccurrences(of: "{type}", with: UserData.get()!.getUserTypeInt()))
             .handleResult()
             .map({ (taoKeData) -> [HelpDoc] in
                 var result: [HelpDoc] = []

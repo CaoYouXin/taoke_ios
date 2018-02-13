@@ -327,7 +327,7 @@ class ShareController: UIViewController {
                 }).map({ (data) -> String? in
                     self.view.hideToastActivity()
                     
-                    data?.shortUrl = TaoKeService.HOST + (data?.shortUrl)!
+                    data?.shortUrl = TaoKeDomains.HOST + (data?.shortUrl)!
                     
                     var qrCode = QRCode((data?.shortUrl)!)
                     qrCode?.size = CGSize(width: self.descQRCode.frame.size.width - 6, height: self.descQRCode.frame.size.height - 6)

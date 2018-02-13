@@ -3,10 +3,6 @@ import RestKit
 import RxSwift
 
 class TaoKeService: TaoKeProtocol {
-    
-//    public static let HOST = "http://192.168.0.136:8080/api/"
-//    public static let HOST = "http://192.168.1.115:8080/api/"
-    public static let HOST = "http://server.tkmqr.com:8080/api/"
 
     public static let API_VERIFICATION = "tbk/phone/verify"
     public static let API_SIGN_IN = "tbk/user/login"
@@ -37,7 +33,7 @@ class TaoKeService: TaoKeProtocol {
     public static let API_GET_SHARE_LINK2 = "tbk/share/save"
 
     public static let API_HELP_LIST = "app/help/list"
-    public static let API_HELP_DOC_LIST = "blog/helpdoc/list"
+    public static let API_HELP_DOC_LIST = "blog/helpdoc/{type}/list"
     public static let API_NOVICE_LIST = "app/guide/list/{type}"
     public static let API_SHARE_APP_LIST = "app/share/img/url/list/{type}"
 
@@ -69,7 +65,7 @@ class TaoKeService: TaoKeProtocol {
         taoKeDataMapping?.addAttributeMappings(from: ["code", "body"])
         let responseDescriptor = RKResponseDescriptor(mapping: taoKeDataMapping, method: .any, pathPattern: nil, keyPath: nil, statusCodes: nil)
 
-        manager = RKObjectManager(baseURL: URL(string: TaoKeService.HOST))
+        manager = RKObjectManager(baseURL: URL(string: TaoKeDomains.HOST))
         manager?.addRequestDescriptor(requestDescriptor)
         manager?.addResponseDescriptor(responseDescriptor)
         manager?.requestSerializationMIMEType = RKMIMETypeJSON

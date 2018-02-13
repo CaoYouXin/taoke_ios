@@ -20,9 +20,9 @@ class HelpDetailController: UIViewController {
         
         theWebView.delegate = self
         
-        theWebView.loadRequest(URLRequest(url: URL(string: TaoKeService.HOST + "blog/"
+        theWebView.loadRequest(URLRequest(url: URL(string: TaoKeDomains.HOST + "blog/"
             + (helpView?.path?.replacingOccurrences(of: "/", with: "&@&"))!
-            + "//" + TaoKeApi.CDN.replacingOccurrences(of: "/", with: "&@&"))!))
+            + "//" + TaoKeDomains.CDN.replacingOccurrences(of: "/", with: "&@&"))!))
     }
 
     override func didReceiveMemoryWarning() {

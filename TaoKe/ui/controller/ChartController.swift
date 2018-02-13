@@ -117,10 +117,6 @@ class ChartController: UIViewController, UITextFieldDelegate {
                     if inputAmount >= 10.0 {
                         TaoKeApi.withDraw(input).rxSchedulerHelper().handleApiError(self, { _ in
                             self.canDrawState = true
-                            let msg = UIAlertController(title: "", message: "购买者不享有此功能", preferredStyle: .actionSheet)
-                            msg.addAction(UIAlertAction(title: "了解", style: .cancel, handler: { (action) in
-                            }))
-                            self.present(msg, animated: true)
                         }).subscribe(onNext: { _ in
                             self.initCanDraw()
                             let msg = UIAlertController(title: "", message: "已经为您创建提现申请记录，工作人员会及时与您取得联系", preferredStyle: .actionSheet)
